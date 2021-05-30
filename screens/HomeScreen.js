@@ -2,14 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-const HomeScreen = () => {
+export default function HomeScreen({ navigation }) {
 	return (
 		<View>
-			<Text>Yolo</Text>
+			<StatusBar style="auto" />
 		</View>
 	);
 };
-
-export default HomeScreen;
-
-const style = StyleSheet.create({});

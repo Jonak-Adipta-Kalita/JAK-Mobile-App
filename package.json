@@ -1,4 +1,7 @@
 {
+  "name": "jak-mobile-app",
+  "description": "A Mobile App made by JAK",
+  "author": "Jonak Adipta Kalita",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
