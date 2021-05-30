@@ -1,12 +1,15 @@
 import React from 'react';
 import 'react-native-gesture-handler';
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
 const globalScreenOptions = {
 	headerStyle: { backgroundColor: '#3f7de0' },
 	headerTitleStyle: { color: 'white' },
@@ -16,7 +19,10 @@ const globalScreenOptions = {
 export default function App({ navigation }) {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator screenOptions={globalScreenOptions}>
+			<Stack.Navigator 
+				screenOptions={globalScreenOptions} 
+				initialRouteName="Home"
+			>
 				<Stack.Screen 
 					name="Home" 
 					component={HomeScreen} 
