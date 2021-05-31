@@ -52,6 +52,7 @@ Create a file name `.env.local` in the Base Directory. Copy everything in `.env.
 and paste it in `.env.local` but change the credentials.
 
 ### Starting the App:
+
 #### Android
 If you are in Windows: Download [Android Studio](https://developer.android.com/studio)
 ```bash
