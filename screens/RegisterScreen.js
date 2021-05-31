@@ -75,7 +75,7 @@ export default function RegisterScreen({ navigation }) {
       <View style={{ height: 100 }} />
     </KeyboardAvoidingView>
   );
-};
+}
 
 RegisterScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

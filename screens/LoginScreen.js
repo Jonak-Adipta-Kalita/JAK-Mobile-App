@@ -49,7 +49,7 @@ export default function LoginScreen({ navigation }) {
       <View style={{ height: 100 }} />
     </KeyboardAvoidingView>
   );
-};
+}
 
 LoginScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

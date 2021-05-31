@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, SafeAreaView, TouchableOpacity } from "react-native";
 import { FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
 import { auth } from "../firebase";
 import PropTypes from "prop-types";
@@ -59,7 +59,7 @@ export default function HomeScreen({ navigation }) {
       <StatusBar style="auto" />
     </View>
   );
-};
+}
 
 HomeScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

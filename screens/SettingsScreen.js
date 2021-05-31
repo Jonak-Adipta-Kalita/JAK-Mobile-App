@@ -29,7 +29,7 @@ export default function SettingsScreen({ navigation }) {
       <StatusBar style="auto" />
     </View>
   );
-};
+}
 
 SettingsScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

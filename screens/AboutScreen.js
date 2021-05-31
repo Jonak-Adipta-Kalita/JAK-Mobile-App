@@ -41,7 +41,7 @@ export default function AboutScreen({ navigation }) {
       </Text>
     </View>
   );
-};
+}
 
 AboutScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
