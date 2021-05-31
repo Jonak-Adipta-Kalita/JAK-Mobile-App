@@ -7,9 +7,6 @@ import PropTypes from "prop-types";
 
 const HomeScreen = ({ navigation }) => {
   const user = auth.currentUser;
-  const login = () => {
-    navigation.navigate("Login");
-  };
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Welcome!!",
@@ -38,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
             }}
           >
             {user ? (
-              <Entypo name="login" onPress={login} size={24} color="black" />
+              <Entypo name="login" onPress={() => navigation.navigate("Login")} size={24} color="black" />
             ) : (
               <Ionicons
                 name="md-settings-outline"
