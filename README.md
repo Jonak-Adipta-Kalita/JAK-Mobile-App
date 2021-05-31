@@ -29,8 +29,23 @@ an app click on the cog icon in the sidebar and click on Project Settings. Scrol
 Bottom where you will find your app now click on CDN. Copy the Config.
 
 #### Enabling Authentication
-In the Project in Firebase click on Authentication in the Sidebar. Enable the 
+In the Project in Firebase click on Authentication in the Sidebar. Enable 
 Authentication. Now click on `Email/Password` and Enable It.
+
+#### Enabling Firestore Database
+In the Project in Firebase click on Firebase Database in the Sidebar. Click on Enable 
+Firestore. Start in Test Mode and leave the Timezone as it is. Now click on Rules and set
+the rules as:
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write;
+    }
+  }
+}
+```
 
 ### Providing required Credentials
 Create a file name `.env.local` in the Base Directory. Copy everything in `.env.example`
