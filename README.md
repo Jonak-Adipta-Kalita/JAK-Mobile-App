@@ -13,13 +13,28 @@ git clone https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App.git
 ```
 
 ### Installing The Required Modules
-To install the required modules, just open a terminal in the directory where this project is cloned. Now type: 
+To install the required modules, just open a terminal in the directory where this 
+project is cloned. Now type: 
 ```bash
 npm i
 # or
 yarn
 ``` 
 and hit enter.
+
+### Getting Firebase Credentials
+Go to [Firebase Console](http://console.firebase.google.com/) and create a Project. Don't
+enable Google Analytics. Now click on the Web Icon and create an app. After you created
+an app click on the cog icon in the sidebar and click on Project Settings. Scroll to the
+Bottom where you will find your app now click on CDN. Copy the Config.
+
+#### Enabling Authentication
+In the Project in Firebase click on Authentication in the Sidebar. Enable the 
+Authentication. Now click on `Email/Password` and Enable It.
+
+### Providing required Credentials
+Create a file name `.env.local` in the Base Directory. Copy everything in `.env.example`
+and paste it in `.env.local` but change the credentials.
 
 ### Starting the App:
 #### Android
