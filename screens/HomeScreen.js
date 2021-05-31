@@ -1,61 +1,66 @@
-import React, { useLayoutEffect } from 'react';
-import { 
-	View, 
-	Text, 
-	Button, 
-	StyleSheet, 
-	SafeAreaView, 
-	TouchableOpacity 
-} from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { StatusBar } from 'expo-status-bar';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React, { useLayoutEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import { View, SafeAreaView, TouchableOpacity } from "react-native";
+import { FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
+import { auth } from "../firebase";
+import PropTypes from "prop-types";
 
-const Drawer = createDrawerNavigator();
-
-export default function HomeScreen({ navigation }) {
-	const login = () => {};
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			title: "Welcome!!",
-			headerStyle: { backgroundColor: "#fff" },
-			headerTitleStyle: { color: "black" },
-			headerTintColor: "black",
-			headerLeft: () => (
-				<SafeAreaView style={{ flex: 1 }}>
-					<TouchableOpacity 
-						style={{ alignItems: "flex-start", margin: 16 }} 
-						onPress={navigation.openDrawer}
-					>
-						<FontAwesome5 name="bars" size={24} />
-					</TouchableOpacity>
-				</SafeAreaView>
-			),
-			headerRight: () => (
-				<SafeAreaView style={{ flex: 1 }}>
-					<TouchableOpacity 
-						style={{ alignItems: "flex-end", margin: 16, justifyContent: "center" }}
-						onPress={login}
-					>
-						<Button 
-							title="Login" 
-						/>
-					</TouchableOpacity>
-				</SafeAreaView>
-			),
-		});
-	}, [navigation]);
-	return (
-		<View>
-			<StatusBar style="auto" />
-		</View>
-	);
+const HomeScreen = ({ navigation }) => {
+  const user = auth.currentUser;
+  const login = () => {
+    navigation.navigate("Login");
+  };
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Welcome!!",
+      headerStyle: { backgroundColor: "#fff", justifyContent: "center" },
+      headerTitleStyle: { color: "black" },
+      headerTintColor: "black",
+      headerLeft: () => (
+        <SafeAreaView style={{ flex: 1 }}>
+          <TouchableOpacity
+            style={{
+              alignItems: "flex-start",
+              margin: 16,
+            }}
+            onPress={navigation.openDrawer}
+          >
+            <FontAwesome5 name="bars" size={24} />
+          </TouchableOpacity>
+        </SafeAreaView>
+      ),
+      headerRight: () => (
+        <SafeAreaView style={{ flex: 1 }}>
+          <TouchableOpacity
+            style={{
+              alignItems: "flex-end",
+              margin: 16,
+            }}
+          >
+            {user ? (
+              <Entypo name="login" onPress={login} size={24} color="black" />
+            ) : (
+              <Ionicons
+                name="md-settings-outline"
+                onPress={() => navigation.navigate("Settings")}
+                size={24}
+                color="black"
+              />
+            )}
+          </TouchableOpacity>
+        </SafeAreaView>
+      ),
+    });
+  }, [navigation]);
+  return (
+    <View>
+      <StatusBar style="auto" />
+    </View>
+  );
 };
 
-const styles = StyleSheet.create({
-	text: {
-		color: "#161924",
-		fontSize: 20,
-		fontWeight: "500"
-	}
-});
+export default HomeScreen;
+
+HomeScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
