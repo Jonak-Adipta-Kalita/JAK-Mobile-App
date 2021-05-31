@@ -5,7 +5,7 @@ import { Button, Input, Text } from "react-native-elements";
 import { auth } from "../firebase";
 import PropTypes from "prop-types";
 
-const RegisterScreen = ({ navigation }) => {
+export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,8 +76,6 @@ const RegisterScreen = ({ navigation }) => {
     </KeyboardAvoidingView>
   );
 };
-
-export default RegisterScreen;
 
 RegisterScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

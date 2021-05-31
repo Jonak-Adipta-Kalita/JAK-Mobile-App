@@ -4,7 +4,7 @@ import { View, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 
-const SettingsScreen = ({ navigation }) => {
+export default function SettingsScreen({ navigation }) {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "My Profile!!",
@@ -30,8 +30,6 @@ const SettingsScreen = ({ navigation }) => {
     </View>
   );
 };
-
-export default SettingsScreen;
 
 SettingsScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

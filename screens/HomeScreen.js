@@ -1,11 +1,11 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import { FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
 import { auth } from "../firebase";
 import PropTypes from "prop-types";
 
-const HomeScreen = ({ navigation }) => {
+export default function HomeScreen({ navigation }) {
   const user = auth.currentUser;
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -35,7 +35,12 @@ const HomeScreen = ({ navigation }) => {
             }}
           >
             {user ? (
-              <Entypo name="login" onPress={() => navigation.navigate("Login")} size={24} color="black" />
+              <Entypo
+                name="login"
+                onPress={() => navigation.navigate("Login")}
+                size={24}
+                color="black"
+              />
             ) : (
               <Ionicons
                 name="md-settings-outline"
@@ -55,8 +60,6 @@ const HomeScreen = ({ navigation }) => {
     </View>
   );
 };
-
-export default HomeScreen;
 
 HomeScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

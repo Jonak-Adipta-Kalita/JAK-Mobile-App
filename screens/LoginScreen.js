@@ -5,7 +5,7 @@ import { Button, Input } from "react-native-elements";
 import { auth } from "../firebase";
 import PropTypes from "prop-types";
 
-const LoginScreen = ({ navigation }) => {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {
@@ -50,8 +50,6 @@ const LoginScreen = ({ navigation }) => {
     </KeyboardAvoidingView>
   );
 };
-
-export default LoginScreen;
 
 LoginScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
