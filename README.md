@@ -48,8 +48,8 @@ service cloud.firestore {
 ```
 
 ### Providing required Credentials
-Create a file name `.env.local` in the Base Directory. Copy everything in `.env.example`
-and paste it in `.env.local` but change the credentials.
+Create a file name `.env` in the Base Directory. Copy everything in `.env.example`
+and paste it in `.env` but change the credentials.
 
 ### Starting the App:
 

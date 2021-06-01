@@ -27,7 +27,14 @@ export default function AboutScreen({ navigation }) {
   return (
     <View>
       <StatusBar style="auto" />
-      <Text style={{ fontSize: "20px" }}>
+      <Text 
+		style={{ 
+			fontSize: "20px",
+			marginTop: "80px",
+			marginRight: "20px",
+			marginLeft: "20px" 
+		}}
+	  >
         My name is JONAK ADIPTA KALITA. I am a student in Kendriya Vidyalaya
         Mangaldoi, I am currently studying in standard '8th'. My mom is a Banker
         and my Dad is a Mathematics Teacher. I am a Coder and also a 'Home Game

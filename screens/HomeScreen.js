@@ -6,7 +6,7 @@ import { auth } from "../firebase";
 import PropTypes from "prop-types";
 
 export default function HomeScreen({ navigation }) {
-  const user = auth.currentUser;
+	const user = false;
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Welcome!!",

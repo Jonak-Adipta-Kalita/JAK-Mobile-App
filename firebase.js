@@ -1,14 +1,15 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId } from '@env';
 
 const firebaseConfig = {
-  apiKey: process.env.apiKey,
-  authDomain: process.env.authDomain,
-  projectId: process.env.projectId,
-  storageBucket: process.env.storageBucket,
-  messagingSenderId: process.env.messagingSenderId,
-  appId: process.env.appId,
+  apiKey: apiKey,
+  authDomain: authDomain,
+  projectId: projectId,
+  storageBucket: storageBucket,
+  messagingSenderId: messagingSenderId,
+  appId: appId,
 };
 
 let app;
