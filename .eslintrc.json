@@ -23,5 +23,8 @@
     "plugins": [
         "react"
     ],
-    "rules": {}
+    "rules": {
+		"react/no-unescaped-entities": 0,
+		"react/display-name": 0
+	}
 }
