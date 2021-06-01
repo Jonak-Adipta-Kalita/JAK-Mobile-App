@@ -2,14 +2,16 @@ import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, SafeAreaView, TouchableOpacity } from "react-native";
 import { FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from "../firebase";
 import PropTypes from "prop-types";
 
 export default function HomeScreen({ navigation }) {
-  const user = false;
+  const [user] = useAuthState(auth);
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Welcome!!",
-      headerStyle: { backgroundColor: "#fff", justifyContent: "center" },
+      headerStyle: { backgroundColor: "#fff" },
       headerTitleStyle: { color: "black" },
       headerTintColor: "black",
       headerLeft: () => (
@@ -33,7 +35,7 @@ export default function HomeScreen({ navigation }) {
               margin: 16,
             }}
           >
-            {user ? (
+            {!user ? (
               <Entypo
                 name="login"
                 onPress={() => navigation.navigate("Login")}

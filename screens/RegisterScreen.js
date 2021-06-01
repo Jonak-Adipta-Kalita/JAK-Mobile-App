@@ -72,7 +72,6 @@ export default function RegisterScreen({ navigation }) {
         onPress={register}
         raised
       />
-      <View style={{ height: 100 }} />
     </KeyboardAvoidingView>
   );
 }
