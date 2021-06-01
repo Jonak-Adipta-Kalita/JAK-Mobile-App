@@ -26,7 +26,7 @@ and hit enter.
 Go to [Firebase Console](http://console.firebase.google.com/) and create a Project. Don't
 enable Google Analytics. Now click on the Web Icon and create an app. After you created
 an app click on the cog icon in the sidebar and click on Project Settings. Scroll to the
-Bottom where you will find your app now click on CDN. Copy the Config.
+Bottom where you will find your app now click on Config. Copy the Config.
 
 #### Enabling Authentication
 In the Project in Firebase click on Authentication in the Sidebar. Enable 
