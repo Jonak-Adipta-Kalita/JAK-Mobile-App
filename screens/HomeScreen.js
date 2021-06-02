@@ -1,8 +1,9 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Card, Button } from 'react-native-elements';
 import { auth } from "../firebase";
 import PropTypes from "prop-types";
 
@@ -58,6 +59,22 @@ export default function HomeScreen({ navigation }) {
     return (
         <View>
             <StatusBar style="auto" />
+			<Card style={styles.card}>
+				<Card.Title>About Me!!</Card.Title>
+				<Card.Divider />
+				<Button 
+					onPress={() => navigation.navigate('About')} 
+					title="Go to About Screen" 
+				/>
+			</Card>
+			<Card style={styles.card}>
+				<Card.Title>Contact Me!!</Card.Title>
+				<Card.Divider />
+				<Button 
+					onPress={() => navigation.navigate('Contact')} 
+					title="Go to Contact Screen" 
+				/>
+			</Card>
         </View>
     );
 }
@@ -65,3 +82,10 @@ export default function HomeScreen({ navigation }) {
 HomeScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+const styles = StyleSheet.create({
+	card: {
+		maxWidth: "50%",
+		maxHeight: "50%",
+	},
+});

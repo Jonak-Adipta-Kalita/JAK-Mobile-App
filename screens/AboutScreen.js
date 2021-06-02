@@ -1,13 +1,13 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 
 export default function AboutScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "About!!",
+            title: "About Me!!",
             headerStyle: { backgroundColor: "#fff" },
             headerTitleStyle: { color: "black" },
             headerTintColor: "black",
@@ -27,14 +27,7 @@ export default function AboutScreen({ navigation }) {
     return (
         <View>
             <StatusBar style="auto" />
-            <Text
-                style={{
-                    fontSize: "20px",
-                    marginTop: "80px",
-                    marginRight: "20px",
-                    marginLeft: "20px",
-                }}
-            >
+            <Text style={styles.main_content}>
                 My name is JONAK ADIPTA KALITA. I am a student in Kendriya
                 Vidyalaya Mangaldoi, I am currently studying in standard '8th'.
                 My mom is a Banker and my Dad is a Mathematics Teacher. I am a
@@ -54,3 +47,7 @@ export default function AboutScreen({ navigation }) {
 AboutScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+const styles = StyleSheet.create({
+	main_content: {},
+});
