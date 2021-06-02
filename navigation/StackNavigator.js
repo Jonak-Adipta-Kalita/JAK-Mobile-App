@@ -16,13 +16,13 @@ const globalScreenOptions = {
 };
 
 export default function StackNavigator() {
-	return (
-		<Stack.Navigator screenOptions={globalScreenOptions}>
-			<Stack.Screen name="Home" component={HomeScreen} />
-			<Stack.Screen name="Login" component={LoginScreen} />
-			<Stack.Screen name="Register" component={RegisterScreen} />
-			<Stack.Screen name="About" component={AboutScreen} />
-			<Stack.Screen name="Settings" component={SettingsScreen} />
-		</Stack.Navigator>
-	);
+  return (
+    <Stack.Navigator screenOptions={globalScreenOptions}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="About" component={AboutScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+    </Stack.Navigator>
+  );
 }
