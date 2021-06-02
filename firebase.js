@@ -3,28 +3,28 @@ import "firebase/auth";
 import "firebase/firestore";
 
 import {
-  apiKey,
-  authDomain,
-  projectId,
-  storageBucket,
-  messagingSenderId,
-  appId,
+    apiKey,
+    authDomain,
+    projectId,
+    storageBucket,
+    messagingSenderId,
+    appId,
 } from "@env";
 
 const firebaseConfig = {
-  apiKey: apiKey,
-  authDomain: authDomain,
-  projectId: projectId,
-  storageBucket: storageBucket,
-  messagingSenderId: messagingSenderId,
-  appId: appId,
+    apiKey: apiKey,
+    authDomain: authDomain,
+    projectId: projectId,
+    storageBucket: storageBucket,
+    messagingSenderId: messagingSenderId,
+    appId: appId,
 };
 
 let app;
 if (firebase.apps.length === 0) {
-  app = firebase.initializeApp(firebaseConfig);
+    app = firebase.initializeApp(firebaseConfig);
 } else {
-  app = firebase.app();
+    app = firebase.app();
 }
 
 const db = app.firestore();

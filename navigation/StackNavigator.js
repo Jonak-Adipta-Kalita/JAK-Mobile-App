@@ -10,19 +10,19 @@ import SettingsScreen from "../screens/SettingsScreen";
 const Stack = createStackNavigator();
 
 const globalScreenOptions = {
-  headerStyle: { backgroundColor: "#3f7de0" },
-  headerTitleStyle: { color: "white" },
-  headerTintColor: "white",
+    headerStyle: { backgroundColor: "#3f7de0" },
+    headerTitleStyle: { color: "white" },
+    headerTintColor: "white",
 };
 
 export default function StackNavigator() {
-  return (
-    <Stack.Navigator screenOptions={globalScreenOptions}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
-      <Stack.Screen name="About" component={AboutScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator screenOptions={globalScreenOptions}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="About" component={AboutScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+        </Stack.Navigator>
+    );
 }

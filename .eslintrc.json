@@ -4,15 +4,12 @@
         "es2021": true,
         "node": true
     },
-	"settings": {
-		"react": {
-			"version": "16.13.1"
-		}
-	},
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "settings": {
+        "react": {
+            "version": "16.13.1"
+        }
+    },
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -20,11 +17,9 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react"],
     "rules": {
-		"react/no-unescaped-entities": 0,
-		"react/display-name": 0
-	}
+        "react/no-unescaped-entities": 0,
+        "react/display-name": 0
+    }
 }
