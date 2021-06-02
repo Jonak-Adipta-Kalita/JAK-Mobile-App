@@ -21,7 +21,7 @@ export default function HomeScreen({ navigation }) {
               alignItems: "flex-start",
               margin: 16,
             }}
-            onPress={navigation.openDrawer}
+            onPress={navigation.toggleDrawer}
           >
             <FontAwesome5 name="bars" size={24} />
           </TouchableOpacity>
