@@ -50,26 +50,28 @@ export default function SettingsScreen({ navigation }) {
                 </TouchableOpacity>
             </View>
             <View style={{ marginTop: 50 }}>
-				<View>
-					<Text style={{ fontSize: 17 }}>
-						Name:
-					</Text>
-					<Text style={{ fontSize: 12 }}>
-						{auth?.currentUser?.displayName}
-					</Text>
-				</View>
-				<View>
-					<Text style={{ fontSize: 15 }}>
-						Email:
-					</Text>
-					<Text style={{ fontSize: 12 }}>
-						{auth?.currentUser?.email}
-					</Text>
-				</View>
+                <View>
+                    <Text style={{ fontSize: 17 }}>Name:</Text>
+                    <Text style={{ fontSize: 12 }}>
+                        {auth?.currentUser?.displayName}
+                    </Text>
+                </View>
+                <View>
+                    <Text style={{ fontSize: 15 }}>Email:</Text>
+                    <Text style={{ fontSize: 12 }}>
+                        {auth?.currentUser?.email}
+                    </Text>
+                </View>
             </View>
-			<View style={{ alignSelf: "center", position: 'absolute', bottom: 35 }}>
-				<Button onPress={logOut} title="Logout" />
-			</View>
+            <View
+                style={{
+                    alignSelf: "center",
+                    position: "absolute",
+                    bottom: 35,
+                }}
+            >
+                <Button onPress={logOut} title="Logout" />
+            </View>
         </View>
     );
 }
@@ -80,7 +82,7 @@ SettingsScreen.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-		flexDirection: 'column',
-		flex: 1
-	},
+        flexDirection: "column",
+        flex: 1,
+    },
 });
