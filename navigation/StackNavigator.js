@@ -6,6 +6,7 @@ import AboutScreen from "../screens/AboutScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import ContactScreen from "../screens/ContactScreen";
 
 const Stack = createStackNavigator();
 
@@ -48,4 +49,18 @@ const SettingsStack = () => {
     );
 };
 
-export { HomeStack, AboutStack, SettingsStack, AuthenticationStack };
+const ContactStack = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Contact" component={ContactScreen} />
+        </Stack.Navigator>
+    );
+};
+
+export {
+    HomeStack,
+    AboutStack,
+    SettingsStack,
+    ContactStack,
+    AuthenticationStack,
+};
