@@ -81,8 +81,5 @@ HomeScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    card: {
-        maxWidth: "50%",
-        maxHeight: "50%",
-    },
+    card: {},
 });
