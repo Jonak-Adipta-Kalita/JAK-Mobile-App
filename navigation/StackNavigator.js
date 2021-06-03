@@ -21,31 +21,31 @@ const HomeStack = () => {
             <Stack.Screen name="Home" component={HomeScreen} />
         </Stack.Navigator>
     );
-}
+};
 
 const AuthenticationStack = () => {
-	return (
-		<Stack.Navigator screenOptions={screenOptions}>
-			<Stack.Screen name="Login" component={LoginScreen} />
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
-		</Stack.Navigator>
-	)
+        </Stack.Navigator>
+    );
 };
 
 const AboutStack = () => {
-	return (
-		<Stack.Navigator>
-			<Stack.Screen name="About" component={AboutScreen} />
-		</Stack.Navigator>
-	)
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="About" component={AboutScreen} />
+        </Stack.Navigator>
+    );
 };
 
 const SettingsStack = () => {
-	return (
-		<Stack.Navigator>
-			<Stack.Screen name="Settings" component={SettingsScreen} />
-		</Stack.Navigator>
-	)
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+        </Stack.Navigator>
+    );
 };
 
 export { HomeStack, AboutStack, SettingsStack, AuthenticationStack };

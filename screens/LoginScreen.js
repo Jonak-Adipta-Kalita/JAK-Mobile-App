@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, KeyboardAvoidingView, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    StyleSheet,
+    View,
+    KeyboardAvoidingView,
+    SafeAreaView,
+    TouchableOpacity,
+} from "react-native";
 import { Button, Input } from "react-native-elements";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../firebase";
 import PropTypes from "prop-types";
 
@@ -20,23 +26,23 @@ export default function LoginScreen({ navigation }) {
             alert(error.message)
         );
     };
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			headerLeft: () => (
-				<SafeAreaView style={{ flex: 1 }}>
-					<TouchableOpacity
-						style={{
-							alignItems: "flex-start",
-							margin: 20,
-						}}
-						onPress={navigation.goBack}
-					>
-						<AntDesign name="arrowleft" size={24} color="white" />
-					</TouchableOpacity>
-				</SafeAreaView>
-			),
-		});
-	}, [navigation]);
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerLeft: () => (
+                <SafeAreaView style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={{
+                            alignItems: "flex-start",
+                            margin: 20,
+                        }}
+                        onPress={navigation.goBack}
+                    >
+                        <AntDesign name="arrowleft" size={24} color="white" />
+                    </TouchableOpacity>
+                </SafeAreaView>
+            ),
+        });
+    }, [navigation]);
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <StatusBar style="auto" />

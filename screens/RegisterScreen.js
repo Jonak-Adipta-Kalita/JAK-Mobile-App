@@ -1,8 +1,14 @@
 import React, { useLayoutEffect, useState } from "react";
-import { StyleSheet, View, KeyboardAvoidingView, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    StyleSheet,
+    View,
+    KeyboardAvoidingView,
+    SafeAreaView,
+    TouchableOpacity,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../firebase";
 import PropTypes from "prop-types";
 
@@ -14,19 +20,19 @@ export default function RegisterScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerBackTitle: "Back to Login",
-			headerLeft: () => (
-				<SafeAreaView style={{ flex: 1 }}>
-					<TouchableOpacity
-						style={{
-							alignItems: "flex-start",
-							margin: 20,
-						}}
-						onPress={navigation.goBack}
-					>
-						<AntDesign name="arrowleft" size={24} color="white" />
-					</TouchableOpacity>
-				</SafeAreaView>
-			),
+            headerLeft: () => (
+                <SafeAreaView style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={{
+                            alignItems: "flex-start",
+                            margin: 20,
+                        }}
+                        onPress={navigation.goBack}
+                    >
+                        <AntDesign name="arrowleft" size={24} color="white" />
+                    </TouchableOpacity>
+                </SafeAreaView>
+            ),
         });
     }, [navigation]);
     const register = () => {
