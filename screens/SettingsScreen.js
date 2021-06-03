@@ -23,7 +23,7 @@ export default function SettingsScreen({ navigation }) {
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
-                        style={{ alignItems: "flex-start", margin: 16 }}
+                        style={{ alignItems: "flex-start", margin: 20 }}
                         onPress={navigation.goBack}
                     >
                         <AntDesign name="arrowleft" size={24} color="black" />

@@ -2,10 +2,10 @@ import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Card, Button } from 'react-native-elements';
-import { auth } from "../firebase";
+import { Card, Button } from "react-native-elements";
 import PropTypes from "prop-types";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
 export default function HomeScreen({ navigation }) {
     const [user] = useAuthState(auth);
@@ -18,10 +18,7 @@ export default function HomeScreen({ navigation }) {
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
-                        style={{
-                            alignItems: "flex-start",
-                            margin: 16,
-                        }}
+                        style={{ alignItems: "flex-start", margin: 20 }}
                         onPress={navigation.toggleDrawer}
                     >
                         <FontAwesome5 name="bars" size={24} />
@@ -59,22 +56,22 @@ export default function HomeScreen({ navigation }) {
     return (
         <View>
             <StatusBar style="auto" />
-			<Card style={styles.card}>
-				<Card.Title>About Me!!</Card.Title>
-				<Card.Divider />
-				<Button 
-					onPress={() => navigation.navigate('About')} 
-					title="Go to About Screen" 
-				/>
-			</Card>
-			<Card style={styles.card}>
-				<Card.Title>Contact Me!!</Card.Title>
-				<Card.Divider />
-				<Button 
-					onPress={() => navigation.navigate('Contact')} 
-					title="Go to Contact Screen" 
-				/>
-			</Card>
+            <Card style={styles.card}>
+                <Card.Title>About Me!!</Card.Title>
+                <Card.Divider />
+                <Button
+                    onPress={() => navigation.navigate("About")}
+                    title="Go to About Screen"
+                />
+            </Card>
+            <Card style={styles.card}>
+                <Card.Title>Contact Me!!</Card.Title>
+                <Card.Divider />
+                <Button
+                    onPress={() => navigation.navigate("Contact")}
+                    title="Go to Contact Screen"
+                />
+            </Card>
         </View>
     );
 }
@@ -84,8 +81,8 @@ HomeScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-	card: {
-		maxWidth: "50%",
-		maxHeight: "50%",
-	},
+    card: {
+        maxWidth: "50%",
+        maxHeight: "50%",
+    },
 });
