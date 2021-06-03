@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../firebase";
-import { Avatar } from "react-native-elements";
+import { Avatar, Button } from "react-native-elements";
 import PropTypes from "prop-types";
 
 export default function SettingsScreen({ navigation }) {
+    const logOut = () => {
+        auth.signOut().then(() => navigation.replace("Login"));
+    };
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "My Profile!!",
@@ -35,7 +38,7 @@ export default function SettingsScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <View style={{ marginTop: 100, alignItems: "center" }}>
+            <View style={{ marginTop: 50, alignItems: "center" }}>
                 <TouchableOpacity activeOpacity={0.5}>
                     <Avatar
                         rounded
@@ -46,20 +49,27 @@ export default function SettingsScreen({ navigation }) {
                     />
                 </TouchableOpacity>
             </View>
-            <View style={{ marginTop: 50, marginLeft: 20 }}>
-                <Text style={{ fontSize: 17 }}>
-                    Name:{" "}
-                    <Text style={{ fontSize: 12 }}>
-                        {auth?.currentUser?.displayName}
-                    </Text>
-                </Text>
-                <Text style={{ fontSize: 15 }}>
-                    Email:{" "}
-                    <Text style={{ fontSize: 12 }}>
-                        {auth?.currentUser?.email}
-                    </Text>
-                </Text>
+            <View style={{ marginTop: 50 }}>
+				<View>
+					<Text style={{ fontSize: 17 }}>
+						Name:
+					</Text>
+					<Text style={{ fontSize: 12 }}>
+						{auth?.currentUser?.displayName}
+					</Text>
+				</View>
+				<View>
+					<Text style={{ fontSize: 15 }}>
+						Email:
+					</Text>
+					<Text style={{ fontSize: 12 }}>
+						{auth?.currentUser?.email}
+					</Text>
+				</View>
             </View>
+			<View style={{ alignSelf: "center", position: 'absolute', bottom: 35 }}>
+				<Button onPress={logOut} title="Logout" />
+			</View>
         </View>
     );
 }
@@ -69,5 +79,8 @@ SettingsScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+		flexDirection: 'column',
+		flex: 1
+	},
 });

@@ -31,9 +31,9 @@ export default function AboutScreen({ navigation }) {
         });
     }, [navigation]);
     return (
-        <View>
+        <View style={styles.container}>
             <StatusBar style="auto" />
-            <Text style={styles.main_content}>
+            <Text style={styles.content}>
                 My name is JONAK ADIPTA KALITA. I am a student in Kendriya
                 Vidyalaya Mangaldoi, I am currently studying in standard '8th'.
                 My mom is a Banker and my Dad is a Mathematics Teacher. I am a
@@ -55,5 +55,6 @@ AboutScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    main_content: {},
+    container: {},
+    content: {},
 });

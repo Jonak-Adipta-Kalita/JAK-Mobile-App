@@ -1,14 +1,11 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
-import { FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { Card, Button } from "react-native-elements";
 import PropTypes from "prop-types";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase";
 
 export default function HomeScreen({ navigation }) {
-    const [user] = useAuthState(auth);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Welcome!!",
@@ -22,32 +19,6 @@ export default function HomeScreen({ navigation }) {
                         onPress={navigation.toggleDrawer}
                     >
                         <FontAwesome5 name="bars" size={24} />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
-            headerRight: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={{
-                            alignItems: "flex-end",
-                            margin: 16,
-                        }}
-                    >
-                        {!user ? (
-                            <Entypo
-                                name="login"
-                                onPress={() => navigation.navigate("Login")}
-                                size={24}
-                                color="black"
-                            />
-                        ) : (
-                            <Ionicons
-                                name="md-settings-outline"
-                                onPress={() => navigation.navigate("Settings")}
-                                size={24}
-                                color="black"
-                            />
-                        )}
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
