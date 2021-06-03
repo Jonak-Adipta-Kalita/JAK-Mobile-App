@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
+import { Card } from 'react-native-elements';
 
 export default function AboutScreen({ navigation }) {
     useLayoutEffect(() => {
@@ -33,19 +34,23 @@ export default function AboutScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <Text style={styles.content}>
-                My name is JONAK ADIPTA KALITA. I am a student in Kendriya
-                Vidyalaya Mangaldoi, I am currently studying in standard '8th'.
-                My mom is a Banker and my Dad is a Mathematics Teacher. I am a
-                Coder and also a 'Home Game Developer'. I code for fun but
-                sometimes I also teach some of my colleagues some 'Python'. I
-                love Python and JavaScript the most. I am a Youtuber too. I love
-                to play Games such as NFS, COD, AC, Among Us, GTA, etc. I am a
-                huge fan of Anime and watched 'Pokemon', 'One Piece',
-                'Beyblade', 'DBG'. If you want to get to my Instagram or Github
-                you have to find it by yourself. Actually you'll find my Social
-                Medias in the Social Media Page.
-            </Text>
+			<Card>
+				<Card.Title>So you want to know about Me?</Card.Title>
+				<Card.Divider />
+				<Text style={styles.content}>
+					My name is JONAK ADIPTA KALITA. I am a student in Kendriya
+					Vidyalaya Mangaldoi, I am currently studying in standard '8th'.
+					My mom is a Banker and my Dad is a Mathematics Teacher. I am a
+					Coder and also a 'Home Game Developer'. I code for fun but
+					sometimes I also teach some of my colleagues some 'Python'. I
+					love Python and JavaScript the most. I am a Youtuber too. I love
+					to play Games such as NFS, COD, AC, Among Us, GTA, etc. I am a
+					huge fan of Anime and watched 'Pokemon', 'One Piece',
+					'Beyblade', 'DBG'. If you want to get to my Instagram or Github
+					you have to find it by yourself. Actually you'll find my Social
+					Medias in the Social Media Page.
+				</Text>
+			</Card>
         </View>
     );
 }
@@ -56,5 +61,8 @@ AboutScreen.propTypes = {
 
 const styles = StyleSheet.create({
     container: {},
-    content: {},
+    content: {
+		fontSize: 20,
+		fontColor: "#594d4c"
+	},
 });

@@ -13,9 +13,6 @@ import { Avatar, Button } from "react-native-elements";
 import PropTypes from "prop-types";
 
 export default function SettingsScreen({ navigation }) {
-    const logOut = () => {
-        auth.signOut().then(() => navigation.replace("Login"));
-    };
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "My Profile!!",
@@ -70,7 +67,7 @@ export default function SettingsScreen({ navigation }) {
                     bottom: 35,
                 }}
             >
-                <Button onPress={logOut} title="Logout" />
+                <Button onPress={() => auth.signOut()} title="Logout" />
             </View>
         </View>
     );
