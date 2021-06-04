@@ -1,6 +1,7 @@
 <div align=center>
 
 # JAK-Mobile-App
+![runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?style=for-the-badge&logo=EXPO&labelColor=f3f3f3&logoColor=000)
 
 </div>
 
