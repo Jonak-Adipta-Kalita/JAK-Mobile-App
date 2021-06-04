@@ -46,10 +46,7 @@ export default function AboutScreen({ navigation }) {
                     colleagues some 'Python'. I love Python and JavaScript the
                     most. I am a Youtuber too. I love to play Games such as NFS,
                     COD, AC, Among Us, GTA, etc. I am a huge fan of Anime and
-                    watched 'Pokemon', 'One Piece', 'Beyblade', 'DBG'. If you
-                    want to get to my Instagram or Github you have to find it by
-                    yourself. Actually you'll find my Social Medias in the
-                    Social Media Page.
+                    watched 'Pokemon', 'One Piece', 'Beyblade', 'DBG'.
                 </Text>
             </Card>
         </View>
