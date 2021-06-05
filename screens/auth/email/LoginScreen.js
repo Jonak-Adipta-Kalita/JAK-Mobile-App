@@ -3,7 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import {
     StyleSheet,
     View,
-    KeyboardAvoidingView,
     SafeAreaView,
     TouchableOpacity,
 } from "react-native";
@@ -45,7 +44,7 @@ export default function LoginScreenEmail({ navigation }) {
         });
     }, [navigation]);
     return (
-        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <View behavior="padding" style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.inputContainer}>
                 <Input
@@ -76,7 +75,7 @@ export default function LoginScreenEmail({ navigation }) {
                 onPress={() => navigation.navigate("Register")}
             />
             <View style={{ height: 100 }} />
-        </KeyboardAvoidingView>
+        </View>
     );
 }
 
