@@ -40,8 +40,7 @@ export default function AboutScreen({ navigation }) {
                 <Text style={styles.content}>
                     My name is JONAK ADIPTA KALITA. I am a student in Kendriya
                     Vidyalaya Mangaldoi, I am currently studying in standard
-                    '8th'. My mom is a Banker and my Dad is a Mathematics
-                    Teacher. I am a Coder and also a 'Home Game Developer'. I
+                    '8th'. I am a Coder and also a 'Home Game Developer'. I
                     code for fun but sometimes I also teach some of my
                     colleagues some 'Python'. I love Python and JavaScript the
                     most. I am a Youtuber too. I love to play Games such as NFS,
