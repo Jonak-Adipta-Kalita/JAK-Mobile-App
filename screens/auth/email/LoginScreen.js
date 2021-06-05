@@ -67,7 +67,7 @@ export default function LoginScreenEmail({ navigation }) {
                 containerStyle={styles.button}
                 title="Register"
                 type="outline"
-                onPress={() => navigation.navigate("Register")}
+                onPress={() => navigation.navigate("RegisterWithEmail")}
             />
             <View style={{ height: 100 }} />
         </View>
