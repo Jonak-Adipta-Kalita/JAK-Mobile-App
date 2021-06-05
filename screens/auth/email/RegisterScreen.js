@@ -1,10 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import {
-    StyleSheet,
-    View,
-    SafeAreaView,
-    TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
