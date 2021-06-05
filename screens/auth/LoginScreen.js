@@ -8,9 +8,12 @@ import {
     createButton,
     createSvgIcon,
 } from "react-social-login-buttons";
+import { auth, provider } from "../../firebase";
 
 export default function LoginScreen({ navigation }) {
-    const googleSignIn = () => {};
+    const googleSignIn = () => {
+        auth.signInWithPopup(provider).catch((error) => alert(error.message));
+    };
     const EmailLoginButton = createButton({
         text: "Log in with Email",
         icon: createSvgIcon(() => <MaterialIcons name="email" size={24} />),
