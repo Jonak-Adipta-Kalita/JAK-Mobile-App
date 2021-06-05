@@ -28,7 +28,7 @@ export default function LoginScreenEmail({ navigation }) {
     };
     useLayoutEffect(() => {
         navigation.setOptions({
-			title: "Login with Email!!",
+            title: "Login with Email!!",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity

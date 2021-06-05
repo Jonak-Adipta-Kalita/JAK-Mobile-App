@@ -30,7 +30,10 @@ const AuthenticationStack = () => {
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="LoginWithEmail" component={LoginScreenEmail} />
-            <Stack.Screen name="RegisterWithEmail" component={RegisterScreenEmail} />
+            <Stack.Screen
+                name="RegisterWithEmail"
+                component={RegisterScreenEmail}
+            />
         </Stack.Navigator>
     );
 };

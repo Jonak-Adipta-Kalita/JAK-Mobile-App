@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function LoginScreen({ navigation }) {
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			title: "Login",
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: "Login",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
@@ -21,13 +21,13 @@ export default function LoginScreen({ navigation }) {
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
-		});
-	}, [navigation]);
-	return (
-		<View>
-			<StatusBar style="auto" />
-		</View>
-	);
+        });
+    }, [navigation]);
+    return (
+        <View>
+            <StatusBar style="auto" />
+        </View>
+    );
 }
 
 LoginScreen.propTypes = {

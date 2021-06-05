@@ -19,7 +19,7 @@ export default function RegisterScreenEmail({ navigation }) {
     const [imageUrl, setImageUrl] = useState("");
     useLayoutEffect(() => {
         navigation.setOptions({
-			title: "Register with Email!!",
+            title: "Register with Email!!",
             headerBackTitle: "Back to Login",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
