@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    StyleSheet,
-    View,
-    SafeAreaView,
-    TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../../../firebase";
@@ -44,7 +39,7 @@ export default function LoginScreenEmail({ navigation }) {
         });
     }, [navigation]);
     return (
-        <View behavior="padding" style={styles.container}>
+        <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.inputContainer}>
                 <Input

@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useState } from "react";
 import {
     StyleSheet,
     View,
-    KeyboardAvoidingView,
     SafeAreaView,
     TouchableOpacity,
 } from "react-native";
@@ -49,7 +48,7 @@ export default function RegisterScreenEmail({ navigation }) {
             .catch((error) => alert(error.message));
     };
     return (
-        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <View style={styles.container}>
             <StatusBar style="auto" />
             <Text h3 style={{ marginBottom: 50 }}>
                 Create an Account
@@ -92,7 +91,7 @@ export default function RegisterScreenEmail({ navigation }) {
                 onPress={register}
                 raised
             />
-        </KeyboardAvoidingView>
+        </View>
     );
 }
 
