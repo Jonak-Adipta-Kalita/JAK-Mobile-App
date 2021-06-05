@@ -2,25 +2,13 @@ import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import {
-    GoogleLoginButton,
-    createButton,
-    createSvgIcon,
-} from "react-social-login-buttons";
+import { AntDesign } from "@expo/vector-icons";
 import { auth, provider } from "../../firebase";
 
 export default function LoginScreen({ navigation }) {
     const googleSignIn = () => {
         auth.signInWithPopup(provider).catch((error) => alert(error.message));
     };
-    const EmailLoginButton = createButton({
-        text: "Log in with Email",
-        icon: createSvgIcon(() => <MaterialIcons name="email" size={24} />),
-        iconFormat: (name) => `fa fa-${name}`,
-        style: { background: "#fff", color: "black" },
-        activeStyle: { background: "#EFF0EE" },
-    });
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login",
@@ -47,10 +35,10 @@ export default function LoginScreen({ navigation }) {
                     style={styles.button}
                     onPress={() => navigation.navigate("LoginWithEmail")}
                 >
-                    <EmailLoginButton />
+				
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={googleSignIn}>
-                    <GoogleLoginButton />
+				
                 </TouchableOpacity>
             </View>
         </View>
