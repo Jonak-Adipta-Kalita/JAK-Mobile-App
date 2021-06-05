@@ -3,10 +3,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "../screens/HomeScreen";
 import AboutScreen from "../screens/AboutScreen";
-import LoginScreen from "../screens/LoginScreen";
-import RegisterScreen from "../screens/RegisterScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import ContactScreen from "../screens/ContactScreen";
+import LoginScreen from "../screens/auth/LoginScreen";
+import LoginScreenEmail from "../screens/auth/email/LoginScreen";
+import RegisterScreenEmail from "../screens/auth/email/RegisterScreen";
 
 const Stack = createStackNavigator();
 
@@ -28,7 +29,8 @@ const AuthenticationStack = () => {
     return (
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="LoginWithEmail" component={LoginScreenEmail} />
+            <Stack.Screen name="RegisterWithEmail" component={RegisterScreenEmail} />
         </Stack.Navigator>
     );
 };
