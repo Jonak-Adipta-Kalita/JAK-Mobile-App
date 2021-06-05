@@ -40,12 +40,12 @@ export default function AboutScreen({ navigation }) {
                 <Text style={styles.content}>
                     My name is JONAK ADIPTA KALITA. I am a student in Kendriya
                     Vidyalaya Mangaldoi, I am currently studying in standard
-                    '8th'. I am a Coder and also a 'Home Game Developer'. I
-                    code for fun but sometimes I also teach some of my
-                    colleagues some 'Python'. I love Python and JavaScript the
-                    most. I am a Youtuber too. I love to play Games such as NFS,
-                    COD, AC, Among Us, GTA, etc. I am a huge fan of Anime and
-                    watched 'Pokemon', 'One Piece', 'Beyblade', 'DBG'.
+                    '8th'. I am a Coder and also a 'Home Game Developer'. I code
+                    for fun but sometimes I also teach some of my colleagues
+                    some 'Python'. I love Python and JavaScript the most. I am a
+                    Youtuber too. I love to play Games such as NFS, COD, AC,
+                    Among Us, GTA, etc. I am a huge fan of Anime and watched
+                    'Pokemon', 'One Piece', 'Beyblade', 'DBG'.
                 </Text>
             </Card>
         </View>
