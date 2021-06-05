@@ -13,6 +13,7 @@
         "lint": "eslint .",
         "lint:fix": "eslint --fix .",
         "prettier": "prettier --write **/*.{js,jsx,tsx,ts,md,json}",
+        "publish": "expo publish",
         "prepare": "husky install"
     },
     "dependencies": {
