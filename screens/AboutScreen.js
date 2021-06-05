@@ -61,6 +61,5 @@ const styles = StyleSheet.create({
     container: {},
     content: {
         fontSize: 20,
-        fontColor: "#594d4c",
     },
 });
