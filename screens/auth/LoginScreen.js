@@ -37,9 +37,9 @@ export default function LoginScreen({ navigation }) {
         });
     }, [navigation]);
     return (
-        <View>
+        <View style={styles.container}>
             <StatusBar style="auto" />
-            <View style={styles.container}>
+            <View style={{ width: 300 }}>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => navigation.navigate("LoginWithEmail")}
@@ -60,6 +60,7 @@ LoginScreen.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         alignItems: "center",
         justifyContent: "center",
     },
