@@ -1,5 +1,8 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 import {
     HomeStack,
     AboutStack,
@@ -7,8 +10,6 @@ import {
     ContactStack,
     AuthenticationStack,
 } from "./StackNavigator";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 const Drawer = createDrawerNavigator();
 
