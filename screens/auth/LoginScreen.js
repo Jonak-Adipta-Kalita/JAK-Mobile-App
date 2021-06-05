@@ -34,12 +34,11 @@ export default function LoginScreen({ navigation }) {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => navigation.navigate("LoginWithEmail")}
-                >
-				
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={googleSignIn}>
-				
-                </TouchableOpacity>
+                ></TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={googleSignIn}
+                ></TouchableOpacity>
             </View>
         </View>
     );
