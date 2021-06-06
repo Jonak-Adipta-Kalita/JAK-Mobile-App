@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    SafeAreaView,
+    TouchableOpacity,
+} from "react-native";
 import { Button, Input, SocialIcon } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../../firebase";
@@ -20,7 +26,7 @@ export default function LoginScreen({ navigation }) {
             alert(error.message)
         );
     };
-	const signInGoogle = () => {};
+    const signInGoogle = () => {};
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login!!",
@@ -70,18 +76,24 @@ export default function LoginScreen({ navigation }) {
                 type="outline"
                 onPress={() => navigation.navigate("Register")}
             />
-			<Text style={{
-					marginTop: 10,
-					marginBottom: 10,
-					color: "#594d4c",
-					fontSize: 20,
-				}}
-			>
-				Or
-			</Text>
-			<TouchableOpacity style={{ width: 300 }} onPress={signInGoogle}>
-				<SocialIcon type="google" button dark title="Login with Google" />
-			</TouchableOpacity>
+            <Text
+                style={{
+                    marginTop: 10,
+                    marginBottom: 10,
+                    color: "#594d4c",
+                    fontSize: 20,
+                }}
+            >
+                Or
+            </Text>
+            <TouchableOpacity style={{ width: 300 }} onPress={signInGoogle}>
+                <SocialIcon
+                    type="google"
+                    button
+                    dark
+                    title="Login with Google"
+                />
+            </TouchableOpacity>
         </View>
     );
 }
