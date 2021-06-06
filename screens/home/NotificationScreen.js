@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 
@@ -25,8 +25,8 @@ export default function NotificationScreen({ navigation }) {
         });
     }, [navigation]);
     return (
-        <View>
-            <StatusBar />
+        <View style={styles.container}>
+            <StatusBar style="auto" />
         </View>
     );
 }
@@ -34,3 +34,7 @@ export default function NotificationScreen({ navigation }) {
 NotificationScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+const styles = StyleSheet.create({
+	container: {},
+});

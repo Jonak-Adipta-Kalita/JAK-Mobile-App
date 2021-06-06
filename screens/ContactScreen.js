@@ -49,28 +49,28 @@ export default function ContactScreen({ navigation }) {
                     placeholder="Name"
                     autoFocus
                     type="text"
-					style={styles.inputBar}
+                    style={styles.inputBar}
                     value={name}
                     onChangeText={(text) => setName(text)}
                 />
                 <Input
                     placeholder="Email"
                     type="email"
-					style={styles.inputBar}
+                    style={styles.inputBar}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />
                 <Input
                     placeholder="Phone Number (with Country Code)"
                     type="phone"
-					style={styles.inputBar}
+                    style={styles.inputBar}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
                 />
                 <Input
                     placeholder="Why do you want to Contact Me?"
                     type="text"
-					style={styles.inputBar}
+                    style={styles.inputBar}
                     value={message}
                     onChangeText={(text) => setMessage(text)}
                 />
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         padding: 10,
-		marginTop: 50,
+        marginTop: 50,
     },
     inputContainer: {
         width: 350,
