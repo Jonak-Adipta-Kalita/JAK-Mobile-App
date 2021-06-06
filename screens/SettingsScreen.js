@@ -1,12 +1,6 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    Text,
-    StyleSheet,
-    SafeAreaView,
-    TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../firebase";
 import { Avatar, Button } from "react-native-elements";
@@ -35,8 +29,8 @@ export default function SettingsScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <View style={{ marginTop: 50, alignItems: "center" }}>
-                <TouchableOpacity activeOpacity={0.5}>
+            <View style={{ marginTop: 30, alignItems: "center" }}>
+                <TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
                     <Avatar
                         rounded
                         size="xlarge"
@@ -46,25 +40,12 @@ export default function SettingsScreen({ navigation }) {
                     />
                 </TouchableOpacity>
             </View>
-            <View style={{ marginTop: 50 }}>
-                <View>
-                    <Text style={{ fontSize: 17 }}>Name:</Text>
-                    <Text style={{ fontSize: 12 }}>
-                        {auth?.currentUser?.displayName}
-                    </Text>
-                </View>
-                <View>
-                    <Text style={{ fontSize: 15 }}>Email:</Text>
-                    <Text style={{ fontSize: 12 }}>
-                        {auth?.currentUser?.email}
-                    </Text>
-                </View>
-            </View>
+            <View style={{ marginTop: 20 }}>{/* details */}</View>
             <View
                 style={{
                     alignSelf: "center",
                     position: "absolute",
-                    bottom: 35,
+                    bottom: 25,
                 }}
             >
                 <Button onPress={() => auth.signOut()} title="Logout" />
