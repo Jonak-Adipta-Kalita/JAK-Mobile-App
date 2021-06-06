@@ -1,28 +1,20 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { useLayoutEffect, useState } from "react";
 import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
-import { Button, Input } from "react-native-elements";
+import { StatusBar } from "expo-status-bar";
+import { Button, Input, Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { auth } from "../../../firebase";
+import { auth } from "../../firebase";
 import PropTypes from "prop-types";
 
-export default function LoginScreenEmail({ navigation }) {
+export default function RegisterScreen({ navigation }) {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    useEffect(() => {
-        const unSubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) navigation.replace("Home");
-        });
-        return unSubscribe;
-    }, []);
-    const signIn = () => {
-        auth.signInWithEmailAndPassword(email, password).catch((error) =>
-            alert(error.message)
-        );
-    };
+    const [imageUrl, setImageUrl] = useState("");
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Login with Email!!",
+            title: "Register!!",
+            headerBackTitle: "Back to Login",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
@@ -38,43 +30,67 @@ export default function LoginScreenEmail({ navigation }) {
             ),
         });
     }, [navigation]);
+    const register = () => {
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((authUser) => {
+                authUser.user.updateProfile({
+                    displayName: name,
+                    photoURL:
+                        imageUrl ||
+                        "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
+                });
+            })
+            .catch((error) => alert(error.message));
+    };
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
+            <Text h3 style={{ marginBottom: 50 }}>
+                Create an Account
+            </Text>
             <View style={styles.inputContainer}>
                 <Input
+                    placeholder="Full Name"
+                    autofocus
+                    type="text"
+                    value={name}
+                    onChangeText={(text) => setName(text)}
+                />
+
+                <Input
                     placeholder="Email"
-                    autoFocus
                     type="email"
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />
+
                 <Input
                     placeholder="Password"
                     secureTextEntry
                     type="password"
                     value={password}
                     onChangeText={(text) => setPassword(text)}
-                    onSubmitEditing={signIn}
+                />
+
+                <Input
+                    placeholder="Profile Picture Url (optional)"
+                    type="text"
+                    value={imageUrl}
+                    onChangeText={(text) => setImageUrl(text)}
+                    onSubmitEditing={register}
                 />
             </View>
             <Button
-                onPress={signIn}
-                containerStyle={styles.button}
-                title="Login"
-            />
-            <Button
                 containerStyle={styles.button}
                 title="Register"
-                type="outline"
-                onPress={() => navigation.navigate("RegisterWithEmail")}
+                onPress={register}
+                raised
             />
-            <View style={{ height: 100 }} />
         </View>
     );
 }
 
-LoginScreenEmail.propTypes = {
+RegisterScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
 

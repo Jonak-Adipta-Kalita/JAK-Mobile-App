@@ -1,17 +1,28 @@
-import React, { useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
+import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
+import { Button, Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { auth, provider } from "../../firebase";
+import { auth } from "../../../firebase";
+import PropTypes from "prop-types";
 
 export default function LoginScreen({ navigation }) {
-    const googleSignIn = () => {
-        auth.signInWithPopup(provider).catch((error) => alert(error.message));
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    useEffect(() => {
+        const unSubscribe = auth.onAuthStateChanged((authUser) => {
+            if (authUser) navigation.replace("Home");
+        });
+        return unSubscribe;
+    }, []);
+    const signInEmail = () => {
+        auth.signInWithEmailAndPassword(email, password).catch((error) =>
+            alert(error.message)
+        );
     };
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Login",
+            title: "Login!!",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
@@ -30,16 +41,35 @@ export default function LoginScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <View style={{ width: 300 }}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => navigation.navigate("LoginWithEmail")}
-                ></TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={googleSignIn}
-                ></TouchableOpacity>
+            <View style={styles.inputContainer}>
+                <Input
+                    placeholder="Email"
+                    autoFocus
+                    type="email"
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
+                />
+                <Input
+                    placeholder="Password"
+                    secureTextEntry
+                    type="password"
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
+                    onSubmitEditing={signInEmail}
+                />
             </View>
+            <Button
+                onPress={signInEmail}
+                containerStyle={styles.button}
+                title="Login"
+            />
+            <Button
+                containerStyle={styles.button}
+                title="Register"
+                type="outline"
+                onPress={() => navigation.navigate("Register")}
+            />
+            <View style={{ height: 100 }} />
         </View>
     );
 }
@@ -53,8 +83,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+        padding: 10,
+        backgroundColor: "white",
+    },
+    inputContainer: {
+        width: 300,
     },
     button: {
-        width: 300,
+        width: 200,
+        marginTop: 10,
     },
 });

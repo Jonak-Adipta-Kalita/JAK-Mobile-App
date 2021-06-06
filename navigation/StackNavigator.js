@@ -6,8 +6,7 @@ import AboutScreen from "../screens/AboutScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import ContactScreen from "../screens/ContactScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
-import LoginScreenEmail from "../screens/auth/email/LoginScreen";
-import RegisterScreenEmail from "../screens/auth/email/RegisterScreen";
+import RegisterScreen from "../screens/auth/RegisterScreen";
 
 const Stack = createStackNavigator();
 
@@ -29,11 +28,7 @@ const AuthenticationStack = () => {
     return (
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="LoginWithEmail" component={LoginScreenEmail} />
-            <Stack.Screen
-                name="RegisterWithEmail"
-                component={RegisterScreenEmail}
-            />
+            <Stack.Screen name="Register" component={RegisterScreen} />
         </Stack.Navigator>
     );
 };
