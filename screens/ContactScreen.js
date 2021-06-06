@@ -33,7 +33,7 @@ export default function ContactScreen({ navigation }) {
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
                         style={{ alignItems: "flex-start", margin: 20 }}
-                        onPress={navigation.goBack}
+                        onPress={() => navigation.goBack}
                     >
                         <AntDesign name="arrowleft" size={24} color="black" />
                     </TouchableOpacity>
@@ -49,24 +49,28 @@ export default function ContactScreen({ navigation }) {
                     placeholder="Name"
                     autoFocus
                     type="text"
+					style={styles.inputBar}
                     value={name}
                     onChangeText={(text) => setName(text)}
                 />
                 <Input
                     placeholder="Email"
                     type="email"
+					style={styles.inputBar}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />
                 <Input
                     placeholder="Phone Number (with Country Code)"
                     type="phone"
+					style={styles.inputBar}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
                 />
                 <Input
                     placeholder="Why do you want to Contact Me?"
                     type="text"
+					style={styles.inputBar}
                     value={message}
                     onChangeText={(text) => setMessage(text)}
                 />
@@ -89,11 +93,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         padding: 10,
-        backgroundColor: "white",
+		marginTop: 50,
     },
     inputContainer: {
         width: 300,
     },
+	inputBar: {
+		width: 50
+	},
     button: {
         width: 200,
         marginTop: 10,

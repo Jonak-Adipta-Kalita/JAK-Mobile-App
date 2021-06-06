@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "react-native-elements";
 import PropTypes from "prop-types";
 
@@ -16,9 +16,19 @@ export default function HomeScreen({ navigation }) {
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
                         style={{ alignItems: "flex-start", margin: 20 }}
-                        onPress={navigation.toggleDrawer}
+                        onPress={() => navigation.toggleDrawer}
                     >
                         <FontAwesome5 name="bars" size={24} />
+                    </TouchableOpacity>
+                </SafeAreaView>
+            ),
+			headerRight: () => (
+                <SafeAreaView style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={{ alignItems: "flex-start", margin: 20 }}
+                        onPress={navigation.navigate("Notification")}
+                    >
+                        <Ionicons name="notifications-outline" size={24} color="black" />
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
