@@ -96,11 +96,8 @@ const styles = StyleSheet.create({
 		marginTop: 50,
     },
     inputContainer: {
-        width: 300,
+        width: 350,
     },
-	inputBar: {
-		width: 50
-	},
     button: {
         width: 200,
         marginTop: 10,

@@ -22,13 +22,17 @@ export default function HomeScreen({ navigation }) {
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
-			headerRight: () => (
+            headerRight: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
                         style={{ alignItems: "flex-start", margin: 20 }}
                         onPress={navigation.navigate("Notification")}
                     >
-                        <Ionicons name="notifications-outline" size={24} color="black" />
+                        <Ionicons
+                            name="notifications-outline"
+                            size={24}
+                            color="black"
+                        />
                     </TouchableOpacity>
                 </SafeAreaView>
             ),

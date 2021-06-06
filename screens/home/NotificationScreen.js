@@ -1,14 +1,14 @@
 import React, { useLayoutEffect } from "react";
-import { StatusBar } from 'expo-status-bar';
-import { View, SafeAreaView, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import PropTypes from 'prop-types';
+import { StatusBar } from "expo-status-bar";
+import { View, SafeAreaView, TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import PropTypes from "prop-types";
 
 export default function NotificationScreen({ navigation }) {
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			title: "Your Notifications!!",
-			headerStyle: { backgroundColor: "#fff" },
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: "Your Notifications!!",
+            headerStyle: { backgroundColor: "#fff" },
             headerTitleStyle: { color: "black" },
             headerTintColor: "black",
             headerBackTitle: "Back to Home",
@@ -22,13 +22,13 @@ export default function NotificationScreen({ navigation }) {
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
-		});
-	}, [navigation]);
-	return (
-		<View>
-			<StatusBar />
-		</View>
-	);
+        });
+    }, [navigation]);
+    return (
+        <View>
+            <StatusBar />
+        </View>
+    );
 }
 
 NotificationScreen.propTypes = {
