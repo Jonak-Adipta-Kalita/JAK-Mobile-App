@@ -74,7 +74,7 @@ export default function LoginScreen({ navigation }) {
                 containerStyle={styles.button}
                 title="Register"
                 type="outline"
-                onPress={() => navigation.jumpTo("Register")}
+                onPress={() => navigation.navigate("Register")}
             />
             <Text
                 style={{
