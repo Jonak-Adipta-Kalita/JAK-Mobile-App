@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { auth } from "../../../firebase";
+import { auth } from "../../firebase";
 import PropTypes from "prop-types";
 
 export default function LoginScreen({ navigation }) {
