@@ -60,6 +60,6 @@ const styles = StyleSheet.create({
     container: {},
     content: {
         fontSize: 20,
-		color: "#594d4c",
+        color: "#594d4c",
     },
 });
