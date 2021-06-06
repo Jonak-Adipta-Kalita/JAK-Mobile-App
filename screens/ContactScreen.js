@@ -2,23 +2,26 @@ import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { Input, Button } from 'react-native-elements';
-import { db } from '../firebase';
+import { Input, Button } from "react-native-elements";
+import { db } from "../firebase";
 import PropTypes from "prop-types";
 
 export default function ContactScreen({ navigation }) {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [message, setMessage] = useState("");
-	const submitRequestToContact = () => {
-		db.collection('requestToContact').add({
-			name: name,
-			email: email,
-			phoneNumber: phoneNumber,
-			message: message,
-		}).then(() => alert("Request Sent!!")).catch((error) => alert(error.message));
-	};
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [message, setMessage] = useState("");
+    const submitRequestToContact = () => {
+        db.collection("requestToContact")
+            .add({
+                name: name,
+                email: email,
+                phoneNumber: phoneNumber,
+                message: message,
+            })
+            .then(() => alert("Request Sent!!"))
+            .catch((error) => alert(error.message));
+    };
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Contact Me!!",
@@ -41,38 +44,38 @@ export default function ContactScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-			<View style={styles.inputContainer}>
-				<Input
-					placeholder="Name"
-					autoFocus
-					type="text"
-					value={name}
-					onChangeText={(text) => setName(text)}
-				/>
-				<Input
-					placeholder="Email"
-					type="email"
-					value={email}
-					onChangeText={(text) => setEmail(text)}
-				/>
-				<Input 
-					placeholder="Phone Number (with Country Code)"
-					type="phone"
-					value={phoneNumber}
-					onChangeText={(text) => setPhoneNumber(text)}
-				/>
-				<Input 
-					placeholder="Why do you want to Contact Me?"
-					type="text"
-					value={message}
-					onChangeText={(text) => setMessage(text)}
-				/>
-			</View>
-			<Button
-				style={styles.button}
-				title="Submit"
-				onPress={submitRequestToContact}
-			/>
+            <View style={styles.inputContainer}>
+                <Input
+                    placeholder="Name"
+                    autoFocus
+                    type="text"
+                    value={name}
+                    onChangeText={(text) => setName(text)}
+                />
+                <Input
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
+                />
+                <Input
+                    placeholder="Phone Number (with Country Code)"
+                    type="phone"
+                    value={phoneNumber}
+                    onChangeText={(text) => setPhoneNumber(text)}
+                />
+                <Input
+                    placeholder="Why do you want to Contact Me?"
+                    type="text"
+                    value={message}
+                    onChangeText={(text) => setMessage(text)}
+                />
+            </View>
+            <Button
+                style={styles.button}
+                title="Submit"
+                onPress={submitRequestToContact}
+            />
         </View>
     );
 }
@@ -82,13 +85,13 @@ ContactScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
+    container: {
+        flex: 1,
         alignItems: "center",
         padding: 10,
         backgroundColor: "white",
-	},
-	inputContainer: {
+    },
+    inputContainer: {
         width: 300,
     },
     button: {
