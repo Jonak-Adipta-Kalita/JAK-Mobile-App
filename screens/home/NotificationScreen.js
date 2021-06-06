@@ -36,5 +36,5 @@ NotificationScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-	container: {},
+    container: {},
 });
