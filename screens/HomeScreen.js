@@ -31,7 +31,7 @@ export default function HomeScreen({ navigation }) {
                 <Card.Title>About Me!!</Card.Title>
                 <Card.Divider />
                 <Button
-                    onPress={() => navigation.navigate("About")}
+                    onPress={() => navigation.jumpTo("About")}
                     title="Go to About Screen"
                 />
             </Card>
@@ -39,7 +39,7 @@ export default function HomeScreen({ navigation }) {
                 <Card.Title>Contact Me!!</Card.Title>
                 <Card.Divider />
                 <Button
-                    onPress={() => navigation.navigate("Contact")}
+                    onPress={() => navigation.jumpTo("Contact")}
                     title="Go to Contact Screen"
                 />
             </Card>
