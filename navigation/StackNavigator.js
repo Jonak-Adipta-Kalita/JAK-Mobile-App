@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "../screens/home/HomeScreen";
+import NotificationScreen from "../screens/home/NotificationScreen";
 import AboutScreen from "../screens/AboutScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import ContactScreen from "../screens/ContactScreen";
@@ -20,6 +21,7 @@ const HomeStack = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Notification" component={NotificationScreen} />
         </Stack.Navigator>
     );
 };
