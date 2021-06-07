@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: 300,
-		marginTop: 10,
+        marginTop: 10,
     },
     button: {
         width: 200,
