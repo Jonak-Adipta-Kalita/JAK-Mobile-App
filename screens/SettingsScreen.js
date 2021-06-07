@@ -18,7 +18,7 @@ export default function SettingsScreen({ navigation }) {
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
                         style={{ alignItems: "flex-start", margin: 20 }}
-                        onPress={() => navigation.goBack}
+                        onPress={navigation.goBack}
                     >
                         <AntDesign name="arrowleft" size={24} color="black" />
                     </TouchableOpacity>

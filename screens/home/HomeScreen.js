@@ -16,7 +16,7 @@ export default function HomeScreen({ navigation }) {
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
                         style={{ alignItems: "flex-start", margin: 20 }}
-                        onPress={() => navigation.toggleDrawer}
+                        onPress={navigation.toggleDrawer}
                     >
                         <FontAwesome5 name="bars" size={24} />
                     </TouchableOpacity>
@@ -26,7 +26,7 @@ export default function HomeScreen({ navigation }) {
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
                         style={{ alignItems: "flex-start", margin: 20 }}
-                        onPress={navigation.navigate("Notification")}
+                        onPress={() => navigation.navigate("Notification")}
                     >
                         <Ionicons
                             name="notifications-outline"
