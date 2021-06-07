@@ -10,6 +10,7 @@ import {
 import { Button, Input, SocialIcon } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../../firebase";
+import { db } from '../../firebase';
 import PropTypes from "prop-types";
 
 export default function LoginScreen({ navigation }) {
@@ -22,9 +23,12 @@ export default function LoginScreen({ navigation }) {
         return unSubscribe;
     }, []);
     const signInEmail = () => {
-        auth.signInWithEmailAndPassword(email, password).catch((error) =>
-            alert(error.message)
-        );
+        auth.signInWithEmailAndPassword(email, password)
+			.then(() => db.collection("notifications").add({
+				title: "Member came back to the Ligtning Family!!",
+				message: `${email} came back to the Ligtning Family!! Yippie!!`,
+			}))
+			.catch((error) => alert(error.message));
     };
     const signInGoogle = () => {};
     useLayoutEffect(() => {

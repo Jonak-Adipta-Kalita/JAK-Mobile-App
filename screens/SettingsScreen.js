@@ -4,9 +4,18 @@ import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../firebase";
 import { Avatar, Button } from "react-native-elements";
+import { db } from '../firebase';
 import PropTypes from "prop-types";
 
 export default function SettingsScreen({ navigation }) {
+	const signOut = () => {
+		auth.signOut()
+			.then(() => db.collection("notifications").add({
+				title: "Member left the Ligtning Family!!",
+				message: "Someone left the Ligtning Family!! But I am sure He/She will return for sure!!",
+			}))
+			.catch((error) => alert(error.message))
+	};
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
@@ -48,7 +57,7 @@ export default function SettingsScreen({ navigation }) {
                     bottom: 25,
                 }}
             >
-                <Button onPress={() => auth.signOut()} title="Logout" />
+                <Button onPress={signOut} title="Logout" />
             </View>
         </View>
     );
