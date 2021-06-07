@@ -23,7 +23,7 @@ export default function DrawerNavigator() {
             {!user ? (
                 <Drawer.Screen name="Login" component={AuthenticationStack} />
             ) : (
-                <Drawer.Screen name="Settings" component={SettingsStack} />
+                <Drawer.Screen name="Profile" component={SettingsStack} />
             )}
         </Drawer.Navigator>
     );
