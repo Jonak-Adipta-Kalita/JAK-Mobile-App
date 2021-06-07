@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 export default function SettingsScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "My Profile!!",
+            title: "Your Profile!!",
             headerStyle: { backgroundColor: "#fff" },
             headerTitleStyle: { color: "black" },
             headerTintColor: "black",
