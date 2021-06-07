@@ -44,7 +44,7 @@ export default function HomeScreen({ navigation }) {
         });
     }, [navigation, user]);
     return (
-        <View>
+        <View style={styles.container}>
             <StatusBar style="auto" />
             <Card style={styles.card}>
                 <Card.Title>About Me!!</Card.Title>
@@ -71,5 +71,6 @@ HomeScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    container: {},
     card: {},
 });

@@ -2,7 +2,21 @@ import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import Notification from '../../components/Notification';
 import PropTypes from "prop-types";
+
+const notifications = [
+	{
+		id: 1,
+		title: "First_Title",
+		message: "First_Message"
+	},
+	{
+		id: 2,
+		title: "Second_Title",
+		message: "Second_Message"
+	},
+];
 
 export default function NotificationScreen({ navigation }) {
     useLayoutEffect(() => {
@@ -27,6 +41,13 @@ export default function NotificationScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
+			{notifications?.map((notification) => (
+				<Notification 
+					key={notification.id} 
+					title={notification.title} 
+					message={notification.message} 
+				/>
+			))}
         </View>
     );
 }
@@ -36,5 +57,7 @@ NotificationScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+		marginBottom: 10,
+	},
 });
