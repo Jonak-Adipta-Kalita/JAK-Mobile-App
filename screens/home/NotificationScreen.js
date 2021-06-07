@@ -1,24 +1,18 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Notification from "../../components/Notification";
+import { db } from "../../firebase";
 import PropTypes from "prop-types";
 
-const notifications = [
-    {
-        id: 1,
-        title: "First_Title",
-        message: "First_Message",
-    },
-    {
-        id: 2,
-        title: "Second_Title",
-        message: "Second_Message",
-    },
-];
-
 export default function NotificationScreen({ navigation }) {
+    const [notifications, setNotifications] = useState();
+    useEffect(() => {
+        db.collection("notifications").onSnapshot((snapshot) => {
+            setNotifications(snapshot.docs.map((doc) => doc.data()));
+        });
+    }, []);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Notifications!!",
