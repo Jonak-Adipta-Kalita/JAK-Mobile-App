@@ -71,6 +71,8 @@ HomeScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+		marginBottom: 10,
+	},
     card: {},
 });
