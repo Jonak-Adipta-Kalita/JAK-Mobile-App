@@ -12,19 +12,24 @@ export default function ContactScreen({ navigation }) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [message, setMessage] = useState("");
     const submitRequestToContact = () => {
-		if (name === "" || email === "" || phoneNumber === "" || message === "") {
-			alert("Please Enter all the Values in the Form!!")
-		} else {
-			db.collection("requestToContact")
-				.add({
-					name: name,
-					email: email,
-					phoneNumber: phoneNumber,
-					message: message,
-				})
-				.then(() => alert("Request Sent!!"))
-				.catch((error) => alert(error.message));
-		};
+        if (
+            name === "" ||
+            email === "" ||
+            phoneNumber === "" ||
+            message === ""
+        ) {
+            alert("Please Enter all the Values in the Form!!");
+        } else {
+            db.collection("requestToContact")
+                .add({
+                    name: name,
+                    email: email,
+                    phoneNumber: phoneNumber,
+                    message: message,
+                })
+                .then(() => alert("Request Sent!!"))
+                .catch((error) => alert(error.message));
+        }
     };
     useLayoutEffect(() => {
         navigation.setOptions({
