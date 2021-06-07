@@ -9,7 +9,9 @@ export default function Notification({ title, message }) {
             <Card>
                 <Card.Title>{title}</Card.Title>
                 <Card.Divider />
-                <Text style={{ textAlign: "center" }}>{message}</Text>
+                <Text style={{ textAlign: "center", color: "#594d4c" }}>
+                    {message}
+                </Text>
             </Card>
         </View>
     );
