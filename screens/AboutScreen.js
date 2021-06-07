@@ -58,8 +58,8 @@ AboutScreen.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-		marginBottom: 10,
-	},
+        marginBottom: 10,
+    },
     content: {
         fontSize: 20,
         color: "#594d4c",
