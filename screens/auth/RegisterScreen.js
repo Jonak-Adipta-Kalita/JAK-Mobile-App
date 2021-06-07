@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../../firebase";
-import { db } from '../../firebase';
+import { db } from "../../firebase";
 import PropTypes from "prop-types";
 
 export default function RegisterScreen({ navigation }) {
@@ -41,10 +41,12 @@ export default function RegisterScreen({ navigation }) {
                         "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
                 });
             })
-			.then(() => db.collection("notifications").add({
-				title: "New member in the Ligtning Family!!",
-				message: `${email} Joined the Ligtning Family!! Yippie!!`,
-			}))
+            .then(() =>
+                db.collection("notifications").add({
+                    title: "New member in the Ligtning Family!!",
+                    message: `${email} Joined the Ligtning Family!! Yippie!!`,
+                })
+            )
             .catch((error) => alert(error.message));
     };
     return (
