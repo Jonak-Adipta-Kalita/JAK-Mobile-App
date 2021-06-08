@@ -27,7 +27,7 @@ export default function SettingsScreen({ navigation }) {
                 db.collection("notifications").add({
                     title: "Someone left us Forever!!",
                     message: "Someone left the Family forever!! Noooooooo!!",
-					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
             .catch((error) => alert(error.message));
