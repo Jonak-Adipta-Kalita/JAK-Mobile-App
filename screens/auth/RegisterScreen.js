@@ -45,7 +45,7 @@ export default function RegisterScreen({ navigation }) {
                 db.collection("notifications").add({
                     title: "New member in the Ligtning Family!!",
                     message: `${email} Joined the Ligtning Family!! Yippie!!`,
-					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
             .catch((error) => alert(error.message));

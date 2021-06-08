@@ -28,7 +28,7 @@ export default function LoginScreen({ navigation }) {
                 db.collection("notifications").add({
                     title: "Member came back to the Ligtning Family!!",
                     message: `${email} came back to the Ligtning Family!! Yippie!!`,
-					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
             .catch((error) => alert(error.message));

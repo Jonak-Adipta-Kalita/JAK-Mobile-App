@@ -15,7 +15,7 @@ export default function SettingsScreen({ navigation }) {
                     title: "Member left the Ligtning Family!!",
                     message:
                         "Someone left the Ligtning Family!! But I am sure He/She will return for sure!!",
-					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
             .catch((error) => alert(error.message));

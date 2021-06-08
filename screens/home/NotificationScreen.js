@@ -9,15 +9,16 @@ import PropTypes from "prop-types";
 export default function NotificationScreen({ navigation }) {
     const [notifications, setNotifications] = useState();
     useEffect(() => {
-        db
-			.collection("notifications")
-			.orderBy("timestamp", "desc")
-			.onSnapshot((snapshot) => {
-				setNotifications(snapshot.docs.map((doc) => ({
-					id: doc.id,
-					data: doc.data(),
-				})));
-			});
+        db.collection("notifications")
+            .orderBy("timestamp", "desc")
+            .onSnapshot((snapshot) => {
+                setNotifications(
+                    snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        data: doc.data(),
+                    }))
+                );
+            });
     }, []);
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -42,16 +43,16 @@ export default function NotificationScreen({ navigation }) {
         <View style={styles.container}>
             <StatusBar style="auto" />
             {notifications?.map(({ id, data }) => {
-				const {title, message, timestamp} = data;
+                const { title, message, timestamp } = data;
                 return (
-					<Notification
-						key={id}
-						id={id}
-						title={title}
-						message={message}
-						timestamp={timestamp}
-					/>
-				)
+                    <Notification
+                        key={id}
+                        id={id}
+                        title={title}
+                        message={message}
+                        timestamp={timestamp}
+                    />
+                );
             })}
         </View>
     );
