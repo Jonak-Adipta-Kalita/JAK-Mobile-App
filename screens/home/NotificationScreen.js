@@ -9,9 +9,15 @@ import PropTypes from "prop-types";
 export default function NotificationScreen({ navigation }) {
     const [notifications, setNotifications] = useState();
     useEffect(() => {
-        db.collection("notifications").onSnapshot((snapshot) => {
-            setNotifications(snapshot.docs.map((doc) => doc.data()));
-        });
+        db
+			.collection("notifications")
+			.orderBy("timestamp", "desc")
+			.onSnapshot((snapshot) => {
+				setNotifications(snapshot.docs.map((doc) => ({
+					id: doc.id,
+					data: doc.data(),
+				})));
+			});
     }, []);
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -35,13 +41,18 @@ export default function NotificationScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            {notifications?.map((notification) => (
-                <Notification
-                    key={notification.id}
-                    title={notification.title}
-                    message={notification.message}
-                />
-            ))}
+            {notifications?.map(({ id, data }) => {
+				const {title, message, timestamp} = data;
+                return (
+					<Notification
+						key={id}
+						id={id}
+						title={title}
+						message={message}
+						timestamp={timestamp}
+					/>
+				)
+            })}
         </View>
     );
 }

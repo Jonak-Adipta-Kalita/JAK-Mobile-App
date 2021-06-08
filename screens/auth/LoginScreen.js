@@ -10,6 +10,7 @@ import {
 import { Button, Input, SocialIcon } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
+import firebase from "firebase";
 import PropTypes from "prop-types";
 
 export default function LoginScreen({ navigation }) {
@@ -27,6 +28,7 @@ export default function LoginScreen({ navigation }) {
                 db.collection("notifications").add({
                     title: "Member came back to the Ligtning Family!!",
                     message: `${email} came back to the Ligtning Family!! Yippie!!`,
+					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
             .catch((error) => alert(error.message));
