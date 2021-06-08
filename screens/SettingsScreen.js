@@ -19,6 +19,17 @@ export default function SettingsScreen({ navigation }) {
             )
             .catch((error) => alert(error.message));
     };
+    const deleteAccount = () => {
+        auth.currentUser
+            .delete()
+            .then(() =>
+                db.collection("notifications").add({
+                    title: "Someone left us Forever!!",
+                    message: "Someone left the Family forever!! Noooooooo!!",
+                })
+            )
+            .catch((error) => alert(error.message));
+    };
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
@@ -58,9 +69,20 @@ export default function SettingsScreen({ navigation }) {
                     alignSelf: "center",
                     position: "absolute",
                     bottom: 25,
+                    flexDirection: "row",
                 }}
             >
-                <Button onPress={signOut} title="Logout" />
+                <Button
+                    style={{ paddingRight: 10 }}
+                    titleStyle={{ color: "red", fontWeight: 500 }}
+                    onPress={signOut}
+                    title="Logout"
+                />
+                <Button
+                    onPress={deleteAccount}
+                    titleStyle={{ color: "red", fontWeight: 500 }}
+                    title="Delete Account"
+                />
             </View>
         </View>
     );
