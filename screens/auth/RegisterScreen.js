@@ -3,8 +3,7 @@ import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { auth } from "../../firebase";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import PropTypes from "prop-types";
 
 export default function RegisterScreen({ navigation }) {

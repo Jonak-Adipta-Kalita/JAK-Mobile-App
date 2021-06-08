@@ -2,9 +2,8 @@ import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { Avatar, Button } from "react-native-elements";
-import { db } from "../firebase";
 import PropTypes from "prop-types";
 
 export default function SettingsScreen({ navigation }) {

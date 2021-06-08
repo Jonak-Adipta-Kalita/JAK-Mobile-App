@@ -9,8 +9,7 @@ import {
 } from "react-native";
 import { Button, Input, SocialIcon } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { auth } from "../../firebase";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import PropTypes from "prop-types";
 
 export default function LoginScreen({ navigation }) {
