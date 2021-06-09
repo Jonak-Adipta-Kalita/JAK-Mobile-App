@@ -36,12 +36,11 @@ export default function SettingsScreen({ navigation }) {
             quality: 1,
         });
         if (!result.cancelled) {
-            setAvatar(result.uri)
-				.then(() => {
-					auth.currentUser.updateProfile({
-						photoURL: avatar,
-					});
-				})
+            setAvatar(result.uri);
+            auth.currentUser
+                .updateProfile({
+                    photoURL: avatar,
+                })
                 .then(() => alert("Your Avatar is Successfully Changed!!"))
                 .catch((error) => alert(error.message));
         }
