@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
     View,
@@ -6,14 +6,46 @@ import {
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
+    Platform,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { auth, db } from "../firebase";
 import { Avatar, Button } from "react-native-elements";
 import firebase from "firebase";
+import * as ImagePicker from "expo-image-picker";
 import PropTypes from "prop-types";
 
 export default function SettingsScreen({ navigation }) {
+    const [avatar, setAvatar] = useState(null);
+    useEffect(() => {
+        (async () => {
+            if (Platform.OS !== "web") {
+                const { status } =
+                    await ImagePicker.requestMediaLibraryPermissionsAsync();
+                if (status !== "granted") {
+                    alert("Give us Camera Roll Permission to Select Avatar!!");
+                }
+            }
+        })();
+    }, []);
+    const selectAvatar = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+        if (!result.cancelled) {
+            setAvatar(result.uri)
+				.then(() => {
+					auth.currentUser.updateProfile({
+						photoURL: avatar,
+					});
+				})
+                .then(() => alert("Your Avatar is Successfully Changed!!"))
+                .catch((error) => alert(error.message));
+        }
+    };
     const signOut = () => {
         auth.signOut()
             .then(() =>
@@ -62,12 +94,15 @@ export default function SettingsScreen({ navigation }) {
             <StatusBar style="auto" />
             <ScrollView>
                 <View style={{ marginTop: 30, alignItems: "center" }}>
-                    <TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+                    <TouchableOpacity
+                        activeOpacity={0.5}
+                        onPress={selectAvatar}
+                    >
                         <Avatar
                             rounded
                             size="xlarge"
                             source={{
-                                uri: auth?.currentUser?.photoURL,
+                                uri: avatar || auth?.currentUser?.photoURL,
                             }}
                         />
                     </TouchableOpacity>
