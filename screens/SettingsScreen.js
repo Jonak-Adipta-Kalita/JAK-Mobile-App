@@ -9,7 +9,7 @@ import {
     Platform,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { auth, db } from "../firebase";
+import { auth, db, storage } from "../firebase";
 import { Avatar, Button } from "react-native-elements";
 import firebase from "firebase";
 import * as ImagePicker from "expo-image-picker";
@@ -37,10 +37,20 @@ export default function SettingsScreen({ navigation }) {
         });
         if (!result.cancelled) {
             setAvatar(result.uri);
-            auth.currentUser
-                .updateProfile({
-                    photoURL: avatar,
+            storage
+                .ref(`users/${auth.currentUser.uid}/profile.jpg`)
+                .put(avatar)
+                .then(() => {
+                    auth.onAuthStateChanged((user) => {
+                        storage
+                            .ref(`users/${user.uid}/profile.jpg`)
+                            .getDownloadURL()
+                            .then((imgURL) => {
+                                user.updateProfile({ photoURL: imgURL });
+                            });
+                    });
                 })
+				.then(() => console.log(auth.currentUser.photoURL))
                 .then(() => alert("Your Avatar is Successfully Changed!!"))
                 .catch((error) => alert(error.message));
         }
