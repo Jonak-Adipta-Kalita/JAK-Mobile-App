@@ -1,6 +1,12 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
+import {
+    View,
+    StyleSheet,
+    SafeAreaView,
+    TouchableOpacity,
+    ScrollView,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { auth, db } from "../firebase";
 import { Avatar, Button } from "react-native-elements";
@@ -54,20 +60,20 @@ export default function SettingsScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-			<ScrollView>
-				<View style={{ marginTop: 30, alignItems: "center" }}>
-					<TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
-						<Avatar
-							rounded
-							size="xlarge"
-							source={{
-								uri: auth?.currentUser?.photoURL,
-							}}
-						/>
-					</TouchableOpacity>
-				</View>
-				<View style={{ marginTop: 20 }}>{/* details */}</View>
-			</ScrollView>
+            <ScrollView>
+                <View style={{ marginTop: 30, alignItems: "center" }}>
+                    <TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+                        <Avatar
+                            rounded
+                            size="xlarge"
+                            source={{
+                                uri: auth?.currentUser?.photoURL,
+                            }}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={{ marginTop: 20 }}>{/* details */}</View>
+            </ScrollView>
             <View
                 style={{
                     alignSelf: "flex-start",

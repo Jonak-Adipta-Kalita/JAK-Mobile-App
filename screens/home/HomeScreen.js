@@ -1,6 +1,12 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
+import {
+    View,
+    StyleSheet,
+    SafeAreaView,
+    TouchableOpacity,
+    ScrollView,
+} from "react-native";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "react-native-elements";
 import { auth } from "../../firebase";
@@ -46,24 +52,24 @@ export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-			<ScrollView>
-				<Card style={styles.card}>
-					<Card.Title>About Me!!</Card.Title>
-					<Card.Divider />
-					<Button
-						onPress={() => navigation.jumpTo("About")}
-						title="Go to About Screen"
-					/>
-				</Card>
-				<Card style={styles.card}>
-					<Card.Title>Contact Me!!</Card.Title>
-					<Card.Divider />
-					<Button
-						onPress={() => navigation.jumpTo("Contact")}
-						title="Go to Contact Screen"
-					/>
-				</Card>
-			</ScrollView>
+            <ScrollView>
+                <Card style={styles.card}>
+                    <Card.Title>About Me!!</Card.Title>
+                    <Card.Divider />
+                    <Button
+                        onPress={() => navigation.jumpTo("About")}
+                        title="Go to About Screen"
+                    />
+                </Card>
+                <Card style={styles.card}>
+                    <Card.Title>Contact Me!!</Card.Title>
+                    <Card.Divider />
+                    <Button
+                        onPress={() => navigation.jumpTo("Contact")}
+                        title="Go to Contact Screen"
+                    />
+                </Card>
+            </ScrollView>
         </View>
     );
 }

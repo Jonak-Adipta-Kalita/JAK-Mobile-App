@@ -6,7 +6,7 @@ import {
     StyleSheet,
     SafeAreaView,
     TouchableOpacity,
-	ScrollView,
+    ScrollView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
@@ -35,22 +35,23 @@ export default function AboutScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-			<ScrollView>
-				<Card>
-					<Card.Title>So you want to know about Me?</Card.Title>
-					<Card.Divider />
-					<Text style={styles.content}>
-						My name is JONAK ADIPTA KALITA. I am a student in Kendriya
-						Vidyalaya Mangaldoi, I am currently studying in standard
-						'8th'. I am a Coder and also a 'Home Game Developer'. I code
-						for fun but sometimes I also teach some of my colleagues
-						some 'Python'. I love Python and JavaScript the most. I am a
-						Youtuber too. I love to play Games such as NFS, COD, AC,
-						Among Us, GTA, etc. I am a huge fan of Anime and watched
-						'Pokemon', 'One Piece', 'Beyblade', 'DBG'.
-					</Text>
-				</Card>
-			</ScrollView>
+            <ScrollView>
+                <Card>
+                    <Card.Title>So you want to know about Me?</Card.Title>
+                    <Card.Divider />
+                    <Text style={styles.content}>
+                        My name is JONAK ADIPTA KALITA. I am a student in
+                        Kendriya Vidyalaya Mangaldoi, I am currently studying in
+                        standard '8th'. I am a Coder and also a 'Home Game
+                        Developer'. I code for fun but sometimes I also teach
+                        some of my colleagues some 'Python'. I love Python and
+                        JavaScript the most. I am a Youtuber too. I love to play
+                        Games such as NFS, COD, AC, Among Us, GTA, etc. I am a
+                        huge fan of Anime and watched 'Pokemon', 'One Piece',
+                        'Beyblade', 'DBG'.
+                    </Text>
+                </Card>
+            </ScrollView>
         </View>
     );
 }
