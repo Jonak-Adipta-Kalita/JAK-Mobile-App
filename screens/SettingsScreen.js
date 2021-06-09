@@ -21,7 +21,7 @@ export default function SettingsScreen({ navigation }) {
             .catch((error) => alert(error.message));
     };
     const deleteAccount = () => {
-        auth.currentUser
+        auth?.currentUser
             .delete()
             .then(() =>
                 db.collection("notifications").add({
@@ -68,23 +68,25 @@ export default function SettingsScreen({ navigation }) {
             <View style={{ marginTop: 20 }}>{/* details */}</View>
             <View
                 style={{
-                    alignSelf: "center",
+                    alignSelf: "flex-start",
+                    paddingLeft: 20,
                     position: "absolute",
                     bottom: 25,
                     flexDirection: "row",
                 }}
             >
-                <Button
-                    style={{ paddingRight: 10 }}
-                    titleStyle={{ color: "red", fontWeight: 500 }}
-                    onPress={signOut}
-                    title="Logout"
-                />
-                <Button
-                    onPress={deleteAccount}
-                    titleStyle={{ color: "red", fontWeight: 500 }}
-                    title="Delete Account"
-                />
+                <Button onPress={signOut} title="Logout" />
+            </View>
+            <View
+                style={{
+                    alignSelf: "flex-end",
+                    paddingRight: 20,
+                    position: "absolute",
+                    bottom: 25,
+                    flexDirection: "row",
+                }}
+            >
+                <Button onPress={deleteAccount} title="Delete Account" />
             </View>
         </View>
     );
