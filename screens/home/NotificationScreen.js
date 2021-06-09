@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Notification from "../../components/Notification";
 import { db } from "../../firebase";
@@ -42,18 +42,20 @@ export default function NotificationScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            {notifications?.map(({ id, data }) => {
-                const { title, message, timestamp } = data;
-                return (
-                    <Notification
-                        key={id}
-                        id={id}
-                        title={title}
-                        message={message}
-                        timestamp={timestamp}
-                    />
-                );
-            })}
+			<ScrollView>
+				{notifications?.map(({ id, data }) => {
+					const { title, message, timestamp } = data;
+					return (
+						<Notification
+							key={id}
+							id={id}
+							title={title}
+							message={message}
+							timestamp={timestamp}
+						/>
+					);
+				})}
+			</ScrollView>
         </View>
     );
 }

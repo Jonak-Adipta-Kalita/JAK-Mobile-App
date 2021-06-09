@@ -6,6 +6,7 @@ import {
     View,
     SafeAreaView,
     TouchableOpacity,
+	ScrollView,
 } from "react-native";
 import { Button, Input, SocialIcon } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -55,52 +56,54 @@ export default function LoginScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <View style={styles.inputContainer}>
-                <Input
-                    placeholder="Email"
-                    autoFocus
-                    type="email"
-                    value={email}
-                    onChangeText={(text) => setEmail(text)}
-                />
-                <Input
-                    placeholder="Password"
-                    secureTextEntry
-                    type="password"
-                    value={password}
-                    onChangeText={(text) => setPassword(text)}
-                    onSubmitEditing={signInEmail}
-                />
-            </View>
-            <Button
-                onPress={signInEmail}
-                containerStyle={styles.button}
-                title="Login"
-            />
-            <Button
-                containerStyle={styles.button}
-                title="Register"
-                type="outline"
-                onPress={() => navigation.navigate("Register")}
-            />
-            <Text
-                style={{
-                    marginTop: 10,
-                    marginBottom: 10,
-                    color: "#594d4c",
-                    fontSize: 20,
-                }}
-            >
-                Or
-            </Text>
-            <TouchableOpacity style={{ width: 300 }} onPress={signInGoogle}>
-                <SocialIcon
-                    type="google"
-                    button
-                    dark
-                    title="Login with Google"
-                />
-            </TouchableOpacity>
+			<ScrollView>
+				<View style={styles.inputContainer}>
+					<Input
+						placeholder="Email"
+						autoFocus
+						type="email"
+						value={email}
+						onChangeText={(text) => setEmail(text)}
+					/>
+					<Input
+						placeholder="Password"
+						secureTextEntry
+						type="password"
+						value={password}
+						onChangeText={(text) => setPassword(text)}
+						onSubmitEditing={signInEmail}
+					/>
+				</View>
+				<Button
+					onPress={signInEmail}
+					containerStyle={styles.button}
+					title="Login"
+				/>
+				<Button
+					containerStyle={styles.button}
+					title="Register"
+					type="outline"
+					onPress={() => navigation.navigate("Register")}
+				/>
+				<Text
+					style={{
+						marginTop: 10,
+						marginBottom: 10,
+						color: "#594d4c",
+						fontSize: 20,
+					}}
+				>
+					Or
+				</Text>
+				<TouchableOpacity style={{ width: 300 }} onPress={signInGoogle}>
+					<SocialIcon
+						type="google"
+						button
+						dark
+						title="Login with Google"
+					/>
+				</TouchableOpacity>
+			</ScrollView>
         </View>
     );
 }
