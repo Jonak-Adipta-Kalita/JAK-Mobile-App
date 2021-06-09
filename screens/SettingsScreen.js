@@ -50,7 +50,7 @@ export default function SettingsScreen({ navigation }) {
                             });
                     });
                 })
-				.then(() => console.log(auth.currentUser.photoURL))
+                .then(() => console.log(auth.currentUser.photoURL))
                 .then(() => alert("Your Avatar is Successfully Changed!!"))
                 .catch((error) => alert(error.message));
         }

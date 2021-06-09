@@ -43,7 +43,7 @@ Authentication. Now click on `Email/Password` and Enable It.
 
 #### Enabling Firestore Database
 
-In the Project in Firebase click on Firebase Database in the Sidebar. Click on Enable
+In the Project in Firebase click on Firestore Database in the Sidebar. Click on Enable
 Firestore. Start in Test Mode and leave the Timezone as it is. Now click on Rules and set
 the rules as:
 
@@ -56,6 +56,22 @@ service cloud.firestore {
     }
   }
 }
+```
+
+#### Enabling Firebase Storage
+
+In the Project in Firebase click on Storage in the Sidebar. Click on Rules and set the rules as:
+
+```javascript
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /users/{uid}/{profileImage} {
+      allow read, write: if request.auth.uid == uid;
+    }
+  }
+}
+
 ```
 
 ### Providing required Credentials
