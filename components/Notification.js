@@ -19,22 +19,17 @@ export default function Notification({ title, message, timestamp }) {
             <Card style={{ position: "relative" }}>
                 <Card.Title>{title}</Card.Title>
                 <Card.Divider />
-                <Text style={{ textAlign: "center", color: "#594d4c" }}>
-                    {message}
-                </Text>
-                <br />
-                <Card.Divider />
-                <br />
                 <Text
                     style={{
-                        position: "absolute",
-                        bottom: 0,
-                        right: 0,
-                        color: "#43484D",
-                        fonSize: "12.08px",
-                        fontWeight: "bold",
+                        textAlign: "center",
+                        color: "#594d4c",
+                        marginBottom: 15,
                     }}
                 >
+                    {message}
+                </Text>
+                <Card.Divider />
+                <Text style={{ color: "#43484D", fontWeight: "bold" }}>
                     {timestamp
                         ? titleCase(moment(timestamp.toDate()).fromNow())
                         : "..."}
@@ -51,5 +46,7 @@ Notification.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+        paddingBottom: 5,
+    },
 });
