@@ -25,7 +25,16 @@ export default function Notification({ title, message, timestamp }) {
                 <br />
                 <Card.Divider />
                 <br />
-                <Text style={{ position: "absolute", bottom: 0, right: 0 }}>
+                <Text
+                    style={{
+                        position: "absolute",
+                        bottom: 0,
+                        right: 0,
+                        color: "#43484D",
+                        fonSize: "12.08px",
+                        fontWeight: "bold",
+                    }}
+                >
                     {timestamp
                         ? titleCase(moment(timestamp.toDate()).fromNow())
                         : "..."}
