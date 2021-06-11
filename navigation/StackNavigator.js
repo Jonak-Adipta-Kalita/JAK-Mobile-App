@@ -11,12 +11,6 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 
 const Stack = createStackNavigator();
 
-const screenOptions = {
-    headerStyle: { backgroundColor: "#3f7de0" },
-    headerTitleStyle: { color: "white" },
-    headerTintColor: "white",
-};
-
 const HomeStack = () => {
     return (
         <Stack.Navigator>
@@ -28,7 +22,13 @@ const HomeStack = () => {
 
 const AuthenticationStack = () => {
     return (
-        <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Navigator 
+			screenOptions={{
+				headerStyle: { backgroundColor: "#3f7de0" },
+				headerTitleStyle: { color: "white" },
+				headerTintColor: "white",
+			}}
+		>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
         </Stack.Navigator>
