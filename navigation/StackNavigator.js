@@ -12,10 +12,10 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 const Stack = createStackNavigator();
 
 const AllStackScreenOption = {
-	headerStyle: { backgroundColor: "#fff" },
+    headerStyle: { backgroundColor: "#fff" },
     headerTitleStyle: { color: "black" },
     headerTintColor: "black",
-	headerBackTitle: "Back",
+    headerBackTitle: "Back",
 };
 
 const HomeStack = () => {
