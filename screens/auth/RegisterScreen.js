@@ -15,7 +15,6 @@ export default function RegisterScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Register!!",
-            headerBackTitle: "Back to Login",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity

@@ -34,6 +34,7 @@ const AuthenticationStack = () => {
                 headerStyle: { backgroundColor: "#3f7de0" },
                 headerTitleStyle: { color: "white" },
                 headerTintColor: "white",
+                headerBackTitle: "Back",
             }}
         >
             <Stack.Screen name="Login" component={LoginScreen} />
