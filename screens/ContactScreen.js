@@ -34,10 +34,6 @@ export default function ContactScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Contact Me!!",
-            headerStyle: { backgroundColor: "#fff" },
-            headerTitleStyle: { color: "black" },
-            headerTintColor: "black",
-            headerBackTitle: "Back",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity

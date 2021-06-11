@@ -29,10 +29,6 @@ export default function NotificationScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Notifications!!",
-            headerStyle: { backgroundColor: "#fff" },
-            headerTitleStyle: { color: "black" },
-            headerTintColor: "black",
-            headerBackTitle: "Back to Home",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity

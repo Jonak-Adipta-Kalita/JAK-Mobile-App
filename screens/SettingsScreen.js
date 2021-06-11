@@ -81,10 +81,6 @@ export default function SettingsScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
-            headerStyle: { backgroundColor: "#fff" },
-            headerTitleStyle: { color: "black" },
-            headerTintColor: "black",
-            headerBackTitle: "Back",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity

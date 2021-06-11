@@ -16,10 +16,6 @@ export default function AboutScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "About Me!!",
-            headerStyle: { backgroundColor: "#fff" },
-            headerTitleStyle: { color: "black" },
-            headerTintColor: "black",
-            headerBackTitle: "Back",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity

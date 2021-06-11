@@ -18,9 +18,6 @@ export default function HomeScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Welcome!!",
-            headerStyle: { backgroundColor: "#fff" },
-            headerTitleStyle: { color: "black" },
-            headerTintColor: "black",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity

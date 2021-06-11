@@ -11,9 +11,16 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 
 const Stack = createStackNavigator();
 
+const AllStackScreenOption = {
+	headerStyle: { backgroundColor: "#fff" },
+    headerTitleStyle: { color: "black" },
+    headerTintColor: "black",
+	headerBackTitle: "Back",
+};
+
 const HomeStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={AllStackScreenOption}>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
         </Stack.Navigator>
@@ -22,13 +29,13 @@ const HomeStack = () => {
 
 const AuthenticationStack = () => {
     return (
-        <Stack.Navigator 
-			screenOptions={{
-				headerStyle: { backgroundColor: "#3f7de0" },
-				headerTitleStyle: { color: "white" },
-				headerTintColor: "white",
-			}}
-		>
+        <Stack.Navigator
+            screenOptions={{
+                headerStyle: { backgroundColor: "#3f7de0" },
+                headerTitleStyle: { color: "white" },
+                headerTintColor: "white",
+            }}
+        >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
         </Stack.Navigator>
@@ -37,7 +44,7 @@ const AuthenticationStack = () => {
 
 const AboutStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={AllStackScreenOption}>
             <Stack.Screen name="About" component={AboutScreen} />
         </Stack.Navigator>
     );
@@ -45,7 +52,7 @@ const AboutStack = () => {
 
 const SettingsStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={AllStackScreenOption}>
             <Stack.Screen name="Settings" component={SettingsScreen} />
         </Stack.Navigator>
     );
@@ -53,7 +60,7 @@ const SettingsStack = () => {
 
 const ContactStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={AllStackScreenOption}>
             <Stack.Screen name="Contact" component={ContactScreen} />
         </Stack.Navigator>
     );
