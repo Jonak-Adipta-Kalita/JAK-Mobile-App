@@ -42,7 +42,7 @@ export default function Notification({ title, message, timestamp }) {
 Notification.propTypes = {
     title: propTypes.string.isRequired,
     message: propTypes.string.isRequired,
-    timestamp: propTypes.object.isRequired,
+    timestamp: propTypes.object,
 };
 
 const styles = StyleSheet.create({
