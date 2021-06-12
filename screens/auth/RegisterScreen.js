@@ -41,7 +41,7 @@ export default function RegisterScreen({ navigation }) {
                 });
             })
             .then(() =>
-                db.collection("notifications").add({
+                db.collection("publicNotifications").add({
                     title: "New member in the Ligtning Family!!",
                     message: `${email} Joined the Ligtning Family!! Yippie!!`,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),

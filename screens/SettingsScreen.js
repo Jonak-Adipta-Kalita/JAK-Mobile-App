@@ -57,7 +57,7 @@ export default function SettingsScreen({ navigation }) {
     const signOut = () => {
         auth.signOut()
             .then(() =>
-                db.collection("notifications").add({
+                db.collection("publicNotifications").add({
                     title: "Member left the Ligtning Family!!",
                     message:
                         "Someone left the Ligtning Family!! But I am sure He/She will return for sure!!",
@@ -70,7 +70,7 @@ export default function SettingsScreen({ navigation }) {
         auth?.currentUser
             .delete()
             .then(() =>
-                db.collection("notifications").add({
+                db.collection("publicNotifications").add({
                     title: "Someone left us Forever!!",
                     message: "Someone left the Family forever!! Noooooooo!!",
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
