@@ -1,31 +1,16 @@
-import React, { useLayoutEffect, useEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
     View,
     StyleSheet,
     SafeAreaView,
     TouchableOpacity,
-    ScrollView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import Notification from "../../components/Notification";
-import { db } from "../../firebase";
+import { NotificationTopTab } from "../../../navigation/TopTabNavigator";
 import PropTypes from "prop-types";
 
 export default function NotificationScreen({ navigation }) {
-    const [notifications, setNotifications] = useState();
-    useEffect(() => {
-        db.collection("notifications")
-            .orderBy("timestamp", "desc")
-            .onSnapshot((snapshot) => {
-                setNotifications(
-                    snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }))
-                );
-            });
-    }, []);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Notifications!!",
@@ -44,20 +29,7 @@ export default function NotificationScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <ScrollView>
-                {notifications?.map(({ id, data }) => {
-                    const { title, message, timestamp } = data;
-                    return (
-                        <Notification
-                            key={id}
-                            id={id}
-                            title={title}
-                            message={message}
-                            timestamp={timestamp}
-                        />
-                    );
-                })}
-            </ScrollView>
+            <NotificationTopTab />
         </View>
     );
 }
