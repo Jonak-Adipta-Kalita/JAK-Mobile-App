@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import React, { useEffect, useState, useLayoutEffect } from "react";
+import { View, ScrollView, StyleSheet } from "react-native";
 import { db } from "../../../firebase";
 import PropTypes from "prop-types";
 import Notification from "../../../components/Notification";
 
 export default function PrivateScreen({ navigation }) {
-	const [notifications, setNotifications] = useState();
+    const [notifications, setNotifications] = useState();
     useEffect(() => {
         db.collection("privateNotifications")
             .orderBy("timestamp", "desc")
@@ -18,14 +18,14 @@ export default function PrivateScreen({ navigation }) {
                 );
             });
     }, []);
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			title: "Private!!",
-		})
-	}, [navigation]);
-	return (
-		<View style={styles.container}>
-			<ScrollView>
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: "Private!!",
+        });
+    }, [navigation]);
+    return (
+        <View style={styles.container}>
+            <ScrollView>
                 {notifications?.map(({ id, data }) => {
                     const { title, message, timestamp } = data;
                     return (
@@ -39,8 +39,8 @@ export default function PrivateScreen({ navigation }) {
                     );
                 })}
             </ScrollView>
-		</View>
-	)
+        </View>
+    );
 }
 
 PrivateScreen.propTypes = {
@@ -48,6 +48,5 @@ PrivateScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
-	container: {},
+    container: {},
 });
-
