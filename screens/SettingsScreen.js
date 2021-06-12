@@ -104,7 +104,7 @@ export default function SettingsScreen({ navigation }) {
                     >
                         <Avatar
                             rounded
-                            size="xlarge"
+                            size="large"
                             source={{
                                 uri: avatar || auth?.currentUser?.photoURL,
                             }}
