@@ -50,6 +50,15 @@ export default function SettingsScreen({ navigation }) {
                             });
                     });
                 })
+                .then(() => {
+                    db.collection("privateNotifications").add({
+                        title: "Avatar Changed Successfully!!",
+                        message: "Your Avatar has been Successfully Changed!!",
+                        timestamp:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                        user: auth?.currentUser?.email,
+                    });
+                })
                 .then(() => alert("Your Avatar is Successfully Changed!!"))
                 .catch((error) => alert(error.message));
         }

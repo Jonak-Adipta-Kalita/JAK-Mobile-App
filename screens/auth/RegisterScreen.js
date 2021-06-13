@@ -47,6 +47,14 @@ export default function RegisterScreen({ navigation }) {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
+            .then(() => {
+                db.collection("privateNotifications").add({
+                    title: "Welcome!!",
+                    message: "Welcome ${email}. Nice to meet!!",
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    user: email,
+                });
+            })
             .catch((error) => alert(error.message));
     };
     return (
