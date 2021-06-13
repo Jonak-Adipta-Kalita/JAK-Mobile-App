@@ -36,8 +36,8 @@ export default function ContactScreen({ navigation }) {
                         timestamp:
                             firebase.firestore.FieldValue.serverTimestamp(),
                         user: email,
-					})}
-                )
+                    });
+                })
                 .then(() => alert("Request Sent!!"))
                 .catch((error) => alert(error.message));
         }
