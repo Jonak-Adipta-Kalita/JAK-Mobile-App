@@ -24,7 +24,9 @@ export default function NotificationScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <NotificationTopTab />
+			<View style={{ height: "100%" }}>
+				<NotificationTopTab />
+			</View>
         </View>
     );
 }
