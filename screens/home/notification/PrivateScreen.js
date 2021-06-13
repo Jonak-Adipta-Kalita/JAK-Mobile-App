@@ -37,6 +37,7 @@ export default function PrivateScreen({ navigation }) {
                                 title={title}
                                 message={message}
                                 timestamp={timestamp}
+                                user={user}
                             />
                         </ScrollView>
                     );
