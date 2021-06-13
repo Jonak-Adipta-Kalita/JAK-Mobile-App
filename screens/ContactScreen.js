@@ -38,6 +38,13 @@ export default function ContactScreen({ navigation }) {
                         user: email,
                     });
                 })
+                .then(() => {
+                    setName("");
+                    setEmail("");
+                    setPhoneNumber("");
+                    setMessage("");
+                    navigation.jumpTo("Home");
+                })
                 .then(() => alert("Request Sent!!"))
                 .catch((error) => alert(error.message));
         }
