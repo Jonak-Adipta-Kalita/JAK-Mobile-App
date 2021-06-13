@@ -9,11 +9,15 @@
         "android": "expo start --android",
         "ios": "expo start --ios",
         "web": "expo start --web",
-        "eject": "expo eject",
-        "lint": "eslint .",
+		"eject": "expo eject",
+		"lint": "eslint .",
         "lint:fix": "eslint --fix .",
         "prettier": "prettier --write **/*.{js,jsx,tsx,ts,md,json}",
-        "publish": "expo publish",
+		"build": "expo build:android && expo build:ios && expo build:web",
+		"build:android": "expo build:android",
+		"build:ios": "expo build:ios",
+		"build:web": "expo build:web",
+        "publish:expo": "expo publish",
         "prepare": "husky install"
     },
     "jest": {
