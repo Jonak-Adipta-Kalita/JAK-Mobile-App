@@ -113,6 +113,7 @@ yarn web
 
 -   Language: [JavaScript](https://www.javascript.com/)
 -   Language Framework: [React Native](https://reactnative.dev/)
+-   CLI: [Expo](https://expo.io/)
 
 ## Contributors
 
