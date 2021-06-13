@@ -4,6 +4,7 @@ import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db } from "../firebase";
+import firebase from "firebase";
 import PropTypes from "prop-types";
 
 export default function ContactScreen({ navigation }) {
@@ -27,6 +28,12 @@ export default function ContactScreen({ navigation }) {
                     phoneNumber: phoneNumber,
                     message: message,
                 })
+				.then(() => db.collection("privateNotifications").add({
+					title: "Request to Contact Sent!!",
+					message: "Your Request to Contact has been Successfully Sent!!",
+					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+					user: email,
+				}))
                 .then(() => alert("Request Sent!!"))
                 .catch((error) => alert(error.message));
         }
