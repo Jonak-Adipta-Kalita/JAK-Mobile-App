@@ -8,8 +8,8 @@ const Tab = createMaterialTopTabNavigator();
 function NotificationTopTab() {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Public" component={PublicScreen} />
-            <Tab.Screen name="Private" component={PrivateScreen} />
+            <Tab.Screen name="PublicNotifications" component={PublicScreen} />
+            <Tab.Screen name="PrivateNotifications" component={PrivateScreen} />
         </Tab.Navigator>
     );
 }
