@@ -30,9 +30,8 @@ export default function PrivateScreen({ navigation }) {
                 const { title, message, timestamp, user } = data;
                 if (user === auth.currentUser.email) {
                     return (
-                        <ScrollView>
+                        <ScrollView key={id}>
                             <Notification
-                                key={id}
                                 id={id}
                                 title={title}
                                 message={message}
