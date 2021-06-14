@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { auth, db, storage } from "../firebase";
-import { Avatar, Button } from "react-native-elements";
+import { Avatar, Button, ListItem, Icon } from "react-native-elements";
 import firebase from "firebase";
 import * as ImagePicker from "expo-image-picker";
 import PropTypes from "prop-types";
@@ -113,14 +113,50 @@ export default function SettingsScreen({ navigation }) {
                     >
                         <Avatar
                             rounded
-                            size="xlarge"
+                            size="large"
                             source={{
                                 uri: avatar || auth?.currentUser?.photoURL,
                             }}
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={{ marginTop: 20 }}>{/* details */}</View>
+                <View style={{ marginTop: 30, padding: 20 }}>
+                    <TouchableOpacity>
+                        <ListItem bottomDivider>
+                            <Icon name="edit" />
+                            <ListItem.Content>
+                                <ListItem.Title>
+                                    {auth.currentUser.displayName}
+                                </ListItem.Title>
+                                <ListItem.Subtitle>Name</ListItem.Subtitle>
+                            </ListItem.Content>
+                        </ListItem>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <ListItem bottomDivider>
+                            <Icon name="edit" />
+                            <ListItem.Content>
+                                <ListItem.Title>
+                                    {auth.currentUser.email}
+                                </ListItem.Title>
+                                <ListItem.Subtitle>Email</ListItem.Subtitle>
+                            </ListItem.Content>
+                        </ListItem>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <ListItem bottomDivider>
+                            <Icon name="edit" />
+                            <ListItem.Content>
+                                <ListItem.Title>
+                                    {auth.currentUser.phoneNumber
+                                        ? auth.currentUser.phoneNumber
+                                        : "Provide your Phone Number!!"}
+                                </ListItem.Title>
+                                <ListItem.Subtitle>Phone</ListItem.Subtitle>
+                            </ListItem.Content>
+                        </ListItem>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
             <View
                 style={{
