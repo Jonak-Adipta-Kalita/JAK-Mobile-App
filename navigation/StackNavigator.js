@@ -4,7 +4,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/home/HomeScreen";
 import NotificationScreen from "../screens/home/notification/NotificationScreen";
 import AboutScreen from "../screens/AboutScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+import SettingsScreen from "../screens/settings/SettingsScreen";
+import ChangeEmailScreen from "../screens/settings/ChangeEmailScreen";
+import ChangeNameScreen from "../screens/settings/ChangeNameScreen";
+import ChangePhoneNumberScreen from "../screens/settings/ChangePhoneNumberScreen";
 import ContactScreen from "../screens/ContactScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
@@ -55,6 +58,12 @@ const SettingsStack = () => {
     return (
         <Stack.Navigator screenOptions={AllStackScreenOption}>
             <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="ChangeName" component={ChangeNameScreen} />
+            <Stack.Screen name="ChangeEmail" component={ChangeEmailScreen} />
+            <Stack.Screen
+                name="ChangePhoneNumber"
+                component={ChangePhoneNumberScreen}
+            />
         </Stack.Navigator>
     );
 };

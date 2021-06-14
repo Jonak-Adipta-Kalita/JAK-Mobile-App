@@ -9,7 +9,7 @@ import {
     Platform,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { auth, db, storage } from "../firebase";
+import { auth, db, storage } from "../../firebase";
 import { Avatar, Button, ListItem, Icon } from "react-native-elements";
 import firebase from "firebase";
 import * as ImagePicker from "expo-image-picker";
@@ -87,9 +87,6 @@ export default function SettingsScreen({ navigation }) {
             )
             .catch((error) => alert(error.message));
     };
-    const changeName = () => {};
-    const changeEmail = () => {};
-    const changePhoneNumber = () => {};
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
@@ -124,7 +121,9 @@ export default function SettingsScreen({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginTop: 30, padding: 20 }}>
-                    <TouchableOpacity onPress={changeName}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("ChangeName")}
+                    >
                         <ListItem bottomDivider>
                             <Icon name="edit" />
                             <ListItem.Content>
@@ -135,7 +134,9 @@ export default function SettingsScreen({ navigation }) {
                             </ListItem.Content>
                         </ListItem>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={changeEmail}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("ChangeEmail")}
+                    >
                         <ListItem bottomDivider>
                             <Icon name="edit" />
                             <ListItem.Content>
@@ -146,7 +147,9 @@ export default function SettingsScreen({ navigation }) {
                             </ListItem.Content>
                         </ListItem>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={changePhoneNumber}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("ChangePhoneNumber")}
+                    >
                         <ListItem bottomDivider>
                             <Icon name="edit" />
                             <ListItem.Content>
