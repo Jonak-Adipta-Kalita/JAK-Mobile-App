@@ -87,9 +87,9 @@ export default function SettingsScreen({ navigation }) {
             )
             .catch((error) => alert(error.message));
     };
-	const changeName = () => {};
-	const changeEmail = () => {};
-	const changePhoneNumber = () => {};
+    const changeName = () => {};
+    const changeEmail = () => {};
+    const changePhoneNumber = () => {};
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
@@ -155,7 +155,9 @@ export default function SettingsScreen({ navigation }) {
                                         ? auth.currentUser.phoneNumber
                                         : "Provide your Phone Number!!"}
                                 </ListItem.Title>
-                                <ListItem.Subtitle>Phone Number</ListItem.Subtitle>
+                                <ListItem.Subtitle>
+                                    Phone Number
+                                </ListItem.Subtitle>
                             </ListItem.Content>
                         </ListItem>
                     </TouchableOpacity>
