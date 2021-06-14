@@ -3,6 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
+import { db, auth } from "../../firebase";
+import firebase from "firebase";
 import PropTypes from "prop-types";
 
 export default function ChangeEmailScreen({ navigation }) {
@@ -10,6 +12,26 @@ export default function ChangeEmailScreen({ navigation }) {
     const changeEmail = () => {
         if (email === "") {
             alert("Please Enter all the Values in the Form!!");
+        } else {
+            auth.currentUser
+                .updateEmail(email)
+                .then(() => {
+                    // Write the code of changing Email in existing Firestore Private Notifications
+                })
+                .then(() => {
+                    db.collection("privateNotifications").add({
+                        title: "Email Changed Successfully!!",
+                        message: `Your Email has been Successfully Changed to ${email}!!`,
+                        timestamp:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                        user: auth?.currentUser?.email,
+                    });
+                })
+                .then(() => {
+                    setEmail("");
+                    navigation.jumpTo("Home");
+                })
+                .catch((error) => alert(error.message));
         }
     };
     useLayoutEffect(() => {

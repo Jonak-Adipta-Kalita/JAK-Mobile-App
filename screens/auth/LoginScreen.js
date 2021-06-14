@@ -35,7 +35,7 @@ export default function LoginScreen({ navigation }) {
             .then(() => {
                 db.collection("privateNotifications").add({
                     title: "Welcome Back!!",
-                    message: "Welcome back ${email}. Nice to meet you again!!",
+                    message: `Welcome back ${email}. Nice to meet you again!!`,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     user: email,
                 });

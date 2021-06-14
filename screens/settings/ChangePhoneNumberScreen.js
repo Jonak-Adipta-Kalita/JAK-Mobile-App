@@ -14,7 +14,7 @@ export default function ChangePhoneNumberScreen({ navigation }) {
     };
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Set/Change your Phone Number!!",
+            title: "Change your Phone Number!!",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
