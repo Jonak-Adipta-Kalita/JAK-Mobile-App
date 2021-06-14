@@ -31,6 +31,7 @@ export default function ChangeEmailScreen({ navigation }) {
                     setEmail("");
                     navigation.jumpTo("Home");
                 })
+                .then(() => alert("Your Email is Successfully Changed!!"))
                 .catch((error) => alert(error.message));
         }
     };
