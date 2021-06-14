@@ -8,11 +8,14 @@ import firebase from "firebase";
 import PropTypes from "prop-types";
 
 export default function ChangeEmailScreen({ navigation }) {
+	const [previousEmail, setPreviousEmail] = useState(auth.currentUser.email);
     const [email, setEmail] = useState("");
     const changeEmail = () => {
         if (email === "") {
             alert("Please Enter all the Values in the Form!!");
-        } else {
+		} else if (email === previousEmail) {
+			alert("Its the same Email Address as your Previous!!")
+		} else {
             auth.currentUser
                 .updateEmail(email)
                 .then(() => {
@@ -29,6 +32,7 @@ export default function ChangeEmailScreen({ navigation }) {
                 })
                 .then(() => {
                     setEmail("");
+					setPreviousEmail(email);
                     navigation.jumpTo("Home");
                 })
                 .then(() => alert("Your Email is Successfully Changed!!"))
