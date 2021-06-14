@@ -5,5 +5,8 @@ out/
 dist/
 test-fixtures/
 node_modules/
+web-build/
+android/
+ios/
 build
 public
