@@ -87,6 +87,9 @@ export default function SettingsScreen({ navigation }) {
             )
             .catch((error) => alert(error.message));
     };
+	const changeName = () => {};
+	const changeEmail = () => {};
+	const changePhoneNumber = () => {};
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
@@ -121,7 +124,7 @@ export default function SettingsScreen({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginTop: 30, padding: 20 }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={changeName}>
                         <ListItem bottomDivider>
                             <Icon name="edit" />
                             <ListItem.Content>
@@ -132,7 +135,7 @@ export default function SettingsScreen({ navigation }) {
                             </ListItem.Content>
                         </ListItem>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={changeEmail}>
                         <ListItem bottomDivider>
                             <Icon name="edit" />
                             <ListItem.Content>
@@ -143,7 +146,7 @@ export default function SettingsScreen({ navigation }) {
                             </ListItem.Content>
                         </ListItem>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={changePhoneNumber}>
                         <ListItem bottomDivider>
                             <Icon name="edit" />
                             <ListItem.Content>
@@ -152,7 +155,7 @@ export default function SettingsScreen({ navigation }) {
                                         ? auth.currentUser.phoneNumber
                                         : "Provide your Phone Number!!"}
                                 </ListItem.Title>
-                                <ListItem.Subtitle>Phone</ListItem.Subtitle>
+                                <ListItem.Subtitle>Phone Number</ListItem.Subtitle>
                             </ListItem.Content>
                         </ListItem>
                     </TouchableOpacity>
