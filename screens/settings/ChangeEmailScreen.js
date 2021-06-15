@@ -48,7 +48,7 @@ export default function ChangeEmailScreen({ navigation }) {
                         }}
                         onPress={navigation.goBack}
                     >
-                        <AntDesign name="arrowleft" size={24} color="black" />
+                        <AntDesign name="arrowleft" size={24} />
                     </TouchableOpacity>
                 </SafeAreaView>
             ),

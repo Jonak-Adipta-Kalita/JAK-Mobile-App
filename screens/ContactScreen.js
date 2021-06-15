@@ -58,7 +58,7 @@ export default function ContactScreen({ navigation }) {
                         style={{ alignItems: "flex-start", margin: 20 }}
                         onPress={navigation.goBack}
                     >
-                        <AntDesign name="arrowleft" size={24} color="black" />
+                        <AntDesign name="arrowleft" size={24} />
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
