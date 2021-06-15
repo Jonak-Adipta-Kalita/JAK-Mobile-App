@@ -10,7 +10,9 @@ export default function ChangePhoneNumberScreen({ navigation }) {
     const changePhoneNumber = () => {
         if (phoneNumber === "") {
             alert("Please Enter all the Values in the Form!!");
-        }
+        } else {
+			//Change or Set Phone Number
+		}
     };
     useLayoutEffect(() => {
         navigation.setOptions({
