@@ -19,9 +19,6 @@ export default function ChangeEmailScreen({ navigation }) {
             auth.currentUser
                 .updateEmail(email)
                 .then(() => {
-                    // Write the code of changing Email in existing Firestore Private Notifications
-                })
-                .then(() => {
                     db.collection("privateNotifications").add({
                         title: "Email Changed Successfully!!",
                         message: `Your Email has been Successfully Changed to ${email}!!`,
