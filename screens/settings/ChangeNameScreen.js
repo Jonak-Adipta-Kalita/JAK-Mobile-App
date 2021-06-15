@@ -8,10 +8,15 @@ import firebase from "firebase";
 import PropTypes from "prop-types";
 
 export default function ChangeNameScreen({ navigation }) {
+    const [previousName, setPreviousName] = useState(
+        auth?.currentUser?.displayName
+    );
     const [name, setName] = useState("");
     const changeName = () => {
         if (name === "") {
             alert("Please Enter all the Values in the Form!!");
+        } else if (name === previousName) {
+            alert("Its the same Name as your Previous!!");
         } else {
             auth.currentUser
                 .updateProfile({
@@ -28,6 +33,7 @@ export default function ChangeNameScreen({ navigation }) {
                 })
                 .then(() => {
                     setName("");
+                    setPreviousName(name);
                     navigation.jumpTo("Home");
                 })
                 .then(() => alert("Your Name is Successfully Changed!!"))

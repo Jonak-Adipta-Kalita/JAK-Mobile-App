@@ -3,16 +3,23 @@ import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
+import { auth } from "../../firebase";
 import PropTypes from "prop-types";
 
 export default function ChangePhoneNumberScreen({ navigation }) {
+    const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
+        auth?.currentUser?.phoneNumber
+    );
     const [phoneNumber, setPhoneNumber] = useState("");
     const changePhoneNumber = () => {
         if (phoneNumber === "") {
             alert("Please Enter all the Values in the Form!!");
+        } else if (phoneNumber === previousPhoneNumber) {
+            alert("Its the same Phone Number as your Previous!!");
         } else {
-			//Change or Set Phone Number
-		}
+            //Change or Set Phone Number
+			setPreviousPhoneNumber(phoneNumber);
+        }
     };
     useLayoutEffect(() => {
         navigation.setOptions({
