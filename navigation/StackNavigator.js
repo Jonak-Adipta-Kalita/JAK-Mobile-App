@@ -19,6 +19,7 @@ const AllStackScreenOption = {
     headerTitleStyle: { color: "black" },
     headerTintColor: "black",
     headerBackTitle: "Back",
+    headerTitleAlign: "center",
 };
 
 const HomeStack = () => {

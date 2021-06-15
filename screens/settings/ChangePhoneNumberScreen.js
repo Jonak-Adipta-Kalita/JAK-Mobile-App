@@ -18,7 +18,7 @@ export default function ChangePhoneNumberScreen({ navigation }) {
             alert("Its the same Phone Number as your Previous!!");
         } else {
             //Change or Set Phone Number
-			setPreviousPhoneNumber(phoneNumber);
+            setPreviousPhoneNumber(phoneNumber);
         }
     };
     useLayoutEffect(() => {
