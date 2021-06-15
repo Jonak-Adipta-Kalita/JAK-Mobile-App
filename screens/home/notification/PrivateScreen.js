@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import { db } from "../../../firebase";
 import { auth } from "../../../firebase";
 import PropTypes from "prop-types";
@@ -26,36 +26,23 @@ export default function PrivateScreen({ navigation }) {
     }, [navigation]);
     return (
         <View style={styles.container}>
-            {notifications?.map(({ id, data }) => {
-                const { title, message, timestamp, user } = data;
-                if (user === auth.currentUser.email) {
-                    return (
-                        <ScrollView key={id}>
+            <ScrollView>
+                {notifications?.map(({ id, data }) => {
+                    const { title, message, timestamp, user } = data;
+                    if (user === auth.currentUser.email) {
+                        return (
                             <Notification
+                                key={id}
                                 id={id}
                                 title={title}
                                 message={message}
                                 timestamp={timestamp}
                                 user={user}
                             />
-                        </ScrollView>
-                    );
-                } else {
-                    return (
-                        <View style={{ paddingTop: 10 }}>
-                            <Text
-                                style={{
-                                    alignSelf: "center",
-                                    fontWeight: "bold",
-                                    color: "#594d4c",
-                                }}
-                            >
-                                All Clear for Now!!
-                            </Text>
-                        </View>
-                    );
-                }
-            })}
+                        );
+                    }
+                })}
+            </ScrollView>
         </View>
     );
 }
