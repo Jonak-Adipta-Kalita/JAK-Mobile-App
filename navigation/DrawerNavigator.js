@@ -3,6 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AntDesign, Entypo } from "@expo/vector-icons";
+import CustomDrawer from "../custom/Drawer";
 import PropTypes from "prop-types";
 
 import {
@@ -18,7 +19,9 @@ const Drawer = createDrawerNavigator();
 export default function DrawerNavigator() {
     const [user] = useAuthState(auth);
     return (
-        <Drawer.Navigator>
+        <Drawer.Navigator
+            drawerContent={(props) => <CustomDrawer {...props} />}
+        >
             <Drawer.Screen
                 name="Home"
                 component={HomeStack}
