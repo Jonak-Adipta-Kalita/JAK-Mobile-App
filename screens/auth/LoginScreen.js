@@ -94,37 +94,51 @@ export default function LoginScreen({ navigation }) {
                 type="outline"
                 onPress={() => navigation.navigate("Register")}
             />
-            <Text
-                style={{
-                    marginTop: 10,
-                    marginBottom: 10,
-                    color: "#594d4c",
-                    fontSize: 20,
-                }}
-            >
-                Or
-            </Text>
             {Platform.OS === "android" ||
                 (Platform.OS === "windows" && (
-                    <ScrollView>
-                        <TouchableOpacity
-                            style={styles.loginButton}
-                            onPress={signInGoogle}
+                    <View>
+                        <Text
+                            style={{
+                                marginTop: 10,
+                                marginBottom: 10,
+                                color: "#594d4c",
+                                fontSize: 20,
+                            }}
                         >
-                            {/* Google Login */}
-                        </TouchableOpacity>
-                    </ScrollView>
+                            Or
+                        </Text>
+                        <ScrollView>
+                            <TouchableOpacity
+                                style={styles.loginButton}
+                                onPress={signInGoogle}
+                            >
+                                {/* Google Login */}
+                            </TouchableOpacity>
+                        </ScrollView>
+                    </View>
                 ))}
             {Platform.OS === "ios" ||
                 (Platform.OS === "macos" && (
-                    <ScrollView>
-                        <TouchableOpacity
-                            style={styles.loginButton}
-                            onPress={signInApple}
+                    <View>
+                        <Text
+                            style={{
+                                marginTop: 10,
+                                marginBottom: 10,
+                                color: "#594d4c",
+                                fontSize: 20,
+                            }}
                         >
-                            {/* Apple Login */}
-                        </TouchableOpacity>
-                    </ScrollView>
+                            Or
+                        </Text>
+                        <ScrollView>
+                            <TouchableOpacity
+                                style={styles.loginButton}
+                                onPress={signInApple}
+                            >
+                                {/* Apple Login */}
+                            </TouchableOpacity>
+                        </ScrollView>
+                    </View>
                 ))}
         </View>
     );
