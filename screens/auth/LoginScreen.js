@@ -8,12 +8,12 @@ import {
     TouchableOpacity,
     ScrollView,
 } from "react-native";
-import { Button, Input, SocialIcon } from "react-native-elements";
+import { Button, Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
+import { Platform } from "react-native";
 import firebase from "firebase";
 import PropTypes from "prop-types";
-import { Platform } from "react-native";
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState("");
@@ -104,28 +104,28 @@ export default function LoginScreen({ navigation }) {
             >
                 Or
             </Text>
-            {Platform.OS === "android" || Platform.OS === "web" ? (
-                <ScrollView>
-                    <TouchableOpacity
-                        style={{ width: 300 }}
-                        onPress={signInGoogle}
-                    >
-                        <SocialIcon
-                            type="google"
-                            button
-                            dark
-                            title="Login with Google"
-                        />
-                    </TouchableOpacity>
-                </ScrollView>
-            ) : (
-                <ScrollView>
-                    <TouchableOpacity
-                        style={{ width: 300 }}
-                        onPress={signInApple}
-                    ></TouchableOpacity>
-                </ScrollView>
-            )}
+            {Platform.OS === "android" ||
+                (Platform.OS === "windows" && (
+                    <ScrollView>
+                        <TouchableOpacity
+                            style={styles.loginButton}
+                            onPress={signInGoogle}
+                        >
+                            {/* Google Login */}
+                        </TouchableOpacity>
+                    </ScrollView>
+                ))}
+            {Platform.OS === "ios" ||
+                (Platform.OS === "macos" && (
+                    <ScrollView>
+                        <TouchableOpacity
+                            style={styles.loginButton}
+                            onPress={signInApple}
+                        >
+                            {/* Apple Login */}
+                        </TouchableOpacity>
+                    </ScrollView>
+                ))}
         </View>
     );
 }
@@ -148,5 +148,9 @@ const styles = StyleSheet.create({
     button: {
         width: 200,
         marginTop: 10,
+    },
+    loginButton: {
+        width: 300,
+        marginTop: 40,
     },
 });
