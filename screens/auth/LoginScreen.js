@@ -13,6 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
+import { Platform } from "react-native";
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState("");
@@ -43,6 +44,7 @@ export default function LoginScreen({ navigation }) {
             .catch((error) => alert(error.message));
     };
     const signInGoogle = () => {};
+    const signInApple = () => {};
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login!!",
@@ -102,16 +104,28 @@ export default function LoginScreen({ navigation }) {
             >
                 Or
             </Text>
-            <ScrollView>
-                <TouchableOpacity style={{ width: 300 }} onPress={signInGoogle}>
-                    <SocialIcon
-                        type="google"
-                        button
-                        dark
-                        title="Login with Google"
-                    />
-                </TouchableOpacity>
-            </ScrollView>
+            {Platform.OS === "android" || Platform.OS === "web" ? (
+                <ScrollView>
+                    <TouchableOpacity
+                        style={{ width: 300 }}
+                        onPress={signInGoogle}
+                    >
+                        <SocialIcon
+                            type="google"
+                            button
+                            dark
+                            title="Login with Google"
+                        />
+                    </TouchableOpacity>
+                </ScrollView>
+            ) : (
+                <ScrollView>
+                    <TouchableOpacity
+                        style={{ width: 300 }}
+                        onPress={signInApple}
+                    ></TouchableOpacity>
+                </ScrollView>
+            )}
         </View>
     );
 }
