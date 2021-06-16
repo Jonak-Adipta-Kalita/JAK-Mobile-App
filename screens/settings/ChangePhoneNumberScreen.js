@@ -17,7 +17,7 @@ export default function ChangePhoneNumberScreen({ navigation }) {
         } else if (phoneNumber === previousPhoneNumber) {
             alert("Its the same Phone Number as your Previous!!");
         } else {
-            //Change or Set Phone Number
+            //TODO: Change or Set Phone Number
             setPreviousPhoneNumber(phoneNumber);
         }
     };
