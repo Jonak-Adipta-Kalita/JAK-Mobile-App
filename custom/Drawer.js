@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import {
     DrawerContentScrollView,
     DrawerItemList,
@@ -13,17 +13,11 @@ export default function CustomDrawer({ progress, ...props }) {
         outputRange: [-100, 0],
     });
     return (
-        <View style={styles.container}>
-            <View style={styles.header}></View>
-            <View style={styles.body}>
-                <DrawerContentScrollView {...props}>
-                    <Animated.View style={{ transform: [{ translateX }] }}>
-                        <DrawerItemList {...props} />
-                    </Animated.View>
-                </DrawerContentScrollView>
-            </View>
-            <View style={styles.footer}></View>
-        </View>
+        <DrawerContentScrollView {...props} style={styles.container}>
+            <Animated.View style={{ transform: [{ translateX }] }}>
+                <DrawerItemList {...props} />
+            </Animated.View>
+        </DrawerContentScrollView>
     );
 }
 
@@ -33,7 +27,4 @@ CustomDrawer.propTypes = {
 
 const styles = StyleSheet.create({
     container: {},
-    header: {},
-    body: {},
-    footer: {},
 });
