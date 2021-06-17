@@ -14,6 +14,8 @@ import { auth, db } from "../../firebase";
 import { Platform } from "react-native";
 import firebase from "firebase";
 import PropTypes from "prop-types";
+import CustomGoogleLoginButton from "../../custom/loginButtons/Google";
+import CustomAppleLoginButton from "../../custom/loginButtons/Apple";
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState("");
@@ -43,8 +45,6 @@ export default function LoginScreen({ navigation }) {
             })
             .catch((error) => alert(error.message));
     };
-    const signInGoogle = () => {};
-    const signInApple = () => {};
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login!!",
@@ -108,12 +108,7 @@ export default function LoginScreen({ navigation }) {
                             Or
                         </Text>
                         <ScrollView>
-                            <TouchableOpacity
-                                style={styles.loginButton}
-                                onPress={signInGoogle}
-                            >
-                                {/* Google Login */}
-                            </TouchableOpacity>
+                            <CustomGoogleLoginButton />
                         </ScrollView>
                     </View>
                 ))}
@@ -131,12 +126,7 @@ export default function LoginScreen({ navigation }) {
                             Or
                         </Text>
                         <ScrollView>
-                            <TouchableOpacity
-                                style={styles.loginButton}
-                                onPress={signInApple}
-                            >
-                                {/* Apple Login */}
-                            </TouchableOpacity>
+                            <CustomAppleLoginButton />
                         </ScrollView>
                     </View>
                 ))}
