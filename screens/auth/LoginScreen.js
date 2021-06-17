@@ -28,13 +28,13 @@ export default function LoginScreen({ navigation }) {
     }, []);
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
-            .then(() =>
+            .then(() => {
                 db.collection("publicNotifications").add({
                     title: "Member came back to the Ligtning Family!!",
                     message: `${email} came back to the Ligtning Family!! Yippie!!`,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                })
-            )
+                });
+            })
             .then(() => {
                 db.collection("privateNotifications").add({
                     title: "Welcome Back!!",
