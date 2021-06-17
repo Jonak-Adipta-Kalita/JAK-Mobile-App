@@ -183,7 +183,6 @@ export default function SettingsScreen({ navigation }) {
                     )}
                 </View>
             </ScrollView>
-            <View style={{ height: "50px" }} />
             <View
                 style={{
                     alignSelf: "flex-start",
