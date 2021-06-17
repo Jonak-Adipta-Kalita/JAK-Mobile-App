@@ -14,8 +14,8 @@ import { auth, db } from "../../firebase";
 import { Platform } from "react-native";
 import firebase from "firebase";
 import PropTypes from "prop-types";
-import CustomGoogleLoginButton from "../../custom/loginButtons/Google";
-import CustomAppleLoginButton from "../../custom/loginButtons/Apple";
+import CustomGoogleLoginButton from "../../custom/loginButtons/android/Google";
+import CustomAppleLoginButton from "../../custom/loginButtons/ios/Apple";
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState("");
@@ -94,42 +94,32 @@ export default function LoginScreen({ navigation }) {
                 type="outline"
                 onPress={() => navigation.navigate("Register")}
             />
-            {Platform.OS === "android" ||
-                (Platform.OS === "windows" && (
-                    <View>
-                        <Text
-                            style={{
-                                marginTop: 10,
-                                marginBottom: 10,
-                                color: "#594d4c",
-                                fontSize: 20,
-                            }}
-                        >
-                            Or
-                        </Text>
-                        <ScrollView>
-                            <CustomGoogleLoginButton />
-                        </ScrollView>
-                    </View>
-                ))}
-            {Platform.OS === "ios" ||
-                (Platform.OS === "macos" && (
-                    <View>
-                        <Text
-                            style={{
-                                marginTop: 10,
-                                marginBottom: 10,
-                                color: "#594d4c",
-                                fontSize: 20,
-                            }}
-                        >
-                            Or
-                        </Text>
-                        <ScrollView>
-                            <CustomAppleLoginButton />
-                        </ScrollView>
-                    </View>
-                ))}
+            {Platform.OS !== "web" && (
+                <View>
+                    <Text
+                        style={{
+                            marginTop: 10,
+                            marginBottom: 10,
+                            color: "#594d4c",
+                            fontSize: 20,
+                        }}
+                    >
+                        Or
+                    </Text>
+                    {Platform.OS === "android" ||
+                        (Platform.OS === "windows" && (
+                            <ScrollView>
+                                <CustomGoogleLoginButton />
+                            </ScrollView>
+                        ))}
+                    {Platform.OS === "ios" ||
+                        (Platform.OS === "macos" && (
+                            <ScrollView>
+                                <CustomAppleLoginButton />
+                            </ScrollView>
+                        ))}
+                </View>
+            )}
         </View>
     );
 }
