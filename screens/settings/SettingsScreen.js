@@ -8,9 +8,9 @@ import {
     ScrollView,
     Platform,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
-import { Avatar, Button, ListItem, Icon } from "react-native-elements";
+import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
 import * as ImagePicker from "expo-image-picker";
 import PropTypes from "prop-types";
@@ -87,6 +87,7 @@ export default function SettingsScreen({ navigation }) {
             )
             .catch((error) => alert(error.message));
     };
+    const verifyEmail = () => {};
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
@@ -125,7 +126,7 @@ export default function SettingsScreen({ navigation }) {
                         onPress={() => navigation.navigate("ChangeName")}
                     >
                         <ListItem bottomDivider>
-                            <Icon name="edit" />
+                            <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
                                     {auth.currentUser.displayName}
@@ -138,7 +139,7 @@ export default function SettingsScreen({ navigation }) {
                         onPress={() => navigation.navigate("ChangeEmail")}
                     >
                         <ListItem bottomDivider>
-                            <Icon name="edit" />
+                            <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
                                     {auth.currentUser.email}
@@ -151,7 +152,7 @@ export default function SettingsScreen({ navigation }) {
                         onPress={() => navigation.navigate("ChangePhoneNumber")}
                     >
                         <ListItem bottomDivider>
-                            <Icon name="edit" />
+                            <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
                                     {auth.currentUser.phoneNumber
@@ -164,14 +165,31 @@ export default function SettingsScreen({ navigation }) {
                             </ListItem.Content>
                         </ListItem>
                     </TouchableOpacity>
+                    {!auth?.currentUser?.emailVerified && (
+                        <TouchableOpacity onPress={verifyEmail}>
+                            <ListItem bottomDivider>
+                                <MaterialCommunityIcons
+                                    name="account-cancel-outline"
+                                    style={{ fontSize: 30 }}
+                                />
+                                <ListItem.Content>
+                                    <ListItem.Title>Verify</ListItem.Title>
+                                    <ListItem.Subtitle>
+                                        Email Verification
+                                    </ListItem.Subtitle>
+                                </ListItem.Content>
+                            </ListItem>
+                        </TouchableOpacity>
+                    )}
                 </View>
             </ScrollView>
+            <View style={{ height: "50px" }} />
             <View
                 style={{
                     alignSelf: "flex-start",
                     paddingLeft: 20,
                     position: "absolute",
-                    bottom: 25,
+                    bottom: 20,
                     flexDirection: "row",
                 }}
             >
@@ -182,7 +200,7 @@ export default function SettingsScreen({ navigation }) {
                     alignSelf: "flex-end",
                     paddingRight: 20,
                     position: "absolute",
-                    bottom: 25,
+                    bottom: 20,
                     flexDirection: "row",
                 }}
             >
