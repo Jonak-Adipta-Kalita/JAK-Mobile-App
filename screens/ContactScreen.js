@@ -115,12 +115,12 @@ export default function ContactScreen({ navigation }) {
                     </View>
                 ) : (
                     <View style={{ width: 350, alignItems: "center" }}>
-                        <Text>Login to Send Contact Request!!</Text>
+                        <Text>Verify Your Email to Send Contact Request!!</Text>
                     </View>
                 )
             ) : (
                 <View style={{ width: 350, alignItems: "center" }}>
-                    <Text>Verify Your Email to Send Contact Request!!</Text>
+                    <Text>Login to Send Contact Request!!</Text>
                 </View>
             )}
         </View>
