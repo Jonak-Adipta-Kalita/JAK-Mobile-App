@@ -21,7 +21,7 @@ export default function ChangeEmailScreen({ navigation }) {
                 .then(() => {
                     db.collection("privateNotifications").add({
                         title: "Email Changed Successfully!!",
-                        message: `Your Email has been Successfully Changed to ${email}!!`,
+                        message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
                         timestamp:
                             firebase.firestore.FieldValue.serverTimestamp(),
                         user: auth?.currentUser?.email,

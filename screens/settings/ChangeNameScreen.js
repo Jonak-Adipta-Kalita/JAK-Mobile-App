@@ -25,7 +25,7 @@ export default function ChangeNameScreen({ navigation }) {
                 .then(() => {
                     db.collection("privateNotifications").add({
                         title: "Name Changed Successfully!!",
-                        message: `Your Name has been Successfully Changed to ${name}!!`,
+                        message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
                         timestamp:
                             firebase.firestore.FieldValue.serverTimestamp(),
                         user: auth?.currentUser?.email,
