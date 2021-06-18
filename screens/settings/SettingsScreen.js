@@ -101,6 +101,21 @@ export default function SettingsScreen({ navigation }) {
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
+            headerRight: () => (
+                <SafeAreaView style={{ flex: 1 }}>
+                    {!auth?.currentUser?.emailVerified && (
+                        <TouchableOpacity
+                            style={{ alignItems: "flex-start", margin: 20 }}
+                            onPress={verifyEmail}
+                        >
+                            <MaterialCommunityIcons
+                                name="account-cancel-outline"
+                                style={{ fontSize: 30 }}
+                            />
+                        </TouchableOpacity>
+                    )}
+                </SafeAreaView>
+            ),
         });
     }, [navigation]);
     return (
@@ -165,22 +180,6 @@ export default function SettingsScreen({ navigation }) {
                             </ListItem.Content>
                         </ListItem>
                     </TouchableOpacity>
-                    {!auth?.currentUser?.emailVerified && (
-                        <TouchableOpacity onPress={verifyEmail}>
-                            <ListItem bottomDivider>
-                                <MaterialCommunityIcons
-                                    name="account-cancel-outline"
-                                    style={{ fontSize: 30 }}
-                                />
-                                <ListItem.Content>
-                                    <ListItem.Title>Verify</ListItem.Title>
-                                    <ListItem.Subtitle>
-                                        Email Verification
-                                    </ListItem.Subtitle>
-                                </ListItem.Content>
-                            </ListItem>
-                        </TouchableOpacity>
-                    )}
                 </View>
             </ScrollView>
             <View
