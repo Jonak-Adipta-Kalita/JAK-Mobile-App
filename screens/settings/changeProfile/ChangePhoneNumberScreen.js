@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
-import { auth } from "../../firebase";
+import { auth } from "../../../firebase";
 import PropTypes from "prop-types";
 
 export default function ChangePhoneNumberScreen({ navigation }) {
