@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { Card } from "react-native-elements";
 import moment from "moment";
 import propTypes from "prop-types";
-import toCustomeTitleCase from "../custom/toTitleCase";
+import toCustomTitleCase from "../custom/toTitleCase";
 
 export default function Notification({ title, message, timestamp }) {
     return (
@@ -23,7 +23,7 @@ export default function Notification({ title, message, timestamp }) {
                 <Card.Divider />
                 <Text style={{ color: "#43484D", fontWeight: "bold" }}>
                     {timestamp
-                        ? toCustomeTitleCase(
+                        ? toCustomTitleCase(
                               moment(timestamp.toDate()).fromNow()
                           )
                         : "..."}
