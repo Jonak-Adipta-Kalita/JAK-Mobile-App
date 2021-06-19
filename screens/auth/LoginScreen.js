@@ -101,6 +101,7 @@ export default function LoginScreen({ navigation }) {
                             marginTop: 10,
                             marginBottom: 10,
                             color: "#594d4c",
+                            alignSelf: "center",
                             fontSize: 20,
                         }}
                     >
