@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 
 export default function SettingsScreen({ navigation }) {
     const [avatar, setAvatar] = useState(null);
+    const avatarImageExtension = "jpg";
     useEffect(() => {
         (async () => {
             if (Platform.OS !== "web") {
@@ -37,16 +38,24 @@ export default function SettingsScreen({ navigation }) {
         });
         if (!result.cancelled) {
             setAvatar(result.uri);
-            storage
-                .ref(`users/${auth.currentUser.uid}/profile.jpg`)
-                .put(avatar)
+            uploadAvatar(avatar, "profile_image")
                 .then(() => {
                     auth.onAuthStateChanged((user) => {
                         storage
-                            .ref(`users/${user.uid}/profile.jpg`)
+                            .ref(
+                                "users" +
+                                    "/" +
+                                    user.uid +
+                                    "/" +
+                                    "profile_image" +
+                                    "." +
+                                    avatarImageExtension
+                            )
                             .getDownloadURL()
                             .then((imgURL) => {
-                                user.updateProfile({ photoURL: imgURL });
+                                auth.currentUser.updateProfile({
+                                    photoURL: imgURL,
+                                });
                             });
                     });
                 })
@@ -62,6 +71,22 @@ export default function SettingsScreen({ navigation }) {
                 .then(() => alert("Your Avatar is Successfully Changed!!"))
                 .catch((error) => alert(error.message));
         }
+    };
+    const uploadAvatar = async (uri, imageName) => {
+        const response = await fetch(uri);
+        const blob = await response.blob();
+        var ref = storage
+            .ref()
+            .child(
+                "users" +
+                    "/" +
+                    auth.currentUser.uid +
+                    "/" +
+                    imageName +
+                    "." +
+                    avatarImageExtension
+            );
+        return ref.put(blob);
     };
     const signOut = () => {
         auth.signOut()
