@@ -3,7 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
-import { auth } from "../../../firebase";
+import { auth, db } from "../../../firebase";
+import firebase from "firebase";
 import PropTypes from "prop-types";
 
 export default function ChangePhoneNumberScreen({ navigation }) {
@@ -18,7 +19,22 @@ export default function ChangePhoneNumberScreen({ navigation }) {
             alert("Its the same Phone Number as your Previous!!");
         } else {
             //TODO: Change or Set Phone Number
-            setPreviousPhoneNumber(phoneNumber);
+            db.collection("privateNotifications")
+                .add({
+                    title: "Phone Number Changed Successfully!!",
+                    message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    user: auth?.currentUser?.email,
+                })
+                .then(() => {
+                    setPhoneNumber("");
+                    setPreviousPhoneNumber(phoneNumber);
+                    navigation.jumpTo("Home");
+                })
+                .then(() => {
+                    alert("Your Phone Number is Successfully Changed!!");
+                })
+                .catch((error) => alert(error.message));
         }
     };
     useLayoutEffect(() => {
