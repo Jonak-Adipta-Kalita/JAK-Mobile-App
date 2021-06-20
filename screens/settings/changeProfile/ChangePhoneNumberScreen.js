@@ -1,6 +1,12 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    View,
+    StyleSheet,
+    SafeAreaView,
+    TouchableOpacity,
+    Alert,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { auth, db } from "../../../firebase";
@@ -14,9 +20,27 @@ export default function ChangePhoneNumberScreen({ navigation }) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const changePhoneNumber = () => {
         if (phoneNumber === "") {
-            alert("Please Enter all the Values in the Form!!");
+            Alert.alert(
+                "Value not Filled!!",
+                "Please Enter all the Values in the Form!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
         } else if (phoneNumber === previousPhoneNumber) {
-            alert("Its the same Phone Number as your Previous!!");
+            Alert.alert(
+                "Value same as Previous!!",
+                "Its the same Phone Number as your Previous!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
         } else {
             //TODO: Change or Set Phone Number
             db.collection("privateNotifications")
@@ -32,9 +56,25 @@ export default function ChangePhoneNumberScreen({ navigation }) {
                     navigation.jumpTo("Home");
                 })
                 .then(() => {
-                    alert("Your Phone Number is Successfully Changed!!");
+                    Alert.alert(
+                        "Phone Number Changed Successfully!!",
+                        "Your Phone Number is Successfully Changed!!",
+                        [
+                            {
+                                text: "OK",
+                                onPress: () => {},
+                            },
+                        ]
+                    );
                 })
-                .catch((error) => alert(error.message));
+                .catch((error) => {
+                    Alert.alert("Error Occured!!", error.message, [
+                        {
+                            text: "OK",
+                            onPress: () => {},
+                        },
+                    ]);
+                });
         }
     };
     useLayoutEffect(() => {

@@ -1,5 +1,11 @@
 import React, { useLayoutEffect, useState } from "react";
-import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    StyleSheet,
+    View,
+    SafeAreaView,
+    TouchableOpacity,
+    Alert,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -40,13 +46,13 @@ export default function RegisterScreen({ navigation }) {
                         "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
                 });
             })
-            .then(() =>
+            .then(() => {
                 db.collection("publicNotifications").add({
                     title: "New member in the Ligtning Family!!",
                     message: `${email} Joined the Ligtning Family!! Yippie!!`,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                })
-            )
+                });
+            })
             .then(() => {
                 db.collection("privateNotifications").add({
                     title: "Welcome!!",
@@ -55,7 +61,14 @@ export default function RegisterScreen({ navigation }) {
                     user: email,
                 });
             })
-            .catch((error) => alert(error.message));
+            .catch((error) => {
+                Alert.alert("Error Occured!!", error.message, [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]);
+            });
     };
     return (
         <View style={styles.container}>

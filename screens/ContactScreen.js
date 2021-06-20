@@ -1,6 +1,12 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    View,
+    StyleSheet,
+    SafeAreaView,
+    TouchableOpacity,
+    Alert,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db } from "../firebase";
@@ -19,7 +25,16 @@ export default function ContactScreen({ navigation }) {
             phoneNumber === "" ||
             message === ""
         ) {
-            alert("Please Enter all the Values in the Form!!");
+            Alert.alert(
+                "Value not Filled!!",
+                "Please Enter all the Values in the Form!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
         } else {
             db.collection("requestToContact")
                 .add({
@@ -45,8 +60,26 @@ export default function ContactScreen({ navigation }) {
                     setMessage("");
                     navigation.jumpTo("Home");
                 })
-                .then(() => alert("Request Sent!!"))
-                .catch((error) => alert(error.message));
+                .then(() => {
+                    Alert.alert(
+                        "Request Sent!!",
+                        "Your Request to Contact is Sent Successfully!!",
+                        [
+                            {
+                                text: "OK",
+                                onPress: () => {},
+                            },
+                        ]
+                    );
+                })
+                .catch((error) => {
+                    Alert.alert("Error Occurred!!", error.message, [
+                        {
+                            text: "OK",
+                            onPress: () => {},
+                        },
+                    ]);
+                });
         }
     };
     useLayoutEffect(() => {

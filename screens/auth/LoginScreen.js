@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Platform,
+    Alert,
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -43,7 +44,14 @@ export default function LoginScreen({ navigation }) {
                     user: email,
                 });
             })
-            .catch((error) => alert(error.message));
+            .catch((error) => {
+                Alert.alert("Error Occured!!", error.message, [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]);
+            });
     };
     useLayoutEffect(() => {
         navigation.setOptions({

@@ -1,6 +1,12 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    View,
+    StyleSheet,
+    SafeAreaView,
+    TouchableOpacity,
+    Alert,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
@@ -12,9 +18,27 @@ export default function ChangeEmailScreen({ navigation }) {
     const [email, setEmail] = useState("");
     const changeEmail = () => {
         if (email === "") {
-            alert("Please Enter all the Values in the Form!!");
+            Alert.alert(
+                "Value not Filled!!",
+                "Please Enter all the Values in the Form!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
         } else if (email === previousEmail) {
-            alert("Its the same Email Address as your Previous!!");
+            Alert.alert(
+                "Value same as Previous!!",
+                "Its the same Email Address as your Previous!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
         } else {
             auth.currentUser
                 .updateEmail(email)
@@ -32,8 +56,26 @@ export default function ChangeEmailScreen({ navigation }) {
                     setPreviousEmail(email);
                     navigation.jumpTo("Home");
                 })
-                .then(() => alert("Your Email is Successfully Changed!!"))
-                .catch((error) => alert(error.message));
+                .then(() => {
+                    Alert.alert(
+                        "Email Changed Successfully!!",
+                        "Your Email is Successfully Changed!!",
+                        [
+                            {
+                                text: "OK",
+                                onPress: () => {},
+                            },
+                        ]
+                    );
+                })
+                .catch((error) => {
+                    Alert.alert("Error Occured!!", error.message, [
+                        {
+                            text: "OK",
+                            onPress: () => {},
+                        },
+                    ]);
+                });
         }
     };
     useLayoutEffect(() => {

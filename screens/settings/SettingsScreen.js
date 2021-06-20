@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Platform,
+    Alert,
 } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
@@ -25,7 +26,16 @@ export default function SettingsScreen({ navigation }) {
                     await ImagePicker.requestMediaLibraryPermissionsAsync();
                 let finalStatus = status;
                 if (finalStatus !== "granted") {
-                    alert("Give us Camera Roll Permission to Change Avatar!!");
+                    Alert.alert(
+                        "Need Camera Roll Permission!!",
+                        "Give us Camera Roll Permission to Change Avatar!!",
+                        [
+                            {
+                                text: "OK",
+                                onPress: () => {},
+                            },
+                        ]
+                    );
                     const { status } =
                         await ImagePicker.requestMediaLibraryPermissionsAsync();
                     finalStatus = status;
@@ -73,8 +83,26 @@ export default function SettingsScreen({ navigation }) {
                         user: auth?.currentUser?.email,
                     });
                 })
-                .then(() => alert("Your Avatar is Successfully Changed!!"))
-                .catch((error) => alert(error.message));
+                .then(() => {
+                    Alert.alert(
+                        "Avatar Changed Successfully!!",
+                        "Your Avatar is Successfully Changed!!",
+                        [
+                            {
+                                text: "OK",
+                                onPress: () => {},
+                            },
+                        ]
+                    );
+                })
+                .catch((error) =>
+                    Alert.alert("Error Occurred!!", error.message, [
+                        {
+                            text: "OK",
+                            onPress: () => {},
+                        },
+                    ])
+                );
         }
     };
     const uploadAvatar = async (uri, imageName) => {
@@ -103,7 +131,14 @@ export default function SettingsScreen({ navigation }) {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
-            .catch((error) => alert(error.message));
+            .catch((error) =>
+                Alert.alert("Error Occured!!", error.message, [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ])
+            );
     };
     const deleteAccount = () => {
         auth?.currentUser
@@ -115,7 +150,14 @@ export default function SettingsScreen({ navigation }) {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
-            .catch((error) => alert(error.message));
+            .catch((error) =>
+                Alert.alert("Error Occured!!", error.message, [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ])
+            );
     };
     const verifyEmail = () => {};
     useLayoutEffect(() => {
