@@ -7,11 +7,11 @@ import {
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
+    Platform,
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
-import { Platform } from "react-native";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 import CustomGoogleLoginButton from "../../custom/loginButtons/android/Google";
@@ -94,7 +94,8 @@ export default function LoginScreen({ navigation }) {
                 type="outline"
                 onPress={() => navigation.navigate("Register")}
             />
-            {Platform.OS !== "web" && (
+
+            {Platform.OS === "android" && (
                 <View>
                     <Text
                         style={{
@@ -107,18 +108,37 @@ export default function LoginScreen({ navigation }) {
                     >
                         Or
                     </Text>
-                    {Platform.OS === "android" ||
-                        (Platform.OS === "windows" && (
-                            <ScrollView>
-                                <CustomGoogleLoginButton />
-                            </ScrollView>
-                        ))}
-                    {Platform.OS === "ios" ||
-                        (Platform.OS === "macos" && (
-                            <ScrollView>
-                                <CustomAppleLoginButton />
-                            </ScrollView>
-                        ))}
+                    <ScrollView
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                        }}
+                    >
+                        <CustomGoogleLoginButton />
+                    </ScrollView>
+                </View>
+            )}
+            {Platform.OS === "ios" && (
+                <View>
+                    <Text
+                        style={{
+                            marginTop: 10,
+                            marginBottom: 10,
+                            color: "#594d4c",
+                            alignSelf: "center",
+                            fontSize: 20,
+                        }}
+                    >
+                        Or
+                    </Text>
+                    <ScrollView
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                        }}
+                    >
+                        <CustomAppleLoginButton />
+                    </ScrollView>
                 </View>
             )}
         </View>
