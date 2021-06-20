@@ -23,9 +23,14 @@ export default function SettingsScreen({ navigation }) {
             if (Platform.OS !== "web") {
                 const { status } =
                     await ImagePicker.requestMediaLibraryPermissionsAsync();
-                if (status !== "granted") {
-                    alert("Give us Camera Roll Permission to Select Avatar!!");
+                let finalStatus = status;
+                if (finalStatus !== "granted") {
+                    alert("Give us Camera Roll Permission to Change Avatar!!");
+                    const { status } =
+                        await ImagePicker.requestMediaLibraryPermissionsAsync();
+                    finalStatus = status;
                 }
+                if (finalStatus !== "granted") return;
             }
         })();
     }, []);
