@@ -57,15 +57,7 @@ export default function SettingsScreen({ navigation }) {
                 .then(() => {
                     auth.onAuthStateChanged((user) => {
                         storage
-                            .ref(
-                                "users" +
-                                    "/" +
-                                    user.uid +
-                                    "/" +
-                                    "profile_image" +
-                                    "." +
-                                    avatarImageExtension
-                            )
+                            .ref(`users/${user.uid}/profile_image.${avatarImageExtension}`)
                             .getDownloadURL()
                             .then((imgURL) => {
                                 auth.currentUser.updateProfile({
@@ -110,15 +102,7 @@ export default function SettingsScreen({ navigation }) {
         const blob = await response.blob();
         var ref = storage
             .ref()
-            .child(
-                "users" +
-                    "/" +
-                    auth.currentUser.uid +
-                    "/" +
-                    imageName +
-                    "." +
-                    avatarImageExtension
-            );
+            .child(`users/${auth.currentUser.uid}/${imageName}.${avatarImageExtension}`);
         return ref.put(blob);
     };
     const signOut = () => {
