@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./navigation/DrawerNavigator";
-import { Platform, InteractionManager } from "react-native";
+import { Platform, InteractionManager, Alert, BackHandler } from "react-native";
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
@@ -48,6 +48,32 @@ if (Platform.OS === "android") {
 }
 
 export default function App() {
+    useEffect(() => {
+        if (Platform.OS === "android") {
+            const backAction = () => {
+                Alert.alert(
+                    "Exit App!!",
+                    "Hold on. Are you sure you want to Exit?",
+                    [
+                        {
+                            text: "Cancel",
+                            onPress: () => {},
+                            style: "cancel",
+                        },
+                        { text: "Yes", onPress: () => BackHandler.exitApp() },
+                    ]
+                );
+                return true;
+            };
+
+            const backHandler = BackHandler.addEventListener(
+                "hardwareBackPress",
+                backAction
+            );
+
+            return () => backHandler.remove();
+        }
+    }, []);
     return (
         <NavigationContainer>
             <DrawerNavigator />
