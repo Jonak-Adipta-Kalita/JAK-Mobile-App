@@ -36,7 +36,7 @@ enable Google Analytics. Now click on the Web Icon and create an app. After you 
 an app click on the cog icon in the sidebar and click on Project Settings. Scroll to the
 Bottom where you will find your app now click on Config. Copy the Config.
 
-#### Enabling Authentication
+#### Enabling Firebase Authentication
 
 In the Project in Firebase click on Authentication in the Sidebar. Enable
 Authentication. Now click on `Email/Password` and Enable It.
@@ -44,35 +44,12 @@ Authentication. Now click on `Email/Password` and Enable It.
 #### Enabling Firestore Database
 
 In the Project in Firebase click on Firestore Database in the Sidebar. Click on Enable
-Firestore. Start in Test Mode and leave the Timezone as it is. Now click on Rules and set
-the rules as:
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write;
-    }
-  }
-}
-```
+Firestore. Start in Test Mode and leave the Timezone as it is.
 
 #### Enabling Firebase Storage
 
-In the Project in Firebase click on Storage in the Sidebar. Click on Rules and set the rules as:
-
-```javascript
-rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /users/{uid}/{profileImage} {
-      allow read, write: if request.auth.uid == uid;
-    }
-  }
-}
-
-```
+In the Project in Firebase click on Storage in the Sidebar. Click on Enable.
+(Sometimes Sotrage is automatically Enabled)
 
 ### Providing required Credentials
 
