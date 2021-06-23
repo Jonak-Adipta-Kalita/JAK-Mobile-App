@@ -100,6 +100,7 @@ and press Enter.
 
 -   Language: [JavaScript](https://www.javascript.com/)
 -   Language Framework: [React Native](https://reactnative.dev/)
+-   Backend: [Node JS](https://nodejs.org/)
 -   CLI: [Expo](https://expo.io/)
 
 ## Contributors
