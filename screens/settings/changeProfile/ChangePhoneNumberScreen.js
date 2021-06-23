@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
-import { auth, db } from "../../../firebase";
+import { auth, db } from "../../../firebase_app";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 

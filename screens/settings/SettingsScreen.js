@@ -10,7 +10,7 @@ import {
     Alert,
 } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { auth, db, storage } from "../../firebase";
+import { auth, db, storage } from "../../firebase_app";
 import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
 import * as ImagePicker from "expo-image-picker";

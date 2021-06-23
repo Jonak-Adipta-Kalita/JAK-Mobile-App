@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "react-native-elements";
-import { auth } from "../../firebase";
+import { auth } from "../../firebase_app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 

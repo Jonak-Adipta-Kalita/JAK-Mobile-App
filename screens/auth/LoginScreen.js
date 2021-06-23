@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { auth, db } from "../../firebase";
+import { auth, db } from "../../firebase_app";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 import CustomGoogleLoginButton from "../../custom/loginButtons/android/Google";

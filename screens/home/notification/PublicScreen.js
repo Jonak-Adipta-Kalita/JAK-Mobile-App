@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import { db } from "../../../firebase";
+import { db } from "../../../firebase_app";
 import PropTypes from "prop-types";
 import Notification from "../../../components/Notification";
 
