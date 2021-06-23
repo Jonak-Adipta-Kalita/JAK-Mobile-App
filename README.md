@@ -88,18 +88,6 @@ yarn web
 
 ### Deploying edited Rules or Indexes
 
-#### Installing Dependency
-
-In a Terminal in the Base Directory, Install `firebase-tools` by typing
-
-```bash
-npm i -g firebase-tools
-```
-
-and pressing Enter.
-
-#### Deploying changes
-
 In a Terminal in the Base Directory type
 
 ```bash
