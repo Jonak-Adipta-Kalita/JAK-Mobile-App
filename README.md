@@ -56,7 +56,7 @@ In the Project in Firebase click on Storage in the Sidebar. Click on Enable.
 Create a file name `.env` in the Base Directory. Copy everything in `.env.example`
 and paste it in `.env` but change the credentials.
 
-### Starting the App:
+### Starting the App
 
 #### Android
 
@@ -86,12 +86,59 @@ npm run web
 yarn web
 ```
 
-### Deploying edited Rules or Indexes
+### Deploying edited Firebase Rules or Indexes
+
+#### Install required Dependency
 
 In a Terminal in the Base Directory type
 
 ```bash
-firebase deploy
+npm install -g firebase-tools
+# or
+yard global add firebase-tools
+```
+
+and press Enter.
+
+#### Login
+
+In a Terminal in the Base Directory type
+
+```bash
+firebase login
+```
+
+and press Enter. You will be Redirected to a Web Page, Login with your Google Account
+that has your Firebase Project.
+
+#### Initialize Firebase
+
+In a Terminal in the Base Directory type
+
+```bash
+firebase init firestore, storage
+```
+
+and press Enter. Now select `Use an Existing Project` and hit Enter. Now select your
+Project and press Enter.
+
+#### Edit the Rules and Indexes
+
+##### Cloud Firestore
+
+-   Rules: `firestore.rules`
+-   Indexes: `firestore.indexes.json`
+
+##### Firebase Storage
+
+-   Rules: `storage.rules`
+
+#### Publish
+
+In a Terminal in the Base Directory type
+
+```bash
+npm run publish:firebase
 ```
 
 and press Enter.
@@ -100,7 +147,7 @@ and press Enter.
 
 -   Language: [JavaScript](https://www.javascript.com/)
 -   Language Framework: [React Native](https://reactnative.dev/)
--   Backend: [Node JS](https://nodejs.org/)
+-   Backend: [Node JS](https://nodejs.org/), [Firebase](https://firebase.google.com/)
 -   CLI: [Expo](https://expo.io/)
 
 ## Contributors
