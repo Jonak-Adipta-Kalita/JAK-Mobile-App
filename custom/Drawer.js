@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text, Switch } from "react-native";
 import {
     DrawerContentScrollView,
     DrawerItemList,
@@ -12,6 +12,8 @@ export default function CustomDrawer({ progress, ...props }) {
         inputRange: [0, 1],
         outputRange: [-100, 0],
     });
+    const [darkThemeEnabled, setDarkThemeEnabled] = useState(false);
+    const toggleDarkTheme = () => {};
     return (
         <DrawerContentScrollView {...props} style={styles.container}>
             <Animated.View style={{ transform: [{ translateX }] }}>
@@ -27,6 +29,30 @@ export default function CustomDrawer({ progress, ...props }) {
                         borderRadius: 10,
                     }}
                 />
+                <View
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignSelf: "center",
+                        marginTop: 70,
+                    }}
+                >
+                    <Text style={{ color: "#818181" }}>Dark Theme</Text>
+                    <View style={{ marginLeft: 70 }}>
+                        <Switch
+                            trackColor={{ false: "#767577", true: "#2be317" }}
+                            thumbColor={
+                                darkThemeEnabled ? "#f4f3f4" : "#f4f3f4"
+                            }
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={() =>
+                                setDarkThemeEnabled((enable) => !enable)
+                            }
+                            onChange={toggleDarkTheme}
+                            value={darkThemeEnabled}
+                        />
+                    </View>
+                </View>
             </Animated.View>
         </DrawerContentScrollView>
     );
