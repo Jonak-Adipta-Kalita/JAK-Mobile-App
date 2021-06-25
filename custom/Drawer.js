@@ -13,7 +13,13 @@ export default function CustomDrawer({ progress, ...props }) {
         outputRange: [-100, 0],
     });
     const [darkThemeEnabled, setDarkThemeEnabled] = useState(false);
-    const toggleDarkTheme = () => {};
+    const toggleDarkTheme = () => {
+        if (darkThemeEnabled) {
+            //TODO: Enable Dark Theme
+        } else {
+            //TODO: Disable Dark Theme
+        }
+    };
     return (
         <DrawerContentScrollView {...props} style={styles.container}>
             <Animated.View style={{ transform: [{ translateX }] }}>
