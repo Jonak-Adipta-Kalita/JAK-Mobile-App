@@ -39,7 +39,19 @@ Bottom where you will find your app now click on Config. Copy the Config.
 #### Enabling Firebase Authentication
 
 In the Project in Firebase click on Authentication in the Sidebar. Enable
-Authentication. Now click on `Email/Password` and Enable It.
+Authentication.
+
+##### Email/Password
+
+Click on `Email/Password` in the Authentication tab and Enable It.
+
+##### Google
+
+Click on `Google` in the Authentication tab and Enable It.
+
+##### Apple
+
+Click on `Apple` in the Authentication tab and Enable It.
 
 #### Enabling Firestore Database
 
