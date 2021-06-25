@@ -26,10 +26,6 @@ export default function CustomDrawer({ progress, ...props }) {
                         paddingHorizontal: 20,
                         borderRadius: 10,
                     }}
-                    indicatorStyle={{
-                        borderBottomWidth: 2,
-                        borderBottomColor: "red",
-                    }}
                 />
             </Animated.View>
         </DrawerContentScrollView>
