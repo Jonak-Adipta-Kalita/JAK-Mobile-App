@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native-elements";
 
 export default function CustomAppleLoginButton() {
-    const signIn = () => {};
+    const signIn = async () => {};
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={signIn}>
