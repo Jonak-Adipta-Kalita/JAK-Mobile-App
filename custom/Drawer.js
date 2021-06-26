@@ -35,28 +35,44 @@ export default function CustomDrawer({ progress, ...props }) {
                         borderRadius: 10,
                     }}
                 />
-                <View
+                <View style={{ marginTop: 30 }} />
+                <Text
                     style={{
-                        display: "flex",
-                        flexDirection: "row",
+                        color: "#000000",
+                        marginBottom: 8,
                         alignSelf: "center",
-                        marginTop: 70,
                     }}
                 >
-                    <Text style={{ color: "#818181" }}>Dark Theme</Text>
-                    <View style={{ marginLeft: 70 }}>
-                        <Switch
-                            trackColor={{ false: "#767577", true: "#2be317" }}
-                            thumbColor={
-                                darkThemeEnabled ? "#f4f3f4" : "#f4f3f4"
-                            }
-                            ios_backgroundColor="#3e3e3e"
-                            onValueChange={() =>
-                                setDarkThemeEnabled((enable) => !enable)
-                            }
-                            onChange={toggleTheme}
-                            value={darkThemeEnabled}
-                        />
+                    Style
+                </Text>
+                <View style={{ alignSelf: "center", borderTopWidth: 2 }}>
+                    <View
+                        style={{
+                            marginTop: 8,
+                            marginBottom: 8,
+                            display: "flex",
+                            flexDirection: "row",
+                            padding: 30,
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                        }}
+                    >
+                        <Text style={{ color: "#818181" }}>Dark Theme</Text>
+                        <View style={{ marginLeft: 70 }}>
+                            <Switch
+                                trackColor={{
+                                    false: "#767577",
+                                    true: "#2be317",
+                                }}
+                                thumbColor="#f4f3f4"
+                                ios_backgroundColor="#3e3e3e"
+                                onValueChange={() => {
+                                    setDarkThemeEnabled((enable) => !enable);
+                                }}
+                                onChange={toggleTheme}
+                                value={darkThemeEnabled}
+                            />
+                        </View>
                     </View>
                 </View>
             </Animated.View>
