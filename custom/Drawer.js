@@ -13,7 +13,7 @@ export default function CustomDrawer({ progress, ...props }) {
         outputRange: [-100, 0],
     });
     const [darkThemeEnabled, setDarkThemeEnabled] = useState(false);
-    const toggleDarkTheme = () => {
+    const toggleTheme = () => {
         if (darkThemeEnabled) {
             //TODO: Enable Dark Theme
         } else {
@@ -54,7 +54,7 @@ export default function CustomDrawer({ progress, ...props }) {
                             onValueChange={() =>
                                 setDarkThemeEnabled((enable) => !enable)
                             }
-                            onChange={toggleDarkTheme}
+                            onChange={toggleTheme}
                             value={darkThemeEnabled}
                         />
                     </View>
