@@ -7,6 +7,10 @@ export default function GetStartedScreen({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Get Started!!",
+            headerStyle: { backgroundColor: "#3f7de0" },
+            headerTitleStyle: { color: "white" },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
         });
     }, [navigation]);
     return (
