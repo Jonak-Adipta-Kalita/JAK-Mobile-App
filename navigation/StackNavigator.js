@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import NotificationScreen from "../screens/home/notification/NotificationScreen";
 import AboutScreen from "../screens/AboutScreen";
@@ -23,15 +25,42 @@ const AllStackScreenOption = {
 };
 
 const HomeStack = () => {
-    return (
-        <Stack.Navigator
-            screenOptions={AllStackScreenOption}
-            initialRouteName="Home"
-        >
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Notification" component={NotificationScreen} />
-        </Stack.Navigator>
-    );
+    const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+    useEffect(() => {
+        AsyncStorage.getItem("alreadyLaunched").then((value) => {
+            if (value === null) {
+                AsyncStorage.setItem("alreadyLaunched", "true");
+                setIsFirstLaunch(true);
+            } else {
+                setIsFirstLaunch(false);
+            }
+        });
+    }, []);
+    if (isFirstLaunch === null) {
+        return null;
+    } else if (isFirstLaunch === true) {
+        return (
+            <Stack.Navigator
+                screenOptions={AllStackScreenOption}
+                initialRouteName="GetStarted"
+            >
+                <Stack.Screen name="GetStarted" component={GetStartedScreen} />
+            </Stack.Navigator>
+        );
+    } else {
+        return (
+            <Stack.Navigator
+                screenOptions={AllStackScreenOption}
+                initialRouteName="Home"
+            >
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen
+                    name="Notification"
+                    component={NotificationScreen}
+                />
+            </Stack.Navigator>
+        );
+    }
 };
 
 const AuthenticationStack = () => {
