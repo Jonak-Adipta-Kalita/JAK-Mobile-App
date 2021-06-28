@@ -4,6 +4,20 @@
 
 ![runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?style=for-the-badge&logo=EXPO&labelColor=f3f3f3&logoColor=000)
 
+<br>
+
+<a href="">
+    <img
+        src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/google.png?raw=true"
+    />
+</a>
+
+<a href="">
+    <img
+        src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/apple.png?raw=true"
+    />
+</a>
+
 </div>
 
 ## Steps
