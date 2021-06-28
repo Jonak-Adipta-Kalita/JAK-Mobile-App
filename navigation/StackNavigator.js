@@ -24,7 +24,10 @@ const AllStackScreenOption = {
 
 const HomeStack = () => {
     return (
-        <Stack.Navigator screenOptions={AllStackScreenOption}>
+        <Stack.Navigator
+            screenOptions={AllStackScreenOption}
+            initialRouteName="Home"
+        >
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
         </Stack.Navigator>
@@ -40,6 +43,7 @@ const AuthenticationStack = () => {
                 headerTintColor: "white",
                 headerBackTitle: "Back",
             }}
+            initialRouteName="Login"
         >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
@@ -49,7 +53,10 @@ const AuthenticationStack = () => {
 
 const AboutStack = () => {
     return (
-        <Stack.Navigator screenOptions={AllStackScreenOption}>
+        <Stack.Navigator
+            screenOptions={AllStackScreenOption}
+            initialRouteName="About"
+        >
             <Stack.Screen name="About" component={AboutScreen} />
         </Stack.Navigator>
     );
@@ -57,7 +64,10 @@ const AboutStack = () => {
 
 const SettingsStack = () => {
     return (
-        <Stack.Navigator screenOptions={AllStackScreenOption}>
+        <Stack.Navigator
+            screenOptions={AllStackScreenOption}
+            initialRouteName="Settings"
+        >
             <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="ChangeName" component={ChangeNameScreen} />
             <Stack.Screen name="ChangeEmail" component={ChangeEmailScreen} />
@@ -71,7 +81,10 @@ const SettingsStack = () => {
 
 const ContactStack = () => {
     return (
-        <Stack.Navigator screenOptions={AllStackScreenOption}>
+        <Stack.Navigator
+            screenOptions={AllStackScreenOption}
+            initialRouteName="Contact"
+        >
             <Stack.Screen name="Contact" component={ContactScreen} />
         </Stack.Navigator>
     );

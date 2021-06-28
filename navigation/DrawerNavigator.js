@@ -1,4 +1,5 @@
 import React from "react";
+import { useWindowDimensions } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { auth } from "../firebase_app";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -18,9 +19,13 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
     const [user] = useAuthState(auth);
+    const dimensions = useWindowDimensions();
+    const isLargeScreen = dimensions.width >= 768;
     return (
         <Drawer.Navigator
             drawerContent={(props) => <CustomDrawer {...props} />}
+            drawerType={isLargeScreen ? "permanent" : "front"}
+            drawerStyle={isLargeScreen ? null : { width: "65%" }}
         >
             <Drawer.Screen
                 name="Home"
