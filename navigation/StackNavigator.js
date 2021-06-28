@@ -45,6 +45,11 @@ const HomeStack = () => {
                 initialRouteName="GetStarted"
             >
                 <Stack.Screen name="GetStarted" component={GetStartedScreen} />
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen
+                    name="Notification"
+                    component={NotificationScreen}
+                />
             </Stack.Navigator>
         );
     } else {
@@ -71,6 +76,7 @@ const AuthenticationStack = () => {
                 headerTitleStyle: { color: "white" },
                 headerTintColor: "white",
                 headerBackTitle: "Back",
+                headerTitleAlign: "center",
             }}
             initialRouteName="Login"
         >
