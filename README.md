@@ -10,7 +10,6 @@
     <img
         src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/google.png?raw=true"
         alt="Get it on Google Play"
-        style="max-width: 153px; max-height: 46px;"
     />
 </a>
 
@@ -18,7 +17,6 @@
     <img
         src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/raw/main/assets/downloadButtons/apple.png?raw=true"
         alt="Download on the App Store"
-        style="max-width: 153px; max-height: 46px;"
     />
 </a>
 
