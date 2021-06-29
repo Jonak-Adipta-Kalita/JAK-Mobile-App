@@ -4,11 +4,12 @@
 
 ![runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?style=for-the-badge&logo=EXPO&labelColor=f3f3f3&logoColor=000)
 
-</div>
+<br />
 
 [![Get it on Google Play](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/google.png?raw=true)]()
-
 [![Download on the App Store](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/raw/main/assets/downloadButtons/apple.png?raw=true)]()
+
+</div>
 
 ## Steps
 
