@@ -6,19 +6,9 @@
 
 <br>
 
-<a href="">
-    <img
-        src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/google.png?raw=true"
-        alt="Get it on Google Play"
-    />
-</a>
+[![Get it on Google Play](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/google.png?raw=true)]()
 
-<a href="">
-    <img
-        src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/raw/main/assets/downloadButtons/apple.png?raw=true"
-        alt="Download on the App Store"
-    />
-</a>
+[![Download on the App Store](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/raw/main/assets/downloadButtons/apple.png?raw=true)]()
 
 </div>
 
