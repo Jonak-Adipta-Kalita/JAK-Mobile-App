@@ -13,7 +13,6 @@ export default function CustomGoogleLoginButton() {
     const [assets, error] = useAssets([
         require("../../../assets/loginButtons/android/google.png")
     ]);
-    const signIn = async () => {};
     if (!assets) {
         return (
             <ActivityIndicator
@@ -32,6 +31,7 @@ export default function CustomGoogleLoginButton() {
             },
         ])
     }
+    const signIn = async () => {};
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={signIn}>

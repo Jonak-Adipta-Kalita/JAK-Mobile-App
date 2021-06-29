@@ -10,7 +10,6 @@ import { Image } from "react-native-elements";
 import { useAssets } from 'expo-asset';
 
 export default function CustomAppleLoginButton() {
-    const signIn = async () => {};
     const [assets, error] = useAssets([
         require("../../../assets/loginButtons/ios/apple.png")
     ]);
@@ -32,6 +31,7 @@ export default function CustomAppleLoginButton() {
             },
         ])
     }
+    const signIn = async () => {};
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={signIn}>
