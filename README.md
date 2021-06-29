@@ -9,12 +9,14 @@
 <a href="">
     <img
         src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/google.png?raw=true"
+        style="max-width:100%;"
     />
 </a>
 
 <a href="">
     <img
-        src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/apple.png?raw=true"
+        src="https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/raw/main/assets/downloadButtons/apple.png?raw=true"
+        style="max-width:30%;"
     />
 </a>
 
