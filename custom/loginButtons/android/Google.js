@@ -1,9 +1,37 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+    StyleSheet,
+    TouchableOpacity,
+    View,
+    Alert,
+    ActivityIndicator,
+} from "react-native";
 import { Image } from "react-native-elements";
+import { useAssets } from 'expo-asset';
 
 export default function CustomGoogleLoginButton() {
+    const [assets, error] = useAssets([
+        require("../../../assets/loginButtons/android/google.png")
+    ]);
     const signIn = async () => {};
+    if (!assets) {
+        return (
+            <ActivityIndicator
+                style={{
+                    width: 70,
+                    height: 70,
+                }}
+            />
+        )
+    }
+    if (error) {
+        Alert.alert("Error Occured", error.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ])
+    }
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={signIn}>
@@ -12,9 +40,7 @@ export default function CustomGoogleLoginButton() {
                         width: 70,
                         height: 70,
                     }}
-                    source={{
-                        uri: "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/loginButtons/android/google.png?raw=true"
-                    }}
+                    source={require("../../../assets/loginButtons/android/google.png")}
                 />
             </TouchableOpacity>
         </View>
