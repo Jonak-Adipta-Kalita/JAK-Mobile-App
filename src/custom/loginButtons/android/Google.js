@@ -11,7 +11,7 @@ import { useAssets } from 'expo-asset';
 
 export default function CustomGoogleLoginButton() {
     const [assets, error] = useAssets([
-        require("../../../assets/loginButtons/android/google.png")
+        require("../../../../assets/loginButtons/android/google.png")
     ]);
     if (!assets) {
         return (
@@ -40,7 +40,7 @@ export default function CustomGoogleLoginButton() {
                         width: 70,
                         height: 70,
                     }}
-                    source={require("../../../assets/loginButtons/android/google.png")}
+                    source={require("../../../../assets/loginButtons/android/google.png")}
                 />
             </TouchableOpacity>
         </View>

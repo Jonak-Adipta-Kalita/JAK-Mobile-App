@@ -10,3 +10,7 @@ android/
 ios/
 build
 public
+!src/custom/loginButtons/android
+!src/custom/loginButtons/ios
+!assets/loginButtons/android
+!assets/loginButtons/ios

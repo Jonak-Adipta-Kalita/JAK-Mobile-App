@@ -9,17 +9,22 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
-import { auth, db } from "../../../firebase_app";
+import { db } from "../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
-export default function ChangePhoneNumberScreen({ navigation }) {
-    const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
-        auth?.currentUser?.phoneNumber
-    );
+export default function ContactScreen({ navigation }) {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const changePhoneNumber = () => {
-        if (phoneNumber === "") {
+    const [message, setMessage] = useState("");
+    const submitRequestToContact = () => {
+        if (
+            name === "" ||
+            email === "" ||
+            phoneNumber === "" ||
+            message === ""
+        ) {
             Alert.alert(
                 "Value not Filled!!",
                 "Please Enter all the Values in the Form!!",
@@ -30,35 +35,35 @@ export default function ChangePhoneNumberScreen({ navigation }) {
                     },
                 ]
             );
-        } else if (phoneNumber === previousPhoneNumber) {
-            Alert.alert(
-                "Value same as Previous!!",
-                "Its the same Phone Number as your Previous!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
-            );
         } else {
-            //TODO: Change or Set Phone Number
-            db.collection("privateNotifications")
+            db.collection("requestToContact")
                 .add({
-                    title: "Phone Number Changed Successfully!!",
-                    message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    user: auth?.currentUser?.email,
+                    name: name,
+                    email: email,
+                    phoneNumber: phoneNumber,
+                    message: message,
                 })
                 .then(() => {
+                    db.collection("privateNotifications").add({
+                        title: "Request to Contact Sent!!",
+                        message:
+                            "Your Request to Contact has been Successfully Sent!!",
+                        timestamp:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                        user: email,
+                    });
+                })
+                .then(() => {
+                    setName("");
+                    setEmail("");
                     setPhoneNumber("");
-                    setPreviousPhoneNumber(phoneNumber);
+                    setMessage("");
                     navigation.jumpTo("Home");
                 })
                 .then(() => {
                     Alert.alert(
-                        "Phone Number Changed Successfully!!",
-                        "Your Phone Number is Successfully Changed!!",
+                        "Request Sent!!",
+                        "Your Request to Contact is Sent Successfully!!",
                         [
                             {
                                 text: "OK",
@@ -68,7 +73,7 @@ export default function ChangePhoneNumberScreen({ navigation }) {
                     );
                 })
                 .catch((error) => {
-                    Alert.alert("Error Occured!!", error.message, [
+                    Alert.alert("Error Occurred!!", error.message, [
                         {
                             text: "OK",
                             onPress: () => {},
@@ -79,18 +84,11 @@ export default function ChangePhoneNumberScreen({ navigation }) {
     };
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: `${
-                auth?.currentUser.phoneNumber
-                    ? "Change your Phone Number!!"
-                    : "Set your Phone Number!!"
-            }`,
+            title: "Contact Me!!",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
-                        style={{
-                            alignItems: "flex-start",
-                            margin: 20,
-                        }}
+                        style={{ alignItems: "flex-start", margin: 20 }}
                         onPress={navigation.goBack}
                     >
                         <AntDesign name="arrowleft" size={24} />
@@ -104,24 +102,45 @@ export default function ChangePhoneNumberScreen({ navigation }) {
             <StatusBar style="auto" />
             <View style={styles.inputContainer}>
                 <Input
-                    placeholder="Phone Number (Use Country Code)"
+                    placeholder="Name"
                     autoFocus
                     type="text"
+                    style={styles.inputBar}
+                    value={name}
+                    onChangeText={(text) => setName(text)}
+                />
+                <Input
+                    placeholder="Email"
+                    type="email"
+                    style={styles.inputBar}
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
+                />
+                <Input
+                    placeholder="Phone Number (with Country Code)"
+                    type="phone"
                     style={styles.inputBar}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
                 />
+                <Input
+                    placeholder="Why do you want to Contact Me?"
+                    type="text"
+                    style={styles.inputBar}
+                    value={message}
+                    onChangeText={(text) => setMessage(text)}
+                />
             </View>
             <Button
                 style={styles.button}
-                title="Upgrade"
-                onPress={changePhoneNumber}
+                title="Submit"
+                onPress={submitRequestToContact}
             />
         </View>
     );
 }
 
-ChangePhoneNumberScreen.propTypes = {
+ContactScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
 

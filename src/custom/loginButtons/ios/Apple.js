@@ -11,7 +11,7 @@ import { useAssets } from 'expo-asset';
 
 export default function CustomAppleLoginButton() {
     const [assets, error] = useAssets([
-        require("../../../assets/loginButtons/ios/apple.png")
+        require("../../../../assets/loginButtons/ios/apple.png")
     ]);
     if (!assets) {
         return (
@@ -40,7 +40,7 @@ export default function CustomAppleLoginButton() {
                         width: 70,
                         height: 70,
                     }}
-                    source={require("../../../assets/loginButtons/ios/apple.png")}
+                    source={require("../../../../assets/loginButtons/ios/apple.png")}
                 />
             </TouchableOpacity>
         </View>

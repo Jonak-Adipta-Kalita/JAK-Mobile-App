@@ -9,7 +9,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
-import { auth, db } from "../../firebase_app";
+import { auth, db } from "../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 

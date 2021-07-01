@@ -12,6 +12,10 @@ android/
 ios/
 build
 .env
+!src/custom/loginButtons/android
+!src/custom/loginButtons/ios
+!assets/loginButtons/android
+!assets/loginButtons/ios
 
 # macOS
 .DS_Store

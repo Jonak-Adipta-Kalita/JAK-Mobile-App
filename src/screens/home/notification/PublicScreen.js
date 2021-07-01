@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import { db } from "../../../firebase_app";
-import { auth } from "../../../firebase_app";
+import { db } from "../../../firebase";
 import PropTypes from "prop-types";
 import Notification from "../../../components/Notification";
 
-export default function PrivateScreen({ navigation }) {
+export default function PublicScreen({ navigation }) {
     const [notifications, setNotifications] = useState();
     useEffect(() => {
-        db.collection("privateNotifications")
+        db.collection("publicNotifications")
             .orderBy("timestamp", "desc")
             .onSnapshot((snapshot) => {
                 setNotifications(
@@ -21,33 +20,30 @@ export default function PrivateScreen({ navigation }) {
     }, []);
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Private!!",
+            title: "Public!!",
         });
     }, [navigation]);
     return (
         <View style={styles.container}>
             <ScrollView>
                 {notifications?.map(({ id, data }) => {
-                    const { title, message, timestamp, user } = data;
-                    if (user === auth.currentUser.email) {
-                        return (
-                            <Notification
-                                key={id}
-                                id={id}
-                                title={title}
-                                message={message}
-                                timestamp={timestamp}
-                                user={user}
-                            />
-                        );
-                    }
+                    const { title, message, timestamp } = data;
+                    return (
+                        <Notification
+                            key={id}
+                            id={id}
+                            title={title}
+                            message={message}
+                            timestamp={timestamp}
+                        />
+                    );
                 })}
             </ScrollView>
         </View>
     );
 }
 
-PrivateScreen.propTypes = {
+PublicScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
 

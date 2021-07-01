@@ -1,7 +1,7 @@
 import React from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import DrawerNavigator from "./navigation/DrawerNavigator";
+import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import { Platform, InteractionManager } from "react-native";
 
 const _setTimeout = global.setTimeout;

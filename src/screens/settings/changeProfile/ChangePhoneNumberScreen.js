@@ -9,15 +9,17 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
-import { db, auth } from "../../../firebase_app";
+import { auth, db } from "../../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
-export default function ChangeEmailScreen({ navigation }) {
-    const [previousEmail, setPreviousEmail] = useState(auth.currentUser.email);
-    const [email, setEmail] = useState("");
-    const changeEmail = () => {
-        if (email === "") {
+export default function ChangePhoneNumberScreen({ navigation }) {
+    const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
+        auth?.currentUser?.phoneNumber
+    );
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const changePhoneNumber = () => {
+        if (phoneNumber === "") {
             Alert.alert(
                 "Value not Filled!!",
                 "Please Enter all the Values in the Form!!",
@@ -28,10 +30,10 @@ export default function ChangeEmailScreen({ navigation }) {
                     },
                 ]
             );
-        } else if (email === previousEmail) {
+        } else if (phoneNumber === previousPhoneNumber) {
             Alert.alert(
                 "Value same as Previous!!",
-                "Its the same Email Address as your Previous!!",
+                "Its the same Phone Number as your Previous!!",
                 [
                     {
                         text: "OK",
@@ -40,26 +42,23 @@ export default function ChangeEmailScreen({ navigation }) {
                 ]
             );
         } else {
-            auth.currentUser
-                .updateEmail(email)
-                .then(() => {
-                    db.collection("privateNotifications").add({
-                        title: "Email Changed Successfully!!",
-                        message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                        user: auth?.currentUser?.email,
-                    });
+            //TODO: Change or Set Phone Number
+            db.collection("privateNotifications")
+                .add({
+                    title: "Phone Number Changed Successfully!!",
+                    message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    user: auth?.currentUser?.email,
                 })
                 .then(() => {
-                    setEmail("");
-                    setPreviousEmail(email);
+                    setPhoneNumber("");
+                    setPreviousPhoneNumber(phoneNumber);
                     navigation.jumpTo("Home");
                 })
                 .then(() => {
                     Alert.alert(
-                        "Email Changed Successfully!!",
-                        "Your Email is Successfully Changed!!",
+                        "Phone Number Changed Successfully!!",
+                        "Your Phone Number is Successfully Changed!!",
                         [
                             {
                                 text: "OK",
@@ -80,7 +79,11 @@ export default function ChangeEmailScreen({ navigation }) {
     };
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Change your Email!!",
+            title: `${
+                auth?.currentUser.phoneNumber
+                    ? "Change your Phone Number!!"
+                    : "Set your Phone Number!!"
+            }`,
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
@@ -101,24 +104,24 @@ export default function ChangeEmailScreen({ navigation }) {
             <StatusBar style="auto" />
             <View style={styles.inputContainer}>
                 <Input
-                    placeholder="Email"
+                    placeholder="Phone Number (Use Country Code)"
                     autoFocus
-                    type="email"
+                    type="text"
                     style={styles.inputBar}
-                    value={email}
-                    onChangeText={(text) => setEmail(text)}
+                    value={phoneNumber}
+                    onChangeText={(text) => setPhoneNumber(text)}
                 />
             </View>
             <Button
                 style={styles.button}
                 title="Upgrade"
-                onPress={changeEmail}
+                onPress={changePhoneNumber}
             />
         </View>
     );
 }
 
-ChangeEmailScreen.propTypes = {
+ChangePhoneNumberScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
 

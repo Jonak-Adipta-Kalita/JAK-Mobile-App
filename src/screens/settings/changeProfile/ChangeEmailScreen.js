@@ -9,17 +9,15 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
-import { db, auth } from "../../../firebase_app";
+import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
-export default function ChangeNameScreen({ navigation }) {
-    const [previousName, setPreviousName] = useState(
-        auth?.currentUser?.displayName
-    );
-    const [name, setName] = useState("");
-    const changeName = () => {
-        if (name === "") {
+export default function ChangeEmailScreen({ navigation }) {
+    const [previousEmail, setPreviousEmail] = useState(auth.currentUser.email);
+    const [email, setEmail] = useState("");
+    const changeEmail = () => {
+        if (email === "") {
             Alert.alert(
                 "Value not Filled!!",
                 "Please Enter all the Values in the Form!!",
@@ -30,10 +28,10 @@ export default function ChangeNameScreen({ navigation }) {
                     },
                 ]
             );
-        } else if (name === previousName) {
+        } else if (email === previousEmail) {
             Alert.alert(
                 "Value same as Previous!!",
-                "Its the same Name as your Previous!!",
+                "Its the same Email Address as your Previous!!",
                 [
                     {
                         text: "OK",
@@ -43,27 +41,25 @@ export default function ChangeNameScreen({ navigation }) {
             );
         } else {
             auth.currentUser
-                .updateProfile({
-                    displayName: name,
-                })
+                .updateEmail(email)
                 .then(() => {
                     db.collection("privateNotifications").add({
-                        title: "Name Changed Successfully!!",
-                        message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
+                        title: "Email Changed Successfully!!",
+                        message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
                         timestamp:
                             firebase.firestore.FieldValue.serverTimestamp(),
                         user: auth?.currentUser?.email,
                     });
                 })
                 .then(() => {
-                    setName("");
-                    setPreviousName(name);
+                    setEmail("");
+                    setPreviousEmail(email);
                     navigation.jumpTo("Home");
                 })
                 .then(() => {
                     Alert.alert(
-                        "Name Changed Successfully!!",
-                        "Your Name is Successfully Changed!!",
+                        "Email Changed Successfully!!",
+                        "Your Email is Successfully Changed!!",
                         [
                             {
                                 text: "OK",
@@ -84,7 +80,7 @@ export default function ChangeNameScreen({ navigation }) {
     };
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Change your Name!!",
+            title: "Change your Email!!",
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
@@ -105,24 +101,24 @@ export default function ChangeNameScreen({ navigation }) {
             <StatusBar style="auto" />
             <View style={styles.inputContainer}>
                 <Input
-                    placeholder="Name"
+                    placeholder="Email"
                     autoFocus
-                    type="text"
+                    type="email"
                     style={styles.inputBar}
-                    value={name}
-                    onChangeText={(text) => setName(text)}
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
                 />
             </View>
             <Button
                 style={styles.button}
                 title="Upgrade"
-                onPress={changeName}
+                onPress={changeEmail}
             />
         </View>
     );
 }
 
-ChangeNameScreen.propTypes = {
+ChangeEmailScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
 
