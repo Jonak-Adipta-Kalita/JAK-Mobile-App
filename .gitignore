@@ -15,6 +15,8 @@ build
 .env
 !src/custom/loginButtons/android
 !src/custom/loginButtons/ios
+!__tests__/custom/loginButtons/android
+!__tests__/custom/loginButtons/ios
 !assets/loginButtons/android
 !assets/loginButtons/ios
 
