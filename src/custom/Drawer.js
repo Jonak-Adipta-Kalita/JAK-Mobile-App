@@ -22,6 +22,9 @@ export default function CustomDrawer({ progress, ...props }) {
     };
     return (
         <>
+            <Animated.View style={{ transform: [{ translateX }] }}>
+                {/* Header */}
+            </Animated.View>
             <DrawerContentScrollView
                 {...props}
                 contentContainerStyle={{ flex: 1 }}
@@ -43,31 +46,29 @@ export default function CustomDrawer({ progress, ...props }) {
                 </Animated.View>
             </DrawerContentScrollView>
             <Animated.View style={{ transform: [{ translateX }] }}>
+                <View
+                    style={{
+                        borderTopWidth: 2,
+                        borderTopColor: "#818181",
+                        marginTop: 10,
+                        marginBottom: 10,
+                    }}
+                />
                 <Text
                     style={{
                         color: "#818181",
-                        marginBottom: 8,
                         alignSelf: "center",
+                        marginBottom: 10,
                     }}
                 >
                     Style
                 </Text>
-                <View
-                    style={{
-                        alignSelf: "center",
-                        borderTopWidth: 2,
-                        borderTopColor: "#818181",
-                    }}
-                >
+                <View style={{ alignSelf: "center" }}>
                     <View
                         style={{
-                            marginTop: 8,
-                            marginBottom: 8,
                             display: "flex",
                             flexDirection: "row",
-                            padding: 30,
-                            paddingTop: 0,
-                            paddingBottom: 0,
+                            marginBottom: 10,
                         }}
                     >
                         <Text style={{ color: "#818181" }}>Dark Theme</Text>
