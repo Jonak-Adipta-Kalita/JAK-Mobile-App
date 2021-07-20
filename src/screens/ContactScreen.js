@@ -36,7 +36,7 @@ export default function ContactScreen({ navigation }) {
                 ]
             );
         } else if (email !== auth.currentUser.email) {
-			Alert.alert(
+            Alert.alert(
                 "Email not Correct!!",
                 "Please Enter your Email Correctly!!",
                 [
@@ -46,7 +46,7 @@ export default function ContactScreen({ navigation }) {
                     },
                 ]
             );
-		} else {
+        } else {
             db.collection("requestToContact")
                 .add({
                     name: name,
