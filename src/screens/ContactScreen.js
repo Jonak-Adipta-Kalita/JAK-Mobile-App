@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
-import { db } from "../firebase";
+import { db, auth } from "../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
@@ -35,7 +35,18 @@ export default function ContactScreen({ navigation }) {
                     },
                 ]
             );
-        } else {
+        } else if (email !== auth.currentUser.email) {
+			Alert.alert(
+                "Email not Correct!!",
+                "Please Enter your Email Correctly!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
+		} else {
             db.collection("requestToContact")
                 .add({
                     name: name,
