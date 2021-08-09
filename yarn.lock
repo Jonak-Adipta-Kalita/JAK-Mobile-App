@@ -1423,25 +1423,6 @@
     xcode "^3.0.1"
     xml2js "^0.4.23"
 
-"@expo/config-plugins@^3.0.0":
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-3.0.6.tgz#1ba148de2c971cc08c989281f18274d45bf0e5bc"
-  integrity sha512-hJfxEWfsWuqt4WG3X2F74+tL1JrXZomRBgShKLTMw1vvLe4md70rjTLbmaHkcGb+TfY3RtFZSK8p9oqFXCi8KA==
-  dependencies:
-    "@expo/config-types" "^42.0.0"
-    "@expo/json-file" "8.2.32"
-    "@expo/plist" "0.0.13"
-    debug "^4.3.1"
-    find-up "~5.0.0"
-    fs-extra "9.0.0"
-    getenv "^1.0.0"
-    glob "7.1.6"
-    resolve-from "^5.0.0"
-    semver "^7.3.5"
-    slash "^3.0.0"
-    xcode "^3.0.1"
-    xml2js "^0.4.23"
-
 "@expo/config-types@^40.0.0-beta.2":
   version "40.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@expo/config-types/-/config-types-40.0.0-beta.2.tgz#4fea4ef5654d02218b02b0b3772529a9ce5b0471"
@@ -1527,15 +1508,6 @@
   dependencies:
     "@babel/code-frame" "~7.10.4"
     fs-extra "9.0.0"
-    json5 "^1.0.1"
-    write-file-atomic "^2.3.0"
-
-"@expo/json-file@8.2.32":
-  version "8.2.32"
-  resolved "https://registry.yarnpkg.com/@expo/json-file/-/json-file-8.2.32.tgz#612e83433559637a3b853b170ae6d86cccb98064"
-  integrity sha512-VnpoEnjMptBQr/zgkfGHd7L8iJBme9g2AVpUIecI+aoW6qmeIRbBViPmyNABgH4UUQn3ObQCxe+q1dAdJo8KGg==
-  dependencies:
-    "@babel/code-frame" "~7.10.4"
     json5 "^1.0.1"
     write-file-atomic "^2.3.0"
 
@@ -5340,14 +5312,14 @@ expo-font@~9.1.0:
   dependencies:
     fontfaceobserver "^2.1.0"
 
-expo-image-picker@~10.2.2:
-  version "10.2.2"
-  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-10.2.2.tgz#7501a13306029f672a165f53545ee5dc5f5dc009"
-  integrity sha512-LCssY/wy4Y/7YsxoUO7PvjqwtQ9L84hxP86RLPnRSUSZy7s+00wnHFctrrtQ0UO4yR2i7rKTMTpkBEP6NVHv2w==
+expo-image-picker@~10.1.4:
+  version "10.1.4"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-10.1.4.tgz#5805ea365385298cd59315790481a0a8d6c6a9ef"
+  integrity sha512-4U16RteJNWP5mC198fOIK/BgI3ZXRjqwslFK/gUrKiK5QKECXdvPCHrPwbXlo1DRQNhoPvWd+Cnhod0RsDnMkQ==
   dependencies:
-    "@expo/config-plugins" "^3.0.0"
-    expo-modules-core "~0.2.0"
-    expo-permissions "~12.1.1"
+    "@expo/config-plugins" "^1.0.18"
+    expo-permissions "~12.0.1"
+    unimodules-permissions-interface "~6.1.0"
     uuid "7.0.2"
 
 expo-keep-awake@~9.1.2:
@@ -5355,17 +5327,10 @@ expo-keep-awake@~9.1.2:
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-9.1.2.tgz#b3e52c7bef0ade975ae88637a2bf980f6b573368"
   integrity sha512-CCuEOQUNLYtMA0rt0sQ9u5LlIMH7lDJG7dImoorfKMsP95yHXy8dl3oCdtaz2zbsPgggVYeom9gE+gQu+Ki4rQ==
 
-expo-modules-core@~0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/expo-modules-core/-/expo-modules-core-0.2.0.tgz#68e5b6e53d0afbf8d131578831aed657589a2d42"
-  integrity sha512-inpfZ5X/BaTtbj2wG9PA9AC0MN8VyId6KSRlVuEg7+ziurHBy/kKDFxpOddUokhwiln2uhoYPSStJjR/tKypdw==
-
-expo-permissions@~12.1.1:
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-12.1.1.tgz#93fd8569d4106ff9dd66d67619cb69a0aa895482"
-  integrity sha512-fHBB4A/aWMcvdmDY79gpgQt0ufKG8F1gwTgO3+RjjudVe5kovNy5TeXdHrCa0MksFVKjktqLjJrgiBITJXjg+g==
-  dependencies:
-    expo-modules-core "~0.2.0"
+expo-permissions@~12.0.1:
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-12.0.1.tgz#5163c00d991bf565bf987354611628c298ddd0c4"
+  integrity sha512-TtypNPPLG4SdVEKBlrArLLZIyhlhE+3B4dhz2HaY1Mve2rcvKE0C7z/e1WoUVU8+LgcdKoNGwg/wRVeCkxeEhg==
 
 expo-status-bar@~1.0.4:
   version "1.0.4"
@@ -10060,10 +10025,10 @@ react-native-iphone-x-helper@^1.3.0, react-native-iphone-x-helper@^1.3.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
 
-react-native-pager-view@5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.2.1.tgz#ad69a6035edd998771daf302830f73602e5204a9"
-  integrity sha512-6aqsVr6Z4MjYP57lMwNEurlOPah0Lw34L6x+/nI6SxY+wyqZI+uaEB7sWS5EIcgQ9cGKMo925LnVWd6Xilu33A==
+react-native-pager-view@5.0.12:
+  version "5.0.12"
+  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.0.12.tgz#5106735d944e7f876b006377ab6a18859bf7730c"
+  integrity sha512-QmHUnQeP2qcxDofEOnKRmoUue0RaT55lhNJDfcQ1/SNuxif4Q2UyvDfqeItm1+toaE5tVnXqoreZh82FqUqnvw==
 
 react-native-paper@^4.9.1:
   version "4.9.1"
@@ -10097,12 +10062,10 @@ react-native-safe-area-context@3.2.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.2.0.tgz#06113c6b208f982d68ab5c3cebd199ca93db6941"
   integrity sha512-k2Nty4PwSnrg9HwrYeeE+EYqViYJoOFwEy9LxL5RIRfoqxAq/uQXNGwpUg2/u4gnKpBbEPa9eRh15KKMe/VHkA==
 
-react-native-screens@~3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.4.0.tgz#91deeac7630db9f3984053e2ab146d71bba7af4e"
-  integrity sha512-cg+q9MRnVdeOcJyvJtqffoXLur/C2wHA/7IO2+FAipzTlgHbbM1mTuSM7qG+SeiQjoIs4mHOEf7A0ziPKW04sA==
-  dependencies:
-    warn-once "^0.1.0"
+react-native-screens@~3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.0.0.tgz#ee4c2d69abf7411603868b57214feec5e8f637fa"
+  integrity sha512-35II5oxTaVp3OP8y0eLPOPpQkxG4fRKQ+dL1YSE1we5kCZFOU0l/Rn0T79HbyUu1LPwUZr6lZupPs0ULnRyMuQ==
 
 react-native-size-matters@^0.3.1:
   version "0.3.1"
@@ -11794,6 +11757,11 @@ unicode-property-aliases-ecmascript@^1.0.4:
   resolved "https://registry.yarnpkg.com/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.1.0.tgz#dd57a99f6207bedff4628abefb94c50db941c8f4"
   integrity sha512-PqSoPh/pWetQ2phoj5RLiaqIk4kCNwoV3CI+LfGmWLKI3rE3kl1h59XpX2BjgDrmbxD9ARtQobPGU1SguCYuQg==
 
+unimodules-permissions-interface@~6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/unimodules-permissions-interface/-/unimodules-permissions-interface-6.1.0.tgz#fd5589945e3b8fc9d2c80c52521853caea85a9ca"
+  integrity sha512-jeJx/y+Vn/Cp1/4su5XJ06UBul83MpXkYEqIOAb2jwaikhmj6tNwko7HpKy9OhfGfrhddCzwtedlro8xxZUk9A==
+
 union-value@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.1.tgz#0b6fe7b835aecda61c6ea4d4f02c14221e109847"
@@ -12068,11 +12036,6 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
-
-warn-once@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/warn-once/-/warn-once-0.1.0.tgz#4f58d89b84f968d0389176aa99e0cf0f14ffd4c8"
-  integrity sha512-recZTSvuaH/On5ZU5ywq66y99lImWqzP93+AiUo9LUwG8gXHW+LJjhOd6REJHm7qb0niYqrEQJvbHSQfuJtTqA==
 
 wcwidth@^1.0.1:
   version "1.0.1"
