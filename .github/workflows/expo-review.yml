@@ -1,0 +1,24 @@
+name: review
+
+on: [pull_request]
+
+jobs:
+  publish:
+    name: Install and Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - uses: expo/expo-github-action@v6
+        with:
+          expo-version: 4.x
+          token: ${{ secrets.EXPO_TOKEN }}
+      - run: yarn install
+      - run: expo publish --release-channel=pr-${{ github.event.number }}
+      - uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+        with:
+          msg: App is ready for review, you can see it [here](https://expo.io/@xxjonakadiptaxx/use-expo?release-channel=pr-${{ github.event.number }}).
