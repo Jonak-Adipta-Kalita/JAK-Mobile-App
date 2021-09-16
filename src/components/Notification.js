@@ -5,7 +5,7 @@ import moment from "moment";
 import propTypes from "prop-types";
 import toCustomTitleCase from "../custom/toTitleCase";
 
-export default function Notification({ title, message, timestamp }) {
+const Notification = ({ title, message, timestamp }) => {
     return (
         <View style={styles.container}>
             <Card style={{ position: "relative" }}>
@@ -31,13 +31,15 @@ export default function Notification({ title, message, timestamp }) {
             </Card>
         </View>
     );
-}
+};
 
 Notification.propTypes = {
     title: propTypes.string.isRequired,
     message: propTypes.string.isRequired,
     timestamp: propTypes.object,
 };
+
+export default Notification;
 
 const styles = StyleSheet.create({
     container: {

@@ -16,7 +16,7 @@ import firebase from "firebase";
 import * as ImagePicker from "expo-image-picker";
 import PropTypes from "prop-types";
 
-export default function SettingsScreen({ navigation }) {
+const SettingsScreen = ({ navigation }) => {
     const [avatar, setAvatar] = useState(null);
     const avatarImageExtension = "jpg";
     useEffect(() => {
@@ -266,11 +266,13 @@ export default function SettingsScreen({ navigation }) {
             </View>
         </View>
     );
-}
+};
 
 SettingsScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default SettingsScreen;
 
 const styles = StyleSheet.create({
     container: {

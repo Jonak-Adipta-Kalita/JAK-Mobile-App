@@ -13,7 +13,7 @@ import { db, auth } from "../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
-export default function ContactScreen({ navigation }) {
+const ContactScreen = ({ navigation }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -149,11 +149,13 @@ export default function ContactScreen({ navigation }) {
             />
         </View>
     );
-}
+};
 
 ContactScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default ContactScreen;
 
 const styles = StyleSheet.create({
     container: {

@@ -16,7 +16,7 @@ import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 
-export default function HomeScreen({ navigation }) {
+const HomeScreen = ({ navigation }) => {
     const [user] = useAuthState(auth);
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -94,11 +94,13 @@ export default function HomeScreen({ navigation }) {
             </ScrollView>
         </View>
     );
-}
+};
 
 HomeScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
     container: {

@@ -4,7 +4,7 @@ import { db, auth } from "../../../firebase";
 import PropTypes from "prop-types";
 import Notification from "../../../components/Notification";
 
-export default function PrivateScreen({ navigation }) {
+const PrivateScreen = ({ navigation }) => {
     const [notifications, setNotifications] = useState();
     useEffect(() => {
         db.collection("privateNotifications")
@@ -44,11 +44,13 @@ export default function PrivateScreen({ navigation }) {
             </ScrollView>
         </View>
     );
-}
+};
 
 PrivateScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default PrivateScreen;
 
 const styles = StyleSheet.create({
     container: {},

@@ -9,7 +9,7 @@ import {
 import { Image } from "react-native-elements";
 import { useAssets } from 'expo-asset';
 
-export default function CustomGoogleLoginButton() {
+const CustomGoogleLoginButton = () => {
     const [assets, error] = useAssets([
         require("../../../../assets/loginButtons/android/google.png")
     ]);
@@ -46,6 +46,8 @@ export default function CustomGoogleLoginButton() {
         </View>
     );
 }
+
+export default CustomGoogleLoginButton
 
 const styles = StyleSheet.create({
     container: {},

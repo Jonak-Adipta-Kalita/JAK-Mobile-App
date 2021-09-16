@@ -17,7 +17,7 @@ import {
 
 const Drawer = createDrawerNavigator();
 
-export default function DrawerNavigator() {
+const DrawerNavigator = () => {
     const [user] = useAuthState(auth);
     const dimensions = useWindowDimensions();
     const isLargeScreen = dimensions.width >= 768;
@@ -97,9 +97,11 @@ export default function DrawerNavigator() {
             )}
         </Drawer.Navigator>
     );
-}
+};
 
 DrawerNavigator.propTypes = {
     color: PropTypes.string,
     size: PropTypes.number,
 };
+
+export default DrawerNavigator;

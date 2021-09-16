@@ -13,7 +13,7 @@ import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
-export default function ChangeNameScreen({ navigation }) {
+const ChangeNameScreen = ({ navigation }) => {
     const [previousName, setPreviousName] = useState(
         auth?.currentUser?.displayName
     );
@@ -120,11 +120,13 @@ export default function ChangeNameScreen({ navigation }) {
             />
         </View>
     );
-}
+};
 
 ChangeNameScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default ChangeNameScreen;
 
 const styles = StyleSheet.create({
     container: {

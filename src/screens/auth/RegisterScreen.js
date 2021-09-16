@@ -13,7 +13,7 @@ import { auth, db } from "../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
-export default function RegisterScreen({ navigation }) {
+const RegisterScreen = ({ navigation }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -116,11 +116,13 @@ export default function RegisterScreen({ navigation }) {
             />
         </View>
     );
-}
+};
 
 RegisterScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default RegisterScreen;
 
 const styles = StyleSheet.create({
     container: {

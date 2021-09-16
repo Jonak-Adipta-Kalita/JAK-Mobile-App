@@ -9,7 +9,7 @@ import {
 import { Image } from "react-native-elements";
 import { useAssets } from 'expo-asset';
 
-export default function CustomAppleLoginButton() {
+const CustomAppleLoginButton = () => {
     const [assets, error] = useAssets([
         require("../../../../assets/loginButtons/ios/apple.png")
     ]);
@@ -46,6 +46,8 @@ export default function CustomAppleLoginButton() {
         </View>
     );
 }
+
+export default CustomAppleLoginButton;
 
 const styles = StyleSheet.create({
     container: {},

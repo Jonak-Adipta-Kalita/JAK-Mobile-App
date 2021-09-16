@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 import CustomGoogleLoginButton from "../../custom/loginButtons/android/Google";
 import CustomAppleLoginButton from "../../custom/loginButtons/ios/Apple";
 
-export default function LoginScreen({ navigation }) {
+const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     useEffect(() => {
@@ -151,11 +151,13 @@ export default function LoginScreen({ navigation }) {
             )}
         </View>
     );
-}
+};
 
 LoginScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default LoginScreen;
 
 const styles = StyleSheet.create({
     container: {

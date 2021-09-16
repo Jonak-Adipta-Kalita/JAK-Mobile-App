@@ -4,7 +4,7 @@ import { db } from "../../../firebase";
 import PropTypes from "prop-types";
 import Notification from "../../../components/Notification";
 
-export default function PublicScreen({ navigation }) {
+const PublicScreen = ({ navigation }) => {
     const [notifications, setNotifications] = useState();
     useEffect(() => {
         db.collection("publicNotifications")
@@ -41,11 +41,13 @@ export default function PublicScreen({ navigation }) {
             </ScrollView>
         </View>
     );
-}
+};
 
 PublicScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default PublicScreen;
 
 const styles = StyleSheet.create({
     container: {},

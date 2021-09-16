@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { NotificationTopTab } from "../../../navigation/TopTabNavigator";
 import PropTypes from "prop-types";
 
-export default function NotificationScreen({ navigation }) {
+const NotificationScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Notifications!!",
@@ -29,11 +29,13 @@ export default function NotificationScreen({ navigation }) {
             </View>
         </View>
     );
-}
+};
 
 NotificationScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default NotificationScreen;
 
 const styles = StyleSheet.create({
     container: {

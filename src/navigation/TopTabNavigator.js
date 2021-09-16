@@ -5,13 +5,13 @@ import PrivateScreen from "../screens/home/notification/PrivateScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
-function NotificationTopTab() {
+const NotificationTopTab = () => {
     return (
         <Tab.Navigator>
             <Tab.Screen name="PublicNotifications" component={PublicScreen} />
             <Tab.Screen name="PrivateNotifications" component={PrivateScreen} />
         </Tab.Navigator>
     );
-}
+};
 
 export { NotificationTopTab };

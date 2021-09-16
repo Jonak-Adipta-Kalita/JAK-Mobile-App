@@ -13,7 +13,7 @@ import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
-export default function ChangeEmailScreen({ navigation }) {
+const ChangeEmailScreen = ({ navigation }) => {
     const [previousEmail, setPreviousEmail] = useState(auth.currentUser.email);
     const [email, setEmail] = useState("");
     const changeEmail = () => {
@@ -116,11 +116,13 @@ export default function ChangeEmailScreen({ navigation }) {
             />
         </View>
     );
-}
+};
 
 ChangeEmailScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default ChangeEmailScreen;
 
 const styles = StyleSheet.create({
     container: {

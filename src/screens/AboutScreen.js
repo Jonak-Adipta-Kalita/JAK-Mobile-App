@@ -12,7 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 import { Card } from "react-native-elements";
 
-export default function AboutScreen({ navigation }) {
+const AboutScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "About Me!!",
@@ -50,11 +50,13 @@ export default function AboutScreen({ navigation }) {
             </ScrollView>
         </View>
     );
-}
+};
 
 AboutScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default AboutScreen;
 
 const styles = StyleSheet.create({
     container: {

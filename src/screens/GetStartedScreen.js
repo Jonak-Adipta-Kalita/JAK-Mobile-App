@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 
-export default function GetStartedScreen({ navigation }) {
+const GetStartedScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Get Started!!",
@@ -18,11 +18,13 @@ export default function GetStartedScreen({ navigation }) {
             <StatusBar style="auto" />
         </View>
     );
-}
+};
 
 GetStartedScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default GetStartedScreen;
 
 const styles = StyleSheet.create({
     container: {},

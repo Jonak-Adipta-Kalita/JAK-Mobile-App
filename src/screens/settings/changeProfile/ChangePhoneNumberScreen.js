@@ -13,7 +13,7 @@ import { auth, db } from "../../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
-export default function ChangePhoneNumberScreen({ navigation }) {
+const ChangePhoneNumberScreen = ({ navigation }) => {
     const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
         auth?.currentUser?.phoneNumber
     );
@@ -119,11 +119,13 @@ export default function ChangePhoneNumberScreen({ navigation }) {
             />
         </View>
     );
-}
+};
 
 ChangePhoneNumberScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
 };
+
+export default ChangePhoneNumberScreen;
 
 const styles = StyleSheet.create({
     container: {

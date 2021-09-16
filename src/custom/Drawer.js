@@ -7,7 +7,7 @@ import {
 import Animated from "react-native-reanimated";
 import PropTypes from "prop-types";
 
-export default function CustomDrawer({ progress, ...props }) {
+const CustomDrawer = ({ progress, ...props }) => {
     const translateX = Animated.interpolateNode(progress, {
         inputRange: [0, 1],
         outputRange: [-100, 0],
@@ -92,11 +92,13 @@ export default function CustomDrawer({ progress, ...props }) {
             </Animated.View>
         </>
     );
-}
+};
 
 CustomDrawer.propTypes = {
     progress: PropTypes.object.isRequired,
 };
+
+export default CustomDrawer;
 
 const styles = StyleSheet.create({
     container: {},
