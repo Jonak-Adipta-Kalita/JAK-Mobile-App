@@ -69,9 +69,9 @@
     "devDependencies": {
         "@babel/core": "^7.12.10",
         "eslint": "^7.27.0",
-        "eslint-plugin-react": "^7.24.0",
+        "eslint-plugin-react": "^7.25.2",
         "firebase-tools": "^9.14.0",
-        "husky": "^6.0.0",
+        "husky": "^7.0.2",
         "jest-expo": "^41.0.0",
         "prettier": "^2.3.0"
     },
