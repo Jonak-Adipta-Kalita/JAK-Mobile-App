@@ -73,7 +73,7 @@
         "firebase-tools": "^9.18.0",
         "husky": "^7.0.2",
         "jest-expo": "^42.1.0",
-        "prettier": "^2.3.0"
+        "prettier": "^2.4.1"
     },
     "private": true
 }
