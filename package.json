@@ -46,7 +46,7 @@
         "expo-asset": "~8.3.3",
         "expo-image-picker": "~10.1.4",
         "expo-status-bar": "~1.0.4",
-        "firebase": "8.2.3",
+        "firebase": "9.0.2",
         "moment": "^2.29.1",
         "prop-types": "^15.7.2",
         "react": "16.13.1",
