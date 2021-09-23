@@ -40,7 +40,8 @@ const RegisterScreen = ({ navigation }) => {
             .then((authUser) => {
                 authUser.user.updateProfile({
                     displayName: name,
-                    photoURL: "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011",
+                    photoURL:
+                        "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011",
                 });
             })
             .then(() => {

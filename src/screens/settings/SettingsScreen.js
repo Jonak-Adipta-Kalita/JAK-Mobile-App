@@ -89,9 +89,7 @@ const SettingsScreen = ({ navigation }) => {
             <StatusBar style="auto" />
             <ScrollView>
                 <View style={{ marginTop: 30, alignItems: "center" }}>
-                    <TouchableOpacity
-                        activeOpacity={0.5}
-                    >
+                    <TouchableOpacity activeOpacity={0.5}>
                         <Avatar
                             rounded
                             size="large"

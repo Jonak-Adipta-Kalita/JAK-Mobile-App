@@ -37,7 +37,7 @@ const CustomDrawer = ({ progress, ...props }) => {
                     />
                 </Animated.View>
             </DrawerContentScrollView>
-			<Animated.View style={{ transform: [{ translateX }] }}>
+            <Animated.View style={{ transform: [{ translateX }] }}>
                 {/* Footer */}
             </Animated.View>
         </>
