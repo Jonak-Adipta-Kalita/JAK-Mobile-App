@@ -68,7 +68,7 @@
         "react-native-web": "~0.13.12"
     },
     "devDependencies": {
-        "@babel/core": "~7.9.0",
+        "@babel/core": "~7.15.5",
         "eslint": "^7.32.0",
         "eslint-plugin-react": "^7.26.0",
         "firebase-tools": "^9.18.0",
