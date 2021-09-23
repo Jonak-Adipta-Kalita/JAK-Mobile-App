@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, Switch } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import {
     DrawerContentScrollView,
     DrawerItemList,
@@ -12,14 +12,6 @@ const CustomDrawer = ({ progress, ...props }) => {
         inputRange: [0, 1],
         outputRange: [-100, 0],
     });
-    const [darkThemeEnabled, setDarkThemeEnabled] = useState(false);
-    const toggleTheme = () => {
-        if (darkThemeEnabled) {
-            //TODO: Enable Dark Theme
-        } else {
-            //TODO: Disable Dark Theme
-        }
-    };
     return (
         <>
             <Animated.View style={{ transform: [{ translateX }] }}>
@@ -45,50 +37,8 @@ const CustomDrawer = ({ progress, ...props }) => {
                     />
                 </Animated.View>
             </DrawerContentScrollView>
-            <Animated.View style={{ transform: [{ translateX }] }}>
-                <View
-                    style={{
-                        borderTopWidth: 2,
-                        borderTopColor: "#818181",
-                        marginTop: 10,
-                        marginBottom: 10,
-                    }}
-                />
-                <Text
-                    style={{
-                        color: "#818181",
-                        alignSelf: "center",
-                        marginBottom: 10,
-                    }}
-                >
-                    Style
-                </Text>
-                <View style={{ alignSelf: "center" }}>
-                    <View
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            marginBottom: 10,
-                        }}
-                    >
-                        <Text style={{ color: "#818181" }}>Dark Theme</Text>
-                        <View style={{ marginLeft: 70 }}>
-                            <Switch
-                                trackColor={{
-                                    false: "#767577",
-                                    true: "#2be317",
-                                }}
-                                thumbColor="#f4f3f4"
-                                ios_backgroundColor="#3e3e3e"
-                                onValueChange={() => {
-                                    setDarkThemeEnabled((enable) => !enable);
-                                }}
-                                onChange={toggleTheme}
-                                value={darkThemeEnabled}
-                            />
-                        </View>
-                    </View>
-                </View>
+			<Animated.View style={{ transform: [{ translateX }] }}>
+                {/* Footer */}
             </Animated.View>
         </>
     );

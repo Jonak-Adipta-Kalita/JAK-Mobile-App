@@ -17,7 +17,6 @@ const RegisterScreen = ({ navigation }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Register!!",
@@ -41,9 +40,7 @@ const RegisterScreen = ({ navigation }) => {
             .then((authUser) => {
                 authUser.user.updateProfile({
                     displayName: name,
-                    photoURL:
-                        imageUrl ||
-                        "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
+                    photoURL: "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011",
                 });
             })
             .then(() => {
@@ -98,14 +95,6 @@ const RegisterScreen = ({ navigation }) => {
                     type="password"
                     value={password}
                     onChangeText={(text) => setPassword(text)}
-                />
-
-                <Input
-                    placeholder="Profile Picture Url (optional)"
-                    type="text"
-                    value={imageUrl}
-                    onChangeText={(text) => setImageUrl(text)}
-                    onSubmitEditing={register}
                 />
             </View>
             <Button

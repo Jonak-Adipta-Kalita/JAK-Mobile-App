@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
     View,
@@ -6,109 +6,15 @@ import {
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
-    Platform,
     Alert,
 } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { auth, db, storage } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
-import * as ImagePicker from "expo-image-picker";
 import PropTypes from "prop-types";
 
 const SettingsScreen = ({ navigation }) => {
-    const [avatar, setAvatar] = useState(null);
-    const avatarImageExtension = "jpg";
-    useEffect(() => {
-        (async () => {
-            if (Platform.OS !== "web") {
-                const { status } =
-                    await ImagePicker.requestMediaLibraryPermissionsAsync();
-                let finalStatus = status;
-                if (finalStatus !== "granted") {
-                    Alert.alert(
-                        "Need Camera Roll Permission!!",
-                        "Give us Camera Roll Permission to Change Avatar!!",
-                        [
-                            {
-                                text: "OK",
-                                onPress: () => {},
-                            },
-                        ]
-                    );
-                    const { status } =
-                        await ImagePicker.requestMediaLibraryPermissionsAsync();
-                    finalStatus = status;
-                }
-                if (finalStatus !== "granted") return;
-            }
-        })();
-    }, []);
-    const selectAvatar = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-        if (!result.cancelled) {
-            setAvatar(result.uri);
-            uploadAvatar(avatar, "profile_image")
-                .then(() => {
-                    auth.onAuthStateChanged((user) => {
-                        storage
-                            .ref(
-                                `users/${user.uid}/profile_image.${avatarImageExtension}`
-                            )
-                            .getDownloadURL()
-                            .then((imgURL) => {
-                                auth.currentUser.updateProfile({
-                                    photoURL: imgURL,
-                                });
-                            });
-                    });
-                })
-                .then(() => {
-                    db.collection("privateNotifications").add({
-                        title: "Avatar Changed Successfully!!",
-                        message: "Your Avatar has been Successfully Changed!!",
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                        user: auth?.currentUser?.email,
-                    });
-                })
-                .then(() => {
-                    Alert.alert(
-                        "Avatar Changed Successfully!!",
-                        "Your Avatar is Successfully Changed!!",
-                        [
-                            {
-                                text: "OK",
-                                onPress: () => {},
-                            },
-                        ]
-                    );
-                })
-                .catch((error) =>
-                    Alert.alert("Error Occurred!!", error.message, [
-                        {
-                            text: "OK",
-                            onPress: () => {},
-                        },
-                    ])
-                );
-        }
-    };
-    const uploadAvatar = async (uri, imageName) => {
-        const response = await fetch(uri);
-        const blob = await response.blob();
-        var ref = storage
-            .ref()
-            .child(
-                `users/${auth.currentUser.uid}/${imageName}.${avatarImageExtension}`
-            );
-        return ref.put(blob);
-    };
     const signOut = () => {
         auth.signOut()
             .then(() =>
@@ -185,13 +91,12 @@ const SettingsScreen = ({ navigation }) => {
                 <View style={{ marginTop: 30, alignItems: "center" }}>
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        onPress={selectAvatar}
                     >
                         <Avatar
                             rounded
                             size="large"
                             source={{
-                                uri: avatar || auth?.currentUser?.photoURL,
+                                uri: auth?.currentUser?.photoURL,
                             }}
                         />
                     </TouchableOpacity>
