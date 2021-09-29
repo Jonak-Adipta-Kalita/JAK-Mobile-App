@@ -15,8 +15,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
-import CustomGoogleLoginButton from "../../custom/loginButtons/android/Google";
-import CustomAppleLoginButton from "../../custom/loginButtons/ios/Apple";
+import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
@@ -103,52 +102,30 @@ const LoginScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate("Register")}
             />
 
-            {Platform.OS === "android" && (
-                <View>
-                    <Text
-                        style={{
-                            marginTop: 10,
-                            marginBottom: 10,
-                            color: "#594d4c",
-                            alignSelf: "center",
-                            fontSize: 20,
-                        }}
-                    >
-                        Or
-                    </Text>
-                    <ScrollView
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                        }}
-                    >
-                        <CustomGoogleLoginButton />
-                    </ScrollView>
-                </View>
-            )}
-            {Platform.OS === "ios" && (
-                <View>
-                    <Text
-                        style={{
-                            marginTop: 10,
-                            marginBottom: 10,
-                            color: "#594d4c",
-                            alignSelf: "center",
-                            fontSize: 20,
-                        }}
-                    >
-                        Or
-                    </Text>
-                    <ScrollView
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                        }}
-                    >
-                        <CustomAppleLoginButton />
-                    </ScrollView>
-                </View>
-            )}
+            <View>
+                <Text
+                    style={{
+                        marginTop: 10,
+                        marginBottom: 10,
+                        color: "#594d4c",
+                        alignSelf: "center",
+                        fontSize: 20,
+                    }}
+                >
+                    Or
+                </Text>
+                <ScrollView
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                    }}
+                >
+                    {Platform.OS === "android" && (
+                        <LoginButton brand="google" />
+                    )}
+                    {Platform.OS === "ios" && <LoginButton brand="apple" />}
+                </ScrollView>
+            </View>
         </View>
     );
 };

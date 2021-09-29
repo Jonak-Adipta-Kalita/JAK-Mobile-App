@@ -12,7 +12,3 @@ ios/
 build/
 public/
 __tests__/
-!src/custom/loginButtons/android
-!src/custom/loginButtons/ios
-!assets/loginButtons/android
-!assets/loginButtons/ios
