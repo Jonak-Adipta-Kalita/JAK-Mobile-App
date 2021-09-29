@@ -146,24 +146,24 @@ const SettingsScreen = ({ navigation }) => {
                 </View>
             </ScrollView>
             <View
-                style={{
-                    alignSelf: "flex-start",
-                    paddingLeft: 20,
-                    position: "absolute",
-                    bottom: 20,
-                    flexDirection: "row",
-                }}
+                style={[
+                    styles.bottomButton,
+                    {
+                        alignSelf: "flex-start",
+                        paddingLeft: 20,
+                    },
+                ]}
             >
                 <Button onPress={signOut} title="Logout" />
             </View>
             <View
-                style={{
-                    alignSelf: "flex-end",
-                    paddingRight: 20,
-                    position: "absolute",
-                    bottom: 20,
-                    flexDirection: "row",
-                }}
+                style={[
+                    styles.bottomButton,
+                    {
+                        paddingRight: 20,
+                        alignSelf: "flex-end",
+                    },
+                ]}
             >
                 <Button onPress={deleteAccount} title="Delete Account" />
             </View>
@@ -182,5 +182,10 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         flex: 1,
         marginBottom: 10,
+    },
+    bottomButton: {
+        position: "absolute",
+        bottom: 20,
+        flexDirection: "row",
     },
 });

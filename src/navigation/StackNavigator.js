@@ -57,6 +57,7 @@ const HomeStack = () => {
             <Stack.Navigator
                 screenOptions={AllStackScreenOption}
                 initialRouteName="Home"
+                // initialRouteName="GetStarted"
             >
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen

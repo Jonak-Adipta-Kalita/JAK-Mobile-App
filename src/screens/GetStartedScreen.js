@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet } from "react-native";
+import { Button } from "react-native-elements";
 import PropTypes from "prop-types";
 
 const GetStartedScreen = ({ navigation }) => {
@@ -16,6 +17,10 @@ const GetStartedScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
+            <View style={styles.mainView}>
+                <View style={styles.imageContainer}></View>
+                <Button style={styles.button} title="Lets Goooo!!" />
+            </View>
         </View>
     );
 };
@@ -28,4 +33,7 @@ export default GetStartedScreen;
 
 const styles = StyleSheet.create({
     container: {},
+    mainView: {},
+    imageContainer: {},
+    buttonContainer: {},
 });
