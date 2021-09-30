@@ -18,8 +18,11 @@ const GetStartedScreen = ({ navigation }) => {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.mainView}>
-                <View style={styles.imageContainer}></View>
-                <Button style={styles.button} title="Lets Goooo!!" />
+                <Button
+                    containerStyle={styles.button}
+                    title="Lets Goooo!!"
+                    onPress={() => navigation.replace("Home")}
+                />
             </View>
         </View>
     );
@@ -33,7 +36,16 @@ export default GetStartedScreen;
 
 const styles = StyleSheet.create({
     container: {},
-    mainView: {},
-    imageContainer: {},
-    buttonContainer: {},
+    mainView: {
+        padding: 10,
+        paddingRight: 20,
+        paddingLeft: 20,
+    },
+    button: {
+        width: 170,
+        position: "absolute",
+        marginTop: 650,
+        alignSelf: "center",
+        borderRadius: 20,
+    },
 });
