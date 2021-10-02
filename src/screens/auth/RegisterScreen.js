@@ -17,6 +17,9 @@ const RegisterScreen = ({ navigation }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+	const [avatar] = useState(
+		"https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011"
+	);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Register!!",
@@ -40,8 +43,7 @@ const RegisterScreen = ({ navigation }) => {
             .then((authUser) => {
                 authUser.user.updateProfile({
                     displayName: name,
-                    photoURL:
-                        "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011",
+                    photoURL: avatar,
                 });
             })
             .then(() => {

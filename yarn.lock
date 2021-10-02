@@ -1195,20 +1195,6 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@dicebear/avatars@^4.9.1":
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/@dicebear/avatars/-/avatars-4.9.1.tgz#3606f8ba9c681389bca9e31cc6396458466aaf92"
-  integrity sha512-5g9BEFHAKXlUooYMzLjCqy3OYmBVi6h99iS5Z+65Yo4WQ9xMWg4FtdsWhUCsfH+/B/EfZd0pCWfxbfDbvbD37Q==
-  dependencies:
-    "@types/json-schema" "^7.0.7"
-    pure-color "^1.3.0"
-    svgson "^5.2.1"
-
-"@dicebear/big-ears@^4.9.1":
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/@dicebear/big-ears/-/big-ears-4.9.1.tgz#ead4f47c10d218b9dd6b491be053f437b78a53a2"
-  integrity sha512-B8Xxe71tHBw3Wh1SxKuyW7JtReI1v3LM0gktervzNfDpVs6K1bU/QvoroaISBiXCYW3BjLX2U3xw+0oC8CZLZw==
-
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
@@ -2398,11 +2384,6 @@
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
   integrity sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
-
-"@types/json-schema@^7.0.7":
-  version "7.0.9"
-  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
-  integrity sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==
 
 "@types/long@^4.0.0", "@types/long@^4.0.1":
   version "4.0.1"
@@ -4310,14 +4291,6 @@ deep-is@^0.1.3, deep-is@~0.1.3:
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
 
-deep-rename-keys@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/deep-rename-keys/-/deep-rename-keys-0.2.1.tgz#ede78537d7a66a2be61517e2af956d7f58a3f1d8"
-  integrity sha1-7eeFN9emaivmFRfir5Vtf1ij8dg=
-  dependencies:
-    kind-of "^3.0.2"
-    rename-keys "^1.1.2"
-
 deepmerge@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.3.0.tgz#d3c47fd6f3a93d517b14426b0628a17b0125f5f7"
@@ -4919,11 +4892,6 @@ event-target-shim@^5.0.0, event-target-shim@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
-
-eventemitter3@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-2.0.3.tgz#b5e1079b59fb5e1ba2771c0a993be060a58c99ba"
-  integrity sha1-teEHm1n7XhuidxwKmTvgYKWMmbo=
 
 eventemitter3@^3.0.0:
   version "3.1.2"
@@ -6703,7 +6671,7 @@ is-plain-obj@^2.1.0:
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
   integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
 
-is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
+is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
   integrity sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
@@ -8992,14 +8960,6 @@ object.values@^1.1.4:
     define-properties "^1.1.3"
     es-abstract "^1.18.2"
 
-omit-deep@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/omit-deep/-/omit-deep-0.3.0.tgz#21c8af3499bcadd29651a232cbcacbc52445ebec"
-  integrity sha1-IcivNJm8rdKWUaIyy8rLxSRF6+w=
-  dependencies:
-    is-plain-object "^2.0.1"
-    unset-value "^0.1.1"
-
 on-finished@^2.2.0, on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -9599,11 +9559,6 @@ pupa@^2.0.1, pupa@^2.1.1:
   dependencies:
     escape-goat "^2.0.0"
 
-pure-color@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/pure-color/-/pure-color-1.3.0.tgz#1fe064fb0ac851f0de61320a8bf796836422f33e"
-  integrity sha1-H+Bk+wrIUfDeYTIKi/eWg2Qi8z4=
-
 qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
@@ -10067,11 +10022,6 @@ remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
   integrity sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
-
-rename-keys@^1.1.2:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/rename-keys/-/rename-keys-1.2.0.tgz#be602fb0b750476b513ebe85ba4465d03254f0a3"
-  integrity sha512-U7XpAktpbSgHTRSNRrjKSrjYkZKuhUukfoBlXWXUExCAqhzh1TU3BDRAfJmarcl5voKS+pbKU9MvyLWKZ4UEEg==
 
 repeat-element@^1.1.2:
   version "1.1.4"
@@ -11019,15 +10969,6 @@ supports-hyperlinks@^2.0.0:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
 
-svgson@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/svgson/-/svgson-5.2.1.tgz#7481fb1af4a58be542a6bd2020c168c6b71381cb"
-  integrity sha512-nbM6QuyZiKzQ0Uo51VDta93YJAr96ikyT40PsgJRrzynOGsOlnmJ6zAK5hUFyE5gnxcg7yuOPUWbUlmV9K0+Dg==
-  dependencies:
-    deep-rename-keys "^0.2.1"
-    omit-deep "0.3.0"
-    xml-reader "2.4.3"
-
 symbol-tree@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
@@ -11512,14 +11453,6 @@ unpipe@1.0.0, unpipe@~1.0.0:
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
 
-unset-value@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/unset-value/-/unset-value-0.1.2.tgz#506810b867f27c2a5a6e9b04833631f6de58d310"
-  integrity sha1-UGgQuGfyfCpabpsEgzYx9t5Y0xA=
-  dependencies:
-    has-value "^0.3.1"
-    isobject "^3.0.0"
-
 unset-value@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unset-value/-/unset-value-1.0.0.tgz#8376873f7d2335179ffb1e6fc3a8ed0dfc8ab559"
@@ -11953,25 +11886,10 @@ xdg-basedir@^4.0.0:
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-4.0.0.tgz#4bc8d9984403696225ef83a1573cbbcb4e79db13"
   integrity sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==
 
-xml-lexer@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/xml-lexer/-/xml-lexer-0.2.2.tgz#518193a4aa334d58fc7d248b549079b89907e046"
-  integrity sha1-UYGTpKozTVj8fSSLVJB5uJkH4EY=
-  dependencies:
-    eventemitter3 "^2.0.0"
-
 xml-name-validator@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-3.0.0.tgz#6ae73e06de4d8c6e47f9fb181f78d648ad457c6a"
   integrity sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==
-
-xml-reader@2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/xml-reader/-/xml-reader-2.4.3.tgz#9f810caf7c425a5aafb848b1c45103c9e71d7530"
-  integrity sha1-n4EMr3xCWlqvuEixxFEDyecddTA=
-  dependencies:
-    eventemitter3 "^2.0.0"
-    xml-lexer "^0.2.2"
 
 xml2js@^0.4.23:
   version "0.4.23"
