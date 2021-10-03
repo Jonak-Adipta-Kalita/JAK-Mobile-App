@@ -11,13 +11,14 @@ import {
     Alert,
 } from "react-native";
 import { Button, Input } from "react-native-elements";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
+    const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     useEffect(() => {
@@ -81,14 +82,36 @@ const LoginScreen = ({ navigation }) => {
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />
-                <Input
-                    placeholder="Password"
-                    secureTextEntry
-                    type="password"
-                    value={password}
-                    onChangeText={(text) => setPassword(text)}
-                    onSubmitEditing={signInEmail}
-                />
+                <View style={styles.passwordContainer}>
+                    <Input
+                        placeholder="Password"
+                        secureTextEntry={!showPassword}
+                        type="password"
+                        value={password}
+                        onChangeText={(text) => setPassword(text)}
+                        onSubmitEditing={signInEmail}
+                    />
+                    <TouchableOpacity
+                        style={styles.showPasswordContainer}
+                        onPress={() => setShowPassword(!showPassword)}
+                    >
+                        {showPassword ? (
+                            <Feather
+                                name="eye"
+                                size={20}
+                                color="black"
+                                style={styles.showPasswordIcon}
+                            />
+                        ) : (
+                            <Feather
+                                name="eye-off"
+                                size={20}
+                                color="black"
+                                style={styles.showPasswordIcon}
+                            />
+                        )}
+                    </TouchableOpacity>
+                </View>
             </View>
             <Button
                 onPress={signInEmail}
@@ -147,6 +170,16 @@ const styles = StyleSheet.create({
         width: 300,
         marginTop: 10,
     },
+    passwordContainer: {
+        position: "relative",
+    },
+    showPasswordContainer: {
+        position: "absolute",
+        right: 15,
+        bottom: 35,
+        height: 24,
+        width: 24,
+    },
     button: {
         width: 200,
         marginTop: 10,
@@ -155,4 +188,5 @@ const styles = StyleSheet.create({
         width: 300,
         marginTop: 40,
     },
+    showPasswordIcon: {},
 });
