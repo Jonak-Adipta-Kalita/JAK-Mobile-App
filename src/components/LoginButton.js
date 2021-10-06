@@ -20,9 +20,6 @@ const LoginButton = ({ brand }) => {
     }
 
     const [assets, error] = useAssets([imageFile]);
-    if (!assets) {
-        return <ActivityIndicator style={styles.dimensions} />;
-    }
     if (error) {
         Alert.alert("Error Occured", error.message, [
             {
@@ -30,6 +27,9 @@ const LoginButton = ({ brand }) => {
                 onPress: () => {},
             },
         ]);
+    }
+    if (!assets) {
+        return <ActivityIndicator style={styles.dimensions} />;
     }
     const signIn = async () => {
         if (brand === "google") {

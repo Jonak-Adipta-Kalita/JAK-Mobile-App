@@ -12,8 +12,8 @@
 ![GitHub Watchers](https://img.shields.io/github/watchers/Jonak-Adipta-Kalita/JAK-Mobile-App?style=for-the-badge)
 ![Made by JAK](https://img.shields.io/badge/BeastNight%20TV-Made%20by%20JAK-blue?style=for-the-badge)
 
-[![Get it on Google Play](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/downloadButtons/google-play.png?raw=true, "Get it on Google Play")]()
-[![Download on the App Store](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/raw/main/assets/downloadButtons/app-store.png?raw=true, "Download on the App Store")]()
+[![Get it on Google Play](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/images/downloadButtons/google-play.png?raw=true, "Get it on Google Play")]()
+[![Download on the App Store](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/raw/main/assets/images/downloadButtons/app-store.png?raw=true, "Download on the App Store")]()
 
 </div>
 
