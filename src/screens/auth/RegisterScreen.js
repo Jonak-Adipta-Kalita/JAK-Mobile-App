@@ -5,7 +5,7 @@ import {
     SafeAreaView,
     TouchableOpacity,
     Alert,
-	Platform
+    Platform,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
