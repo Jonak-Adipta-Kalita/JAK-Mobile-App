@@ -5,6 +5,7 @@ import {
     SafeAreaView,
     TouchableOpacity,
     Alert,
+	Platform
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
@@ -209,7 +210,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         padding: 10,
-        backgroundColor: "white",
     },
     passwordContainer: {
         position: "relative",
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     showPasswordContainer: {
         position: "absolute",
         right: 15,
-        bottom: 35,
+        bottom: Platform.OS === "android" && Platform.OS === "ios" ? 35 : 17,
         height: 24,
         width: 24,
     },

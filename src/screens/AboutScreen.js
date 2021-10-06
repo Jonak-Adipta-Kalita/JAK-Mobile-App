@@ -40,11 +40,11 @@ const AboutScreen = ({ navigation }) => {
                         Kendriya Vidyalaya Mangaldoi, I am currently studying in
                         standard '8th'. I am a Coder and also a 'Home Game
                         Developer'. I code for fun but sometimes I also teach
-                        some of my colleagues some 'Python'. I love Python and
-                        JavaScript the most. I am a Youtuber too. I love to play
-                        Games such as NFS, COD, AC, Among Us, GTA, etc. I am a
-                        huge fan of Anime and watched 'Pokemon', 'One Piece',
-                        'Beyblade', 'DBG'.
+                        some of my colleagues some 'Python'. I love 'Python' and
+                        'JavaScript' the most. I am a Youtuber too. I love to
+                        play Games such as NFS, COD, AC, Among Us, GTA, etc. I
+                        am a huge fan of Anime and watched 'Pokemon', 'One
+                        Piece', 'Beyblade', 'DBG'.
                     </Text>
                 </Card>
             </ScrollView>

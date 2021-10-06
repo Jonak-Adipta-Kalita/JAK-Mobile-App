@@ -16,10 +16,18 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 
 const Stack = createStackNavigator();
 
-const AllStackScreenOption = {
+const StackScreenOption1 = {
     headerStyle: { backgroundColor: "#fff" },
     headerTitleStyle: { color: "black" },
     headerTintColor: "black",
+    headerBackTitle: "Back",
+    headerTitleAlign: "center",
+};
+
+const StackScreenOption2 = {
+    headerStyle: { backgroundColor: "#3f7de0" },
+    headerTitleStyle: { color: "white" },
+    headerTintColor: "white",
     headerBackTitle: "Back",
     headerTitleAlign: "center",
 };
@@ -41,7 +49,7 @@ const HomeStack = () => {
     } else if (isFirstLaunch === true) {
         return (
             <Stack.Navigator
-                screenOptions={AllStackScreenOption}
+                screenOptions={StackScreenOption1}
                 initialRouteName="GetStarted"
             >
                 <Stack.Screen name="GetStarted" component={GetStartedScreen} />
@@ -55,7 +63,7 @@ const HomeStack = () => {
     } else {
         return (
             <Stack.Navigator
-                screenOptions={AllStackScreenOption}
+                screenOptions={StackScreenOption1}
                 initialRouteName="Home"
             >
                 <Stack.Screen name="Home" component={HomeScreen} />
@@ -71,13 +79,7 @@ const HomeStack = () => {
 const AuthenticationStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={{
-                headerStyle: { backgroundColor: "#3f7de0" },
-                headerTitleStyle: { color: "white" },
-                headerTintColor: "white",
-                headerBackTitle: "Back",
-                headerTitleAlign: "center",
-            }}
+            screenOptions={StackScreenOption2}
             initialRouteName="Login"
         >
             <Stack.Screen name="Login" component={LoginScreen} />
@@ -89,7 +91,7 @@ const AuthenticationStack = () => {
 const AboutStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={AllStackScreenOption}
+            screenOptions={StackScreenOption1}
             initialRouteName="About"
         >
             <Stack.Screen name="About" component={AboutScreen} />
@@ -100,7 +102,7 @@ const AboutStack = () => {
 const SettingsStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={AllStackScreenOption}
+            screenOptions={StackScreenOption1}
             initialRouteName="Settings"
         >
             <Stack.Screen name="Settings" component={SettingsScreen} />
@@ -117,7 +119,7 @@ const SettingsStack = () => {
 const ContactStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={AllStackScreenOption}
+            screenOptions={StackScreenOption1}
             initialRouteName="Contact"
         >
             <Stack.Screen name="Contact" component={ContactScreen} />

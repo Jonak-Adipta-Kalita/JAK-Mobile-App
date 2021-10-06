@@ -1,8 +1,19 @@
 import React from "react";
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+    NavigationContainer,
+    DefaultTheme,
+    DarkTheme,
+} from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
-import { Platform, InteractionManager } from "react-native";
+import {
+    Platform,
+    InteractionManager,
+    Alert,
+    ActivityIndicator,
+    useColorScheme,
+} from "react-native";
+import { useFonts } from "expo-font";
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
@@ -48,8 +59,27 @@ if (Platform.OS === "android") {
 }
 
 const App = () => {
+    const scheme = useColorScheme();
+
+    const [loaded, error] = useFonts({
+        OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
+    });
+    if (error) {
+        Alert.alert("Error Occured", error.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+    if (!loaded) {
+        return <ActivityIndicator style={{ width: 70, height: 70 }} />;
+    }
+
     return (
-        <NavigationContainer>
+        <NavigationContainer
+            theme={scheme === "dark" ? DarkTheme : DefaultTheme}
+        >
             <DrawerNavigator />
         </NavigationContainer>
     );

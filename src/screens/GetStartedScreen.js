@@ -21,7 +21,7 @@ const GetStartedScreen = ({ navigation }) => {
                 <Button
                     containerStyle={styles.button}
                     title="Lets Goooo!!"
-                    onPress={() => navigation.replace("Home")}
+                    onPress={() => navigation.replace("Login")}
                 />
             </View>
         </View>

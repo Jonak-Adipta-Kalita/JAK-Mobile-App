@@ -125,30 +125,32 @@ const LoginScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate("Register")}
             />
 
-            <View>
-                <Text
-                    style={{
-                        marginTop: 10,
-                        marginBottom: 10,
-                        color: "#594d4c",
-                        alignSelf: "center",
-                        fontSize: 20,
-                    }}
-                >
-                    Or
-                </Text>
-                <ScrollView
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                    }}
-                >
-                    {Platform.OS === "android" && (
-                        <LoginButton brand="google" />
-                    )}
-                    {Platform.OS === "ios" && <LoginButton brand="apple" />}
-                </ScrollView>
-            </View>
+			{Platform.OS === "android" || Platform.OS === "ios" && (
+				<View>
+					<Text
+						style={{
+							marginTop: 10,
+							marginBottom: 10,
+							color: "#594d4c",
+							alignSelf: "center",
+							fontSize: 20,
+						}}
+					>
+						Or
+					</Text>
+					<ScrollView
+						style={{
+							display: "flex",
+							flexDirection: "row",
+						}}
+					>
+						{Platform.OS === "android" && (
+							<LoginButton brand="google" />
+						)}
+						{Platform.OS === "ios" && <LoginButton brand="apple" />}
+					</ScrollView>
+				</View>
+			)}
         </View>
     );
 };
@@ -164,7 +166,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         padding: 10,
-        backgroundColor: "white",
     },
     inputContainer: {
         width: 300,
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     showPasswordContainer: {
         position: "absolute",
         right: 15,
-        bottom: 35,
+        bottom: Platform.OS === "android" && Platform.OS === "ios" ? 35 : 17,
         height: 24,
         width: 24,
     },
