@@ -217,7 +217,8 @@ const styles = StyleSheet.create({
     showPasswordContainer: {
         position: "absolute",
         right: 15,
-        bottom: Platform.OS === "android" ? 35 : Platform.OS === "ios" ? 35 : 17,
+        bottom:
+            Platform.OS === "android" ? 35 : Platform.OS === "ios" ? 35 : 17,
         height: 24,
         width: 24,
     },
