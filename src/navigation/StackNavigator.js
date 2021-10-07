@@ -18,7 +18,7 @@ const Stack = createStackNavigator();
 
 const StackScreenOption1 = {
     headerStyle: { backgroundColor: "#fff" },
-    headerTitleStyle: { color: "black" },
+    headerTitleStyle: { color: "black", fontFamily: "OtomanopeeOne" },
     headerTintColor: "black",
     headerBackTitle: "Back",
     headerTitleAlign: "center",
@@ -26,7 +26,7 @@ const StackScreenOption1 = {
 
 const StackScreenOption2 = {
     headerStyle: { backgroundColor: "#3f7de0" },
-    headerTitleStyle: { color: "white" },
+    headerTitleStyle: { color: "white", fontFamily: "OtomanopeeOne" },
     headerTintColor: "white",
     headerBackTitle: "Back",
     headerTitleAlign: "center",

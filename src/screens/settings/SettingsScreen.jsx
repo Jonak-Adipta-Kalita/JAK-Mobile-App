@@ -12,6 +12,7 @@ import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
+import globalStyles from "../../globalStyles";
 import PropTypes from "prop-types";
 
 const SettingsScreen = ({ navigation }) => {
@@ -154,7 +155,11 @@ const SettingsScreen = ({ navigation }) => {
                     },
                 ]}
             >
-                <Button onPress={signOut} title="Logout" />
+                <Button
+                    containerStyle={globalStyles.button}
+                    onPress={signOut}
+                    title="Logout"
+                />
             </View>
             <View
                 style={[
@@ -165,7 +170,11 @@ const SettingsScreen = ({ navigation }) => {
                     },
                 ]}
             >
-                <Button onPress={deleteAccount} title="Delete Account" />
+                <Button
+                    containerStyle={globalStyles.button}
+                    onPress={deleteAccount}
+                    title="Delete Account"
+                />
             </View>
         </View>
     );

@@ -11,6 +11,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../firebase";
 import firebase from "firebase";
+import globalStyles from "../globalStyles";
 import PropTypes from "prop-types";
 
 const ContactScreen = ({ navigation }) => {
@@ -143,7 +144,7 @@ const ContactScreen = ({ navigation }) => {
                 />
             </View>
             <Button
-                style={styles.button}
+                containerStyle={[globalStyles.button, { marginTop: 10 }]}
                 title="Submit"
                 onPress={submitRequestToContact}
             />
@@ -166,9 +167,5 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: 350,
-    },
-    button: {
-        width: 200,
-        marginTop: 10,
     },
 });

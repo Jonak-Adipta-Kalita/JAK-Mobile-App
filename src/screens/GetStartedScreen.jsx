@@ -2,13 +2,17 @@ import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
+import globalStyles from "../globalStyles";
 import PropTypes from "prop-types";
 
 const GetStartedScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Get Started!!",
-            headerStyle: { backgroundColor: "#3f7de0" },
+            headerStyle: {
+                backgroundColor: "#3f7de0",
+                fontFamily: "OtomanopeeOne",
+            },
             headerTitleStyle: { color: "white" },
             headerTintColor: "white",
             headerTitleAlign: "center",
@@ -19,7 +23,7 @@ const GetStartedScreen = ({ navigation }) => {
             <StatusBar style="auto" />
             <View style={styles.mainView}>
                 <Button
-                    containerStyle={styles.button}
+                    containerStyle={[globalStyles.button, styles.button]}
                     title="Lets Goooo!!"
                     onPress={() => navigation.replace("Login")}
                 />
@@ -42,10 +46,8 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
     },
     button: {
-        width: 170,
         position: "absolute",
         marginTop: 650,
         alignSelf: "center",
-        borderRadius: 20,
     },
 });

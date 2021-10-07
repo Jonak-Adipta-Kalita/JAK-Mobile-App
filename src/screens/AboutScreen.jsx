@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import PropTypes from "prop-types";
+import globalStyles from "../globalStyles";
 import { Card } from "react-native-elements";
 
 const AboutScreen = ({ navigation }) => {
@@ -35,7 +36,7 @@ const AboutScreen = ({ navigation }) => {
                 <Card>
                     <Card.Title>So you want to know about Me?</Card.Title>
                     <Card.Divider />
-                    <Text style={styles.content}>
+                    <Text style={[globalStyles.font, styles.content]}>
                         My name is JONAK ADIPTA KALITA. I am a student in
                         Kendriya Vidyalaya Mangaldoi, I am currently studying in
                         standard '8th'. I am a Coder and also a 'Home Game
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     content: {
-        fontSize: 20,
+        fontSize: 16,
         color: "#594d4c",
     },
 });

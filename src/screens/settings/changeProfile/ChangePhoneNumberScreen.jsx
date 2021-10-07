@@ -11,6 +11,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { auth, db } from "../../../firebase";
 import firebase from "firebase";
+import globalStyles from "../../../globalStyles";
 import PropTypes from "prop-types";
 
 const ChangePhoneNumberScreen = ({ navigation }) => {
@@ -113,7 +114,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                 />
             </View>
             <Button
-                style={styles.button}
+                containerStyle={[globalStyles.button, styles.button]}
                 title="Upgrade"
                 onPress={changePhoneNumber}
             />

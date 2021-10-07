@@ -11,6 +11,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
 import firebase from "firebase";
+import globalStyles from "../../../globalStyles";
 import PropTypes from "prop-types";
 
 const ChangeNameScreen = ({ navigation }) => {
@@ -114,7 +115,7 @@ const ChangeNameScreen = ({ navigation }) => {
                 />
             </View>
             <Button
-                style={styles.button}
+                containerStyle={[globalStyles.button, styles.button]}
                 title="Upgrade"
                 onPress={changeName}
             />
@@ -139,7 +140,6 @@ const styles = StyleSheet.create({
         width: 350,
     },
     button: {
-        width: 200,
         marginTop: 10,
     },
 });
