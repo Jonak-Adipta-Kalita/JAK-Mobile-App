@@ -53,6 +53,36 @@ const LoginScreen = ({ navigation }) => {
                 ]);
             });
     };
+    const signInMethods = () => {
+        if (Platform.OS === "android" || Platform.OS === "ios") {
+            return (
+                <View>
+                    <Text
+                        style={{
+                            marginTop: 10,
+                            marginBottom: 10,
+                            color: "#594d4c",
+                            alignSelf: "center",
+                            fontSize: 20,
+                        }}
+                    >
+                        Or
+                    </Text>
+                    <ScrollView
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                        }}
+                    >
+                        {Platform.OS === "android" && (
+                            <LoginButton brand="google" />
+                        )}
+                        {Platform.OS === "ios" && <LoginButton brand="apple" />}
+                    </ScrollView>
+                </View>
+            );
+        }
+    };
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login!!",
@@ -125,35 +155,7 @@ const LoginScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate("Register")}
             />
 
-            {Platform.OS === "android" ||
-                (Platform.OS === "ios" && (
-                    <View>
-                        <Text
-                            style={{
-                                marginTop: 10,
-                                marginBottom: 10,
-                                color: "#594d4c",
-                                alignSelf: "center",
-                                fontSize: 20,
-                            }}
-                        >
-                            Or
-                        </Text>
-                        <ScrollView
-                            style={{
-                                display: "flex",
-                                flexDirection: "row",
-                            }}
-                        >
-                            {Platform.OS === "android" && (
-                                <LoginButton brand="google" />
-                            )}
-                            {Platform.OS === "ios" && (
-                                <LoginButton brand="apple" />
-                            )}
-                        </ScrollView>
-                    </View>
-                ))}
+            {signInMethods()}
         </View>
     );
 };

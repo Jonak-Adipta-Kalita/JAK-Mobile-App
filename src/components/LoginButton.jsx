@@ -29,7 +29,7 @@ const LoginButton = ({ brand }) => {
         ]);
     }
     if (!assets) {
-        return <ActivityIndicator style={styles.dimensions} />;
+        return <ActivityIndicator style={styles.dimensions} color="blue" />;
     }
     const signIn = async () => {
         if (brand === "google") {
