@@ -74,7 +74,7 @@ const App = () => {
     }
     if (!loaded) {
         return (
-            <ActivityIndicator size="large" style={{ width: 70, height: 70 }} />
+            <ActivityIndicator size="large" style={{ width: 70, height: 70 }} color="blue" />
         );
     }
 
