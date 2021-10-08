@@ -70,7 +70,7 @@
         "@babel/core": "~7.9.0",
         "eslint": "^7.32.0",
         "eslint-plugin-react": "^7.26.1",
-        "firebase-tools": "^9.19.0",
+        "firebase-tools": "^9.20.0",
         "husky": "^7.0.2",
         "jest-expo": "^42.0.0",
         "prettier": "^2.4.1"
