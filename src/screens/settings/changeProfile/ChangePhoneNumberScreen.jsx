@@ -16,7 +16,7 @@ import globalStyles from "../../../globalStyles";
 import PropTypes from "prop-types";
 
 const ChangePhoneNumberScreen = ({ navigation }) => {
-	const [user] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
         user?.phoneNumber
     );
@@ -47,8 +47,8 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
         } else {
             //TODO: Change or Set Phone Number
             db.collection("users")
-				.doc(user?.uid)
-				.collection("notifications")
+                .doc(user?.uid)
+                .collection("notifications")
                 .add({
                     title: "Phone Number Changed Successfully!!",
                     message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
@@ -111,7 +111,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                     placeholder="Phone Number (Use Country Code)"
                     autoFocus
                     type="text"
-                    style={styles.inputBar}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
                 />

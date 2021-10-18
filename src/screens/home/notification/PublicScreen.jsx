@@ -17,7 +17,7 @@ const PublicScreen = ({ navigation }) => {
                     }))
                 );
             });
-    }, []);
+    }, [db, user]);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Public!!",

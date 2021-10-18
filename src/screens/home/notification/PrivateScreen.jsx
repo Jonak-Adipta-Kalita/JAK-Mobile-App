@@ -6,12 +6,12 @@ import Notification from "../../../components/Notification";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const PrivateScreen = ({ navigation }) => {
-	const [user] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [notifications, setNotifications] = useState();
     useEffect(() => {
         db.collection("users")
-			.doc(user?.uid)
-			.collection("notifications")
+            .doc(user?.uid)
+            .collection("notifications")
             .orderBy("timestamp", "desc")
             .onSnapshot((snapshot) => {
                 setNotifications(
@@ -21,7 +21,7 @@ const PrivateScreen = ({ navigation }) => {
                     }))
                 );
             });
-    }, []);
+    }, [db, user]);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Private!!",
@@ -31,19 +31,17 @@ const PrivateScreen = ({ navigation }) => {
         <View style={styles.container}>
             <ScrollView>
                 {notifications?.map(({ id, data }) => {
-                    const { title, message, timestamp, user } = data;
-                    if (user === user?.email) {
-                        return (
-                            <Notification
-                                key={id}
-                                id={id}
-                                title={title}
-                                message={message}
-                                timestamp={timestamp}
-                                user={user}
-                            />
-                        );
-                    }
+                    const { title, message, timestamp } = data;
+                    return (
+                        <Notification
+                            key={id}
+                            id={id}
+                            title={title}
+                            message={message}
+                            timestamp={timestamp}
+                            user={user}
+                        />
+                    );
                 })}
             </ScrollView>
         </View>

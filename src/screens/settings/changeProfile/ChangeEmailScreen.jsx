@@ -16,7 +16,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 
 const ChangeEmailScreen = ({ navigation }) => {
-	const [user] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");
     const changeEmail = () => {
@@ -45,12 +45,15 @@ const ChangeEmailScreen = ({ navigation }) => {
         } else {
             user?.updateEmail(email)
                 .then(() => {
-                    db.collection("users").doc(user?.uid).collection("notifications").add({
-                        title: "Email Changed Successfully!!",
-                        message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                    });
+                    db.collection("users")
+                        .doc(user?.uid)
+                        .collection("notifications")
+                        .add({
+                            title: "Email Changed Successfully!!",
+                            message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
+                            timestamp:
+                                firebase.firestore.FieldValue.serverTimestamp(),
+                        });
                 })
                 .then(() => {
                     setEmail("");
@@ -105,7 +108,7 @@ const ChangeEmailScreen = ({ navigation }) => {
                     placeholder="Email"
                     autoFocus
                     type="email"
-                    style={styles.inputBar}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />

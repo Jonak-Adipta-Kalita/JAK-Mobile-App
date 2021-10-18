@@ -8,4 +8,7 @@ export default StyleSheet.create({
     font: {
         fontFamily: "OtomanopeeOne",
     },
+    inputBar: {
+        padding: 10,
+    },
 });

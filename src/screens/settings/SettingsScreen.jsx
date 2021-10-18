@@ -17,7 +17,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 
 const SettingsScreen = ({ navigation }) => {
-	const [user] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const signOut = () => {
         auth.signOut()
             .then(() =>
@@ -38,7 +38,7 @@ const SettingsScreen = ({ navigation }) => {
             );
     };
     const deleteAccount = () => {
-		user?.delete()
+        user?.delete()
             .then(() =>
                 db.collection("publicNotifications").add({
                     title: "Someone left us Forever!!",
@@ -121,9 +121,7 @@ const SettingsScreen = ({ navigation }) => {
                         <ListItem bottomDivider>
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
-                                <ListItem.Title>
-                                    {user?.email}
-                                </ListItem.Title>
+                                <ListItem.Title>{user?.email}</ListItem.Title>
                                 <ListItem.Subtitle>Email</ListItem.Subtitle>
                             </ListItem.Content>
                         </ListItem>

@@ -16,10 +16,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 
 const ChangeNameScreen = ({ navigation }) => {
-	const [user] = useAuthState(auth);
-    const [previousName, setPreviousName] = useState(
-        user?.displayName
-    );
+    const [user] = useAuthState(auth);
+    const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");
     const changeName = () => {
         if (name === "") {
@@ -46,15 +44,18 @@ const ChangeNameScreen = ({ navigation }) => {
             );
         } else {
             user?.updateProfile({
-                    displayName: name,
-                })
+                displayName: name,
+            })
                 .then(() => {
-                    db.collection("users").doc(user?.uid).collection("notifications").add({
-                        title: "Name Changed Successfully!!",
-                        message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                    });
+                    db.collection("users")
+                        .doc(user?.uid)
+                        .collection("notifications")
+                        .add({
+                            title: "Name Changed Successfully!!",
+                            message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
+                            timestamp:
+                                firebase.firestore.FieldValue.serverTimestamp(),
+                        });
                 })
                 .then(() => {
                     setName("");
@@ -109,7 +110,7 @@ const ChangeNameScreen = ({ navigation }) => {
                     placeholder="Name"
                     autoFocus
                     type="text"
-                    style={styles.inputBar}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={name}
                     onChangeText={(text) => setName(text)}
                 />

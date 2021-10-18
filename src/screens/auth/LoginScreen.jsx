@@ -11,8 +11,9 @@ import {
     Alert,
 } from "react-native";
 import { Button, Input } from "react-native-elements";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
+import globalStyles from "../../globalStyles";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 import LoginButton from "../../components/LoginButton";
@@ -29,21 +30,26 @@ const LoginScreen = ({ navigation }) => {
     }, []);
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
-			.then((authuser) => {
-				
-					db.collection("publicNotifications").add({
-						title: "Member came back to the Ligtning Family!!",
-						message: `${email} came back to the Ligtning Family!! Yippie!!`,
-						timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-					})
-				.then(() => {
-					db.collection("users").doc(authUser.uid).collection("notifications").add({
-						title: "Welcome Back!!",
-						message: `Welcome back ${email}. Nice to meet you again!!`,
-						timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-					});
-				})
-			})
+            .then((authuser) => {
+                db.collection("publicNotifications")
+                    .add({
+                        title: "Member came back to the Ligtning Family!!",
+                        message: `${email} came back to the Ligtning Family!! Yippie!!`,
+                        timestamp:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                    })
+                    .then(() => {
+                        db.collection("users")
+                            .doc(authUser.uid)
+                            .collection("notifications")
+                            .add({
+                                title: "Welcome Back!!",
+                                message: `Welcome back ${email}. Nice to meet you again!!`,
+                                timestamp:
+                                    firebase.firestore.FieldValue.serverTimestamp(),
+                            });
+                    });
+            })
             .catch((error) => {
                 Alert.alert("Error Occured!!", error.message, [
                     {
@@ -110,7 +116,11 @@ const LoginScreen = ({ navigation }) => {
                     autoFocus
                     type="email"
                     value={email}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     onChangeText={(text) => setEmail(text)}
+                    leftIcon={() => (
+                        <MaterialIcons name="email" size={24} color="black" />
+                    )}
                 />
                 <View style={styles.passwordContainer}>
                     <Input
@@ -118,7 +128,15 @@ const LoginScreen = ({ navigation }) => {
                         secureTextEntry={!showPassword}
                         type="password"
                         value={password}
+                        inputStyle={[globalStyles.inputBar, styles.inputBar]}
                         onChangeText={(text) => setPassword(text)}
+                        leftIcon={() => (
+                            <MaterialIcons
+                                name="lock"
+                                size={24}
+                                color="black"
+                            />
+                        )}
                         onSubmitEditing={signInEmail}
                     />
                     <TouchableOpacity

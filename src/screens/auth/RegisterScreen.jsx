@@ -9,8 +9,14 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import {
+    AntDesign,
+    Feather,
+    MaterialIcons,
+    FontAwesome5,
+} from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
+import globalStyles from "../../globalStyles";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
@@ -72,25 +78,30 @@ const RegisterScreen = ({ navigation }) => {
         } else {
             auth.createUserWithEmailAndPassword(email, password)
                 .then((authUser) => {
-                    authUser.user.updateProfile({
-                        displayName: name,
-                        photoURL: avatar,
-                    })
-					.then(() => {
-						db.collection("publicNotifications").add({
-							title: "New member in the Ligtning Family!!",
-							message: `${email} Joined the Ligtning Family!! Yippie!!`,
-							timestamp:
-								firebase.firestore.FieldValue.serverTimestamp(),
-						});
-					})
-					.then(() => {
-						db.collection("users").doc(authUser.uid).collection("notifications").add({
-							title: "Welcome!!",
-							message: `Welcome ${email}. Nice to meet!!`,
-							timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-						});
-					});
+                    authUser.user
+                        .updateProfile({
+                            displayName: name,
+                            photoURL: avatar,
+                        })
+                        .then(() => {
+                            db.collection("publicNotifications").add({
+                                title: "New member in the Ligtning Family!!",
+                                message: `${email} Joined the Ligtning Family!! Yippie!!`,
+                                timestamp:
+                                    firebase.firestore.FieldValue.serverTimestamp(),
+                            });
+                        })
+                        .then(() => {
+                            db.collection("users")
+                                .doc(authUser.uid)
+                                .collection("notifications")
+                                .add({
+                                    title: "Welcome!!",
+                                    message: `Welcome ${email}. Nice to meet!!`,
+                                    timestamp:
+                                        firebase.firestore.FieldValue.serverTimestamp(),
+                                });
+                        });
                 })
                 .catch((error) => {
                     Alert.alert("Error Occured!!", error.message, [
@@ -114,13 +125,21 @@ const RegisterScreen = ({ navigation }) => {
                     autofocus
                     type="text"
                     value={name}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     onChangeText={(text) => setName(text)}
+                    leftIcon={() => (
+                        <FontAwesome5 name="user-alt" size={24} color="black" />
+                    )}
                 />
 
                 <Input
                     placeholder="Email"
                     type="email"
                     value={email}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    leftIcon={() => (
+                        <MaterialIcons name="email" size={24} color="black" />
+                    )}
                     onChangeText={(text) => setEmail(text)}
                 />
 
@@ -130,7 +149,15 @@ const RegisterScreen = ({ navigation }) => {
                         secureTextEntry={!showPassword}
                         type="password"
                         value={password}
+                        inputStyle={[globalStyles.inputBar, styles.inputBar]}
                         onChangeText={(text) => setPassword(text)}
+                        leftIcon={() => (
+                            <MaterialIcons
+                                name="lock"
+                                size={24}
+                                color="black"
+                            />
+                        )}
                     />
 
                     <TouchableOpacity
@@ -161,7 +188,15 @@ const RegisterScreen = ({ navigation }) => {
                         secureTextEntry={!showPassword}
                         type="password"
                         value={confirmPassword}
+                        inputStyle={[globalStyles.inputBar, styles.inputBar]}
                         onChangeText={(text) => setConfirmPassword(text)}
+                        leftIcon={() => (
+                            <MaterialIcons
+                                name="lock"
+                                size={24}
+                                color="black"
+                            />
+                        )}
                     />
 
                     <TouchableOpacity
