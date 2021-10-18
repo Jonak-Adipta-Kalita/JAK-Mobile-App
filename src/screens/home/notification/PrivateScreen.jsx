@@ -3,11 +3,15 @@ import { View, ScrollView, StyleSheet } from "react-native";
 import { db, auth } from "../../../firebase";
 import PropTypes from "prop-types";
 import Notification from "../../../components/Notification";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const PrivateScreen = ({ navigation }) => {
+	const [user] = useAuthState(auth);
     const [notifications, setNotifications] = useState();
     useEffect(() => {
-        db.collection("privateNotifications")
+        db.collection("users")
+			.doc(user?.uid)
+			.collection("notifications")
             .orderBy("timestamp", "desc")
             .onSnapshot((snapshot) => {
                 setNotifications(
@@ -28,7 +32,7 @@ const PrivateScreen = ({ navigation }) => {
             <ScrollView>
                 {notifications?.map(({ id, data }) => {
                     const { title, message, timestamp, user } = data;
-                    if (user === auth.currentUser.email) {
+                    if (user === user?.email) {
                         return (
                             <Notification
                                 key={id}

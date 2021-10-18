@@ -11,12 +11,14 @@ import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { auth, db } from "../../../firebase";
 import firebase from "firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../../../globalStyles";
 import PropTypes from "prop-types";
 
 const ChangePhoneNumberScreen = ({ navigation }) => {
+	const [user] = useAuthState(auth);
     const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
-        auth?.currentUser?.phoneNumber
+        user?.phoneNumber
     );
     const [phoneNumber, setPhoneNumber] = useState("");
     const changePhoneNumber = () => {
@@ -44,12 +46,13 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
             );
         } else {
             //TODO: Change or Set Phone Number
-            db.collection("privateNotifications")
+            db.collection("users")
+				.doc(user?.uid)
+				.collection("notifications")
                 .add({
                     title: "Phone Number Changed Successfully!!",
                     message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    user: auth?.currentUser?.email,
                 })
                 .then(() => {
                     setPhoneNumber("");
@@ -81,7 +84,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: `${
-                auth?.currentUser.phoneNumber
+                user?.phoneNumber
                     ? "Change your Phone Number!!"
                     : "Set your Phone Number!!"
             }`,

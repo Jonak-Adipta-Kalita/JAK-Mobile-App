@@ -13,9 +13,11 @@ import { auth, db } from "../../firebase";
 import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
 import globalStyles from "../../globalStyles";
+import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 
 const SettingsScreen = ({ navigation }) => {
+	const [user] = useAuthState(auth);
     const signOut = () => {
         auth.signOut()
             .then(() =>
@@ -36,8 +38,7 @@ const SettingsScreen = ({ navigation }) => {
             );
     };
     const deleteAccount = () => {
-        auth?.currentUser
-            .delete()
+		user?.delete()
             .then(() =>
                 db.collection("publicNotifications").add({
                     title: "Someone left us Forever!!",
@@ -70,7 +71,7 @@ const SettingsScreen = ({ navigation }) => {
             ),
             headerRight: () => (
                 <SafeAreaView style={{ flex: 1 }}>
-                    {!auth?.currentUser?.emailVerified && (
+                    {!user?.emailVerified && (
                         <TouchableOpacity
                             style={{ alignItems: "flex-start", margin: 20 }}
                             onPress={verifyEmail}
@@ -95,7 +96,7 @@ const SettingsScreen = ({ navigation }) => {
                             rounded
                             size="large"
                             source={{
-                                uri: auth?.currentUser?.photoURL,
+                                uri: user?.photoURL,
                             }}
                         />
                     </TouchableOpacity>
@@ -108,7 +109,7 @@ const SettingsScreen = ({ navigation }) => {
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
-                                    {auth.currentUser.displayName}
+                                    {user?.displayName}
                                 </ListItem.Title>
                                 <ListItem.Subtitle>Name</ListItem.Subtitle>
                             </ListItem.Content>
@@ -121,7 +122,7 @@ const SettingsScreen = ({ navigation }) => {
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
-                                    {auth.currentUser.email}
+                                    {user?.email}
                                 </ListItem.Title>
                                 <ListItem.Subtitle>Email</ListItem.Subtitle>
                             </ListItem.Content>
@@ -134,8 +135,8 @@ const SettingsScreen = ({ navigation }) => {
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
-                                    {auth.currentUser.phoneNumber
-                                        ? auth.currentUser.phoneNumber
+                                    {user?.phoneNumber
+                                        ? user?.phoneNumber
                                         : "Provide your Phone Number!!"}
                                 </ListItem.Title>
                                 <ListItem.Subtitle>

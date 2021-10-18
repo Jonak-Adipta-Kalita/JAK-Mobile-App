@@ -12,11 +12,13 @@ import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import globalStyles from "../../../globalStyles";
+import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 
 const ChangeNameScreen = ({ navigation }) => {
+	const [user] = useAuthState(auth);
     const [previousName, setPreviousName] = useState(
-        auth?.currentUser?.displayName
+        user?.displayName
     );
     const [name, setName] = useState("");
     const changeName = () => {
@@ -43,17 +45,15 @@ const ChangeNameScreen = ({ navigation }) => {
                 ]
             );
         } else {
-            auth.currentUser
-                .updateProfile({
+            user?.updateProfile({
                     displayName: name,
                 })
                 .then(() => {
-                    db.collection("privateNotifications").add({
+                    db.collection("users").doc(user?.uid).collection("notifications").add({
                         title: "Name Changed Successfully!!",
                         message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
                         timestamp:
                             firebase.firestore.FieldValue.serverTimestamp(),
-                        user: auth?.currentUser?.email,
                     });
                 })
                 .then(() => {

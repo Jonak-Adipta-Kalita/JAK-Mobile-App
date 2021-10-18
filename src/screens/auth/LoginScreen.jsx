@@ -29,21 +29,21 @@ const LoginScreen = ({ navigation }) => {
     }, []);
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
-            .then(() => {
-                db.collection("publicNotifications").add({
-                    title: "Member came back to the Ligtning Family!!",
-                    message: `${email} came back to the Ligtning Family!! Yippie!!`,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                });
-            })
-            .then(() => {
-                db.collection("privateNotifications").add({
-                    title: "Welcome Back!!",
-                    message: `Welcome back ${email}. Nice to meet you again!!`,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    user: email,
-                });
-            })
+			.then((authuser) => {
+				
+					db.collection("publicNotifications").add({
+						title: "Member came back to the Ligtning Family!!",
+						message: `${email} came back to the Ligtning Family!! Yippie!!`,
+						timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+					})
+				.then(() => {
+					db.collection("users").doc(authUser.uid).collection("notifications").add({
+						title: "Welcome Back!!",
+						message: `Welcome back ${email}. Nice to meet you again!!`,
+						timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+					});
+				})
+			})
             .catch((error) => {
                 Alert.alert("Error Occured!!", error.message, [
                     {

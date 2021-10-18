@@ -75,24 +75,22 @@ const RegisterScreen = ({ navigation }) => {
                     authUser.user.updateProfile({
                         displayName: name,
                         photoURL: avatar,
-                    });
-                })
-                .then(() => {
-                    db.collection("publicNotifications").add({
-                        title: "New member in the Ligtning Family!!",
-                        message: `${email} Joined the Ligtning Family!! Yippie!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                    });
-                })
-                .then(() => {
-                    db.collection("privateNotifications").add({
-                        title: "Welcome!!",
-                        message: `Welcome ${email}. Nice to meet!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                        user: email,
-                    });
+                    })
+					.then(() => {
+						db.collection("publicNotifications").add({
+							title: "New member in the Ligtning Family!!",
+							message: `${email} Joined the Ligtning Family!! Yippie!!`,
+							timestamp:
+								firebase.firestore.FieldValue.serverTimestamp(),
+						});
+					})
+					.then(() => {
+						db.collection("users").doc(authUser.uid).collection("notifications").add({
+							title: "Welcome!!",
+							message: `Welcome ${email}. Nice to meet!!`,
+							timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+						});
+					});
                 })
                 .catch((error) => {
                     Alert.alert("Error Occured!!", error.message, [
