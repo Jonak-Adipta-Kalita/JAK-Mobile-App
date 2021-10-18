@@ -55,7 +55,34 @@ const SettingsScreen = ({ navigation }) => {
                 ])
             );
     };
-    const verifyEmail = () => {};
+    const verifyEmail = () => {
+        if (!user?.emailVerified) {
+            user.sendEmailVerification()
+                .then(() => {
+                    Alert.alert(
+                        "Verification Email Successfully Sent!!",
+                        "Please check your Email for the Verification Link!!",
+                        [
+                            {
+                                text: "OK",
+                                onPress: () => {},
+                            },
+                        ]
+                    );
+                })
+                .then(() => {
+                    navigation.navigate("Home");
+                })
+                .catch((error) => {
+                    Alert.alert("Error Occurred!!", error.message, [
+                        {
+                            text: "OK",
+                            onPress: () => {},
+                        },
+                    ]);
+                });
+        }
+    };
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
