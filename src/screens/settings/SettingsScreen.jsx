@@ -14,6 +14,7 @@ import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
 import globalStyles from "../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
+import LoadingIndicator from "../../components/Loading";
 import PropTypes from "prop-types";
 
 const SettingsScreen = ({ navigation }) => {
@@ -122,15 +123,19 @@ const SettingsScreen = ({ navigation }) => {
             <StatusBar style="auto" />
             <ScrollView>
                 <View style={{ marginTop: 30, alignItems: "center" }}>
-                    <TouchableOpacity activeOpacity={0.5}>
-                        <Avatar
-                            rounded
-                            size="large"
-                            source={{
-                                uri: user?.photoURL,
-                            }}
-                        />
-                    </TouchableOpacity>
+                    {user?.photoURL ? (
+                        <TouchableOpacity activeOpacity={0.5}>
+                            <Avatar
+                                rounded
+                                size="large"
+                                source={{
+                                    uri: user?.photoURL,
+                                }}
+                            />
+                        </TouchableOpacity>
+                    ) : (
+                        <LoadingIndicator dimensions={styles.dimensions} />
+                    )}
                 </View>
                 <View style={{ marginTop: 30, padding: 20 }}>
                     <TouchableOpacity
@@ -226,5 +231,9 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 20,
         flexDirection: "row",
+    },
+    dimensions: {
+        width: 70,
+        height: 70,
     },
 });

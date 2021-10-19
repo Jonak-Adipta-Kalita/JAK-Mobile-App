@@ -40,7 +40,7 @@ const LoginScreen = ({ navigation }) => {
                     })
                     .then(() => {
                         db.collection("users")
-                            .doc(authUser.uid)
+                            .doc(authUser.user.uid)
                             .collection("notifications")
                             .add({
                                 title: "Welcome Back!!",

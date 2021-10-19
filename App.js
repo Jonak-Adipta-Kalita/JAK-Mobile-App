@@ -65,6 +65,7 @@ const App = () => {
     const [loaded, error] = useFonts({
         OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
     });
+
     if (error) {
         Alert.alert("Error Occured", error.message, [
             {
@@ -73,6 +74,7 @@ const App = () => {
             },
         ]);
     }
+
     if (!loaded) {
         return (
             <LoadingIndicator

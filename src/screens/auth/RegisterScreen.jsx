@@ -14,6 +14,7 @@ import {
     Feather,
     MaterialIcons,
     FontAwesome5,
+    Entypo,
 } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
@@ -26,6 +27,7 @@ const RegisterScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [avatar] = useState(
         "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011"
     );
@@ -52,7 +54,8 @@ const RegisterScreen = ({ navigation }) => {
             name === "" ||
             email === "" ||
             password === "" ||
-            confirmPassword === ""
+            confirmPassword === "" ||
+            phoneNumber === ""
         ) {
             Alert.alert(
                 "Value not Filled!!",
@@ -82,6 +85,7 @@ const RegisterScreen = ({ navigation }) => {
                         .updateProfile({
                             displayName: name,
                             photoURL: avatar,
+                            phoneNumber: phoneNumber,
                         })
                         .then(() => {
                             db.collection("publicNotifications").add({
@@ -93,11 +97,11 @@ const RegisterScreen = ({ navigation }) => {
                         })
                         .then(() => {
                             db.collection("users")
-                                .doc(authUser.uid)
+                                .doc(authUser.user.uid)
                                 .collection("notifications")
                                 .add({
                                     title: "Welcome!!",
-                                    message: `Welcome ${email}. Nice to meet!!`,
+                                    message: `Welcome ${email}. Nice to meet you!!`,
                                     timestamp:
                                         firebase.firestore.FieldValue.serverTimestamp(),
                                 });
@@ -220,6 +224,17 @@ const RegisterScreen = ({ navigation }) => {
                         )}
                     </TouchableOpacity>
                 </View>
+
+                <Input
+                    placeholder="Phone Number"
+                    type="tel"
+                    value={phoneNumber}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    leftIcon={() => (
+                        <Entypo name="phone" size={24} color="black" />
+                    )}
+                    onChangeText={(text) => setPhoneNumber(text)}
+                />
             </View>
             <Button
                 containerStyle={styles.button}
