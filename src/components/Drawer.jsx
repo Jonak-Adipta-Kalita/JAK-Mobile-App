@@ -14,6 +14,7 @@ import Animated from "react-native-reanimated";
 import { auth } from "../firebase";
 import { Avatar } from "react-native-elements";
 import { useAuthState } from "react-firebase-hooks/auth";
+import globalStyles from "../globalStyles";
 import PropTypes from "prop-types";
 
 const CustomDrawer = ({ progress, ...props }) => {
@@ -42,10 +43,20 @@ const CustomDrawer = ({ progress, ...props }) => {
                                 marginTop: Platform.OS === "web" ? 17 : 13,
                             }}
                         >
-                            <Text style={{ fontWeight: "bold", fontSize: 13 }}>
+                            <Text
+                                style={[
+                                    globalStyles.text,
+                                    { fontWeight: "bold", fontSize: 13 },
+                                ]}
+                            >
                                 {user.displayName}
                             </Text>
-                            <Text style={{ fontWeight: "bold", fontSize: 13 }}>
+                            <Text
+                                style={[
+                                    globalStyles.text,
+                                    { fontWeight: "bold", fontSize: 13 },
+                                ]}
+                            >
                                 {user.phoneNumber}
                             </Text>
                         </View>

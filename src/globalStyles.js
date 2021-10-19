@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Appearance } from "react-native";
+
+const colorScheme = Appearance.getColorScheme();
 
 export default StyleSheet.create({
     button: {
@@ -10,5 +12,9 @@ export default StyleSheet.create({
     },
     inputBar: {
         padding: 10,
+        color: colorScheme === "dark" && "#fff",
+    },
+    text: {
+        color: colorScheme === "dark" && "#fff",
     },
 });
