@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import { View, ScrollView, StyleSheet, Alert } from "react-native";
 import { db } from "../../../firebase";
 import PropTypes from "prop-types";
-import { useCollectionOnce } from "react-firebase-hooks/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
 import LoadingIndicator from "../../../components/Loading";
 import Notification from "../../../components/Notification";
 
@@ -13,7 +13,7 @@ const PublicScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    const [notifications, loading, error] = useCollectionOnce(
+    const [notifications, loading, error] = useCollection(
         db.collection("publicNotifications").orderBy("timestamp", "desc")
     );
 
