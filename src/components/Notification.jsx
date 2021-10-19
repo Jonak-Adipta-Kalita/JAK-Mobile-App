@@ -27,8 +27,8 @@ const Notification = ({ title, message, timestamp }) => {
 };
 
 Notification.propTypes = {
-    title: propTypes.string.isRequired,
-    message: propTypes.string.isRequired,
+    title: propTypes.string,
+    message: propTypes.string,
     timestamp: propTypes.object,
 };
 
