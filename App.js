@@ -74,7 +74,12 @@ const App = () => {
         ]);
     }
     if (!loaded) {
-        return <LoadingIndicator dimensions={styles.dimensions} />;
+        return (
+            <LoadingIndicator
+                dimensions={styles.dimensions}
+                containerStyle={{ flex: 1 }}
+            />
+        );
     }
 
     return (

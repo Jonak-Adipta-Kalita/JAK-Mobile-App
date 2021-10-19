@@ -7,7 +7,7 @@ import LoadingIndicator from "../../../components/Loading";
 import Notification from "../../../components/Notification";
 
 const PublicScreen = ({ navigation }) => {
-	useLayoutEffect(() => {
+    useLayoutEffect(() => {
         navigation.setOptions({
             title: "Public!!",
         });
@@ -17,7 +17,7 @@ const PublicScreen = ({ navigation }) => {
         db.collection("publicNotifications").orderBy("timestamp", "desc")
     );
 
-	if (error) {
+    if (error) {
         Alert.alert("Error Occured", error.message, [
             {
                 text: "OK",
@@ -34,11 +34,11 @@ const PublicScreen = ({ navigation }) => {
         <View style={styles.container}>
             <ScrollView>
                 {notifications?.docs?.map((notification) => (
-					<Notification
-						key={notification.id}
-						id={notification.id}
+                    <Notification
+                        key={notification.id}
+                        id={notification.id}
                         title={notification.data().title}
-						message={notification.data().message}
+                        message={notification.data().message}
                         timestamp={notification.data().timestamp}
                     />
                 ))}

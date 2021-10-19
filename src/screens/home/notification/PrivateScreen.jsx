@@ -8,7 +8,7 @@ import Notification from "../../../components/Notification";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const PrivateScreen = ({ navigation }) => {
-	const [user] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const [notifications, loading, error] = useCollection(
         db
             .collection("users")
@@ -25,13 +25,13 @@ const PrivateScreen = ({ navigation }) => {
             },
         ]);
     }
-	
-	useLayoutEffect(() => {
+
+    useLayoutEffect(() => {
         navigation.setOptions({
             title: "Private!!",
         });
     }, [navigation]);
-	
+
     if (loading) {
         return <LoadingIndicator dimensions={styles.dimensions} />;
     }
@@ -40,12 +40,12 @@ const PrivateScreen = ({ navigation }) => {
             <ScrollView>
                 {notifications?.docs?.map((notification) => (
                     <Notification
-                            key={notification.id}
-                            id={notification.id}
-                            title={notification.data().title}
-                            message={notification.data().message}
-                            timestamp={notification.data().timestamp}
-                        />
+                        key={notification.id}
+                        id={notification.id}
+                        title={notification.data().title}
+                        message={notification.data().message}
+                        timestamp={notification.data().timestamp}
+                    />
                 ))}
             </ScrollView>
         </View>
