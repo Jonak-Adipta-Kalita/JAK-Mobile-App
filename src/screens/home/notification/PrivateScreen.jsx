@@ -1,27 +1,32 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { View, ScrollView, StyleSheet, Alert } from "react-native";
 import { db, auth } from "../../../firebase";
 import PropTypes from "prop-types";
 import Notification from "../../../components/Notification";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollection } from "react-firebase-hooks/firestore";
+import LoadingIndicator from "../../../components/Loading";
 
 const PrivateScreen = ({ navigation }) => {
-    const [user] = useAuthState(auth);
-    const [notifications, setNotifications] = useState();
-    useEffect(() => {
-        db.collection("users")
+    const [notifications, loading, error] = useCollection(
+        db
+            .collection("users")
             .doc(user?.uid)
             .collection("notifications")
             .orderBy("timestamp", "desc")
-            .onSnapshot((snapshot) => {
-                setNotifications(
-                    snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }))
-                );
-            });
-    }, [db, user]);
+    );
+    if (error) {
+        Alert.alert("Error Occured", error.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+    if (!loading) {
+        return <LoadingIndicator dimensions={styles.dimensions} />;
+    }
+    const [user] = useAuthState(auth);
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Private!!",
@@ -56,4 +61,8 @@ export default PrivateScreen;
 
 const styles = StyleSheet.create({
     container: {},
+    dimensions: {
+        width: 70,
+        height: 70,
+    },
 });

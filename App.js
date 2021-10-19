@@ -10,10 +10,11 @@ import {
     Platform,
     InteractionManager,
     Alert,
-    ActivityIndicator,
     useColorScheme,
+    StyleSheet,
 } from "react-native";
 import { useFonts } from "expo-font";
+import LoadingIndicator from "./src/components/Loading";
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
@@ -73,13 +74,7 @@ const App = () => {
         ]);
     }
     if (!loaded) {
-        return (
-            <ActivityIndicator
-                size="large"
-                style={{ width: 70, height: 70 }}
-                color="blue"
-            />
-        );
+        return <LoadingIndicator dimensions={styles.dimensions} />;
     }
 
     return (
@@ -92,3 +87,10 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+    dimensions: {
+        width: 70,
+        height: 70,
+    },
+});

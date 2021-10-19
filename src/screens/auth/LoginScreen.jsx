@@ -30,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
     }, []);
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
-            .then((authuser) => {
+            .then((authUser) => {
                 db.collection("publicNotifications")
                     .add({
                         title: "Member came back to the Ligtning Family!!",

@@ -38,22 +38,26 @@ const SettingsScreen = ({ navigation }) => {
             );
     };
     const deleteAccount = () => {
+        const userUID = user?.uid;
         user?.delete()
-            .then(() =>
+            .then(() => {
+                db.collection("users").doc(userUID).delete();
+            })
+            .then(() => {
                 db.collection("publicNotifications").add({
                     title: "Someone left us Forever!!",
                     message: "Someone left the Family forever!! Noooooooo!!",
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                })
-            )
-            .catch((error) =>
+                });
+            })
+            .catch((error) => {
                 Alert.alert("Error Occured!!", error.message, [
                     {
                         text: "OK",
                         onPress: () => {},
                     },
-                ])
-            );
+                ]);
+            });
     };
     const verifyEmail = () => {
         if (!user?.emailVerified) {

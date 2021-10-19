@@ -1,15 +1,10 @@
 import React from "react";
-import {
-    StyleSheet,
-    TouchableOpacity,
-    View,
-    Alert,
-    ActivityIndicator,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, View, Alert } from "react-native";
 import PropTypes from "prop-types";
 import images from "../images";
 import { Image } from "react-native-elements";
 import { useAssets } from "expo-asset";
+import LoadingIndicator from "../components/Loading";
 
 const LoginButton = ({ brand }) => {
     let imageFile;
@@ -29,7 +24,7 @@ const LoginButton = ({ brand }) => {
         ]);
     }
     if (!assets) {
-        return <ActivityIndicator style={styles.dimensions} color="blue" />;
+        return <LoadingIndicator dimensions={styles.dimensions} />;
     }
     const signIn = async () => {
         if (brand === "google") {
