@@ -10,12 +10,14 @@ import {
     Platform,
     InteractionManager,
     Alert,
-    ActivityIndicator,
     useColorScheme,
+    StyleSheet,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
+import LoadingIndicator from "./src/components/Loading";
+
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
@@ -66,6 +68,7 @@ const App = () => {
     const [loaded, error] = useFonts({
         OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
     });
+
     if (error) {
         Alert.alert("Error Occured", error.message, [
             {
@@ -74,12 +77,12 @@ const App = () => {
             },
         ]);
     }
+
     if (!loaded) {
         return (
-            <ActivityIndicator
-                size="large"
-                style={{ width: 70, height: 70 }}
-                color="blue"
+            <LoadingIndicator
+                dimensions={styles.dimensions}
+                containerStyle={{ flex: 1 }}
             />
         );
     }
@@ -96,3 +99,10 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+    dimensions: {
+        width: 70,
+        height: 70,
+    },
+});

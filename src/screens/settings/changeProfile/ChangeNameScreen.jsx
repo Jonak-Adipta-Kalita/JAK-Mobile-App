@@ -12,12 +12,12 @@ import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import globalStyles from "../../../globalStyles";
+import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 
 const ChangeNameScreen = ({ navigation }) => {
-    const [previousName, setPreviousName] = useState(
-        auth?.currentUser?.displayName
-    );
+    const [user] = useAuthState(auth);
+    const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");
     const changeName = () => {
         if (name === "") {
@@ -43,18 +43,19 @@ const ChangeNameScreen = ({ navigation }) => {
                 ]
             );
         } else {
-            auth.currentUser
-                .updateProfile({
-                    displayName: name,
-                })
+            user?.updateProfile({
+                displayName: name,
+            })
                 .then(() => {
-                    db.collection("privateNotifications").add({
-                        title: "Name Changed Successfully!!",
-                        message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                        user: auth?.currentUser?.email,
-                    });
+                    db.collection("users")
+                        .doc(user?.uid)
+                        .collection("notifications")
+                        .add({
+                            title: "Name Changed Successfully!!",
+                            message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
+                            timestamp:
+                                firebase.firestore.FieldValue.serverTimestamp(),
+                        });
                 })
                 .then(() => {
                     setName("");
@@ -109,7 +110,7 @@ const ChangeNameScreen = ({ navigation }) => {
                     placeholder="Name"
                     autoFocus
                     type="text"
-                    style={styles.inputBar}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={name}
                     onChangeText={(text) => setName(text)}
                 />

@@ -4,7 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AntDesign, Entypo } from "@expo/vector-icons";
-import CustomDrawer from "../custom/Drawer";
+import CustomDrawer from "../components/Drawer";
 import PropTypes from "prop-types";
 
 import {

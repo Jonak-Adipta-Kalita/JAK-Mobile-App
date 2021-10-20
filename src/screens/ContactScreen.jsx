@@ -11,10 +11,12 @@ import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../firebase";
 import firebase from "firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import PropTypes from "prop-types";
 
 const ContactScreen = ({ navigation }) => {
+    const [user] = useAuthState(auth);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -36,7 +38,7 @@ const ContactScreen = ({ navigation }) => {
                     },
                 ]
             );
-        } else if (email !== auth.currentUser.email) {
+        } else if (email !== user?.email) {
             Alert.alert(
                 "Email not Correct!!",
                 "Please Enter your Email Correctly!!",
@@ -56,14 +58,16 @@ const ContactScreen = ({ navigation }) => {
                     message: message,
                 })
                 .then(() => {
-                    db.collection("privateNotifications").add({
-                        title: "Request to Contact Sent!!",
-                        message:
-                            "Your Request to Contact has been Successfully Sent!!",
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                        user: email,
-                    });
+                    db.collection("users")
+                        .doc(user?.uid)
+                        .collection("notifications")
+                        .add({
+                            title: "Request to Contact Sent!!",
+                            message:
+                                "Your Request to Contact has been Successfully Sent!!",
+                            timestamp:
+                                firebase.firestore.FieldValue.serverTimestamp(),
+                        });
                 })
                 .then(() => {
                     setName("");
@@ -117,28 +121,32 @@ const ContactScreen = ({ navigation }) => {
                     placeholder="Name"
                     autoFocus
                     type="text"
-                    style={styles.inputBar}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={name}
                     onChangeText={(text) => setName(text)}
                 />
                 <Input
                     placeholder="Email"
                     type="email"
-                    style={styles.inputBar}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />
                 <Input
                     placeholder="Phone Number (with Country Code)"
                     type="phone"
-                    style={styles.inputBar}
+                    inputStyle={[
+                        globalStyles.inputBar,
+                        styles.inputBar,
+                        { paddingRight: 2 },
+                    ]}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
                 />
                 <Input
                     placeholder="Why do you want to Contact Me?"
                     type="text"
-                    style={styles.inputBar}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={message}
                     onChangeText={(text) => setMessage(text)}
                 />

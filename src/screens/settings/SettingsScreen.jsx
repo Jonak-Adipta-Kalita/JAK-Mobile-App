@@ -13,9 +13,12 @@ import { auth, db } from "../../firebase";
 import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
 import globalStyles from "../../globalStyles";
+import { useAuthState } from "react-firebase-hooks/auth";
+import LoadingIndicator from "../../components/Loading";
 import PropTypes from "prop-types";
 
 const SettingsScreen = ({ navigation }) => {
+    const [user] = useAuthState(auth);
     const signOut = () => {
         auth.signOut()
             .then(() =>
@@ -36,25 +39,55 @@ const SettingsScreen = ({ navigation }) => {
             );
     };
     const deleteAccount = () => {
-        auth?.currentUser
-            .delete()
-            .then(() =>
+        const userUID = user?.uid;
+        user?.delete()
+            .then(() => {
+                db.collection("users").doc(userUID).delete();
+            })
+            .then(() => {
                 db.collection("publicNotifications").add({
                     title: "Someone left us Forever!!",
                     message: "Someone left the Family forever!! Noooooooo!!",
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                })
-            )
-            .catch((error) =>
+                });
+            })
+            .catch((error) => {
                 Alert.alert("Error Occured!!", error.message, [
                     {
                         text: "OK",
                         onPress: () => {},
                     },
-                ])
-            );
+                ]);
+            });
     };
-    const verifyEmail = () => {};
+    const verifyEmail = () => {
+        if (!user?.emailVerified) {
+            user.sendEmailVerification()
+                .then(() => {
+                    Alert.alert(
+                        "Verification Email Successfully Sent!!",
+                        "Please check your Email for the Verification Link!!",
+                        [
+                            {
+                                text: "OK",
+                                onPress: () => {},
+                            },
+                        ]
+                    );
+                })
+                .then(() => {
+                    navigation.navigate("Home");
+                })
+                .catch((error) => {
+                    Alert.alert("Error Occurred!!", error.message, [
+                        {
+                            text: "OK",
+                            onPress: () => {},
+                        },
+                    ]);
+                });
+        }
+    };
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
@@ -70,7 +103,7 @@ const SettingsScreen = ({ navigation }) => {
             ),
             headerRight: () => (
                 <SafeAreaView style={{ flex: 1 }}>
-                    {!auth?.currentUser?.emailVerified && (
+                    {!user?.emailVerified && (
                         <TouchableOpacity
                             style={{ alignItems: "flex-start", margin: 20 }}
                             onPress={verifyEmail}
@@ -90,15 +123,19 @@ const SettingsScreen = ({ navigation }) => {
             <StatusBar style="auto" />
             <ScrollView>
                 <View style={{ marginTop: 30, alignItems: "center" }}>
-                    <TouchableOpacity activeOpacity={0.5}>
-                        <Avatar
-                            rounded
-                            size="large"
-                            source={{
-                                uri: auth?.currentUser?.photoURL,
-                            }}
-                        />
-                    </TouchableOpacity>
+                    {user?.photoURL ? (
+                        <TouchableOpacity activeOpacity={0.5}>
+                            <Avatar
+                                rounded
+                                size="large"
+                                source={{
+                                    uri: user?.photoURL,
+                                }}
+                            />
+                        </TouchableOpacity>
+                    ) : (
+                        <LoadingIndicator dimensions={styles.dimensions} />
+                    )}
                 </View>
                 <View style={{ marginTop: 30, padding: 20 }}>
                     <TouchableOpacity
@@ -108,7 +145,7 @@ const SettingsScreen = ({ navigation }) => {
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
-                                    {auth.currentUser.displayName}
+                                    {user?.displayName}
                                 </ListItem.Title>
                                 <ListItem.Subtitle>Name</ListItem.Subtitle>
                             </ListItem.Content>
@@ -120,9 +157,7 @@ const SettingsScreen = ({ navigation }) => {
                         <ListItem bottomDivider>
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
-                                <ListItem.Title>
-                                    {auth.currentUser.email}
-                                </ListItem.Title>
+                                <ListItem.Title>{user?.email}</ListItem.Title>
                                 <ListItem.Subtitle>Email</ListItem.Subtitle>
                             </ListItem.Content>
                         </ListItem>
@@ -134,8 +169,8 @@ const SettingsScreen = ({ navigation }) => {
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
-                                    {auth.currentUser.phoneNumber
-                                        ? auth.currentUser.phoneNumber
+                                    {user?.phoneNumber
+                                        ? user?.phoneNumber
                                         : "Provide your Phone Number!!"}
                                 </ListItem.Title>
                                 <ListItem.Subtitle>
@@ -196,5 +231,9 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 20,
         flexDirection: "row",
+    },
+    dimensions: {
+        width: 70,
+        height: 70,
     },
 });

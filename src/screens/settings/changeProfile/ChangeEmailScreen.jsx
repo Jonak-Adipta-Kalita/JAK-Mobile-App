@@ -12,10 +12,12 @@ import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import globalStyles from "../../../globalStyles";
+import { useAuthState } from "react-firebase-hooks/auth";
 import PropTypes from "prop-types";
 
 const ChangeEmailScreen = ({ navigation }) => {
-    const [previousEmail, setPreviousEmail] = useState(auth.currentUser.email);
+    const [user] = useAuthState(auth);
+    const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");
     const changeEmail = () => {
         if (email === "") {
@@ -41,16 +43,17 @@ const ChangeEmailScreen = ({ navigation }) => {
                 ]
             );
         } else {
-            auth.currentUser
-                .updateEmail(email)
+            user?.updateEmail(email)
                 .then(() => {
-                    db.collection("privateNotifications").add({
-                        title: "Email Changed Successfully!!",
-                        message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
-                        user: auth?.currentUser?.email,
-                    });
+                    db.collection("users")
+                        .doc(user?.uid)
+                        .collection("notifications")
+                        .add({
+                            title: "Email Changed Successfully!!",
+                            message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
+                            timestamp:
+                                firebase.firestore.FieldValue.serverTimestamp(),
+                        });
                 })
                 .then(() => {
                     setEmail("");
@@ -105,7 +108,7 @@ const ChangeEmailScreen = ({ navigation }) => {
                     placeholder="Email"
                     autoFocus
                     type="email"
-                    style={styles.inputBar}
+                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />
