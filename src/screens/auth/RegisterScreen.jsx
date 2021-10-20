@@ -18,8 +18,6 @@ import {
 } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import LoadingIndicator from "../../components/Loading";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
@@ -30,8 +28,6 @@ const RegisterScreen = ({ navigation }) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [createUser, user, loading, error] =
-        useCreateUserWithEmailAndPassword(auth);
     const [avatar] = useState(
         "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011"
     );
@@ -85,10 +81,9 @@ const RegisterScreen = ({ navigation }) => {
                 ]
             );
         } else {
-            createUser(email, password)
-                .then((user_) => {
-                    console.log(user_);
-                    user.user
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((authUser) => {
+                    authUser.user
                         .updateProfile({
                             displayName: name,
                             photoURL: avatar,
@@ -104,7 +99,7 @@ const RegisterScreen = ({ navigation }) => {
                         })
                         .then(() => {
                             db.collection("users")
-                                .doc(user.user.uid)
+                                .doc(authUser.user.uid)
                                 .collection("notifications")
                                 .add({
                                     title: "Welcome!!",
@@ -124,24 +119,6 @@ const RegisterScreen = ({ navigation }) => {
                 });
         }
     };
-
-    if (error) {
-        Alert.alert("Error Occured", error.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
-    }
-
-    if (loading) {
-        return (
-            <LoadingIndicator
-                dimensions={styles.dimensions}
-                containerStyle={{ flex: 1 }}
-            />
-        );
-    }
 
     return (
         <View style={styles.container}>
@@ -304,8 +281,4 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     showPasswordIcon: {},
-    dimensions: {
-        width: 70,
-        height: 70,
-    },
 });
