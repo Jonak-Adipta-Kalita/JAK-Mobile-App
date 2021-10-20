@@ -18,6 +18,8 @@ import {
 } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import LoadingIndicator from "../../components/Loading";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
@@ -28,9 +30,12 @@ const RegisterScreen = ({ navigation }) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [createUser, user, loading, error] =
+        useCreateUserWithEmailAndPassword(auth);
     const [avatar] = useState(
         "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011"
     );
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Register!!",
@@ -49,6 +54,7 @@ const RegisterScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+
     const register = () => {
         if (
             name === "" ||
@@ -79,9 +85,10 @@ const RegisterScreen = ({ navigation }) => {
                 ]
             );
         } else {
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((authUser) => {
-                    authUser.user
+            createUser(email, password)
+                .then((user_) => {
+                    console.log(user_);
+                    user.user
                         .updateProfile({
                             displayName: name,
                             photoURL: avatar,
@@ -97,7 +104,7 @@ const RegisterScreen = ({ navigation }) => {
                         })
                         .then(() => {
                             db.collection("users")
-                                .doc(authUser.user.uid)
+                                .doc(user.user.uid)
                                 .collection("notifications")
                                 .add({
                                     title: "Welcome!!",
@@ -117,10 +124,29 @@ const RegisterScreen = ({ navigation }) => {
                 });
         }
     };
+
+    if (error) {
+        Alert.alert("Error Occured", error.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+
+    if (loading) {
+        return (
+            <LoadingIndicator
+                dimensions={styles.dimensions}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <Text h3 style={{ marginBottom: 50 }}>
+            <Text h3 style={[globalStyles.text, { marginBottom: 50 }]}>
                 Create an Account
             </Text>
             <View style={styles.inputContainer}>
@@ -278,4 +304,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     showPasswordIcon: {},
+    dimensions: {
+        width: 70,
+        height: 70,
+    },
 });

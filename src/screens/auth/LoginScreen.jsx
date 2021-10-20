@@ -16,7 +16,9 @@ import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
 import firebase from "firebase";
 import PropTypes from "prop-types";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import LoginButton from "../../components/LoginButton";
+import LoadingIndicator from "../../components/Loading";
 
 const LoginScreen = ({ navigation }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -26,11 +28,34 @@ const LoginScreen = ({ navigation }) => {
         const unSubscribe = auth.onAuthStateChanged((authUser) => {
             if (authUser) navigation.replace("Home");
         });
+
         return unSubscribe;
     }, []);
+    const [signInUser, user, loading, error] =
+        useSignInWithEmailAndPassword(auth);
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: "Login!!",
+            headerLeft: () => (
+                <SafeAreaView style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={{
+                            alignItems: "flex-start",
+                            margin: 20,
+                        }}
+                        onPress={navigation.goBack}
+                    >
+                        <AntDesign name="arrowleft" size={24} color="white" />
+                    </TouchableOpacity>
+                </SafeAreaView>
+            ),
+        });
+    }, [navigation]);
+
     const signInEmail = () => {
-        auth.signInWithEmailAndPassword(email, password)
-            .then((authUser) => {
+        signInUser(email, password)
+            .then(() => {
                 db.collection("publicNotifications")
                     .add({
                         title: "Member came back to the Ligtning Family!!",
@@ -40,7 +65,7 @@ const LoginScreen = ({ navigation }) => {
                     })
                     .then(() => {
                         db.collection("users")
-                            .doc(authUser.user.uid)
+                            .doc(user.user.uid)
                             .collection("notifications")
                             .add({
                                 title: "Welcome Back!!",
@@ -59,6 +84,7 @@ const LoginScreen = ({ navigation }) => {
                 ]);
             });
     };
+
     const signInMethods = () => {
         if (Platform.OS === "android" || Platform.OS === "ios") {
             return (
@@ -89,24 +115,24 @@ const LoginScreen = ({ navigation }) => {
             );
         }
     };
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Login!!",
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={{
-                            alignItems: "flex-start",
-                            margin: 20,
-                        }}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} color="white" />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
-        });
-    }, [navigation]);
+
+    if (error) {
+        Alert.alert("Error Occured", error.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+
+    if (loading) {
+        return (
+            <LoadingIndicator
+                dimensions={styles.dimensions}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -214,4 +240,8 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     showPasswordIcon: {},
+    dimensions: {
+        width: 70,
+        height: 70,
+    },
 });

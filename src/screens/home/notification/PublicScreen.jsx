@@ -27,7 +27,7 @@ const PublicScreen = ({ navigation }) => {
     }
 
     if (loading) {
-        return <LoadingIndicator dimensions={styles.dimensions} />;
+        return <LoadingIndicator dimensions={{ width: 70, height: 70 }} />;
     }
 
     return (
@@ -55,8 +55,4 @@ export default PublicScreen;
 
 const styles = StyleSheet.create({
     container: {},
-    dimensions: {
-        width: 70,
-        height: 70,
-    },
 });

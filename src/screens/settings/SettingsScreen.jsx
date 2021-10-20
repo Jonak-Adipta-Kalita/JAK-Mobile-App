@@ -134,7 +134,9 @@ const SettingsScreen = ({ navigation }) => {
                             />
                         </TouchableOpacity>
                     ) : (
-                        <LoadingIndicator dimensions={styles.dimensions} />
+                        <LoadingIndicator
+                            dimensions={{ width: 70, height: 70 }}
+                        />
                     )}
                 </View>
                 <View style={{ marginTop: 30, padding: 20 }}>
@@ -231,9 +233,5 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 20,
         flexDirection: "row",
-    },
-    dimensions: {
-        width: 70,
-        height: 70,
     },
 });

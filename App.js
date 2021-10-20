@@ -11,7 +11,6 @@ import {
     InteractionManager,
     Alert,
     useColorScheme,
-    StyleSheet,
 } from "react-native";
 import { useFonts } from "expo-font";
 import LoadingIndicator from "./src/components/Loading";
@@ -78,7 +77,7 @@ const App = () => {
     if (!loaded) {
         return (
             <LoadingIndicator
-                dimensions={styles.dimensions}
+                dimensions={{ width: 70, height: 70 }}
                 containerStyle={{ flex: 1 }}
             />
         );
@@ -94,10 +93,3 @@ const App = () => {
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-    dimensions: {
-        width: 70,
-        height: 70,
-    },
-});
