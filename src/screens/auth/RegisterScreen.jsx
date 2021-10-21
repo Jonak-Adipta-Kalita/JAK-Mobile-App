@@ -18,16 +18,22 @@ import {
 } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    setShowPassword,
+    selectShowPassword,
+} from "../../redux/slices/showPasswordSlice";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
 const RegisterScreen = ({ navigation }) => {
-    const [showPassword, setShowPassword] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const dispatch = useDispatch();
+    const showPassword = useSelector(selectShowPassword);
     const [avatar] = useState(
         "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011"
     );
@@ -205,7 +211,7 @@ const RegisterScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                         style={styles.showPasswordContainer}
-                        onPress={() => setShowPassword(!showPassword)}
+                        onPress={() => dispatch(setShowPassword(!showPassword))}
                     >
                         {showPassword ? (
                             <Feather

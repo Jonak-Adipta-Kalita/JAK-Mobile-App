@@ -12,9 +12,9 @@ export default StyleSheet.create({
     },
     inputBar: {
         padding: 10,
-        color: colorScheme === "dark" && "#fff",
+        color: colorScheme === "dark" ? "#fff" : "#000000",
     },
     text: {
-        color: colorScheme === "dark" && "#fff",
+        color: colorScheme === "dark" ? "#fff" : "#000000",
     },
 });

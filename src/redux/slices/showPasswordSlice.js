@@ -1,21 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    showPassword: null,
-};
-
 export const showPasswordSlice = createSlice({
     name: "showPassword",
-    initialState,
+    initialState: {
+		show: false,
+	},
     reducer: {
-        setShowPassword: (state, action) => {
-            state.showPassword = action.payload;
+        setShowPassword: (state) => {
+            state.show = !state.show;
         },
     },
 });
 
 export const { setShowPassword } = showPasswordSlice.actions;
 
-export const selectShowPassword = (state) => state.showPassword.showPassword;
+export const selectShowPassword = (state) => state.showPassword.show;
 
 export default showPasswordSlice.reducer;

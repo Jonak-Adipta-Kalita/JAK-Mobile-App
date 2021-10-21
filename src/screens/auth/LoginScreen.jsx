@@ -16,18 +16,27 @@ import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
 import firebase from "firebase";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    setShowPassword,
+    selectShowPassword,
+} from "../../redux/slices/showPasswordSlice";
 import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
-    const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const dispatch = useDispatch();
+    const showPassword = useSelector(selectShowPassword);
+
     useEffect(() => {
         const unSubscribe = auth.onAuthStateChanged((authUser) => {
             if (authUser) navigation.replace("Home");
         });
         return unSubscribe;
     }, []);
+
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
             .then((authUser) => {
@@ -59,6 +68,7 @@ const LoginScreen = ({ navigation }) => {
                 ]);
             });
     };
+
     const signInMethods = () => {
         if (Platform.OS === "android" || Platform.OS === "ios") {
             return (
@@ -89,6 +99,7 @@ const LoginScreen = ({ navigation }) => {
             );
         }
     };
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login!!",
@@ -107,6 +118,7 @@ const LoginScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -141,7 +153,7 @@ const LoginScreen = ({ navigation }) => {
                     />
                     <TouchableOpacity
                         style={styles.showPasswordContainer}
-                        onPress={() => setShowPassword(!showPassword)}
+                        onPress={() => dispatch()}
                     >
                         {showPassword ? (
                             <Feather

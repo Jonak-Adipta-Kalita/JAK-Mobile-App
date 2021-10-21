@@ -14,7 +14,7 @@ import {
     StyleSheet,
 } from "react-native";
 import { useFonts } from "expo-font";
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 
@@ -87,13 +87,13 @@ const App = () => {
     }
 
     return (
-        <Provider store={store}>
+        <ReduxProvider store={store}>
             <NavigationContainer
                 theme={scheme === "dark" ? DarkTheme : DefaultTheme}
             >
                 <DrawerNavigator />
             </NavigationContainer>
-        </Provider>
+        </ReduxProvider>
     );
 };
 
