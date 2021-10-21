@@ -18,7 +18,6 @@ import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 
-
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
 const MAX_TIMER_DURATION_MS = 60 * 1000;
