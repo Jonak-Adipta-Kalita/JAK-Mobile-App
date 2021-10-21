@@ -153,7 +153,7 @@ const LoginScreen = ({ navigation }) => {
                     />
                     <TouchableOpacity
                         style={styles.showPasswordContainer}
-                        onPress={() => dispatch()}
+                        onPress={() => dispatch(setShowPassword())}
                     >
                         {showPassword ? (
                             <Feather

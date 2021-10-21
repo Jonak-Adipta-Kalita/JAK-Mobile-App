@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const showPasswordSlice = createSlice({
     name: "showPassword",
     initialState: {
-		show: false,
-	},
+        show: false,
+    },
     reducer: {
         setShowPassword: (state) => {
             state.show = !state.show;
