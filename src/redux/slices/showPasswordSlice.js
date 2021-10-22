@@ -1,16 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, applyMiddleware } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 
-export const showPasswordSlice = createSlice({
-    name: "showPassword",
-    initialState: {
-        show: false,
-    },
-    reducer: {
-        setShowPassword: (state) => {
-            state.show = !state.show;
+export const showPasswordSlice = createSlice(
+    {
+        name: "showPassword",
+        initialState: {
+            show: false,
+        },
+        reducer: {
+            setShowPassword: (state) => {
+                state.show = !state.show;
+            },
         },
     },
-});
+    applyMiddleware(thunk)
+);
 
 export const { setShowPassword } = showPasswordSlice.actions;
 

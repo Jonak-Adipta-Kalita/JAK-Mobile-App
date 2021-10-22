@@ -24,11 +24,11 @@ import {
 import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
     const dispatch = useDispatch();
     const showPassword = useSelector(selectShowPassword);
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     useEffect(() => {
         const unSubscribe = auth.onAuthStateChanged((authUser) => {

@@ -35,9 +35,9 @@ const RegisterScreen = ({ navigation }) => {
     const [avatar] = useState(
         "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011"
     );
-	
-	const dispatch = useDispatch();
-	const showPassword = useSelector(selectShowPassword);
+
+    const dispatch = useDispatch();
+    const showPassword = useSelector(selectShowPassword);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -215,7 +215,7 @@ const RegisterScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                         style={styles.showPasswordContainer}
-                        onPress={() => dispatch(setShowPassword(!showPassword))}
+                        onPress={() => dispatch(setShowPassword())}
                     >
                         {showPassword ? (
                             <Feather
