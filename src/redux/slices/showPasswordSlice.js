@@ -7,7 +7,7 @@ export const showPasswordSlice = createSlice(
         initialState: {
             show: false,
         },
-        reducer: {
+        reducers: {
             setShowPassword: (state) => {
                 state.show = !state.show;
             },

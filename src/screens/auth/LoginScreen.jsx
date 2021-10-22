@@ -24,7 +24,6 @@ import {
 import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
-    const dispatch = useDispatch();
     const showPassword = useSelector(selectShowPassword);
 
     const [email, setEmail] = useState("");
@@ -118,6 +117,8 @@ const LoginScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+	
+	const dispatch = useDispatch();
 
     return (
         <View style={styles.container}>
