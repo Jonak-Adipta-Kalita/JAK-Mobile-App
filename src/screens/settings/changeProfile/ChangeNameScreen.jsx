@@ -58,6 +58,11 @@ const ChangeNameScreen = ({ navigation }) => {
                         });
                 })
                 .then(() => {
+                    db.collection("users").doc(user?.uid).set({
+                        displayName: name,
+                    });
+                })
+                .then(() => {
                     setName("");
                     setPreviousName(name);
                     navigation.jumpTo("Home");

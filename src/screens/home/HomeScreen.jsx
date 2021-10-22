@@ -44,6 +44,7 @@ const HomeScreen = ({ navigation }) => {
             return () => backHandler.remove();
         }
     }, []);
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Welcome!!",

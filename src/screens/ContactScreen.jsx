@@ -22,80 +22,97 @@ const ContactScreen = ({ navigation }) => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [message, setMessage] = useState("");
     const submitRequestToContact = () => {
-        if (
-            name === "" ||
-            email === "" ||
-            phoneNumber === "" ||
-            message === ""
-        ) {
-            Alert.alert(
-                "Value not Filled!!",
-                "Please Enter all the Values in the Form!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
-            );
-        } else if (email !== user?.email) {
-            Alert.alert(
-                "Email not Correct!!",
-                "Please Enter your Email Correctly!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
-            );
-        } else {
-            db.collection("requestToContact")
-                .add({
-                    name: name,
-                    email: email,
-                    phoneNumber: phoneNumber,
-                    message: message,
-                })
-                .then(() => {
-                    db.collection("users")
-                        .doc(user?.uid)
-                        .collection("notifications")
-                        .add({
-                            title: "Request to Contact Sent!!",
-                            message:
-                                "Your Request to Contact has been Successfully Sent!!",
-                            timestamp:
-                                firebase.firestore.FieldValue.serverTimestamp(),
-                        });
-                })
-                .then(() => {
-                    setName("");
-                    setEmail("");
-                    setPhoneNumber("");
-                    setMessage("");
-                    navigation.jumpTo("Home");
-                })
-                .then(() => {
-                    Alert.alert(
-                        "Request Sent!!",
-                        "Your Request to Contact is Sent Successfully!!",
-                        [
-                            {
-                                text: "OK",
-                                onPress: () => {},
-                            },
-                        ]
-                    );
-                })
-                .catch((error) => {
-                    Alert.alert("Error Occurred!!", error.message, [
+        if (user) {
+            if (
+                name === "" ||
+                email === "" ||
+                phoneNumber === "" ||
+                message === ""
+            ) {
+                Alert.alert(
+                    "Value not Filled!!",
+                    "Please Enter all the Values in the Form!!",
+                    [
                         {
                             text: "OK",
                             onPress: () => {},
                         },
-                    ]);
-                });
+                    ]
+                );
+            } else if (email !== user?.email) {
+                Alert.alert(
+                    "Email not Correct!!",
+                    "Please Enter your Email Correctly!!",
+                    [
+                        {
+                            text: "OK",
+                            onPress: () => {},
+                        },
+                    ]
+                );
+            } else {
+                db.collection("requestToContact")
+                    .add({
+                        name: name,
+                        email: email,
+                        phoneNumber: phoneNumber,
+                        message: message,
+                    })
+                    .then(() => {
+                        db.collection("users")
+                            .doc(user?.uid)
+                            .collection("notifications")
+                            .add({
+                                title: "Request to Contact Sent!!",
+                                message:
+                                    "Your Request to Contact has been Successfully Sent!!",
+                                timestamp:
+                                    firebase.firestore.FieldValue.serverTimestamp(),
+                            });
+                    })
+                    .then(() => {
+                        setName("");
+                        setEmail("");
+                        setPhoneNumber("");
+                        setMessage("");
+                        navigation.jumpTo("Home");
+                    })
+                    .then(() => {
+                        Alert.alert(
+                            "Request Sent!!",
+                            "Your Request to Contact is Sent Successfully!!",
+                            [
+                                {
+                                    text: "OK",
+                                    onPress: () => {},
+                                },
+                            ]
+                        );
+                    })
+                    .catch((error) => {
+                        Alert.alert("Error Occurred!!", error.message, [
+                            {
+                                text: "OK",
+                                onPress: () => {},
+                            },
+                        ]);
+                    });
+            }
+        } else {
+            Alert.alert(
+                "No User Data Found!!",
+                "Please Login or Register to the App!!",
+                [
+                    {
+                        text: "Login",
+                        onPress: () => navigation.navigate("Login"),
+                    },
+                    {
+                        text: "Register",
+                        onPress: () => navigation.navigate("Register"),
+                    },
+                ]
+            );
         }
     };
     useLayoutEffect(() => {

@@ -96,14 +96,6 @@ const RegisterScreen = ({ navigation }) => {
                             phoneNumber: phoneNumber,
                         })
                         .then(() => {
-                            db.collection("publicNotifications").add({
-                                title: "New member in the Ligtning Family!!",
-                                message: `${email} Joined the Ligtning Family!! Yippie!!`,
-                                timestamp:
-                                    firebase.firestore.FieldValue.serverTimestamp(),
-                            });
-                        })
-                        .then(() => {
                             db.collection("users")
                                 .doc(authUser.user.uid)
                                 .collection("notifications")
@@ -113,6 +105,24 @@ const RegisterScreen = ({ navigation }) => {
                                     timestamp:
                                         firebase.firestore.FieldValue.serverTimestamp(),
                                 });
+                        })
+                        .then(() => {
+                            db.collection("users").doc(authUser.user.uid).set({
+                                uid: authUser.user.uid,
+                                email: email,
+                                displayName: name,
+                                photoURL: avatar,
+                                phoneNumber: phoneNumber,
+                                emailVerified: authUser.user.emailVerified,
+                            });
+                        })
+                        .then(() => {
+                            db.collection("publicNotifications").add({
+                                title: "New member in the Ligtning Family!!",
+                                message: `${email} Joined the Ligtning Family!! Yippie!!`,
+                                timestamp:
+                                    firebase.firestore.FieldValue.serverTimestamp(),
+                            });
                         });
                 })
                 .catch((error) => {
@@ -141,7 +151,11 @@ const RegisterScreen = ({ navigation }) => {
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     onChangeText={(text) => setName(text)}
                     leftIcon={() => (
-                        <FontAwesome5 name="user-alt" size={24} color="black" />
+                        <FontAwesome5
+                            name="user-alt"
+                            size={24}
+                            style={globalStyles.inputBarIcon}
+                        />
                     )}
                 />
 
@@ -151,7 +165,11 @@ const RegisterScreen = ({ navigation }) => {
                     value={email}
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     leftIcon={() => (
-                        <MaterialIcons name="email" size={24} color="black" />
+                        <MaterialIcons
+                            name="email"
+                            size={24}
+                            style={globalStyles.inputBarIcon}
+                        />
                     )}
                     onChangeText={(text) => setEmail(text)}
                 />
@@ -168,7 +186,7 @@ const RegisterScreen = ({ navigation }) => {
                             <MaterialIcons
                                 name="lock"
                                 size={24}
-                                color="black"
+                                style={globalStyles.inputBarIcon}
                             />
                         )}
                     />
@@ -207,7 +225,7 @@ const RegisterScreen = ({ navigation }) => {
                             <MaterialIcons
                                 name="lock"
                                 size={24}
-                                color="black"
+                                style={globalStyles.inputBarIcon}
                             />
                         )}
                     />
@@ -238,7 +256,11 @@ const RegisterScreen = ({ navigation }) => {
                     value={phoneNumber}
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     leftIcon={() => (
-                        <Entypo name="phone" size={24} color="black" />
+                        <Entypo
+                            name="phone"
+                            size={24}
+                            style={globalStyles.inputBarIcon}
+                        />
                     )}
                     onChangeText={(text) => setPhoneNumber(text)}
                 />

@@ -14,6 +14,9 @@ export default StyleSheet.create({
         padding: 10,
         color: colorScheme === "dark" ? "#fff" : "#000000",
     },
+    inputBarIcon: {
+        color: colorScheme === "dark" ? "#fff" : "#000000",
+    },
     text: {
         color: colorScheme === "dark" ? "#fff" : "#000000",
     },

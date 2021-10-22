@@ -56,6 +56,11 @@ const ChangeEmailScreen = ({ navigation }) => {
                         });
                 })
                 .then(() => {
+                    db.collection("users").doc(user?.uid).set({
+                        email: email,
+                    });
+                })
+                .then(() => {
                     setEmail("");
                     setPreviousEmail(email);
                     navigation.jumpTo("Home");

@@ -132,7 +132,11 @@ const LoginScreen = ({ navigation }) => {
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     onChangeText={(text) => setEmail(text)}
                     leftIcon={() => (
-                        <MaterialIcons name="email" size={24} color="black" />
+                        <MaterialIcons
+                            name="email"
+                            size={24}
+                            style={globalStyles.inputBarIcon}
+                        />
                     )}
                 />
                 <View style={styles.passwordContainer}>
@@ -147,7 +151,7 @@ const LoginScreen = ({ navigation }) => {
                             <MaterialIcons
                                 name="lock"
                                 size={24}
-                                color="black"
+                                style={globalStyles.inputBarIcon}
                             />
                         )}
                         onSubmitEditing={signInEmail}

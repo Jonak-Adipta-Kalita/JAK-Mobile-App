@@ -55,6 +55,11 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
                 .then(() => {
+                    db.collection("users").doc(user?.uid).set({
+                        phoneNumber: phoneNumber,
+                    });
+                })
+                .then(() => {
                     setPhoneNumber("");
                     setPreviousPhoneNumber(phoneNumber);
                     navigation.jumpTo("Home");

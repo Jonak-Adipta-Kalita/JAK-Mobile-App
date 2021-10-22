@@ -76,6 +76,11 @@ const SettingsScreen = ({ navigation }) => {
                     );
                 })
                 .then(() => {
+                    db.collection("users").doc(user?.uid).set({
+                        emailVerified: true,
+                    });
+                })
+                .then(() => {
                     navigation.navigate("Home");
                 })
                 .catch((error) => {
