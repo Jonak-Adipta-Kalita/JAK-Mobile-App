@@ -1,10 +1,25 @@
 import React from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import {
+    View,
+    StyleSheet,
+    ActivityIndicator,
+    useColorScheme,
+} from "react-native";
 import PropTypes from "prop-types";
 
 const LoadingIndicator = ({ containerStyle, dimensions }) => {
+    const colorScheme = useColorScheme();
+
     return (
-        <View style={[containerStyle, styles.container]}>
+        <View
+            style={[
+                containerStyle,
+                styles.container,
+                {
+                    backgroundColor: colorScheme === "dark" ? "#202124" : "#fff",
+                },
+            ]}
+        >
             <ActivityIndicator
                 size="large"
                 style={dimensions}
