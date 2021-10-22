@@ -117,8 +117,8 @@ const LoginScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
-	
-	const dispatch = useDispatch();
+
+    const dispatch = useDispatch();
 
     return (
         <View style={styles.container}>
