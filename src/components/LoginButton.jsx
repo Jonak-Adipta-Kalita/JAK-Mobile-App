@@ -24,7 +24,7 @@ const LoginButton = ({ brand }) => {
         ]);
     }
     if (!assets) {
-        return <LoadingIndicator dimensions={styles.dimensions} />;
+        return <LoadingIndicator dimensions={{ width: 70, height: 70 }} />;
     }
     const signIn = async () => {
         if (brand === "google") {
@@ -50,8 +50,4 @@ export default LoginButton;
 
 const styles = StyleSheet.create({
     container: {},
-    dimensions: {
-        width: 70,
-        height: 70,
-    },
 });

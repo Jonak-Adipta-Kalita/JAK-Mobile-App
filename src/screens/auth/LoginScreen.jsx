@@ -24,6 +24,7 @@ import {
 import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
     const showPassword = useSelector(selectShowPassword);
 
     const [email, setEmail] = useState("");
@@ -33,9 +34,10 @@ const LoginScreen = ({ navigation }) => {
         const unSubscribe = auth.onAuthStateChanged((authUser) => {
             if (authUser) navigation.replace("Home");
         });
+
         return unSubscribe;
     }, []);
-
+  
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
             .then((authUser) => {
@@ -117,8 +119,6 @@ const LoginScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
-
-    const dispatch = useDispatch();
 
     return (
         <View style={styles.container}>

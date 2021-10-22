@@ -27,6 +27,9 @@ import firebase from "firebase";
 import PropTypes from "prop-types";
 
 const RegisterScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const showPassword = useSelector(selectShowPassword);
+  
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -35,9 +38,6 @@ const RegisterScreen = ({ navigation }) => {
     const [avatar] = useState(
         "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011"
     );
-
-    const dispatch = useDispatch();
-    const showPassword = useSelector(selectShowPassword);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -130,7 +130,7 @@ const RegisterScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <Text h3 style={{ marginBottom: 50 }}>
+            <Text h3 style={[globalStyles.text, { marginBottom: 50 }]}>
                 Create an Account
             </Text>
             <View style={styles.inputContainer}>

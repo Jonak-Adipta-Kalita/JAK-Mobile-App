@@ -33,7 +33,7 @@ const PrivateScreen = ({ navigation }) => {
     }, [navigation]);
 
     if (loading) {
-        return <LoadingIndicator dimensions={styles.dimensions} />;
+        return <LoadingIndicator dimensions={{ width: 70, height: 70 }} />;
     }
     return (
         <View style={styles.container}>
@@ -60,8 +60,4 @@ export default PrivateScreen;
 
 const styles = StyleSheet.create({
     container: {},
-    dimensions: {
-        width: 70,
-        height: 70,
-    },
 });
