@@ -16,7 +16,8 @@ const LoadingIndicator = ({ containerStyle, dimensions }) => {
                 containerStyle,
                 styles.container,
                 {
-                    backgroundColor: colorScheme === "dark" ? "#202124" : "#fff",
+                    backgroundColor:
+                        colorScheme === "dark" ? "#202124" : "#fff",
                 },
             ]}
         >

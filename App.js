@@ -1,10 +1,6 @@
 import React from "react";
 import "react-native-gesture-handler";
-import {
-    NavigationContainer,
-    DefaultTheme,
-    DarkTheme,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import {
     Platform,
@@ -14,6 +10,8 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import { Provider as ReduxProvider } from "react-redux";
+import LightTheme from "./src/themes/LightTheme";
+import DarkTheme from "./src/themes/DarkTheme";
 import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 
@@ -88,7 +86,7 @@ const App = () => {
     return (
         <ReduxProvider store={store}>
             <NavigationContainer
-                theme={scheme === "dark" ? DarkTheme : DefaultTheme}
+                theme={scheme === "dark" ? DarkTheme : LightTheme}
             >
                 <DrawerNavigator />
             </NavigationContainer>
