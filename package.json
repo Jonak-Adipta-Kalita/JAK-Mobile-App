@@ -44,7 +44,7 @@
         "@react-navigation/stack": "^5.14.5",
         "@reduxjs/toolkit": "^1.6.2",
         "expo": "^42.0.0",
-        "expo-asset": "~8.3.3",
+        "expo-asset": "~8.4.3",
         "expo-font": "~9.2.1",
         "expo-status-bar": "~1.0.4",
         "firebase": "8.2.3",
