@@ -13,6 +13,8 @@ import {
     useColorScheme,
 } from "react-native";
 import { useFonts } from "expo-font";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 
 const _setTimeout = global.setTimeout;
@@ -84,11 +86,13 @@ const App = () => {
     }
 
     return (
-        <NavigationContainer
-            theme={scheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-            <DrawerNavigator />
-        </NavigationContainer>
+        <ReduxProvider store={store}>
+            <NavigationContainer
+                theme={scheme === "dark" ? DarkTheme : DefaultTheme}
+            >
+                <DrawerNavigator />
+            </NavigationContainer>
+        </ReduxProvider>
     );
 };
 

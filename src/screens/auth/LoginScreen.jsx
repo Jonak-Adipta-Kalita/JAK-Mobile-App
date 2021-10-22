@@ -16,12 +16,20 @@ import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
 import firebase from "firebase";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    setShowPassword,
+    selectShowPassword,
+} from "../../redux/slices/showPasswordSlice";
 import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
-    const [showPassword, setShowPassword] = useState(false);
+    const dispatch = useDispatch();
+    const showPassword = useSelector(selectShowPassword);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
     useEffect(() => {
         const unSubscribe = auth.onAuthStateChanged((authUser) => {
             if (authUser) navigation.replace("Home");
@@ -29,26 +37,7 @@ const LoginScreen = ({ navigation }) => {
 
         return unSubscribe;
     }, []);
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Login!!",
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={{
-                            alignItems: "flex-start",
-                            margin: 20,
-                        }}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} color="white" />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
-        });
-    }, [navigation]);
-
+  
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
             .then((authUser) => {
@@ -112,6 +101,25 @@ const LoginScreen = ({ navigation }) => {
         }
     };
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: "Login!!",
+            headerLeft: () => (
+                <SafeAreaView style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        style={{
+                            alignItems: "flex-start",
+                            margin: 20,
+                        }}
+                        onPress={navigation.goBack}
+                    >
+                        <AntDesign name="arrowleft" size={24} color="white" />
+                    </TouchableOpacity>
+                </SafeAreaView>
+            ),
+        });
+    }, [navigation]);
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -146,7 +154,7 @@ const LoginScreen = ({ navigation }) => {
                     />
                     <TouchableOpacity
                         style={styles.showPasswordContainer}
-                        onPress={() => setShowPassword(!showPassword)}
+                        onPress={() => dispatch(setShowPassword())}
                     >
                         {showPassword ? (
                             <Feather

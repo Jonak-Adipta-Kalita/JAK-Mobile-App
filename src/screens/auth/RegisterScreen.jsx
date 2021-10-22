@@ -18,11 +18,18 @@ import {
 } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    setShowPassword,
+    selectShowPassword,
+} from "../../redux/slices/showPasswordSlice";
 import firebase from "firebase";
 import PropTypes from "prop-types";
 
 const RegisterScreen = ({ navigation }) => {
-    const [showPassword, setShowPassword] = useState(false);
+    const dispatch = useDispatch();
+    const showPassword = useSelector(selectShowPassword);
+  
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -169,7 +176,7 @@ const RegisterScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                         style={styles.showPasswordContainer}
-                        onPress={() => setShowPassword(!showPassword)}
+                        onPress={() => dispatch(setShowPassword())}
                     >
                         {showPassword ? (
                             <Feather
@@ -208,7 +215,7 @@ const RegisterScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                         style={styles.showPasswordContainer}
-                        onPress={() => setShowPassword(!showPassword)}
+                        onPress={() => dispatch(setShowPassword())}
                     >
                         {showPassword ? (
                             <Feather
