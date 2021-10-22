@@ -5,7 +5,6 @@ import {
     SafeAreaView,
     TouchableOpacity,
     Alert,
-    Platform,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
@@ -29,7 +28,7 @@ import PropTypes from "prop-types";
 const RegisterScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const showPassword = useSelector(selectShowPassword);
-  
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -175,7 +174,7 @@ const RegisterScreen = ({ navigation }) => {
                     />
 
                     <TouchableOpacity
-                        style={styles.showPasswordContainer}
+                        style={globalStyles.showPasswordContainer}
                         onPress={() => dispatch(setShowPassword())}
                     >
                         {showPassword ? (
@@ -183,14 +182,14 @@ const RegisterScreen = ({ navigation }) => {
                                 name="eye"
                                 size={20}
                                 color="black"
-                                style={styles.showPasswordIcon}
+                                style={globalStyles.showPasswordIcon}
                             />
                         ) : (
                             <Feather
                                 name="eye-off"
                                 size={20}
                                 color="black"
-                                style={styles.showPasswordIcon}
+                                style={globalStyles.showPasswordIcon}
                             />
                         )}
                     </TouchableOpacity>
@@ -214,22 +213,20 @@ const RegisterScreen = ({ navigation }) => {
                     />
 
                     <TouchableOpacity
-                        style={styles.showPasswordContainer}
+                        style={globalStyles.showPasswordContainer}
                         onPress={() => dispatch(setShowPassword())}
                     >
                         {showPassword ? (
                             <Feather
                                 name="eye"
                                 size={20}
-                                color="black"
-                                style={styles.showPasswordIcon}
+                                style={globalStyles.showPasswordIcon}
                             />
                         ) : (
                             <Feather
                                 name="eye-off"
                                 size={20}
-                                color="black"
-                                style={styles.showPasswordIcon}
+                                style={globalStyles.showPasswordIcon}
                             />
                         )}
                     </TouchableOpacity>
@@ -272,14 +269,6 @@ const styles = StyleSheet.create({
     passwordContainer: {
         position: "relative",
     },
-    showPasswordContainer: {
-        position: "absolute",
-        right: 15,
-        bottom:
-            Platform.OS === "android" ? 35 : Platform.OS === "ios" ? 35 : 17,
-        height: 24,
-        width: 24,
-    },
     inputContainer: {
         width: 300,
     },
@@ -287,5 +276,4 @@ const styles = StyleSheet.create({
         width: 200,
         marginTop: 10,
     },
-    showPasswordIcon: {},
 });

@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
 
         return unSubscribe;
     }, []);
-  
+
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
             .then((authUser) => {
@@ -153,22 +153,20 @@ const LoginScreen = ({ navigation }) => {
                         onSubmitEditing={signInEmail}
                     />
                     <TouchableOpacity
-                        style={styles.showPasswordContainer}
+                        style={globalStyles.showPasswordContainer}
                         onPress={() => dispatch(setShowPassword())}
                     >
                         {showPassword ? (
                             <Feather
                                 name="eye"
                                 size={20}
-                                color="black"
-                                style={styles.showPasswordIcon}
+                                style={globalStyles.showPasswordIcon}
                             />
                         ) : (
                             <Feather
                                 name="eye-off"
                                 size={20}
-                                color="black"
-                                style={styles.showPasswordIcon}
+                                style={globalStyles.showPasswordIcon}
                             />
                         )}
                     </TouchableOpacity>
@@ -210,14 +208,6 @@ const styles = StyleSheet.create({
     passwordContainer: {
         position: "relative",
     },
-    showPasswordContainer: {
-        position: "absolute",
-        right: 15,
-        bottom:
-            Platform.OS === "android" ? 35 : Platform.OS === "ios" ? 35 : 17,
-        height: 24,
-        width: 24,
-    },
     button: {
         width: 200,
         marginTop: 10,
@@ -226,5 +216,4 @@ const styles = StyleSheet.create({
         width: 300,
         marginTop: 40,
     },
-    showPasswordIcon: {},
 });
