@@ -75,7 +75,7 @@
         "eslint-plugin-react": "^7.26.1",
         "firebase-tools": "^9.19.0",
         "husky": "^7.0.2",
-        "jest-expo": "^42.0.0",
+        "jest-expo": "^43.0.1",
         "prettier": "^2.4.1"
     },
     "private": true
