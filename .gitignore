@@ -19,6 +19,8 @@ build
 !__tests__/custom/loginButtons/ios
 !assets/loginButtons/android
 !assets/loginButtons/ios
+google-services.json
+GoogleService-Info.plist
 
 # macOS
 .DS_Store

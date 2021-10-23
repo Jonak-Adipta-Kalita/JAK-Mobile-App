@@ -47,6 +47,20 @@ enable Google Analytics. Now click on the Web Icon and create an app. After you 
 an app click on the cog icon in the sidebar and click on Project Settings. Scroll to the
 Bottom where you will find your app now click on Config. Copy the Config.
 
+#### Get `google-services.json`
+
+Go to [Firebase Console](http://console.firebase.google.com/) and Select your Project.
+Click on the cog icon in the sidebar and click on Project Settings. Now in bottom click on
+`Add App` and select the Android Logo. Now register your Android app and also don't forget to
+download the `google-services.json` and put it in the Base Directory of the Project.
+
+#### Get `GoogleService-Info.plist`
+
+Go to [Firebase Console](http://console.firebase.google.com/) and Select your Project.
+Click on the cog icon in the sidebar and click on Project Settings. Now in bottom click on
+`Add App` and select the IOS Logo. Now register your IOS app and also don't forget to
+download the `GoogleService-Info.plist` and put it in the Base Directory of the Project.
+
 #### Enabling Firebase Authentication
 
 In the Project in Firebase click on Authentication in the Sidebar. Enable
