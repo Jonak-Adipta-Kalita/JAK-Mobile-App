@@ -17,16 +17,16 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.beastnighttv.jakmobileapp",
-			"buildNumber": "0.0.1"
+            "buildNumber": "0.0.1"
         },
         "android": {
-			"permissions": [],
+            "permissions": [],
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#FFFFFF"
             },
             "package": "com.beastnighttv.jakmobileapp",
-			"googleServicesFile": "./google-services.json"
+            "googleServicesFile": "./google-services.json"
         },
         "web": {
             "favicon": "./assets/images/favicon.png"
