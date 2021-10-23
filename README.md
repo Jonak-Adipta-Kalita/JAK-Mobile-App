@@ -42,10 +42,10 @@ and hit enter.
 
 ### Getting Firebase Credentials
 
-Go to [Firebase Console](http://console.firebase.google.com/) and create a Project. Don't
-enable Google Analytics. Now click on the Web Icon and create an app. After you created
-an app click on the cog icon in the sidebar and click on Project Settings. Scroll to the
-Bottom where you will find your app now click on Config. Copy the Config.
+Go to [Firebase Console](http://console.firebase.google.com/) and create a Project. Enable 
+Google Analytics. Now click on the Web Icon and create an app. After you created an app 
+click on the cog icon in the sidebar and click on Project Settings. Scroll to the Bottom
+where you will find your app now click on Config. Copy the Config.
 
 #### Get `google-services.json`
 
