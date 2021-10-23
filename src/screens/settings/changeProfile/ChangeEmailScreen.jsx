@@ -13,6 +13,7 @@ import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import globalStyles from "../../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
+import pushPrivateNotification from "../../../notify/privateNotification";
 import PropTypes from "prop-types";
 
 const ChangeEmailScreen = ({ navigation }) => {
@@ -45,20 +46,20 @@ const ChangeEmailScreen = ({ navigation }) => {
         } else {
             user?.updateEmail(email)
                 .then(() => {
-                    db.collection("users")
-                        .doc(user?.uid)
-                        .collection("notifications")
-                        .add({
-                            title: "Email Changed Successfully!!",
-                            message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
-                            timestamp:
-                                firebase.firestore.FieldValue.serverTimestamp(),
-                        });
+                    pushPrivateNotification(user?.uid, {
+                        title: "Email Changed Successfully!!",
+                        message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
+                        timestamp:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                    });
                 })
                 .then(() => {
-                    db.collection("users").doc(user?.uid).set({
-                        email: email,
-                    });
+                    db.collection("users").doc(user?.uid).set(
+                        {
+                            email: email,
+                        },
+                        { merge: true }
+                    );
                 })
                 .then(() => {
                     setEmail("");

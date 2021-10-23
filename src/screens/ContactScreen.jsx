@@ -12,6 +12,7 @@ import { Input, Button } from "react-native-elements";
 import { db, auth } from "../firebase";
 import firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import pushPrivateNotification from "../notify/privateNotification";
 import globalStyles from "../globalStyles";
 import PropTypes from "prop-types";
 
@@ -59,16 +60,13 @@ const ContactScreen = ({ navigation }) => {
                         message: message,
                     })
                     .then(() => {
-                        db.collection("users")
-                            .doc(user?.uid)
-                            .collection("notifications")
-                            .add({
-                                title: "Request to Contact Sent!!",
-                                message:
-                                    "Your Request to Contact has been Successfully Sent!!",
-                                timestamp:
-                                    firebase.firestore.FieldValue.serverTimestamp(),
-                            });
+                        pushPrivateNotification(user?.uid, {
+                            title: "Request to Contact Sent!!",
+                            message:
+                                "Your Request to Contact has been Successfully Sent!!",
+                            timestamp:
+                                firebase.firestore.FieldValue.serverTimestamp(),
+                        });
                     })
                     .then(() => {
                         setName("");

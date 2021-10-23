@@ -14,6 +14,7 @@ import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
 import globalStyles from "../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
+import pushPublicNotification from "../../notify/publicNotification";
 import LoadingIndicator from "../../components/Loading";
 import PropTypes from "prop-types";
 
@@ -22,7 +23,7 @@ const SettingsScreen = ({ navigation }) => {
     const signOut = () => {
         auth.signOut()
             .then(() =>
-                db.collection("publicNotifications").add({
+                pushPublicNotification({
                     title: "Member left the Ligtning Family!!",
                     message:
                         "Someone left the Ligtning Family!! But I am sure He/She will return for sure!!",
@@ -45,7 +46,7 @@ const SettingsScreen = ({ navigation }) => {
                 db.collection("users").doc(userUID).delete();
             })
             .then(() => {
-                db.collection("publicNotifications").add({
+                pushPublicNotification({
                     title: "Someone left us Forever!!",
                     message: "Someone left the Family forever!! Noooooooo!!",
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -76,9 +77,12 @@ const SettingsScreen = ({ navigation }) => {
                     );
                 })
                 .then(() => {
-                    db.collection("users").doc(user?.uid).set({
-                        emailVerified: true,
-                    });
+                    db.collection("users").doc(user?.uid).set(
+                        {
+                            emailVerified: true,
+                        },
+                        { merge: true }
+                    );
                 })
                 .then(() => {
                     navigation.navigate("Home");

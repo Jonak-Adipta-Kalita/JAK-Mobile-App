@@ -23,6 +23,8 @@ import {
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
 import firebase from "firebase";
+import pushPrivateNotification from "../../notify/privateNotification";
+import pushPublicNotification from "../../notify/publicNotification";
 import PropTypes from "prop-types";
 
 const RegisterScreen = ({ navigation }) => {
@@ -96,15 +98,12 @@ const RegisterScreen = ({ navigation }) => {
                             phoneNumber: phoneNumber,
                         })
                         .then(() => {
-                            db.collection("users")
-                                .doc(authUser.user.uid)
-                                .collection("notifications")
-                                .add({
-                                    title: "Welcome!!",
-                                    message: `Welcome ${email}. Nice to meet you!!`,
-                                    timestamp:
-                                        firebase.firestore.FieldValue.serverTimestamp(),
-                                });
+                            pushPrivateNotification(authUser.user.uid, {
+                                title: "Welcome!!",
+                                message: `Welcome ${email}. Nice to meet you!!`,
+                                timestamp:
+                                    firebase.firestore.FieldValue.serverTimestamp(),
+                            });
                         })
                         .then(() => {
                             db.collection("users").doc(authUser.user.uid).set({
@@ -117,7 +116,7 @@ const RegisterScreen = ({ navigation }) => {
                             });
                         })
                         .then(() => {
-                            db.collection("publicNotifications").add({
+                            pushPublicNotification({
                                 title: "New member in the Ligtning Family!!",
                                 message: `${email} Joined the Ligtning Family!! Yippie!!`,
                                 timestamp:

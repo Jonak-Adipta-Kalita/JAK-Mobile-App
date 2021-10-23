@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
-import { auth, db } from "../../firebase";
+import { auth } from "../../firebase";
 import globalStyles from "../../globalStyles";
 import firebase from "firebase";
 import PropTypes from "prop-types";
@@ -21,6 +21,8 @@ import {
     setShowPassword,
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
+import pushPrivateNotification from "../../notify/privateNotification";
+import pushPublicNotification from "../../notify/publicNotification";
 import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
@@ -41,24 +43,18 @@ const LoginScreen = ({ navigation }) => {
     const signInEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
             .then((authUser) => {
-                db.collection("publicNotifications")
-                    .add({
-                        title: "Member came back to the Ligtning Family!!",
-                        message: `${email} came back to the Ligtning Family!! Yippie!!`,
+                pushPublicNotification({
+                    title: "Member came back to the Ligtning Family!!",
+                    message: `${email} came back to the Ligtning Family!! Yippie!!`,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                }).then(() => {
+                    pushPrivateNotification(authUser.user.uid, {
+                        title: "Welcome Back!!",
+                        message: `Welcome back ${email}. Nice to meet you again!!`,
                         timestamp:
                             firebase.firestore.FieldValue.serverTimestamp(),
-                    })
-                    .then(() => {
-                        db.collection("users")
-                            .doc(authUser.user.uid)
-                            .collection("notifications")
-                            .add({
-                                title: "Welcome Back!!",
-                                message: `Welcome back ${email}. Nice to meet you again!!`,
-                                timestamp:
-                                    firebase.firestore.FieldValue.serverTimestamp(),
-                            });
                     });
+                });
             })
             .catch((error) => {
                 Alert.alert("Error Occured!!", error.message, [

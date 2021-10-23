@@ -12,6 +12,7 @@ import { Input, Button } from "react-native-elements";
 import { auth, db } from "../../../firebase";
 import firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import pushPrivateNotification from "../../../notify/privateNotification";
 import globalStyles from "../../../globalStyles";
 import PropTypes from "prop-types";
 
@@ -45,19 +46,19 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                 ]
             );
         } else {
-            //TODO: Change or Set Phone Number
-            db.collection("users")
-                .doc(user?.uid)
-                .collection("notifications")
-                .add({
-                    title: "Phone Number Changed Successfully!!",
-                    message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                })
+            //TODO: Change Phone Number
+            pushPrivateNotification(user?.uid, {
+                title: "Phone Number Changed Successfully!!",
+                message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
                 .then(() => {
-                    db.collection("users").doc(user?.uid).set({
-                        phoneNumber: phoneNumber,
-                    });
+                    db.collection("users").doc(user?.uid).set(
+                        {
+                            phoneNumber: phoneNumber,
+                        },
+                        { merge: true }
+                    );
                 })
                 .then(() => {
                     setPhoneNumber("");

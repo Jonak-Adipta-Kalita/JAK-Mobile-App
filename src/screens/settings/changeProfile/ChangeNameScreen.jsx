@@ -13,6 +13,7 @@ import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import globalStyles from "../../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
+import pushPrivateNotification from "../../../notify/privateNotification";
 import PropTypes from "prop-types";
 
 const ChangeNameScreen = ({ navigation }) => {
@@ -47,20 +48,20 @@ const ChangeNameScreen = ({ navigation }) => {
                 displayName: name,
             })
                 .then(() => {
-                    db.collection("users")
-                        .doc(user?.uid)
-                        .collection("notifications")
-                        .add({
-                            title: "Name Changed Successfully!!",
-                            message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
-                            timestamp:
-                                firebase.firestore.FieldValue.serverTimestamp(),
-                        });
+                    pushPrivateNotification(user?.uid, {
+                        title: "Name Changed Successfully!!",
+                        message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
+                        timestamp:
+                            firebase.firestore.FieldValue.serverTimestamp(),
+                    });
                 })
                 .then(() => {
-                    db.collection("users").doc(user?.uid).set({
-                        displayName: name,
-                    });
+                    db.collection("users").doc(user?.uid).set(
+                        {
+                            displayName: name,
+                        },
+                        { merge: true }
+                    );
                 })
                 .then(() => {
                     setName("");
