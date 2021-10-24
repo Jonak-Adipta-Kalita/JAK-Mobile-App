@@ -31,9 +31,9 @@ export default StyleSheet.create({
     showPasswordIcon: {
         color: colorScheme === "dark" ? "#fff" : "#000000",
     },
-	headerIcon: {
-		alignItems: "flex-start",
-		margin: 20,
-		marginBottom: 5,
-	}
+    headerIcon: {
+        alignItems: "flex-start",
+        margin: 20,
+        marginBottom: 5,
+    },
 });
