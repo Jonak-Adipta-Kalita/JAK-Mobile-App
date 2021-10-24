@@ -25,8 +25,7 @@
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#FFFFFF"
             },
-            "package": "com.beastnighttv.jakmobileapp",
-            "googleServicesFile": "./google-services.json"
+            "package": "com.beastnighttv.jakmobileapp"
         },
         "web": {
             "favicon": "./assets/images/favicon.png"
