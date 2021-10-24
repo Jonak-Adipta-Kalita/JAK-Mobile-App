@@ -14,6 +14,7 @@ import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "react-native-elements";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import globalStyles from "../../globalStyles";
 import PropTypes from "prop-types";
 
 const HomeScreen = ({ navigation }) => {
@@ -51,7 +52,7 @@ const HomeScreen = ({ navigation }) => {
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
-                        style={{ alignItems: "flex-start", margin: 20 }}
+                        style={globalStyles.headerIcon}
                         onPress={navigation.toggleDrawer}
                     >
                         <FontAwesome5 name="bars" size={24} />
@@ -62,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
                 <SafeAreaView style={{ flex: 1 }}>
                     {user && (
                         <TouchableOpacity
-                            style={{ alignItems: "flex-start", margin: 20 }}
+                            style={globalStyles.headerIcon}
                             onPress={() => navigation.navigate("Notification")}
                         >
                             <Ionicons name="notifications-outline" size={24} />

@@ -103,7 +103,7 @@ const SettingsScreen = ({ navigation }) => {
             headerLeft: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
-                        style={{ alignItems: "flex-start", margin: 20 }}
+                        style={globalStyles.headerIcon}
                         onPress={navigation.goBack}
                     >
                         <AntDesign name="arrowleft" size={24} />
@@ -114,7 +114,7 @@ const SettingsScreen = ({ navigation }) => {
                 <SafeAreaView style={{ flex: 1 }}>
                     {!user?.emailVerified && (
                         <TouchableOpacity
-                            style={{ alignItems: "flex-start", margin: 20 }}
+                            style={globalStyles.headerIcon}
                             onPress={verifyEmail}
                         >
                             <MaterialCommunityIcons
