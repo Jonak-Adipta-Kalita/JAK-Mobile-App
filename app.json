@@ -10,19 +10,19 @@
             "resizeMode": "contain",
             "backgroundColor": "#ffffff"
         },
-		"privacy": "public",
-		"githubUrl": "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App",
+        "privacy": "public",
+        "githubUrl": "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App",
         "updates": {
             "fallbackToCacheTimeout": 0
         },
         "assetBundlePatterns": ["**/*"],
-		"notification": {
-			"icon": "./assets/images/icon.png",
-			"color": "#C14580",
-			"androidMode": "collapse",
-			"iosDisplayInForeground": false,
-			"androidCollapsedTitle": "{unread_notifications} new Notifications from JAK Mobile App!!",
-		},
+        "notification": {
+            "icon": "./assets/images/icon.png",
+            "color": "#C14580",
+            "androidMode": "collapse",
+            "iosDisplayInForeground": false,
+            "androidCollapsedTitle": "{unread_notifications} new Notifications from JAK Mobile App!!"
+        },
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.beastnighttv.jakmobileapp",
