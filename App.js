@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
@@ -14,6 +14,8 @@ import LightTheme from "./src/themes/LightTheme";
 import DarkTheme from "./src/themes/DarkTheme";
 import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
+import { registerForPushNotificationsAsync } from "./src/pushNotification/register";
+import * as Notifications from "expo-notifications";
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
@@ -58,12 +60,42 @@ if (Platform.OS === "android") {
     };
 }
 
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: false,
+    }),
+});
+
 const App = () => {
     const scheme = useColorScheme();
-
     const [loaded, error] = useFonts({
         OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
     });
+    const [expoPushToken, setExpoPushToken] = useState("");
+    const [notification, setNotification] = useState(false);
+    const notificationListener = useRef();
+
+    useEffect(() => {
+        registerForPushNotificationsAsync().then((token) =>
+            setExpoPushToken(token)
+        );
+
+        notificationListener.current =
+            Notifications.addNotificationReceivedListener((_notification) => {
+                setNotification(_notification);
+            });
+
+        return () => {
+            Notifications.removeNotificationSubscription(
+                notificationListener.current
+            );
+        };
+    }, []);
+	
+	console.log(expoPushToken);
+	console.log(notification);
 
     if (error) {
         Alert.alert("Error Occured", error.message, [
