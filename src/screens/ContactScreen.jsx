@@ -40,10 +40,10 @@ const ContactScreen = ({ navigation }) => {
                         },
                     ]
                 );
-            } else if (email !== user?.email) {
+            } else if (email !== user?.email || name !== user?.displayName) {
                 Alert.alert(
-                    "Email not Correct!!",
-                    "Please Enter your Email Correctly!!",
+                    "Some Values are not Correct!!",
+                    "Please Enter your Value Correctly!!",
                     [
                         {
                             text: "OK",

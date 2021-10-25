@@ -1,6 +1,6 @@
 {
     "expo": {
-        "name": "JAK-Mobile-App",
+        "name": "jak-mobile-app",
         "slug": "JAK-Mobile-App",
         "version": "0.0.1",
         "orientation": "portrait",
@@ -10,6 +10,8 @@
             "resizeMode": "contain",
             "backgroundColor": "#ffffff"
         },
+		"privacy": "public",
+        "githubUrl": "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App",
         "updates": {
             "fallbackToCacheTimeout": 0
         },
@@ -25,7 +27,8 @@
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#FFFFFF"
             },
-            "package": "com.beastnighttv.jakmobileapp"
+			"package": "com.beastnighttv.jakmobileapp",
+            "googleServicesFile": "./google-services.json"
         },
         "web": {
             "favicon": "./assets/images/favicon.png"
