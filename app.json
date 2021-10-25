@@ -16,6 +16,13 @@
             "fallbackToCacheTimeout": 0
         },
         "assetBundlePatterns": ["**/*"],
+        "notification": {
+            "icon": "./assets/images/icon.png",
+            "color": "#C14580",
+            "androidMode": "collapse",
+            "iosDisplayInForeground": false,
+            "androidCollapsedTitle": "{unread_notifications} new Notifications from JAK Mobile App!!"
+        },
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.beastnighttv.jakmobileapp",
