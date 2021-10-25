@@ -9668,9 +9668,10 @@ react-native-web@0.17.1:
     normalize-css-color "^1.0.2"
     prop-types "^15.6.0"
 
-"react-native@https://github.com/expo/react-native/archive/sdk-43.tar.gz":
+react-native@0.64.2:
   version "0.64.2"
-  resolved "https://github.com/expo/react-native/archive/sdk-43.tar.gz#7904fd21709a64ff861997aef9d5c64bbeadaea7"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.64.2.tgz#233b6ed84ac4749c8bc2a2d6cf63577a1c437d18"
+  integrity sha512-Ty/fFHld9DcYsFZujXYdeVjEhvSeQcwuTGXezyoOkxfiGEGrpL/uwUZvMzwShnU4zbbTKDu2PAm/uwuOittRGA==
   dependencies:
     "@jest/create-cache-key-function" "^26.5.0"
     "@react-native-community/cli" "^5.0.1-alpha.1"

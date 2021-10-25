@@ -100,9 +100,9 @@ and paste it in `.env` but change the credentials.
 If you are in Windows: Download [Android Studio](https://developer.android.com/studio)
 
 ```bash
-npm run android
+npm run start:android
 # or
-yarn android
+yarn start:android
 ```
 
 #### IOS
@@ -110,17 +110,17 @@ yarn android
 If you are in MAC: Download [XCode](https://developer.apple.com/xcode/)
 
 ```bash
-npm run ios
+npm run start:ios
 # or
-yarn ios
+yarn start:ios
 ```
 
 #### Web
 
 ```bash
-npm run web
+npm run start:web
 # or
-yarn web
+yarn start:web
 ```
 
 ### Deploying edited Firebase Rules or Indexes
