@@ -1,7 +1,14 @@
 import { db } from "../firebase";
 import propTypes from "prop-types";
+import { schedulePushNotification } from "../pushNotification/schedule";
 
-const pushPrivateNotification = (userUID, data) => {
+const pushPrivateNotification = async (userUID, data) => {
+	await schedulePushNotification({
+		title: data?.title,
+		body: data?.message,
+		data: data,
+	});
+	
     return db
         .collection("users")
         .doc(userUID)
