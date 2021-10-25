@@ -93,9 +93,9 @@ const App = () => {
             );
         };
     }, []);
-	
-	console.log(expoPushToken);
-	console.log(notification);
+
+    console.log(expoPushToken);
+    console.log(notification);
 
     if (error) {
         Alert.alert("Error Occured", error.message, [
