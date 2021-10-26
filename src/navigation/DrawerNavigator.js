@@ -24,14 +24,14 @@ const DrawerNavigator = () => {
 
     return (
         <Drawer.Navigator
-			useLegacyImplementation
-			drawerContent={(props) => <CustomDrawer {...props} />}
-			defaultStatus="closed"
-			screenOptions={{
-				drawerType: isLargeScreen ? 'permanent' : 'back',
-				drawerStyle: isLargeScreen ? null : { width: '65%' },
-				overlayColor: 'transparent',
-			}}
+            useLegacyImplementation
+            drawerContent={(props) => <CustomDrawer {...props} />}
+            defaultStatus="closed"
+            screenOptions={{
+                drawerType: isLargeScreen ? "permanent" : "back",
+                drawerStyle: isLargeScreen ? null : { width: "65%" },
+                overlayColor: "transparent",
+            }}
         >
             <Drawer.Screen
                 name="Home"
