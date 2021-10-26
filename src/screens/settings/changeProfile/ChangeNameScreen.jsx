@@ -66,7 +66,7 @@ const ChangeNameScreen = ({ navigation }) => {
                 .then(() => {
                     setName("");
                     setPreviousName(name);
-                    navigation.jumpTo("Home");
+                    navigation.jumpTo("HomeDrawer");
                 })
                 .then(() => {
                     Alert.alert(

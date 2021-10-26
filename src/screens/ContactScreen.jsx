@@ -73,7 +73,7 @@ const ContactScreen = ({ navigation }) => {
                         setEmail("");
                         setPhoneNumber("");
                         setMessage("");
-                        navigation.jumpTo("Home");
+                        navigation.jumpTo("HomeDrawer");
                     })
                     .then(() => {
                         Alert.alert(

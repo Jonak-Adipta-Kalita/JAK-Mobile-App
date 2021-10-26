@@ -53,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
                 <SafeAreaView style={{ flex: 1 }}>
                     <TouchableOpacity
                         style={globalStyles.headerIcon}
-                        onPress={() => navigation.toggleDrawer()}
+                        onPress={() => navigation.openDrawer()}
                     >
                         <FontAwesome5 name="bars" size={24} />
                     </TouchableOpacity>
@@ -81,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
                     <Card.Title>About Me!!</Card.Title>
                     <Card.Divider />
                     <Button
-                        onPress={() => navigation.jumpTo("About")}
+                        onPress={() => navigation.jumpTo("AboutDrawer")}
                         title="Go to About Screen"
                     />
                 </Card>
@@ -89,7 +89,7 @@ const HomeScreen = ({ navigation }) => {
                     <Card.Title>Contact Me!!</Card.Title>
                     <Card.Divider />
                     <Button
-                        onPress={() => navigation.jumpTo("Contact")}
+                        onPress={() => navigation.jumpTo("ContactDrawer")}
                         title="Go to Contact Screen"
                     />
                 </Card>

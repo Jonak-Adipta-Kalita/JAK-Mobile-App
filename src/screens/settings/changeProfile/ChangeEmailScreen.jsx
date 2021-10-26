@@ -64,7 +64,7 @@ const ChangeEmailScreen = ({ navigation }) => {
                 .then(() => {
                     setEmail("");
                     setPreviousEmail(email);
-                    navigation.jumpTo("Home");
+                    navigation.jumpTo("HomeDrawer");
                 })
                 .then(() => {
                     Alert.alert(

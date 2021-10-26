@@ -24,20 +24,20 @@ const DrawerNavigator = () => {
 
     return (
         <Drawer.Navigator
-            useLegacyImplementation
             drawerContent={(props) => <CustomDrawer {...props} />}
             defaultStatus="closed"
             screenOptions={{
-                drawerType: isLargeScreen ? "permanent" : "back",
+                drawerType: isLargeScreen ? "permanent" : "front",
                 drawerStyle: isLargeScreen ? null : { width: "65%" },
                 overlayColor: "transparent",
                 headerShown: false,
             }}
         >
             <Drawer.Screen
-                name="Home"
+                name="HomeDrawer"
                 component={HomeStack}
                 options={{
+					drawerLabel: "Home",
                     drawerIcon: ({ color, size }) => (
                         <AntDesign
                             name="home"
@@ -48,9 +48,10 @@ const DrawerNavigator = () => {
                 }}
             />
             <Drawer.Screen
-                name="About"
+                name="AboutDrawer"
                 component={AboutStack}
                 options={{
+					drawerLabel: "About",
                     drawerIcon: ({ color, size }) => (
                         <AntDesign
                             name="exclamationcircleo"
@@ -61,9 +62,10 @@ const DrawerNavigator = () => {
                 }}
             />
             <Drawer.Screen
-                name="Contact"
+                name="ContactDrawer"
                 component={ContactStack}
                 options={{
+					drawerLabel: "Contact",
                     drawerIcon: ({ color, size }) => (
                         <AntDesign
                             name="phone"
@@ -75,9 +77,10 @@ const DrawerNavigator = () => {
             />
             {!user ? (
                 <Drawer.Screen
-                    name="Login"
+                    name="AuthDrawer"
                     component={AuthenticationStack}
                     options={{
+						drawerLabel: "Login",
                         drawerIcon: ({ color, size }) => (
                             <Entypo
                                 name="login"
@@ -89,9 +92,10 @@ const DrawerNavigator = () => {
                 />
             ) : (
                 <Drawer.Screen
-                    name="Profile"
+                    name="ProfileDrawer"
                     component={SettingsStack}
                     options={{
+						drawerLabel: "Profile",
                         drawerIcon: ({ color, size }) => (
                             <AntDesign
                                 name="setting"

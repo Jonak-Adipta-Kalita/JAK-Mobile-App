@@ -63,7 +63,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                 .then(() => {
                     setPhoneNumber("");
                     setPreviousPhoneNumber(phoneNumber);
-                    navigation.jumpTo("Home");
+                    navigation.jumpTo("HomeDrawer");
                 })
                 .then(() => {
                     Alert.alert(
