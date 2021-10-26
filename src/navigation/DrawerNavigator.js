@@ -31,6 +31,7 @@ const DrawerNavigator = () => {
                 drawerType: isLargeScreen ? "permanent" : "back",
                 drawerStyle: isLargeScreen ? null : { width: "65%" },
                 overlayColor: "transparent",
+				headerShown: false,
             }}
         >
             <Drawer.Screen

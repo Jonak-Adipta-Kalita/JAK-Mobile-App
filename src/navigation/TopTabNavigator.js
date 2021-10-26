@@ -5,9 +5,13 @@ import PrivateScreen from "../screens/home/notification/PrivateScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
+const TabScreenOptions = {
+	tabBarActiveTintColor: "#000000",
+};
+
 const NotificationTopTab = () => {
     return (
-        <Tab.Navigator initialRouteName="PublicNotifications">
+        <Tab.Navigator initialRouteName="PublicNotifications" screenOptions={TabScreenOptions}>
             <Tab.Screen name="PublicNotifications" component={PublicScreen} />
             <Tab.Screen name="PrivateNotifications" component={PrivateScreen} />
         </Tab.Navigator>
