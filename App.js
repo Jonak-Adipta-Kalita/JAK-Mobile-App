@@ -16,6 +16,7 @@ import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 import { registerForPushNotificationsAsync } from "./src/pushNotification/register";
 import * as Notifications from "expo-notifications";
+import { enableScreens } from "react-native-screens";
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
@@ -60,6 +61,8 @@ if (Platform.OS === "android") {
     };
 }
 
+enableScreens(true);
+
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
@@ -78,9 +81,9 @@ const App = () => {
     const notificationListener = useRef();
 
     useEffect(() => {
-        registerForPushNotificationsAsync().then((token) =>
-            setExpoPushToken(token)
-        );
+        registerForPushNotificationsAsync().then((token) => {
+            setExpoPushToken(token);
+        });
 
         notificationListener.current =
             Notifications.addNotificationReceivedListener((_notification) => {

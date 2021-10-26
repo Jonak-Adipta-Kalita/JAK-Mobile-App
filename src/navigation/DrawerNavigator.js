@@ -37,7 +37,7 @@ const DrawerNavigator = () => {
                 name="HomeDrawer"
                 component={HomeStack}
                 options={{
-					drawerLabel: "Home",
+                    drawerLabel: "Home",
                     drawerIcon: ({ color, size }) => (
                         <AntDesign
                             name="home"
@@ -51,7 +51,7 @@ const DrawerNavigator = () => {
                 name="AboutDrawer"
                 component={AboutStack}
                 options={{
-					drawerLabel: "About",
+                    drawerLabel: "About",
                     drawerIcon: ({ color, size }) => (
                         <AntDesign
                             name="exclamationcircleo"
@@ -65,7 +65,7 @@ const DrawerNavigator = () => {
                 name="ContactDrawer"
                 component={ContactStack}
                 options={{
-					drawerLabel: "Contact",
+                    drawerLabel: "Contact",
                     drawerIcon: ({ color, size }) => (
                         <AntDesign
                             name="phone"
@@ -80,7 +80,7 @@ const DrawerNavigator = () => {
                     name="AuthDrawer"
                     component={AuthenticationStack}
                     options={{
-						drawerLabel: "Login",
+                        drawerLabel: "Login",
                         drawerIcon: ({ color, size }) => (
                             <Entypo
                                 name="login"
@@ -95,7 +95,7 @@ const DrawerNavigator = () => {
                     name="ProfileDrawer"
                     component={SettingsStack}
                     options={{
-						drawerLabel: "Profile",
+                        drawerLabel: "Profile",
                         drawerIcon: ({ color, size }) => (
                             <AntDesign
                                 name="setting"
