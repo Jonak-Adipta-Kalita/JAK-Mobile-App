@@ -91,7 +91,7 @@ const CustomDrawer = ({ progress, ...props }) => {
 };
 
 CustomDrawer.propTypes = {
-    progress: PropTypes.object.isRequired,
+    progress: PropTypes.object,
 };
 
 export default CustomDrawer;

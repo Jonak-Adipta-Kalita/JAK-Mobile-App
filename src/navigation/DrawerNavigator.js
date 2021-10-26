@@ -21,11 +21,17 @@ const DrawerNavigator = () => {
     const [user] = useAuthState(auth);
     const dimensions = useWindowDimensions();
     const isLargeScreen = dimensions.width >= 768;
+
     return (
         <Drawer.Navigator
-            drawerContent={(props) => <CustomDrawer {...props} />}
-            drawerType={isLargeScreen ? "permanent" : "front"}
-            drawerStyle={isLargeScreen ? null : { width: "65%" }}
+			useLegacyImplementation
+			drawerContent={(props) => <CustomDrawer {...props} />}
+			defaultStatus="closed"
+			screenOptions={{
+				drawerType: isLargeScreen ? 'permanent' : 'back',
+				drawerStyle: isLargeScreen ? null : { width: '65%' },
+				overlayColor: 'transparent',
+			}}
         >
             <Drawer.Screen
                 name="Home"

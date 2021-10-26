@@ -7,7 +7,7 @@ const Tab = createMaterialTopTabNavigator();
 
 const NotificationTopTab = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator initialRouteName="PublicNotifications">
             <Tab.Screen name="PublicNotifications" component={PublicScreen} />
             <Tab.Screen name="PrivateNotifications" component={PrivateScreen} />
         </Tab.Navigator>
