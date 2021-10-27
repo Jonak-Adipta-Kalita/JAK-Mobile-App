@@ -12,12 +12,13 @@ import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import globalStyles from "../../../globalStyles";
+import LoadingIndicator from "../../../components/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPrivateNotification from "../../../notify/privateNotification";
 import PropTypes from "prop-types";
 
 const ChangeNameScreen = ({ navigation }) => {
-    const [user] = useAuthState(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");
     const changeName = () => {
@@ -105,6 +106,25 @@ const ChangeNameScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+
+    if (userError) {
+        Alert.alert("Error Occured", userError.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+
+    if (userLoading) {
+        return (
+            <LoadingIndicator
+                dimensions={{ width: 70, height: 70 }}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />

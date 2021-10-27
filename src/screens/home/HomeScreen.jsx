@@ -14,11 +14,12 @@ import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "react-native-elements";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import LoadingIndicator from "../../components/Loading";
 import globalStyles from "../../globalStyles";
 import PropTypes from "prop-types";
 
 const HomeScreen = ({ navigation }) => {
-    const [user] = useAuthState(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     useEffect(() => {
         if (Platform.OS === "android") {
             const backAction = () => {
@@ -73,6 +74,25 @@ const HomeScreen = ({ navigation }) => {
             ),
         });
     }, [navigation, user]);
+
+    if (userError) {
+        Alert.alert("Error Occured", userError.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+
+    if (userLoading) {
+        return (
+            <LoadingIndicator
+                dimensions={{ width: 70, height: 70 }}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />

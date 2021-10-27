@@ -13,11 +13,12 @@ import { db, auth } from "../../../firebase";
 import firebase from "firebase";
 import globalStyles from "../../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
+import LoadingIndicator from "../../../components/Loading";
 import pushPrivateNotification from "../../../notify/privateNotification";
 import PropTypes from "prop-types";
 
 const ChangeEmailScreen = ({ navigation }) => {
-    const [user] = useAuthState(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");
     const changeEmail = () => {
@@ -103,6 +104,25 @@ const ChangeEmailScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+
+    if (userError) {
+        Alert.alert("Error Occured", userError.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+
+    if (userLoading) {
+        return (
+            <LoadingIndicator
+                dimensions={{ width: 70, height: 70 }}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />

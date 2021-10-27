@@ -19,7 +19,7 @@ import LoadingIndicator from "../../components/Loading";
 import PropTypes from "prop-types";
 
 const SettingsScreen = ({ navigation }) => {
-    const [user] = useAuthState(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const signOut = () => {
         auth.signOut()
             .then(() =>
@@ -127,6 +127,25 @@ const SettingsScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+
+    if (userError) {
+        Alert.alert("Error Occured", userError.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+
+    if (userLoading) {
+        return (
+            <LoadingIndicator
+                dimensions={{ width: 70, height: 70 }}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />

@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     Text,
     Platform,
+    Alert,
 } from "react-native";
 import {
     DrawerContentScrollView,
@@ -15,14 +16,34 @@ import { auth } from "../firebase";
 import { Avatar } from "react-native-elements";
 import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
+import LoadingIndicator from "./Loading";
 import PropTypes from "prop-types";
 
 const CustomDrawer = ({ progress, ...props }) => {
-    const [user] = useAuthState(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const translateX = Animated.interpolateNode(progress, {
         inputRange: [0, 1],
         outputRange: [-100, 0],
     });
+
+    if (userError) {
+        Alert.alert("Error Occured", userError.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+
+    if (userLoading) {
+        return (
+            <LoadingIndicator
+                dimensions={{ width: 70, height: 70 }}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
+
     return (
         <>
             {user && (

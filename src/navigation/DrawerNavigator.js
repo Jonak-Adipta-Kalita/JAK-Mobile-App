@@ -1,5 +1,5 @@
 import React from "react";
-import { useWindowDimensions } from "react-native";
+import { useWindowDimensions, Alert } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -18,9 +18,18 @@ import {
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
-    const [user] = useAuthState(auth);
+    const [user, , userError] = useAuthState(auth);
     const dimensions = useWindowDimensions();
     const isLargeScreen = dimensions.width >= 768;
+
+    if (userError) {
+        Alert.alert("Error Occured", userError.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
 
     return (
         <Drawer.Navigator

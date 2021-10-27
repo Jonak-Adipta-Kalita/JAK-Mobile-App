@@ -14,10 +14,11 @@ import firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPrivateNotification from "../notify/privateNotification";
 import globalStyles from "../globalStyles";
+import LoadingIndicator from "../components/Loading";
 import PropTypes from "prop-types";
 
 const ContactScreen = ({ navigation }) => {
-    const [user] = useAuthState(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -128,6 +129,25 @@ const ContactScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+
+    if (userError) {
+        Alert.alert("Error Occured", userError.message, [
+            {
+                text: "OK",
+                onPress: () => {},
+            },
+        ]);
+    }
+
+    if (userLoading) {
+        return (
+            <LoadingIndicator
+                dimensions={{ width: 70, height: 70 }}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />

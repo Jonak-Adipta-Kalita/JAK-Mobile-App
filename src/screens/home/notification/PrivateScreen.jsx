@@ -8,8 +8,8 @@ import Notification from "../../../components/Notification";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const PrivateScreen = ({ navigation }) => {
-    const [user] = useAuthState(auth);
-    const [notifications, loading, error] = useCollection(
+    const [user, userLoading, userError] = useAuthState(auth);
+    const [notifications, firestoreLoading, firestoreError] = useCollection(
         db
             .collection("users")
             .doc(user?.uid)
@@ -17,22 +17,26 @@ const PrivateScreen = ({ navigation }) => {
             .orderBy("timestamp", "desc")
     );
 
-    if (error) {
-        Alert.alert("Error Occured", error.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
-    }
-
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Private!!",
         });
     }, [navigation]);
 
-    if (loading) {
+    if (firestoreError || userError) {
+        Alert.alert(
+            "Error Occured",
+            firestoreError.message || userError.message,
+            [
+                {
+                    text: "OK",
+                    onPress: () => {},
+                },
+            ]
+        );
+    }
+
+    if (firestoreLoading || userLoading) {
         return (
             <LoadingIndicator
                 containerStyle={{ flex: 1 }}
@@ -40,6 +44,7 @@ const PrivateScreen = ({ navigation }) => {
             />
         );
     }
+
     return (
         <View style={styles.container}>
             <ScrollView>

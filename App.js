@@ -74,7 +74,7 @@ Notifications.setNotificationHandler({
 });
 
 const App = () => {
-	const [, userLoading, userError] = useAuthState(auth);
+    const [, userLoading, userError] = useAuthState(auth);
     const scheme = useColorScheme();
     const [fontsLoaded, fontsError] = useFonts({
         OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
@@ -104,7 +104,7 @@ const App = () => {
     console.log(notification);
 
     if (fontsError || userError) {
-        Alert.alert("Error Occured", fontsLoaded.message || userError.message, [
+        Alert.alert("Error Occured", fontsError.message || userError.message, [
             {
                 text: "OK",
                 onPress: () => {},
