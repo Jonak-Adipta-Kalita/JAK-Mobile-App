@@ -7,6 +7,7 @@ import {
     InteractionManager,
     Alert,
     useColorScheme,
+    LogBox,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { Provider as ReduxProvider } from "react-redux";
@@ -62,6 +63,10 @@ if (Platform.OS === "android") {
         _clearTimeout(id);
     };
 }
+
+LogBox.ignoreLogs([
+    'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
+]);
 
 enableScreens(true);
 
