@@ -14,6 +14,8 @@ import LightTheme from "./src/themes/LightTheme";
 import DarkTheme from "./src/themes/DarkTheme";
 import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
+import { auth } from "./src/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { registerForPushNotificationsAsync } from "./src/pushNotification/register";
 import * as Notifications from "expo-notifications";
 import { enableScreens } from "react-native-screens";
@@ -72,8 +74,9 @@ Notifications.setNotificationHandler({
 });
 
 const App = () => {
+	const [, userLoading, userError] = useAuthState(auth);
     const scheme = useColorScheme();
-    const [loaded, error] = useFonts({
+    const [fontsLoaded, fontsError] = useFonts({
         OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
     });
     const [expoPushToken, setExpoPushToken] = useState("");
@@ -100,8 +103,8 @@ const App = () => {
     console.log(expoPushToken);
     console.log(notification);
 
-    if (error) {
-        Alert.alert("Error Occured", error.message, [
+    if (fontsError || userError) {
+        Alert.alert("Error Occured", fontsLoaded.message || userError.message, [
             {
                 text: "OK",
                 onPress: () => {},
@@ -109,7 +112,7 @@ const App = () => {
         ]);
     }
 
-    if (!loaded) {
+    if (!fontsLoaded || userLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}

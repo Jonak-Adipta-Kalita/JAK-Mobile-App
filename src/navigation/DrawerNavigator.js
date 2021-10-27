@@ -1,10 +1,10 @@
 import React from "react";
-// import { useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AntDesign, Entypo } from "@expo/vector-icons";
-// import CustomDrawer from "../components/Drawer";
+import CustomDrawer from "../components/Drawer";
 import PropTypes from "prop-types";
 
 import {
@@ -19,17 +19,16 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
     const [user] = useAuthState(auth);
-    // const dimensions = useWindowDimensions();
-    // const isLargeScreen = dimensions.width >= 768;
+    const dimensions = useWindowDimensions();
+    const isLargeScreen = dimensions.width >= 768;
 
     return (
         <Drawer.Navigator
-            // drawerContent={(props) => <CustomDrawer {...props} />}
+            drawerContent={(props) => <CustomDrawer {...props} />}
             defaultStatus="closed"
             screenOptions={{
                 // drawerType: isLargeScreen ? "permanent" : "front",
-                // drawerStyle: isLargeScreen ? null : { width: "65%" },
-                // overlayColor: "transparent",
+                drawerStyle: isLargeScreen ? null : { width: "65%" },
                 headerShown: false,
             }}
         >
