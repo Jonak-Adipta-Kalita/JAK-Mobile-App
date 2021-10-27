@@ -22,7 +22,6 @@ const StackScreenOption1 = {
     headerTintColor: "black",
     headerBackTitle: "Back",
     headerTitleAlign: "center",
-    detachPreviousScreen: true,
 };
 
 const StackScreenOption2 = {
@@ -52,7 +51,6 @@ const HomeStack = () => {
             <Stack.Navigator
                 screenOptions={StackScreenOption1}
                 initialRouteName="GetStarted"
-                detachInactiveScreens={true}
             >
                 <Stack.Screen name="GetStarted" component={GetStartedScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />

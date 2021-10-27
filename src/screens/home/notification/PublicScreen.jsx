@@ -27,7 +27,7 @@ const PublicScreen = ({ navigation }) => {
     }
 
     if (loading) {
-        return <LoadingIndicator dimensions={{ width: 70, height: 70 }} />;
+        return <LoadingIndicator containerStyle={{ flex: 1 }} dimensions={{ width: 70, height: 70 }} />;
     }
 
     return (
