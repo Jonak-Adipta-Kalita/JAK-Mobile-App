@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
 import "react-native-gesture-handler";
+import React, { useState, useRef, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import {

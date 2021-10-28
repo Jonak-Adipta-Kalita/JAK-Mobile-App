@@ -16,21 +16,24 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 
 const Stack = createStackNavigator();
 
-const StackScreenOption1 = {
-    headerStyle: { backgroundColor: "#fff" },
-    headerTitleStyle: { color: "black", fontFamily: "OtomanopeeOne" },
-    headerTintColor: "black",
-    headerBackTitle: "Back",
+const globalStackScreenOptions = {
+	headerBackTitle: "Back",
     headerTitleAlign: "center",
     detachPreviousScreen: true,
 };
 
-const StackScreenOption2 = {
+const stackScreenOption1 = {
+	...globalStackScreenOptions,
+    headerStyle: { backgroundColor: "#fff" },
+    headerTitleStyle: { color: "black", fontFamily: "OtomanopeeOne" },
+    headerTintColor: "black",
+};
+
+const stackScreenOption2 = {
+	...globalStackScreenOptions,
     headerStyle: { backgroundColor: "#3f7de0" },
     headerTitleStyle: { color: "white", fontFamily: "OtomanopeeOne" },
     headerTintColor: "white",
-    headerBackTitle: "Back",
-    headerTitleAlign: "center",
 };
 
 const HomeStack = () => {
@@ -50,7 +53,7 @@ const HomeStack = () => {
     } else if (isFirstLaunch === true) {
         return (
             <Stack.Navigator
-                screenOptions={StackScreenOption1}
+                screenOptions={stackScreenOption1}
                 initialRouteName="GetStarted"
                 detachInactiveScreens={true}
             >
@@ -65,7 +68,7 @@ const HomeStack = () => {
     } else {
         return (
             <Stack.Navigator
-                screenOptions={StackScreenOption1}
+                screenOptions={stackScreenOption1}
                 initialRouteName="Home"
             >
                 <Stack.Screen name="Home" component={HomeScreen} />
@@ -81,7 +84,7 @@ const HomeStack = () => {
 const AuthenticationStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={StackScreenOption2}
+            screenOptions={stackScreenOption2}
             initialRouteName="Login"
         >
             <Stack.Screen name="Login" component={LoginScreen} />
@@ -93,7 +96,7 @@ const AuthenticationStack = () => {
 const AboutStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={StackScreenOption1}
+            screenOptions={stackScreenOption1}
             initialRouteName="About"
         >
             <Stack.Screen name="About" component={AboutScreen} />
@@ -104,7 +107,7 @@ const AboutStack = () => {
 const SettingsStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={StackScreenOption1}
+            screenOptions={stackScreenOption1}
             initialRouteName="Settings"
         >
             <Stack.Screen name="Settings" component={SettingsScreen} />
@@ -121,7 +124,7 @@ const SettingsStack = () => {
 const ContactStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={StackScreenOption1}
+            screenOptions={stackScreenOption1}
             initialRouteName="Contact"
         >
             <Stack.Screen name="Contact" component={ContactScreen} />

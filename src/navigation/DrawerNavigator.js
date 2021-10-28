@@ -37,7 +37,7 @@ const DrawerNavigator = () => {
             defaultStatus="closed"
             detachInactiveScreens={true}
             screenOptions={{
-                // drawerType: isLargeScreen ? "permanent" : "front",
+                drawerType: isLargeScreen ? "permanent" : "front",
                 drawerStyle: isLargeScreen ? null : { width: "65%" },
                 headerShown: false,
             }}
