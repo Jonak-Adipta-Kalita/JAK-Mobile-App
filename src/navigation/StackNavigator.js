@@ -17,20 +17,20 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 const Stack = createStackNavigator();
 
 const globalStackScreenOptions = {
-	headerBackTitle: "Back",
+    headerBackTitle: "Back",
     headerTitleAlign: "center",
     detachPreviousScreen: true,
 };
 
 const stackScreenOption1 = {
-	...globalStackScreenOptions,
+    ...globalStackScreenOptions,
     headerStyle: { backgroundColor: "#fff" },
     headerTitleStyle: { color: "black", fontFamily: "OtomanopeeOne" },
     headerTintColor: "black",
 };
 
 const stackScreenOption2 = {
-	...globalStackScreenOptions,
+    ...globalStackScreenOptions,
     headerStyle: { backgroundColor: "#3f7de0" },
     headerTitleStyle: { color: "white", fontFamily: "OtomanopeeOne" },
     headerTintColor: "white",
