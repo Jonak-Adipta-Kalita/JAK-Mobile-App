@@ -90,18 +90,7 @@ const CustomDrawer = ({ progress, ...props }) => {
                 style={styles.body}
             >
                 <Animated.View style={{ transform: [{ translateX }] }}>
-                    <DrawerItemList
-                        {...props}
-                        labelStyle={{ fontSize: 14 }}
-                        activeBackgroundColor="#F1F1F1"
-                        activeTintColor="#000000"
-                        inactiveTintColor="#818181"
-                        itemStyle={{
-                            marginLeft: 10,
-                            paddingHorizontal: 20,
-                            borderRadius: 10,
-                        }}
-                    />
+                    <DrawerItemList {...props} />
                 </Animated.View>
             </DrawerContentScrollView>
             <Animated.View style={{ transform: [{ translateX }] }}>

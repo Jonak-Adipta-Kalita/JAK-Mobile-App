@@ -8,6 +8,7 @@ import LoadingIndicator from "../components/Loading";
 
 const LoginButton = ({ brand }) => {
     let imageFile;
+
     if (brand === "google") {
         imageFile = images.loginButtons.google;
     } else if (brand === "apple") {
@@ -15,6 +16,7 @@ const LoginButton = ({ brand }) => {
     }
 
     const [assets, error] = useAssets([imageFile]);
+
     if (error) {
         Alert.alert("Error Occured", error.message, [
             {
@@ -23,9 +25,11 @@ const LoginButton = ({ brand }) => {
             },
         ]);
     }
+
     if (!assets) {
         return <LoadingIndicator dimensions={{ width: 70, height: 70 }} />;
     }
+
     const signIn = async () => {
         if (brand === "google") {
             // Google Login
@@ -33,10 +37,11 @@ const LoginButton = ({ brand }) => {
             // Apple Login
         }
     };
+
     return (
         <View style={styles.container}>
             <TouchableOpacity style={{}} onPress={signIn}>
-                <Image style={styles.dimensions} source={imageFile} />
+                <Image style={{ width: 70, height: 70 }} source={imageFile} />
             </TouchableOpacity>
         </View>
     );

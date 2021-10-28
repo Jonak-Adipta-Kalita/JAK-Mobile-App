@@ -40,6 +40,15 @@ const DrawerNavigator = () => {
                 drawerType: isLargeScreen ? "permanent" : "front",
                 drawerStyle: isLargeScreen ? null : { width: "65%" },
                 headerShown: false,
+                drawerLabelStyle: { fontSize: 14 },
+                drawerActiveBackgroundColor: "#F1F1F1",
+                draweraActiveTintColor: "#000000",
+                drawerInactiveTintColor: "#818181",
+                drawerItemStyle: {
+                    marginLeft: 10,
+                    paddingHorizontal: 20,
+                    borderRadius: 10,
+                },
             }}
         >
             <Drawer.Screen
