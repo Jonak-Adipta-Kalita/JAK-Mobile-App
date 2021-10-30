@@ -70,7 +70,7 @@ const HomeStack = () => {
             <Stack.Navigator
                 screenOptions={stackScreenOption1}
                 initialRouteName="Home"
-				detachInactiveScreens={true}
+                detachInactiveScreens={true}
             >
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen
@@ -87,7 +87,7 @@ const AuthenticationStack = () => {
         <Stack.Navigator
             screenOptions={stackScreenOption2}
             initialRouteName="Login"
-			detachInactiveScreens={true}
+            detachInactiveScreens={true}
         >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
@@ -100,7 +100,7 @@ const AboutStack = () => {
         <Stack.Navigator
             screenOptions={stackScreenOption1}
             initialRouteName="About"
-			detachInactiveScreens={true}
+            detachInactiveScreens={true}
         >
             <Stack.Screen name="About" component={AboutScreen} />
         </Stack.Navigator>
@@ -112,7 +112,7 @@ const SettingsStack = () => {
         <Stack.Navigator
             screenOptions={stackScreenOption1}
             initialRouteName="Settings"
-			detachInactiveScreens={true}
+            detachInactiveScreens={true}
         >
             <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="ChangeName" component={ChangeNameScreen} />
@@ -130,7 +130,7 @@ const ContactStack = () => {
         <Stack.Navigator
             screenOptions={stackScreenOption1}
             initialRouteName="Contact"
-			detachInactiveScreens={true}
+            detachInactiveScreens={true}
         >
             <Stack.Screen name="Contact" component={ContactScreen} />
         </Stack.Navigator>
