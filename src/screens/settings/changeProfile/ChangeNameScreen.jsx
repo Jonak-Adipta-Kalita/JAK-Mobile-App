@@ -15,6 +15,7 @@ import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPrivateNotification from "../../../notify/privateNotification";
+import errorAlertShower from "../../../utils/errorAlertShower";
 import PropTypes from "prop-types";
 
 const ChangeNameScreen = ({ navigation }) => {
@@ -82,12 +83,7 @@ const ChangeNameScreen = ({ navigation }) => {
                     );
                 })
                 .catch((error) => {
-                    Alert.alert("Error Occured!!", error.message, [
-                        {
-                            text: "OK",
-                            onPress: () => {},
-                        },
-                    ]);
+                    errorAlertShower(error);
                 });
         }
     };
@@ -108,12 +104,7 @@ const ChangeNameScreen = ({ navigation }) => {
     }, [navigation]);
 
     if (userError) {
-        Alert.alert("Error Occured", userError.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
+        errorAlertShower(userError);
     }
 
     if (userLoading) {

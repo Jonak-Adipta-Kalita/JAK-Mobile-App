@@ -5,7 +5,6 @@ import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import {
     Platform,
     InteractionManager,
-    Alert,
     useColorScheme,
     LogBox,
 } from "react-native";
@@ -20,6 +19,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { registerForPushNotificationsAsync } from "./src/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
 import { enableScreens } from "react-native-screens";
+import errorAlertShower from "./src/utils/errorAlertShower";
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
@@ -66,6 +66,7 @@ if (Platform.OS === "android") {
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
+    "Remote debugger is in a background tab which may cause apps to perform slowly. Fix this by foregrounding the tab (or opening it in a separate window)",
 ]);
 
 enableScreens(true);
@@ -109,12 +110,7 @@ const App = () => {
     console.log(notification);
 
     if (fontsError || userError) {
-        Alert.alert("Error Occured", fontsError.message || userError.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
+        errorAlertShower(fontsError || userError);
     }
 
     if (!fontsLoaded || userLoading) {

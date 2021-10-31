@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View, Alert } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import PropTypes from "prop-types";
 import images from "../images";
 import { Image } from "react-native-elements";
@@ -7,6 +7,7 @@ import { useAssets } from "expo-asset";
 import LoadingIndicator from "../components/Loading";
 import googleAuth from "../authenticators/googleAuth";
 import appleAuth from "../authenticators/appleAuth";
+import errorAlertShower from "../utils/errorAlertShower";
 
 const LoginButton = ({ brand }) => {
     let imageFile;
@@ -20,12 +21,7 @@ const LoginButton = ({ brand }) => {
     const [assets, assetsError] = useAssets([imageFile]);
 
     if (assetsError) {
-        Alert.alert("Error Occured", assetsError.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
+        errorAlertShower(assetsError);
     }
 
     if (!assets) {

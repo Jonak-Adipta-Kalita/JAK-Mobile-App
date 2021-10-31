@@ -1,11 +1,12 @@
 import React from "react";
-import { useWindowDimensions, Alert } from "react-native";
+import { useWindowDimensions } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import CustomDrawer from "../components/Drawer";
 import PropTypes from "prop-types";
+import errorAlertShower from "../utils/errorAlertShower";
 
 import {
     HomeStack,
@@ -23,12 +24,7 @@ const DrawerNavigator = () => {
     const isLargeScreen = dimensions.width >= 768;
 
     if (userError) {
-        Alert.alert("Error Occured", userError.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
+        errorAlertShower(userError);
     }
 
     return (

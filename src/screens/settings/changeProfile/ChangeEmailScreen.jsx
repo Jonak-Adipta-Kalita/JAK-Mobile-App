@@ -16,6 +16,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../../components/Loading";
 import pushPrivateNotification from "../../../notify/privateNotification";
 import PropTypes from "prop-types";
+import errorAlertShower from "../../../utils/errorAlertShower";
 
 const ChangeEmailScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -80,12 +81,7 @@ const ChangeEmailScreen = ({ navigation }) => {
                     );
                 })
                 .catch((error) => {
-                    Alert.alert("Error Occured!!", error.message, [
-                        {
-                            text: "OK",
-                            onPress: () => {},
-                        },
-                    ]);
+                    errorAlertShower(error);
                 });
         }
     };
@@ -106,12 +102,7 @@ const ChangeEmailScreen = ({ navigation }) => {
     }, [navigation]);
 
     if (userError) {
-        Alert.alert("Error Occured", userError.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
+        errorAlertShower(userError);
     }
 
     if (userLoading) {

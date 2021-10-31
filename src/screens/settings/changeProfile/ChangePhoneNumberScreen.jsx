@@ -16,6 +16,7 @@ import pushPrivateNotification from "../../../notify/privateNotification";
 import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
 import PropTypes from "prop-types";
+import errorAlertShower from "../../../utils/errorAlertShower";
 
 const ChangePhoneNumberScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -79,12 +80,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                     );
                 })
                 .catch((error) => {
-                    Alert.alert("Error Occured!!", error.message, [
-                        {
-                            text: "OK",
-                            onPress: () => {},
-                        },
-                    ]);
+                    errorAlertShower(error);
                 });
         }
     };
@@ -109,12 +105,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
     }, [navigation]);
 
     if (userError) {
-        Alert.alert("Error Occured", userError.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
+        errorAlertShower(userError);
     }
 
     if (userLoading) {

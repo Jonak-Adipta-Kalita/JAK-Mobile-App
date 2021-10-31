@@ -8,7 +8,6 @@ import {
     TouchableOpacity,
     ScrollView,
     Platform,
-    Alert,
 } from "react-native";
 import firebase from "firebase";
 import { Button, Input } from "react-native-elements";
@@ -24,6 +23,7 @@ import {
 import LoginButton from "../../components/LoginButton";
 import pushPrivateNotification from "../../notify/privateNotification";
 import pushPublicNotification from "../../notify/publicNotification";
+import errorAlertShower from "../../utils/errorAlertShower";
 
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -57,12 +57,7 @@ const LoginScreen = ({ navigation }) => {
                 });
             })
             .catch((error) => {
-                Alert.alert("Error Occured!!", error.message, [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]);
+                errorAlertShower(error);
             });
     };
 

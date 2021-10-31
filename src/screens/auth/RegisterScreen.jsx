@@ -26,6 +26,7 @@ import {
 import PropTypes from "prop-types";
 import pushPrivateNotification from "../../notify/privateNotification";
 import pushPublicNotification from "../../notify/publicNotification";
+import errorAlertShower from "../../utils/errorAlertShower";
 
 const RegisterScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -122,12 +123,7 @@ const RegisterScreen = ({ navigation }) => {
                         });
                 })
                 .catch((error) => {
-                    Alert.alert("Error Occured!!", error.message, [
-                        {
-                            text: "OK",
-                            onPress: () => {},
-                        },
-                    ]);
+                    errorAlertShower(error);
                 });
         }
     };

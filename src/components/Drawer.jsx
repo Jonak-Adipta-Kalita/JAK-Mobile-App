@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     Text,
     Platform,
-    Alert,
 } from "react-native";
 import {
     DrawerContentScrollView,
@@ -17,6 +16,7 @@ import { Avatar } from "react-native-elements";
 import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "./Loading";
+import errorAlertShower from "../utils/errorAlertShower";
 import PropTypes from "prop-types";
 
 const CustomDrawer = ({ progress, ...props }) => {
@@ -27,12 +27,7 @@ const CustomDrawer = ({ progress, ...props }) => {
     });
 
     if (userError) {
-        Alert.alert("Error Occured", userError.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
+        errorAlertShower(userError);
     }
 
     if (userLoading) {

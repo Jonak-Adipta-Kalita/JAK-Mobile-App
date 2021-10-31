@@ -17,6 +17,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import pushPublicNotification from "../../notify/publicNotification";
 import LoadingIndicator from "../../components/Loading";
 import PropTypes from "prop-types";
+import errorAlertShower from "../../utils/errorAlertShower";
 
 const SettingsScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -30,14 +31,9 @@ const SettingsScreen = ({ navigation }) => {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
             )
-            .catch((error) =>
-                Alert.alert("Error Occured!!", error.message, [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ])
-            );
+            .catch((error) => {
+                errorAlertShower(error);
+            });
     };
     const deleteAccount = () => {
         const userUID = user?.uid;
@@ -53,12 +49,7 @@ const SettingsScreen = ({ navigation }) => {
                 });
             })
             .catch((error) => {
-                Alert.alert("Error Occured!!", error.message, [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]);
+                errorAlertShower(error);
             });
     };
     const verifyEmail = () => {
@@ -88,12 +79,7 @@ const SettingsScreen = ({ navigation }) => {
                     navigation.navigate("Home");
                 })
                 .catch((error) => {
-                    Alert.alert("Error Occurred!!", error.message, [
-                        {
-                            text: "OK",
-                            onPress: () => {},
-                        },
-                    ]);
+                    errorAlertShower(error);
                 });
         }
     };
@@ -129,12 +115,7 @@ const SettingsScreen = ({ navigation }) => {
     }, [navigation]);
 
     if (userError) {
-        Alert.alert("Error Occured", userError.message, [
-            {
-                text: "OK",
-                onPress: () => {},
-            },
-        ]);
+        errorAlertShower(userError);
     }
 
     if (userLoading) {
