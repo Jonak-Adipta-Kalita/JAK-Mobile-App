@@ -15,17 +15,17 @@ import {
     FontAwesome5,
     Entypo,
 } from "@expo/vector-icons";
-import { auth, db } from "../../firebase";
 import globalStyles from "../../globalStyles";
+import firebase from "firebase";
+import { auth, db } from "../../firebase";
 import { useSelector, useDispatch } from "react-redux";
 import {
     setShowPassword,
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
-import firebase from "firebase";
+import PropTypes from "prop-types";
 import pushPrivateNotification from "../../notify/privateNotification";
 import pushPublicNotification from "../../notify/publicNotification";
-import PropTypes from "prop-types";
 
 const RegisterScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const RegisterScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    const register = () => {
+    const registerEmail = () => {
         if (
             name === "" ||
             email === "" ||
@@ -264,7 +264,7 @@ const RegisterScreen = ({ navigation }) => {
             <Button
                 containerStyle={styles.button}
                 title="Register"
-                onPress={register}
+                onPress={registerEmail}
                 raised
             />
         </View>

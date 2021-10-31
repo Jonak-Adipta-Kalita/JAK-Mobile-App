@@ -5,6 +5,8 @@ import images from "../images";
 import { Image } from "react-native-elements";
 import { useAssets } from "expo-asset";
 import LoadingIndicator from "../components/Loading";
+import googleAuth from "../authenticators/googleAuth";
+import appleAuth from "../authenticators/appleAuth";
 
 const LoginButton = ({ brand }) => {
     let imageFile;
@@ -15,10 +17,10 @@ const LoginButton = ({ brand }) => {
         imageFile = images.loginButtons.apple;
     }
 
-    const [assets, error] = useAssets([imageFile]);
+    const [assets, assetsError] = useAssets([imageFile]);
 
-    if (error) {
-        Alert.alert("Error Occured", error.message, [
+    if (assetsError) {
+        Alert.alert("Error Occured", assetsError.message, [
             {
                 text: "OK",
                 onPress: () => {},
@@ -32,9 +34,9 @@ const LoginButton = ({ brand }) => {
 
     const signIn = async () => {
         if (brand === "google") {
-            // Google Login
+            await googleAuth();
         } else if (brand === "apple") {
-            // Apple Login
+            await appleAuth();
         }
     };
 

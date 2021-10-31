@@ -10,20 +10,20 @@ import {
     Platform,
     Alert,
 } from "react-native";
+import firebase from "firebase";
 import { Button, Input } from "react-native-elements";
 import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
 import globalStyles from "../../globalStyles";
-import firebase from "firebase";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import {
     setShowPassword,
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
+import LoginButton from "../../components/LoginButton";
 import pushPrivateNotification from "../../notify/privateNotification";
 import pushPublicNotification from "../../notify/publicNotification";
-import LoginButton from "../../components/LoginButton";
 
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const LoginScreen = ({ navigation }) => {
         return unSubscribe;
     }, []);
 
-    const signInEmail = () => {
+    const loginEmail = () => {
         auth.signInWithEmailAndPassword(email, password)
             .then((authUser) => {
                 pushPublicNotification({
@@ -147,7 +147,6 @@ const LoginScreen = ({ navigation }) => {
                                 style={globalStyles.inputBarIcon}
                             />
                         )}
-                        onSubmitEditing={signInEmail}
                     />
                     <TouchableOpacity
                         style={globalStyles.showPasswordContainer}
@@ -170,7 +169,7 @@ const LoginScreen = ({ navigation }) => {
                 </View>
             </View>
             <Button
-                onPress={signInEmail}
+                onPress={loginEmail}
                 containerStyle={styles.button}
                 title="Login"
             />
