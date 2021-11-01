@@ -31,7 +31,6 @@ const DrawerNavigator = () => {
         <Drawer.Navigator
             drawerContent={(props) => <CustomDrawer {...props} />}
             defaultStatus="closed"
-            detachInactiveScreens={true}
             screenOptions={{
                 drawerType: isLargeScreen ? "permanent" : "front",
                 drawerStyle: isLargeScreen ? null : { width: "65%" },

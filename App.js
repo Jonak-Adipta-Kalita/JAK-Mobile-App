@@ -16,9 +16,8 @@ import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 import { auth } from "./src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import registerForPushNotifications from "./src/pushNotification/registerForPushNotification";
+import registerForPushNotifications from "./src/utils/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
-import { enableScreens } from "react-native-screens";
 import errorAlertShower from "./src/utils/errorAlertShower";
 
 const _setTimeout = global.setTimeout;
@@ -68,8 +67,6 @@ LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
     "Remote debugger is in a background tab which may cause apps to perform slowly. Fix this by foregrounding the tab (or opening it in a separate window)",
 ]);
-
-enableScreens(true);
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
