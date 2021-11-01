@@ -5,7 +5,7 @@ const errorAlertShower = (error) => {
     if (Platform.OS === "web") {
         return alert(error.message);
     } else if (Platform.OS === "android" || Platform.OS === "ios") {
-        return Alert.alert("Error Occured", error.message, [
+        return Alert.alert(`${error.code} - ${error.title}`, error.message, [
             {
                 text: "OK",
                 onPress: () => null,

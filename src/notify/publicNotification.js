@@ -1,6 +1,6 @@
 import { db } from "../firebase";
 import propTypes from "prop-types";
-import { schedulePushNotification } from "../pushNotification/scheduleForPushNotification";
+import schedulePushNotification from "../pushNotification/scheduleForPushNotification";
 
 const pushPublicNotification = async (data) => {
     await schedulePushNotification({

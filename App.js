@@ -16,7 +16,7 @@ import { store } from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 import { auth } from "./src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { registerForPushNotificationsAsync } from "./src/pushNotification/registerForPushNotification";
+import registerForPushNotifications from "./src/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
 import { enableScreens } from "react-native-screens";
 import errorAlertShower from "./src/utils/errorAlertShower";
@@ -90,7 +90,7 @@ const App = () => {
     const notificationListener = useRef();
 
     useEffect(() => {
-        registerForPushNotificationsAsync().then((token) => {
+        registerForPushNotifications().then((token) => {
             setExpoPushToken(token);
         });
 

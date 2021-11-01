@@ -82,9 +82,7 @@ const LoginScreen = ({ navigation }) => {
                             flexDirection: "row",
                         }}
                     >
-                        {Platform.OS === "android" && (
-                            <LoginButton brand="google" />
-                        )}
+                        <LoginButton brand="google" />
                         {Platform.OS === "ios" && <LoginButton brand="apple" />}
                     </ScrollView>
                 </View>

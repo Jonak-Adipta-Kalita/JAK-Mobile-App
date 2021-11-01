@@ -1,7 +1,7 @@
 import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 
-export const schedulePushNotification = async ({ title, body, data }) => {
+const schedulePushNotification = async ({ title, body, data }) => {
     if (Platform.OS === "android" || Platform.OS === "ios") {
         await Notifications.scheduleNotificationAsync({
             content: {
@@ -13,3 +13,5 @@ export const schedulePushNotification = async ({ title, body, data }) => {
         });
     }
 };
+
+export default schedulePushNotification;

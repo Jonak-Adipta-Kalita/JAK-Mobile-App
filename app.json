@@ -24,6 +24,7 @@
             "androidCollapsedTitle": "{unread_notifications} new Notifications from JAK Mobile App!!"
         },
         "ios": {
+			"usesAppleSignIn": true,
             "supportsTablet": true,
             "bundleIdentifier": "com.beastnighttv.jakmobileapp",
             "buildNumber": "0.0.1"
