@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import schedulePushNotification from "../utils/pushNotification/scheduleForPushNotification";
 
 const pushPrivateNotification = async (userUID, data) => {
-	await schedulePushNotification(data?.title, data?.message, data);
+    await schedulePushNotification(data?.title, data?.message, data);
 
     return db
         .collection("users")
