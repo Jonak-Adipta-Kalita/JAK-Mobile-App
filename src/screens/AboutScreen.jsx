@@ -29,6 +29,7 @@ const AboutScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />

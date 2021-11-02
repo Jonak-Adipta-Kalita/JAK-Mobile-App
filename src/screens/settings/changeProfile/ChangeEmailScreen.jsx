@@ -17,6 +17,7 @@ const ChangeEmailScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");
+
     const changeEmail = () => {
         if (email === "") {
             messageAlertShower(
@@ -80,6 +81,7 @@ const ChangeEmailScreen = ({ navigation }) => {
                 });
         }
     };
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Change your Email!!",
@@ -96,9 +98,7 @@ const ChangeEmailScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    if (userError) {
-        errorAlertShower(userError);
-    }
+    if (userError) errorAlertShower(userError);
 
     if (userLoading) {
         return (

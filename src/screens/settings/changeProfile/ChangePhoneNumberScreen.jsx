@@ -19,6 +19,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
         user?.phoneNumber
     );
     const [phoneNumber, setPhoneNumber] = useState("");
+
     const changePhoneNumber = () => {
         if (phoneNumber === "") {
             messageAlertShower(
@@ -79,6 +80,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                 });
         }
     };
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: `${
@@ -99,9 +101,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    if (userError) {
-        errorAlertShower(userError);
-    }
+    if (userError) errorAlertShower(userError);
 
     if (userLoading) {
         return (

@@ -22,6 +22,7 @@ const NotificationScreen = ({ navigation }) => {
             ),
         });
     }, [navigation]);
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />

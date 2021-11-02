@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
 
 const HomeScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
+
     useEffect(() => {
         if (Platform.OS === "android") {
             const backAction = () => {
@@ -76,9 +77,7 @@ const HomeScreen = ({ navigation }) => {
         });
     }, [navigation, user]);
 
-    if (userError) {
-        errorAlertShower(userError);
-    }
+    if (userError) errorAlertShower(userError);
 
     if (userLoading) {
         return (

@@ -17,6 +17,7 @@ const ChangeNameScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");
+
     const changeName = () => {
         if (name === "") {
             messageAlertShower(
@@ -82,6 +83,7 @@ const ChangeNameScreen = ({ navigation }) => {
                 });
         }
     };
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Change your Name!!",
@@ -98,9 +100,7 @@ const ChangeNameScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    if (userError) {
-        errorAlertShower(userError);
-    }
+    if (userError) errorAlertShower(userError);
 
     if (userLoading) {
         return (

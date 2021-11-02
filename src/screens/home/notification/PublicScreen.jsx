@@ -14,15 +14,13 @@ const PublicScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    const [notifications, loading, firestoreError] = useCollection(
+    const [notifications, firestoreLoading, firestoreError] = useCollection(
         db.collection("publicNotifications").orderBy("timestamp", "desc")
     );
 
-    if (firestoreError) {
-        errorAlertShower(firestoreError);
-    }
+    if (firestoreError) errorAlertShower(firestoreError);
 
-    if (loading) {
+    if (firestoreLoading) {
         return (
             <LoadingIndicator
                 containerStyle={{ flex: 1 }}

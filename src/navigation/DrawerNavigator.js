@@ -23,9 +23,7 @@ const DrawerNavigator = () => {
     const dimensions = useWindowDimensions();
     const isLargeScreen = dimensions.width >= 768;
 
-    if (userError) {
-        errorAlertShower(userError);
-    }
+    if (userError) errorAlertShower(userError);
 
     return (
         <Drawer.Navigator

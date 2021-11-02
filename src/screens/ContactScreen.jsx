@@ -19,6 +19,7 @@ const ContactScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [message, setMessage] = useState("");
+
     const submitRequestToContact = () => {
         if (user) {
             if (
@@ -105,6 +106,7 @@ const ContactScreen = ({ navigation }) => {
             );
         }
     };
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Contact Me!!",
@@ -121,9 +123,7 @@ const ContactScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    if (userError) {
-        errorAlertShower(userError);
-    }
+    if (userError) errorAlertShower(userError);
 
     if (userLoading) {
         return (

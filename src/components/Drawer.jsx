@@ -21,14 +21,13 @@ import PropTypes from "prop-types";
 
 const CustomDrawer = ({ progress, ...props }) => {
     const [user, userLoading, userError] = useAuthState(auth);
+
     const translateX = Animated.interpolateNode(progress, {
         inputRange: [0, 1],
         outputRange: [-100, 0],
     });
 
-    if (userError) {
-        errorAlertShower(userError);
-    }
+    if (userError) errorAlertShower(userError);
 
     if (userLoading) {
         return (

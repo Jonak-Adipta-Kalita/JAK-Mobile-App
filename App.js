@@ -106,9 +106,7 @@ const App = () => {
     console.log(expoPushToken);
     console.log(notification);
 
-    if (fontsError || userError) {
-        errorAlertShower(fontsError || userError);
-    }
+    if (fontsError || userError) errorAlertShower(fontsError || userError);
 
     if (!fontsLoaded || userLoading) {
         return (

@@ -21,6 +21,7 @@ import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 
 const SettingsScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
+
     const signOut = () => {
         auth.signOut()
             .then(() =>
@@ -35,6 +36,7 @@ const SettingsScreen = ({ navigation }) => {
                 errorAlertShower(error);
             });
     };
+
     const deleteAccount = () => {
         const userUID = user?.uid;
         user?.delete()
@@ -52,6 +54,7 @@ const SettingsScreen = ({ navigation }) => {
                 errorAlertShower(error);
             });
     };
+
     const verifyEmail = () => {
         if (!user?.emailVerified) {
             user.sendEmailVerification()
@@ -83,6 +86,7 @@ const SettingsScreen = ({ navigation }) => {
                 });
         }
     };
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
@@ -114,9 +118,7 @@ const SettingsScreen = ({ navigation }) => {
         });
     }, [navigation]);
 
-    if (userError) {
-        errorAlertShower(userError);
-    }
+    if (userError) errorAlertShower(userError);
 
     if (userLoading) {
         return (

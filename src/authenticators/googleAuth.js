@@ -11,6 +11,7 @@ const googleAuth = async () => {
         iosStandaloneAppClientId: GOOGLE_IOS_CLIENT_ID,
         androidStandaloneAppClientId: GOOGLE_ANDROID_CLIENT_ID,
     });
+
     if (type === "success") {
         const credential = await firebase.auth.GoogleAuthProvider.credential(
             idToken,

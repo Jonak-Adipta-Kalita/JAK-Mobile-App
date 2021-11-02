@@ -18,6 +18,7 @@ const GetStartedScreen = ({ navigation }) => {
             headerTitleAlign: "center",
         });
     }, [navigation]);
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />

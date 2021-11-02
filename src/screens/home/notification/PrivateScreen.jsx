@@ -10,6 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const PrivateScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
+
     const [notifications, firestoreLoading, firestoreError] = useCollection(
         db
             .collection("users")

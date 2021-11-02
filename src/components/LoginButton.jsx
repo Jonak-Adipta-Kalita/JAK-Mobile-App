@@ -20,9 +20,7 @@ const LoginButton = ({ brand }) => {
 
     const [assets, assetsError] = useAssets([imageFile]);
 
-    if (assetsError) {
-        errorAlertShower(assetsError);
-    }
+    if (assetsError) errorAlertShower(assetsError);
 
     if (!assets) {
         return <LoadingIndicator dimensions={{ width: 70, height: 70 }} />;
