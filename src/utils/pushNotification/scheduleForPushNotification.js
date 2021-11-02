@@ -2,7 +2,7 @@ import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 import PropTypes from "prop-types";
 
-const schedulePushNotification = async ({ title, body, data }) => {
+const schedulePushNotification = async (title, body, data) => {
     if (Platform.OS === "android" || Platform.OS === "ios") {
         await Notifications.scheduleNotificationAsync({
             content: {
@@ -18,7 +18,7 @@ const schedulePushNotification = async ({ title, body, data }) => {
 schedulePushNotification.propTypes = {
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.object,
 };
 
 export default schedulePushNotification;
