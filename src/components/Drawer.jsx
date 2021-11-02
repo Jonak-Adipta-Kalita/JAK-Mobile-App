@@ -16,7 +16,7 @@ import { Avatar } from "react-native-elements";
 import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "./Loading";
-import errorAlertShower from "../utils/errorAlertShower";
+import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import PropTypes from "prop-types";
 
 const CustomDrawer = ({ progress, ...props }) => {

@@ -6,7 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import CustomDrawer from "../components/Drawer";
 import PropTypes from "prop-types";
-import errorAlertShower from "../utils/errorAlertShower";
+import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 
 import {
     HomeStack,

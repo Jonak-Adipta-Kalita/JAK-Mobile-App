@@ -23,7 +23,7 @@ import {
 import LoginButton from "../../components/LoginButton";
 import pushPrivateNotification from "../../notify/privateNotification";
 import pushPublicNotification from "../../notify/publicNotification";
-import errorAlertShower from "../../utils/errorAlertShower";
+import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch();

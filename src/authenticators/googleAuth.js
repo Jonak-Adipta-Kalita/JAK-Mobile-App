@@ -1,8 +1,8 @@
-import * as Google from "expo-google-app-auth";
 import firebase from "firebase";
-import { GOOGLE_ANDROID_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from "@env";
 import { auth } from "../firebase";
-import errorAlertShower from "../utils/errorAlertShower";
+import * as Google from "expo-google-app-auth";
+import errorAlertShower from "../utils/alertShowers/errorAlertShower";
+import { GOOGLE_ANDROID_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from "@env";
 
 const googleAuth = async () => {
     const { type, idToken, accessToken } = await Google.logInAsync({

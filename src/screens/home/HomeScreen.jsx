@@ -6,7 +6,6 @@ import {
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
-    Alert,
     Platform,
     BackHandler,
 } from "react-native";
@@ -16,7 +15,8 @@ import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
 import globalStyles from "../../globalStyles";
-import errorAlertShower from "../../utils/errorAlertShower";
+import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import PropTypes from "prop-types";
 
 const HomeScreen = ({ navigation }) => {
@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
     useEffect(() => {
         if (Platform.OS === "android") {
             const backAction = () => {
-                Alert.alert(
+                messageAlertShower(
                     "Exit App!!",
                     "Hold on. Are you sure you want to Exit?",
                     [

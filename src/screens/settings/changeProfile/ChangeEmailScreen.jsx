@@ -1,12 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    StyleSheet,
-    SafeAreaView,
-    TouchableOpacity,
-    Alert,
-} from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
@@ -16,7 +10,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../../components/Loading";
 import pushPrivateNotification from "../../../notify/privateNotification";
 import PropTypes from "prop-types";
-import errorAlertShower from "../../../utils/errorAlertShower";
+import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 
 const ChangeEmailScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -24,7 +19,7 @@ const ChangeEmailScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const changeEmail = () => {
         if (email === "") {
-            Alert.alert(
+            messageAlertShower(
                 "Value not Filled!!",
                 "Please Enter all the Values in the Form!!",
                 [
@@ -35,7 +30,7 @@ const ChangeEmailScreen = ({ navigation }) => {
                 ]
             );
         } else if (email === previousEmail) {
-            Alert.alert(
+            messageAlertShower(
                 "Value same as Previous!!",
                 "Its the same Email Address as your Previous!!",
                 [
@@ -69,7 +64,7 @@ const ChangeEmailScreen = ({ navigation }) => {
                     navigation.jumpTo("HomeDrawer");
                 })
                 .then(() => {
-                    Alert.alert(
+                    messageAlertShower(
                         "Email Changed Successfully!!",
                         "Your Email is Successfully Changed!!",
                         [

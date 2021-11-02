@@ -1,11 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import {
-    StyleSheet,
-    View,
-    SafeAreaView,
-    TouchableOpacity,
-    Alert,
-} from "react-native";
+import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import {
@@ -26,7 +20,8 @@ import {
 import PropTypes from "prop-types";
 import pushPrivateNotification from "../../notify/privateNotification";
 import pushPublicNotification from "../../notify/publicNotification";
-import errorAlertShower from "../../utils/errorAlertShower";
+import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 
 const RegisterScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -65,7 +60,7 @@ const RegisterScreen = ({ navigation }) => {
             confirmPassword === "" ||
             phoneNumber === ""
         ) {
-            Alert.alert(
+            messageAlertShower(
                 "Value not Filled!!",
                 "Please Enter all the Values in the Form!!",
                 [
@@ -76,7 +71,7 @@ const RegisterScreen = ({ navigation }) => {
                 ]
             );
         } else if (password !== confirmPassword) {
-            Alert.alert(
+            messageAlertShower(
                 "Passwords doesn't Matches!!!!",
                 "Please make sure your Password and Confirm Password is same!!",
                 [

@@ -6,7 +6,6 @@ import {
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
-    Alert,
 } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db } from "../../firebase";
@@ -17,7 +16,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import pushPublicNotification from "../../notify/publicNotification";
 import LoadingIndicator from "../../components/Loading";
 import PropTypes from "prop-types";
-import errorAlertShower from "../../utils/errorAlertShower";
+import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 
 const SettingsScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -56,7 +56,7 @@ const SettingsScreen = ({ navigation }) => {
         if (!user?.emailVerified) {
             user.sendEmailVerification()
                 .then(() => {
-                    Alert.alert(
+                    messageAlertShower(
                         "Verification Email Successfully Sent!!",
                         "Please check your Email for the Verification Link!!",
                         [

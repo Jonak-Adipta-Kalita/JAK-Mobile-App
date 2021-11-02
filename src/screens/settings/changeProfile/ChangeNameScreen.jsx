@@ -1,12 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    StyleSheet,
-    SafeAreaView,
-    TouchableOpacity,
-    Alert,
-} from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
@@ -15,7 +9,8 @@ import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPrivateNotification from "../../../notify/privateNotification";
-import errorAlertShower from "../../../utils/errorAlertShower";
+import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import PropTypes from "prop-types";
 
 const ChangeNameScreen = ({ navigation }) => {
@@ -24,7 +19,7 @@ const ChangeNameScreen = ({ navigation }) => {
     const [name, setName] = useState("");
     const changeName = () => {
         if (name === "") {
-            Alert.alert(
+            messageAlertShower(
                 "Value not Filled!!",
                 "Please Enter all the Values in the Form!!",
                 [
@@ -35,7 +30,7 @@ const ChangeNameScreen = ({ navigation }) => {
                 ]
             );
         } else if (name === previousName) {
-            Alert.alert(
+            messageAlertShower(
                 "Value same as Previous!!",
                 "Its the same Name as your Previous!!",
                 [
@@ -71,7 +66,7 @@ const ChangeNameScreen = ({ navigation }) => {
                     navigation.jumpTo("HomeDrawer");
                 })
                 .then(() => {
-                    Alert.alert(
+                    messageAlertShower(
                         "Name Changed Successfully!!",
                         "Your Name is Successfully Changed!!",
                         [

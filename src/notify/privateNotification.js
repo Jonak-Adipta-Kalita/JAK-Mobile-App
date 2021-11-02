@@ -1,5 +1,5 @@
 import { db } from "../firebase";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import schedulePushNotification from "../utils/pushNotification/scheduleForPushNotification";
 
 const pushPrivateNotification = async (userUID, data) => {
@@ -17,8 +17,8 @@ const pushPrivateNotification = async (userUID, data) => {
 };
 
 pushPrivateNotification.propTypes = {
-    userUID: propTypes.string.isRequired,
-    data: propTypes.object.isRequired,
+    userUID: PropTypes.string.isRequired,
+    data: PropTypes.object.isRequired,
 };
 
 export default pushPrivateNotification;

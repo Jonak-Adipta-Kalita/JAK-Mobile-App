@@ -7,7 +7,7 @@ import { useAssets } from "expo-asset";
 import LoadingIndicator from "../components/Loading";
 import googleAuth from "../authenticators/googleAuth";
 import appleAuth from "../authenticators/appleAuth";
-import errorAlertShower from "../utils/errorAlertShower";
+import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 
 const LoginButton = ({ brand }) => {
     let imageFile;

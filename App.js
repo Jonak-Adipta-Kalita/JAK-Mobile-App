@@ -18,7 +18,7 @@ import { auth } from "./src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import registerForPushNotifications from "./src/utils/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
-import errorAlertShower from "./src/utils/errorAlertShower";
+import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;

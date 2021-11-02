@@ -1,12 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    StyleSheet,
-    SafeAreaView,
-    TouchableOpacity,
-    Alert,
-} from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../firebase";
@@ -16,7 +10,8 @@ import pushPrivateNotification from "../notify/privateNotification";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "../components/Loading";
 import PropTypes from "prop-types";
-import errorAlertShower from "../utils/errorAlertShower";
+import errorAlertShower from "../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 
 const ContactScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -32,7 +27,7 @@ const ContactScreen = ({ navigation }) => {
                 phoneNumber === "" ||
                 message === ""
             ) {
-                Alert.alert(
+                messageAlertShower(
                     "Value not Filled!!",
                     "Please Enter all the Values in the Form!!",
                     [
@@ -43,7 +38,7 @@ const ContactScreen = ({ navigation }) => {
                     ]
                 );
             } else if (email !== user?.email || name !== user?.displayName) {
-                Alert.alert(
+                messageAlertShower(
                     "Some Values are not Correct!!",
                     "Please Enter your Value Correctly!!",
                     [
@@ -78,7 +73,7 @@ const ContactScreen = ({ navigation }) => {
                         navigation.jumpTo("HomeDrawer");
                     })
                     .then(() => {
-                        Alert.alert(
+                        messageAlertShower(
                             "Request Sent!!",
                             "Your Request to Contact is Sent Successfully!!",
                             [
@@ -94,7 +89,7 @@ const ContactScreen = ({ navigation }) => {
                     });
             }
         } else {
-            Alert.alert(
+            messageAlertShower(
                 "No User Data Found!!",
                 "Please Login or Register to the App!!",
                 [

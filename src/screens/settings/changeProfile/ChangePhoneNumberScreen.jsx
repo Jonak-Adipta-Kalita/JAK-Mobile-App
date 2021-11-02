@@ -1,12 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    StyleSheet,
-    SafeAreaView,
-    TouchableOpacity,
-    Alert,
-} from "react-native";
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { auth, db } from "../../../firebase";
@@ -16,7 +10,8 @@ import pushPrivateNotification from "../../../notify/privateNotification";
 import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
 import PropTypes from "prop-types";
-import errorAlertShower from "../../../utils/errorAlertShower";
+import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 
 const ChangePhoneNumberScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -26,7 +21,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const changePhoneNumber = () => {
         if (phoneNumber === "") {
-            Alert.alert(
+            messageAlertShower(
                 "Value not Filled!!",
                 "Please Enter all the Values in the Form!!",
                 [
@@ -37,7 +32,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                 ]
             );
         } else if (phoneNumber === previousPhoneNumber) {
-            Alert.alert(
+            messageAlertShower(
                 "Value same as Previous!!",
                 "Its the same Phone Number as your Previous!!",
                 [
@@ -68,7 +63,7 @@ const ChangePhoneNumberScreen = ({ navigation }) => {
                     navigation.jumpTo("HomeDrawer");
                 })
                 .then(() => {
-                    Alert.alert(
+                    messageAlertShower(
                         "Phone Number Changed Successfully!!",
                         "Your Phone Number is Successfully Changed!!",
                         [

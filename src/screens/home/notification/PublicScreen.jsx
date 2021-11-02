@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { useCollection } from "react-firebase-hooks/firestore";
 import LoadingIndicator from "../../../components/Loading";
 import Notification from "../../../components/Notification";
-import errorAlertShower from "../../../utils/errorAlertShower";
+import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 
 const PublicScreen = ({ navigation }) => {
     useLayoutEffect(() => {
