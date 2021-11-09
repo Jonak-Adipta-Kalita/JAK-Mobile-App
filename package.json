@@ -50,7 +50,7 @@
         "expo-google-app-auth": "~9.0.0",
         "expo-notifications": "~0.13.3",
         "expo-status-bar": "~1.1.0",
-        "firebase": "8.2.3",
+        "firebase": "9.4.0",
         "moment": "^2.29.1",
         "prop-types": "^15.7.2",
         "react": "17.0.1",
