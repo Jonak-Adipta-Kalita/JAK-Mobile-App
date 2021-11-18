@@ -12,7 +12,7 @@ import { useFonts } from "expo-font";
 import { Provider as ReduxProvider } from "react-redux";
 import LightTheme from "./src/themes/LightTheme";
 import DarkTheme from "./src/themes/DarkTheme";
-import { store } from "./src/redux/store";
+import reduxStore from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 import { auth } from "./src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -118,7 +118,7 @@ const App = () => {
     }
 
     return (
-        <ReduxProvider store={store}>
+        <ReduxProvider store={reduxStore}>
             <NavigationContainer
                 theme={scheme === "dark" ? DarkTheme : LightTheme}
             >
