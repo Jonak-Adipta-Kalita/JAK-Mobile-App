@@ -100,7 +100,6 @@ CustomDrawer.propTypes = {
 export default CustomDrawer;
 
 const styles = StyleSheet.create({
-    container: {},
     header: {
         marginTop: Platform.OS === "web" ? 0 : 20,
         marginBottom: Platform.OS === "web" ? 10 : -15,
