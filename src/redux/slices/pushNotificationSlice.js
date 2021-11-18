@@ -9,7 +9,7 @@ export const pushNotificationSlice = createSlice(
         },
         reducers: {
             setToken: (state, action) => {
-                state.show = action.payload.token;
+                state.token = action.payload.token;
             },
         },
     },
@@ -18,6 +18,6 @@ export const pushNotificationSlice = createSlice(
 
 export const { setToken } = pushNotificationSlice.actions;
 
-export const selectToken = (state) => state.pushNotification.show;
+export const selectToken = (state) => state.pushNotification.token;
 
 export default pushNotificationSlice.reducer;
