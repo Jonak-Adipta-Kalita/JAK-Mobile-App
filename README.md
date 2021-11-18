@@ -51,15 +51,30 @@ where you will find your app now click on Config. Copy the Config.
 
 Go to [Firebase Console](http://console.firebase.google.com/) and Select your Project.
 Click on the cog icon in the sidebar and click on Project Settings. Now in bottom click on
-`Add App` and select the Android Logo. Now register your Android app and also don't forget to
-download the `google-services.json` and put it in the Base Directory of the Project.
+`Add App` and select the Android Logo. Now register your Android app. After the setup open a
+terminal in the Base Directory use this commands:
+
+```bash
+yarn build:android
+```
+
+after that command do this command (You'll need Java JDK to use this command):
+
+```bash
+expo fetch:android:hashes
+```
+
+this will give you the `SHA-1` and the `SHA-256` fingerprints. Paste them in your Android App
+in Firebase Console then Download the `google-services.json` and put it in the Base Directory of
+the Project.
 
 #### Get `GoogleService-Info.plist`
 
 Go to [Firebase Console](http://console.firebase.google.com/) and Select your Project.
 Click on the cog icon in the sidebar and click on Project Settings. Now in bottom click on
 `Add App` and select the IOS Logo. Now register your IOS app and also don't forget to
-download the `GoogleService-Info.plist` and put it in the Base Directory of the Project.
+download the `GoogleService-Info.plist` (after completing the setup) and put it in the Base
+Directory of the Project.
 
 #### Enabling Firebase Authentication
 
@@ -107,7 +122,7 @@ yarn start:android
 
 #### IOS
 
-If you are in MAC: Download [XCode](https://developer.apple.com/xcode/)
+If you are in MAC: Download [XCode](https://developer.apple.com/xcode/) or [Android Studio](https://developer.android.com/studio)
 
 ```bash
 npm run start:ios
