@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import {
@@ -82,29 +82,13 @@ const App = () => {
     const [fontsLoaded, fontsError] = useFonts({
         OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
     });
-    const [expoPushToken, setExpoPushToken] = useState("");
-    const [notification, setNotification] = useState(false);
-    const notificationListener = useRef();
+    const [, setExpoPushToken] = useState("");
 
     useEffect(() => {
         registerForPushNotifications().then((token) => {
             setExpoPushToken(token);
         });
-
-        notificationListener.current =
-            Notifications.addNotificationReceivedListener((_notification) => {
-                setNotification(_notification);
-            });
-
-        return () => {
-            Notifications.removeNotificationSubscription(
-                notificationListener.current
-            );
-        };
     }, []);
-
-    console.log(expoPushToken);
-    console.log(notification);
 
     if (fontsError || userError) errorAlertShower(fontsError || userError);
 

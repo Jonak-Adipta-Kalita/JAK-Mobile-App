@@ -23,8 +23,8 @@ const CustomDrawer = ({ progress, ...props }) => {
     const [user, userLoading, userError] = useAuthState(auth);
 
     const translateX = Animated.interpolateNode(progress, {
-        inputRange: [0, 1],
-        outputRange: [-100, 0],
+        outputRange: [0, 1],
+        inputRange: [-100, 0],
     });
 
     if (userError) errorAlertShower(userError);
@@ -80,8 +80,7 @@ const CustomDrawer = ({ progress, ...props }) => {
             )}
             <DrawerContentScrollView
                 {...props}
-                contentContainerStyle={{ flex: 1 }}
-                style={styles.body}
+                contentContainerStyle={styles.body}
             >
                 <Animated.View style={{ transform: [{ translateX }] }}>
                     <DrawerItemList {...props} />
@@ -111,6 +110,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderBottomColor: "#818181",
     },
-    body: {},
+    body: {
+        flex: 1,
+    },
     footer: {},
 });

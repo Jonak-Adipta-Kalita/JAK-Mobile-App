@@ -109,12 +109,17 @@ const SettingsStack = () => {
             initialRouteName="Settings"
         >
             <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Screen name="ChangeName" component={ChangeNameScreen} />
-            <Stack.Screen name="ChangeEmail" component={ChangeEmailScreen} />
-            <Stack.Screen
-                name="ChangePhoneNumber"
-                component={ChangePhoneNumberScreen}
-            />
+            <Stack.Group>
+                <Stack.Screen name="ChangeName" component={ChangeNameScreen} />
+                <Stack.Screen
+                    name="ChangeEmail"
+                    component={ChangeEmailScreen}
+                />
+                <Stack.Screen
+                    name="ChangePhoneNumber"
+                    component={ChangePhoneNumberScreen}
+                />
+            </Stack.Group>
         </Stack.Navigator>
     );
 };

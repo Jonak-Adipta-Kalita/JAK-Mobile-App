@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
     View,
@@ -8,7 +8,7 @@ import {
     ScrollView,
 } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { auth, db } from "../../firebase";
+import { auth, db, storage } from "../../firebase";
 import { Avatar, Button, ListItem } from "react-native-elements";
 import firebase from "firebase";
 import globalStyles from "../../globalStyles";
@@ -18,9 +18,55 @@ import LoadingIndicator from "../../components/Loading";
 import PropTypes from "prop-types";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
+import * as ImagePicker from "expo-image-picker";
+
+const uploadImageAsync = async (uri, userUID) => {
+    const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = () => {
+            resolve(xhr.response);
+        };
+        xhr.onerror = (error) => {
+            alert(error);
+            reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", uri, true);
+        xhr.send(null);
+    });
+
+    const fileRef = storage.ref(`users/${userUID}/profile_pic`).put(blob);
+
+    blob.close();
+
+    return await storage
+        .ref(`users/${userUID}`)
+        .child("profile_pic")
+        .getDownloadURL(fileRef);
+};
 
 const SettingsScreen = ({ navigation }) => {
     const [user, userLoading, userError] = useAuthState(auth);
+    const [image, setImage] = useState(null);
+
+    const updatePic = async () => {
+        let pickerResult = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
+        try {
+            if (!pickerResult.cancelled) {
+                const uploadUrl = await uploadImageAsync(
+                    pickerResult.uri,
+                    user?.uid
+                );
+                user?.updateProfile({ photoURL: uploadUrl });
+                setImage(uploadUrl);
+            }
+        } catch (error) {
+            errorAlertShower(error);
+        }
+    };
 
     const signOut = () => {
         auth.signOut()
@@ -135,12 +181,15 @@ const SettingsScreen = ({ navigation }) => {
             <ScrollView>
                 <View style={{ marginTop: 30, alignItems: "center" }}>
                     {user?.photoURL ? (
-                        <TouchableOpacity activeOpacity={0.5}>
+                        <TouchableOpacity
+                            activeOpacity={0.5}
+                            onPress={updatePic}
+                        >
                             <Avatar
                                 rounded
                                 size="large"
                                 source={{
-                                    uri: user?.photoURL,
+                                    uri: image || user?.photoURL,
                                 }}
                             />
                         </TouchableOpacity>

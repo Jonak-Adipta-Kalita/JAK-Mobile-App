@@ -22,6 +22,7 @@ import pushPrivateNotification from "../../notify/privateNotification";
 import pushPublicNotification from "../../notify/publicNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
+import images from "../../images";
 
 const RegisterScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -32,9 +33,7 @@ const RegisterScreen = ({ navigation }) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [avatar] = useState(
-        "https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011"
-    );
+    const avatar = images.avatar;
 
     useLayoutEffect(() => {
         navigation.setOptions({
