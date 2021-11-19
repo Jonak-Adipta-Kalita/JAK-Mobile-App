@@ -51,7 +51,8 @@ where you will find your app now click on Config. Copy the Config.
 
 Go to [Firebase Console](http://console.firebase.google.com/) and Select your Project.
 Click on the cog icon in the sidebar and click on Project Settings. Now in bottom click on
-`Add App` and select the Android Logo. Now register your Android app. After the setup open a
+`Add App` and select the Android Logo. Now register your Android app
+(use `host.exp.exponent` as the Package Name). After the setup open a
 terminal in the Base Directory use this commands:
 
 ```bash
@@ -72,7 +73,8 @@ the Project.
 
 Go to [Firebase Console](http://console.firebase.google.com/) and Select your Project.
 Click on the cog icon in the sidebar and click on Project Settings. Now in bottom click on
-`Add App` and select the IOS Logo. Now register your IOS app and also don't forget to
+`Add App` and select the IOS Logo. Now register your IOS app (use `host.exp.exponent` as
+the Bundle ID) and also don't forget to
 download the `GoogleService-Info.plist` (after completing the setup) and put it in the Base
 Directory of the Project.
 
