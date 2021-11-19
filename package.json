@@ -15,6 +15,7 @@
         "lint:fix": "eslint --fix .",
         "prettier": "prettier **/*.{js,jsx,tsx,ts,md,json}",
         "prettier:fix": "prettier --write **/*.{js,jsx,tsx,ts,md,json}",
+        "format": "eslint --fix . && prettier --write **/*.{js,jsx,tsx,ts,md,json}",
         "build": "expo build:android && expo build:ios && expo build:web",
         "build:android": "expo build:android",
         "build:ios": "expo build:ios",
