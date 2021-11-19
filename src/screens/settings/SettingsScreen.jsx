@@ -35,14 +35,14 @@ const uploadImageAsync = async (uri, userUID) => {
         xhr.send(null);
     });
 
-    const fileRef = storage.ref(`users/${userUID}/profile_pic`).put(blob);
+    await storage.ref(`users/${userUID}/profile_pic`).put(blob);
 
     blob.close();
 
     return await storage
         .ref(`users/${userUID}`)
         .child("profile_pic")
-        .getDownloadURL(fileRef);
+        .getDownloadURL();
 };
 
 const SettingsScreen = ({ navigation }) => {
@@ -56,12 +56,12 @@ const SettingsScreen = ({ navigation }) => {
         });
         try {
             if (!pickerResult.cancelled) {
-                const uploadUrl = await uploadImageAsync(
+                const uploadURL = await uploadImageAsync(
                     pickerResult.uri,
                     user?.uid
                 );
-                user?.updateProfile({ photoURL: uploadUrl });
-                setImage(uploadUrl);
+                user?.updateProfile({ photoURL: uploadURL });
+                setImage(uploadURL);
             }
         } catch (error) {
             errorAlertShower(error);
