@@ -66,7 +66,7 @@ expo fetch:android:hashes
 ```
 
 this will give you the `SHA-1` and the `SHA-256` fingerprints. Paste them in your Android
-App in Firebase Console then Download the `google-services.json`. Rename it to 
+App in Firebase Console then Download the `google-services.json`. Rename it to
 `google_services_android-dev.json` and put it in the Base Directory of the Project.
 
 #### Get `GoogleService-Info.plist`

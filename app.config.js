@@ -33,7 +33,7 @@ export default {
             ? "host.exp.exponent"
             : "com.beastnighttv.jakmobileapp",
         buildNumber: VERSION,
-		googleServicesFile: __DEV__
+        googleServicesFile: __DEV__
             ? "./google_services_ios-dev.plist"
             : "./google_services_ios-prod.plist",
     },
