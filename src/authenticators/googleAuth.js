@@ -8,8 +8,6 @@ const googleAuth = async () => {
     const { type, idToken, accessToken } = await Google.logInAsync({
         iosClientId: GOOGLE_IOS_CLIENT_ID,
         androidClientId: GOOGLE_ANDROID_CLIENT_ID,
-        iosStandaloneAppClientId: GOOGLE_IOS_CLIENT_ID,
-        androidStandaloneAppClientId: GOOGLE_ANDROID_CLIENT_ID,
     });
 
     if (type === "success") {
