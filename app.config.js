@@ -33,6 +33,9 @@ export default {
             ? "host.exp.exponent"
             : "com.beastnighttv.jakmobileapp",
         buildNumber: VERSION,
+		googleServicesFile: __DEV__
+            ? "./google_services_ios-dev.plist"
+            : "./google_services_ios-prod.plist",
     },
     android: {
         permissions: [],
@@ -43,7 +46,9 @@ export default {
         package: __DEV__
             ? "host.exp.exponent"
             : "com.beastnighttv.jakmobileapp",
-        googleServicesFile: "./google-services.json",
+        googleServicesFile: __DEV__
+            ? "./google_services_android-dev.json"
+            : "./google_services_android-prod.json",
     },
     web: {
         favicon: "./assets/images/favicon.png",

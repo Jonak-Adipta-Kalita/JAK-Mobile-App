@@ -11,16 +11,15 @@ npm-debug.*
 web-build/
 android/
 ios/
-build
+build/
 .env
-!src/custom/loginButtons/android
-!src/custom/loginButtons/ios
-!__tests__/custom/loginButtons/android
-!__tests__/custom/loginButtons/ios
 !assets/loginButtons/android
 !assets/loginButtons/ios
-google-services.json
-GoogleService-Info.plist
+
+google_services_ios-prod.plist
+google_services_ios-dev.plist
+google_services_android-dev.json
+google_services_android-prod.json
 
 # macOS
 .DS_Store
