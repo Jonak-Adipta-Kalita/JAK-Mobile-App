@@ -83,7 +83,7 @@
         "husky": "^7.0.4",
         "jest-expo": "^43.0.1",
         "npm-check-updates": "^12.0.2",
-        "prettier": "^2.4.1"
+        "prettier": "^2.5.0"
     },
     "private": true
 }
