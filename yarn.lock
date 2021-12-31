@@ -10070,10 +10070,10 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-firebase-hooks@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-3.0.4.tgz#2185357d2bd6f7292552bc65f2459bbf9364e673"
-  integrity sha512-eqhj8O5t/9nzGS/DfCGQX9goqbxTP2T/qrY2B13s4rx/VIJ4Bx3WnZgqxEVA0Y/mWZBh7gOlXSPdRGbxBq5d8g==
+react-firebase-hooks@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-3.0.5.tgz#4b0673ef4c028886a35c4a5c8def1a786d5e33e6"
+  integrity sha512-9LztZGaZU0qJY/TQWzkBlfVrFmu0Ui6HE8CUjU7tNz9oGKGx5tUQG/xQbfyMIGClErgnnQsm8sC+oU9pg8Ri5Q==
 
 "react-is@^16.12.0 || ^17.0.0", react-is@^17.0.1, react-is@^17.0.2:
   version "17.0.2"
