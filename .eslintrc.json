@@ -9,22 +9,22 @@
             "version": "16.13.1"
         }
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 12,
+        "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "overrides": [
-        {
-            "files": ["*.js", "*.jsx", "*.ts", "*.tsx"]
-        }
-    ],
-    "plugins": ["react"],
+    "plugins": ["react", "@typescript-eslint"],
     "rules": {
-        "react/no-unescaped-entities": 0,
-        "react/display-name": 0
+        "@typescript-eslint/no-empty-function": 0,
+        "@typescript-eslint/no-explicit-any": 0
     }
 }

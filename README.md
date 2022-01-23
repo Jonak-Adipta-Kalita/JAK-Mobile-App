@@ -199,7 +199,7 @@ and press Enter.
 
 ## Technology(s) Used
 
--   Language: [JavaScript](https://www.javascript.com/)
+-   Language: [TypeScript](https://www.typescriptlang.org/)
 -   Language Framework: [React Native](https://reactnative.dev/)
 -   Backend: [Node JS](https://nodejs.org/), [Firebase](https://firebase.google.com/)
 -   CLI: [Expo](https://expo.io/)
