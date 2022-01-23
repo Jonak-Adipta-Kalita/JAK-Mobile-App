@@ -122,7 +122,7 @@ const ChangeNameScreen = () => {
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={name}
                     onChangeText={(text) => setName(text)}
-                    autoCompleteType={""}
+                    autoCompleteType={"name"}
                 />
             </View>
             <Button

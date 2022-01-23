@@ -120,7 +120,7 @@ const ChangeEmailScreen = () => {
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
-                    autoCompleteType={""}
+                    autoCompleteType={"email"}
                 />
             </View>
             <Button

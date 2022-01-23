@@ -143,7 +143,7 @@ const RegisterScreen = () => {
                             style={globalStyles.inputBarIcon}
                         />
                     }
-                    autoCompleteType={""}
+                    autoCompleteType={"name"}
                 />
 
                 <Input
@@ -158,7 +158,7 @@ const RegisterScreen = () => {
                         />
                     }
                     onChangeText={(text) => setEmail(text)}
-                    autoCompleteType={""}
+                    autoCompleteType={"email"}
                 />
 
                 <View style={styles.passwordContainer}>
@@ -175,7 +175,7 @@ const RegisterScreen = () => {
                                 style={globalStyles.inputBarIcon}
                             />
                         }
-                        autoCompleteType={""}
+                        autoCompleteType={"password"}
                     />
 
                     <TouchableOpacity
@@ -204,7 +204,7 @@ const RegisterScreen = () => {
                     <Input
                         placeholder="Confirm Password"
                         secureTextEntry={!showPassword}
-                        autoCompleteType={""}
+                        autoCompleteType={"password"}
                         value={confirmPassword}
                         inputStyle={[globalStyles.inputBar, styles.inputBar]}
                         onChangeText={(text) => setConfirmPassword(text)}
@@ -239,7 +239,7 @@ const RegisterScreen = () => {
 
                 <Input
                     placeholder="Phone Number"
-                    autoCompleteType={""}
+                    autoCompleteType={"tel"}
                     value={phoneNumber}
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     leftIcon={

@@ -146,14 +146,14 @@ const ContactScreen = () => {
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={name}
                     onChangeText={(text) => setName(text)}
-                    autoCompleteType={""}
+                    autoCompleteType={"name"}
                 />
                 <Input
                     placeholder="Email"
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
-                    autoCompleteType={""}
+                    autoCompleteType={"email"}
                 />
                 <Input
                     placeholder="Phone Number (with Country Code)"
@@ -164,14 +164,14 @@ const ContactScreen = () => {
                     ]}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
-                    autoCompleteType={""}
+                    autoCompleteType={"tel"}
                 />
                 <Input
                     placeholder="Why do you want to Contact Me?"
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={message}
                     onChangeText={(text) => setMessage(text)}
-                    autoCompleteType={""}
+                    autoCompleteType={"off"}
                 />
             </View>
             <Button

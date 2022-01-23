@@ -125,7 +125,7 @@ const LoginScreen = () => {
                             style={globalStyles.inputBarIcon}
                         />
                     }
-                    autoCompleteType={""}
+                    autoCompleteType={"email"}
                 />
                 <View style={styles.passwordContainer}>
                     <Input
@@ -141,7 +141,7 @@ const LoginScreen = () => {
                                 style={globalStyles.inputBarIcon}
                             />
                         }
-                        autoCompleteType={""}
+                        autoCompleteType={"password"}
                     />
                     <TouchableOpacity
                         style={globalStyles.showPasswordContainer}

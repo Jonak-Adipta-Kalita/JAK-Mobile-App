@@ -123,7 +123,7 @@ const ChangePhoneNumberScreen = () => {
                     inputStyle={[globalStyles.inputBar, styles.inputBar]}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
-                    autoCompleteType={""}
+                    autoCompleteType={"tel"}
                 />
             </View>
             <Button
