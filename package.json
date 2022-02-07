@@ -51,7 +51,7 @@
         "expo-font": "~10.0.3",
         "expo-google-app-auth": "~9.0.0",
         "expo-image-picker": "~11.0.3",
-        "expo-notifications": "~0.13.3",
+        "expo-notifications": "~0.14.1",
         "expo-status-bar": "~1.1.0",
         "firebase": "8.2.3",
         "moment": "^2.29.1",
