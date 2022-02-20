@@ -10,7 +10,6 @@ import {
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
 import { Avatar, Button, ListItem } from "react-native-elements";
-import firebase from "firebase";
 import globalStyles from "../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPublicNotification from "../../notify/publicNotification";
@@ -19,6 +18,8 @@ import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
+import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -35,14 +36,12 @@ const uploadImageAsync = async (uri: string, userUID: string) => {
         xhr.send(null);
     });
 
-    await storage.ref(`users/${userUID}/profile_pic`).put(blob);
+    const fileRef = ref(storage, `users/${userUID}/profile_pic`);
+    await uploadBytes(fileRef, blob);
 
     blob.close();
 
-    return await storage
-        .ref(`users/${userUID}`)
-        .child("profile_pic")
-        .getDownloadURL();
+    return await getDownloadURL(fileRef);
 };
 
 const SettingsScreen = () => {
@@ -76,7 +75,7 @@ const SettingsScreen = () => {
                     title: "Member left the Ligtning Family!!",
                     message:
                         "Someone left the Ligtning Family!! But I am sure He/She will return for sure!!",
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    timestamp: serverTimestamp(),
                 })
             )
             .catch((error) => {
@@ -88,13 +87,13 @@ const SettingsScreen = () => {
         const userUID = user?.uid;
         user?.delete()
             .then(() => {
-                db.collection("users").doc(userUID).delete();
+                deleteDoc(doc(db, "users", userUID));
             })
             .then(() => {
                 pushPublicNotification({
                     title: "Someone left us Forever!!",
                     message: "Someone left the Family forever!! Noooooooo!!",
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    timestamp: serverTimestamp(),
                 });
             })
             .catch((error) => {
@@ -118,7 +117,8 @@ const SettingsScreen = () => {
                     );
                 })
                 .then(() => {
-                    db.collection("users").doc(user?.uid).set(
+                    setDoc(
+                        doc(db, "users", user?.uid),
                         {
                             emailVerified: true,
                         },

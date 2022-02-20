@@ -10,7 +10,6 @@ import {
     Entypo,
 } from "@expo/vector-icons";
 import globalStyles from "../../globalStyles";
-import firebase from "firebase";
 import { auth, db } from "../../firebase";
 import {
     setShowPassword,
@@ -24,6 +23,8 @@ import images from "../../images";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const RegisterScreen = () => {
     const navigation: any = useNavigation();
@@ -83,23 +84,21 @@ const RegisterScreen = () => {
                 ]
             );
         } else {
-            auth.createUserWithEmailAndPassword(email, password)
+            createUserWithEmailAndPassword(auth, email, password)
                 .then((authUser) => {
-                    authUser
-                        ?.user!.updateProfile({
-                            displayName: name,
-                            photoURL: avatar,
-                        })
+                    updateProfile(authUser?.user, {
+                        displayName: name,
+                        photoURL: avatar,
+                    })
                         .then(() => {
                             pushPrivateNotification(authUser.user.uid!, {
                                 title: "Welcome!!",
                                 message: `Welcome ${email}. Nice to meet you!!`,
-                                timestamp:
-                                    firebase.firestore.FieldValue.serverTimestamp(),
+                                timestamp: serverTimestamp(),
                             });
                         })
                         .then(() => {
-                            db.collection("users").doc(authUser.user.uid!).set({
+                            setDoc(doc(db, "users", authUser.user.uid!), {
                                 uid: authUser.user.uid!,
                                 email: email,
                                 displayName: name,
@@ -112,8 +111,7 @@ const RegisterScreen = () => {
                             pushPublicNotification({
                                 title: "New member in the Ligtning Family!!",
                                 message: `${email} Joined the Ligtning Family!! Yippie!!`,
-                                timestamp:
-                                    firebase.firestore.FieldValue.serverTimestamp(),
+                                timestamp: serverTimestamp(),
                             });
                         });
                 })

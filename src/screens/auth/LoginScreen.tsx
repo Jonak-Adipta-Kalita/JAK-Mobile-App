@@ -9,7 +9,6 @@ import {
     ScrollView,
     Platform,
 } from "react-native";
-import firebase from "firebase";
 import { Button, Input } from "react-native-elements";
 import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
@@ -25,6 +24,8 @@ import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { serverTimestamp } from "firebase/firestore";
 
 const LoginScreen = () => {
     const navigation: any = useNavigation();
@@ -43,18 +44,17 @@ const LoginScreen = () => {
     }, []);
 
     const loginEmail = () => {
-        auth.signInWithEmailAndPassword(email, password)
+        signInWithEmailAndPassword(auth, email, password)
             .then((authUser) => {
                 pushPublicNotification({
                     title: "Member came back to the Ligtning Family!!",
                     message: `${email} came back to the Ligtning Family!! Yippie!!`,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    timestamp: serverTimestamp(),
                 }).then(() => {
                     pushPrivateNotification(authUser.user.uid!, {
                         title: "Welcome Back!!",
                         message: `Welcome back ${email}. Nice to meet you again!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
+                        timestamp: serverTimestamp(),
                     });
                 });
             })

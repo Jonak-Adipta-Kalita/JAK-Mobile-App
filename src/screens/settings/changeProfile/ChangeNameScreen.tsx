@@ -4,7 +4,6 @@ import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
-import firebase from "firebase";
 import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,6 +11,7 @@ import pushPrivateNotification from "../../../notify/privateNotification";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const ChangeNameScreen = () => {
     const navigation: any = useNavigation();
@@ -50,16 +50,18 @@ const ChangeNameScreen = () => {
                     pushPrivateNotification(user?.uid, {
                         title: "Name Changed Successfully!!",
                         message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
-                        timestamp:
-                            firebase.firestore.FieldValue.serverTimestamp(),
+                        timestamp: serverTimestamp(),
                     });
                 })
                 .then(() => {
-                    db.collection("users").doc(user?.uid).set(
+                    setDoc(
+                        doc(db, "users", user?.uid),
                         {
                             displayName: name,
                         },
-                        { merge: true }
+                        {
+                            merge: true,
+                        }
                     );
                 })
                 .then(() => {

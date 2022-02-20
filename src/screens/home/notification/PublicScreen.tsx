@@ -6,6 +6,7 @@ import LoadingIndicator from "../../../components/Loading";
 import Notification from "../../../components/Notification";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
+import { collection, orderBy, query } from "firebase/firestore";
 
 const PublicScreen = () => {
     const navigation = useNavigation();
@@ -16,7 +17,10 @@ const PublicScreen = () => {
     }, [navigation]);
 
     const [notifications, firestoreLoading, firestoreError] = useCollection(
-        db.collection("publicNotifications").orderBy("timestamp", "desc")
+        query(
+            collection(db, "publicNotifications"),
+            orderBy("timestamp", "desc")
+        )
     );
 
     if (firestoreError) errorAlertShower(firestoreError);

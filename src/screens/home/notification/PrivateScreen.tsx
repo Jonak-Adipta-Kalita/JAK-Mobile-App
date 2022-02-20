@@ -7,17 +7,17 @@ import Notification from "../../../components/Notification";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigation } from "@react-navigation/native";
+import { collection, orderBy, query } from "firebase/firestore";
 
 const PrivateScreen = () => {
     const navigation = useNavigation();
     const [user, userLoading, userError] = useAuthState(auth);
 
     const [notifications, firestoreLoading, firestoreError] = useCollection(
-        db
-            .collection("users")
-            .doc(user?.uid)
-            .collection("notifications")
-            .orderBy("timestamp", "desc")
+        query(
+            collection(db, "users", user?.uid, "notifications"),
+            orderBy("timestamp", "desc")
+        )
     );
 
     useLayoutEffect(() => {
