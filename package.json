@@ -37,7 +37,7 @@
     },
     "homepage": "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App#readme",
     "dependencies": {
-        "@react-native-async-storage/async-storage": "~1.15.0",
+        "@react-native-async-storage/async-storage": "~1.17.3",
         "@react-native-community/masked-view": "^0.1.11",
         "@react-navigation/drawer": "^6.1.8",
         "@react-navigation/material-bottom-tabs": "^6.0.9",
@@ -79,7 +79,7 @@
         "@typescript-eslint/parser": "^5.10.0",
         "eslint": "^7.32.0",
         "eslint-plugin-react": "^7.28.0",
-        "firebase-tools": "^9.21.0",
+        "firebase-tools": "^10.7.1",
         "husky": "^7.0.4",
         "jest-expo": "^43.0.1",
         "npm-check-updates": "^12.0.2",
