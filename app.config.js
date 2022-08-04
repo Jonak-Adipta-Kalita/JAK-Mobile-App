@@ -1,4 +1,6 @@
-const __DEV__ = true;
+import { PRODUCTION } from "@env";
+
+const __DEV__ = PRODUCTION === "true" ? true : false;
 const VERSION = "0.0.1";
 
 export default {
