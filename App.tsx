@@ -14,6 +14,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import registerForPushNotifications from "./src/utils/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
+import { TailwindProvider } from "tailwindcss-react-native";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -55,11 +56,13 @@ const App = () => {
 
     return (
         <ReduxProvider store={reduxStore}>
-            <NavigationContainer
-                theme={scheme === "dark" ? DarkTheme : LightTheme}
-            >
-                <DrawerNavigator />
-            </NavigationContainer>
+            <TailwindProvider>
+                <NavigationContainer
+                    theme={scheme === "dark" ? DarkTheme : LightTheme}
+                >
+                    <DrawerNavigator />
+                </NavigationContainer>
+            </TailwindProvider>
         </ReduxProvider>
     );
 };
