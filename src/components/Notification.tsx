@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { Card } from "react-native-elements";
 import moment from "moment";
 import globalStyles from "../globalStyles";
-import toTitleCase from "../utils/toTitleCase";
+import { editMessage } from "@xxjonakadiptaxx/jak_javascript_package";
 
 interface Props {
     id: string;
@@ -24,7 +24,9 @@ const Notification = ({ title, message, timestamp }: Props) => {
                 <Card.Divider />
                 <Text style={{ color: "#43484D", fontWeight: "bold" }}>
                     {timestamp
-                        ? toTitleCase(moment(timestamp.toDate()).fromNow())
+                        ? new editMessage(
+                              moment(timestamp.toDate()).fromNow()
+                          ).toTitleCase()
                         : "..."}
                 </Text>
             </Card>

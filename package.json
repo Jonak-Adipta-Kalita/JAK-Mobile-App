@@ -45,6 +45,7 @@
         "@react-navigation/native": "^6.0.11",
         "@react-navigation/stack": "^6.2.2",
         "@reduxjs/toolkit": "^1.8.3",
+        "@xxjonakadiptaxx/jak_javascript_package": "^3.2.1",
         "expo": "^46.0.0",
         "expo-asset": "~8.6.1",
         "expo-constants": "~13.2.3",
