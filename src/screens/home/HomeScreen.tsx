@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
     View,
-    StyleSheet,
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
@@ -90,7 +89,7 @@ const HomeScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{ marginBottom: 10 }}>
             <StatusBar style="auto" />
             <ScrollView>
                 <Card>
@@ -105,11 +104,5 @@ const HomeScreen = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        marginBottom: 10,
-    },
-});
 
 export default HomeScreen;

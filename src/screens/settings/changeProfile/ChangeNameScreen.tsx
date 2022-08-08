@@ -1,6 +1,13 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    View,
+    SafeAreaView,
+    TouchableOpacity,
+    ViewStyle,
+    TextStyle,
+    ImageStyle,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
@@ -13,12 +20,14 @@ import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
+import { useTailwind } from "tailwindcss-react-native";
 
 const ChangeNameScreen = () => {
     const navigation: any = useNavigation();
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");
+    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     const changeName = () => {
         if (name === "") {
@@ -116,20 +125,29 @@ const ChangeNameScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                tailwind("flex-1 items-center"),
+                { padding: 10, marginTop: 20 },
+            ]}
+        >
             <StatusBar style="auto" />
-            <View style={styles.inputContainer}>
+            <View
+                style={{
+                    width: 350,
+                }}
+            >
                 <Input
                     placeholder="Name"
                     autoFocus
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={globalStyles.inputBar}
                     value={name}
                     onChangeText={(text) => setName(text)}
                     autoCompleteType={"name"}
                 />
             </View>
             <Button
-                containerStyle={[globalStyles.button, styles.button]}
+                containerStyle={[globalStyles.button, { marginTop: 10 }]}
                 title="Upgrade"
                 onPress={changeName}
             />
@@ -138,19 +156,3 @@ const ChangeNameScreen = () => {
 };
 
 export default ChangeNameScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        padding: 10,
-        marginTop: 20,
-    },
-    inputContainer: {
-        width: 350,
-    },
-    button: {
-        marginTop: 10,
-    },
-    inputBar: {},
-});

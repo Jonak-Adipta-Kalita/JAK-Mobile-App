@@ -3,7 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import {
     View,
     Text,
-    StyleSheet,
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
@@ -33,13 +32,21 @@ const AboutScreen = () => {
     }, [navigation]);
 
     return (
-        <View style={styles.container}>
+        <View style={{ marginBottom: 10 }}>
             <StatusBar style="auto" />
             <ScrollView>
                 <Card>
                     <Card.Title>So you want to know about Me?</Card.Title>
                     <Card.Divider />
-                    <Text style={[globalStyles.font, styles.content]}>
+                    <Text
+                        style={[
+                            globalStyles.font,
+                            {
+                                fontSize: 16,
+                                color: "#594d4c",
+                            },
+                        ]}
+                    >
                         My name is JONAK ADIPTA KALITA. I am a student in
                         Kendriya Vidyalaya Mangaldoi, I am currently studying in
                         standard &rsquo;9th&rsquo;. I am a Programmer and also a
@@ -58,13 +65,3 @@ const AboutScreen = () => {
 };
 
 export default AboutScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        marginBottom: 10,
-    },
-    content: {
-        fontSize: 16,
-        color: "#594d4c",
-    },
-});

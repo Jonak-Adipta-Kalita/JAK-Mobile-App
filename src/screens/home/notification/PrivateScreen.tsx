@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView } from "react-native";
 import { db, auth } from "../../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import LoadingIndicator from "../../../components/Loading";
@@ -40,7 +40,7 @@ const PrivateScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View>
             <ScrollView>
                 {notifications?.docs?.map((notification) => (
                     <Notification
@@ -57,7 +57,3 @@ const PrivateScreen = () => {
 };
 
 export default PrivateScreen;
-
-const styles = StyleSheet.create({
-    container: {},
-});

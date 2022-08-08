@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView } from "react-native";
 import { db } from "../../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import LoadingIndicator from "../../../components/Loading";
@@ -35,7 +35,7 @@ const PublicScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View>
             <ScrollView>
                 {notifications?.docs?.map((notification) => (
                     <Notification
@@ -52,7 +52,3 @@ const PublicScreen = () => {
 };
 
 export default PublicScreen;
-
-const styles = StyleSheet.create({
-    container: {},
-});

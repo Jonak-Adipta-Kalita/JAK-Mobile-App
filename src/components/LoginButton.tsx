@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import images from "../images";
 import { Image } from "react-native-elements";
 import { useAssets } from "expo-asset";
@@ -38,7 +38,7 @@ const LoginButton = ({ brand }: Props) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View>
             <TouchableOpacity style={{}} onPress={signIn}>
                 <Image style={{ width: 70, height: 70 }} source={imageFile} />
             </TouchableOpacity>
@@ -47,7 +47,3 @@ const LoginButton = ({ brand }: Props) => {
 };
 
 export default LoginButton;
-
-const styles = StyleSheet.create({
-    container: {},
-});

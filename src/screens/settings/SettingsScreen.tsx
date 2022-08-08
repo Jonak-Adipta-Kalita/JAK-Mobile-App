@@ -2,10 +2,12 @@ import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
     View,
-    StyleSheet,
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
+    ViewStyle,
+    TextStyle,
+    ImageStyle,
 } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
@@ -21,6 +23,7 @@ import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
+import { useTailwind } from "tailwindcss-react-native";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -49,6 +52,7 @@ const SettingsScreen = () => {
     const navigation: any = useNavigation();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
+    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     const updatePic = async () => {
         const pickerResult: any = await ImagePicker.launchImageLibraryAsync({
@@ -178,10 +182,24 @@ const SettingsScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                tailwind("flex-col flex-1"),
+                {
+                    marginBottom: 10,
+                },
+            ]}
+        >
             <StatusBar style="auto" />
             <ScrollView>
-                <View style={{ marginTop: 30, alignItems: "center" }}>
+                <View
+                    style={[
+                        {
+                            marginTop: 30,
+                        },
+                        tailwind("items-center"),
+                    ]}
+                >
                     {user?.photoURL ? (
                         <TouchableOpacity
                             activeOpacity={0.5}
@@ -259,11 +277,8 @@ const SettingsScreen = () => {
             </ScrollView>
             <View
                 style={[
-                    styles.bottomButton,
-                    {
-                        alignSelf: "flex-start",
-                        paddingLeft: 20,
-                    },
+                    tailwind("absolute flex-row self-start"),
+                    { paddingLeft: 20, bottom: 20 },
                 ]}
             >
                 <Button
@@ -274,11 +289,8 @@ const SettingsScreen = () => {
             </View>
             <View
                 style={[
-                    styles.bottomButton,
-                    {
-                        paddingRight: 20,
-                        alignSelf: "flex-end",
-                    },
+                    tailwind("absolute flex-rowself-end"),
+                    { paddingRight: 20, bottom: 20 },
                 ]}
             >
                 <Button
@@ -292,16 +304,3 @@ const SettingsScreen = () => {
 };
 
 export default SettingsScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "column",
-        flex: 1,
-        marginBottom: 10,
-    },
-    bottomButton: {
-        position: "absolute",
-        bottom: 20,
-        flexDirection: "row",
-    },
-});

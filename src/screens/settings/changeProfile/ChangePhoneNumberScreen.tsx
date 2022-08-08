@@ -1,6 +1,13 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    View,
+    SafeAreaView,
+    TouchableOpacity,
+    ViewStyle,
+    TextStyle,
+    ImageStyle,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { auth, db } from "../../../firebase";
@@ -12,6 +19,7 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useTailwind } from "tailwindcss-react-native";
 
 const ChangePhoneNumberScreen = () => {
     const navigation: any = useNavigation();
@@ -20,6 +28,7 @@ const ChangePhoneNumberScreen = () => {
         user?.phoneNumber
     );
     const [phoneNumber, setPhoneNumber] = useState("");
+    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     const changePhoneNumber = () => {
         if (phoneNumber === "") {
@@ -117,20 +126,35 @@ const ChangePhoneNumberScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                tailwind("flex-1 items-center"),
+                { padding: 10, marginTop: 20 },
+            ]}
+        >
             <StatusBar style="auto" />
-            <View style={styles.inputContainer}>
+            <View
+                style={{
+                    width: 350,
+                }}
+            >
                 <Input
                     placeholder="Phone Number (Use Country Code)"
                     autoFocus
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={[globalStyles.inputBar]}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
                     autoCompleteType={"tel"}
                 />
             </View>
             <Button
-                containerStyle={[globalStyles.button, styles.button]}
+                containerStyle={[
+                    globalStyles.button,
+                    { marginTop: 10 },
+                    {
+                        width: 200,
+                    },
+                ]}
                 title="Upgrade"
                 onPress={changePhoneNumber}
             />
@@ -139,20 +163,3 @@ const ChangePhoneNumberScreen = () => {
 };
 
 export default ChangePhoneNumberScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        padding: 10,
-        marginTop: 20,
-    },
-    inputContainer: {
-        width: 350,
-    },
-    button: {
-        width: 200,
-        marginTop: 10,
-    },
-    inputBar: {},
-});

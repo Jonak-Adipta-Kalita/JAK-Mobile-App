@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
-    StyleSheet,
     Text,
     View,
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
     Platform,
+    ViewStyle,
+    TextStyle,
+    ImageStyle,
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
@@ -26,14 +28,15 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
+import { useTailwind } from "tailwindcss-react-native";
 
 const LoginScreen = () => {
     const navigation: any = useNavigation();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     useEffect(() => {
         const unSubscribe = auth.onAuthStateChanged((authUser) => {
@@ -68,22 +71,17 @@ const LoginScreen = () => {
             return (
                 <View>
                     <Text
-                        style={{
-                            marginTop: 10,
-                            marginBottom: 10,
-                            color: "#594d4c",
-                            alignSelf: "center",
-                            fontSize: 20,
-                        }}
+                        style={[
+                            tailwind("my-10 self-center"),
+                            {
+                                color: "#594d4c",
+                                fontSize: 20,
+                            },
+                        ]}
                     >
                         Or
                     </Text>
-                    <ScrollView
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                        }}
-                    >
+                    <ScrollView style={tailwind("flex flex-row")}>
                         <LoginButton brand="google" />
                         {Platform.OS === "ios" && <LoginButton brand="apple" />}
                     </ScrollView>
@@ -109,14 +107,19 @@ const LoginScreen = () => {
     }, [navigation]);
 
     return (
-        <View style={styles.container}>
+        <View style={tailwind("flex-1 items-center p-10")}>
             <StatusBar style="auto" />
-            <View style={styles.inputContainer}>
+            <View
+                style={{
+                    width: 300,
+                    marginTop: 10,
+                }}
+            >
                 <Input
                     placeholder="Email"
                     autoFocus
                     value={email}
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={globalStyles.inputBar}
                     onChangeText={(text) => setEmail(text)}
                     leftIcon={
                         <MaterialIcons
@@ -127,12 +130,12 @@ const LoginScreen = () => {
                     }
                     autoCompleteType={"email"}
                 />
-                <View style={styles.passwordContainer}>
+                <View style={tailwind("relative")}>
                     <Input
                         placeholder="Password"
                         secureTextEntry={!showPassword}
                         value={password}
-                        inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                        inputStyle={globalStyles.inputBar}
                         onChangeText={(text) => setPassword(text)}
                         leftIcon={
                             <MaterialIcons
@@ -165,11 +168,17 @@ const LoginScreen = () => {
             </View>
             <Button
                 onPress={loginEmail}
-                containerStyle={styles.button}
+                containerStyle={{
+                    width: 200,
+                    marginTop: 10,
+                }}
                 title="Login"
             />
             <Button
-                containerStyle={styles.button}
+                containerStyle={{
+                    width: 200,
+                    marginTop: 10,
+                }}
                 title="Register"
                 type="outline"
                 onPress={() => navigation.navigate("Register")}
@@ -181,27 +190,3 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        padding: 10,
-    },
-    inputContainer: {
-        width: 300,
-        marginTop: 10,
-    },
-    passwordContainer: {
-        position: "relative",
-    },
-    button: {
-        width: 200,
-        marginTop: 10,
-    },
-    loginButton: {
-        width: 300,
-        marginTop: 40,
-    },
-    inputBar: {},
-});

@@ -1,5 +1,12 @@
 import React, { useLayoutEffect, useState } from "react";
-import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+    View,
+    SafeAreaView,
+    TouchableOpacity,
+    ViewStyle,
+    TextStyle,
+    ImageStyle,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import {
@@ -25,6 +32,7 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useTailwind } from "tailwindcss-react-native";
 
 const RegisterScreen = () => {
     const navigation: any = useNavigation();
@@ -37,6 +45,7 @@ const RegisterScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const avatar: string = images.avatar;
+    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -122,17 +131,26 @@ const RegisterScreen = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                tailwind("flex items-center justify-center"),
+                { padding: 10 },
+            ]}
+        >
             <StatusBar style="auto" />
             <Text h3 style={[globalStyles.text, { marginBottom: 50 }]}>
                 Create an Account
             </Text>
-            <View style={styles.inputContainer}>
+            <View
+                style={{
+                    width: 300,
+                }}
+            >
                 <Input
                     placeholder="Full Name"
                     autoFocus
                     value={name}
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={globalStyles.inputBar}
                     onChangeText={(text) => setName(text)}
                     leftIcon={
                         <FontAwesome5
@@ -147,7 +165,7 @@ const RegisterScreen = () => {
                 <Input
                     placeholder="Email"
                     value={email}
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={globalStyles.inputBar}
                     leftIcon={
                         <MaterialIcons
                             name="email"
@@ -159,12 +177,12 @@ const RegisterScreen = () => {
                     autoCompleteType={"email"}
                 />
 
-                <View style={styles.passwordContainer}>
+                <View style={tailwind("relative")}>
                     <Input
                         placeholder="Password"
                         secureTextEntry={!showPassword}
                         value={password}
-                        inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                        inputStyle={globalStyles.inputBar}
                         onChangeText={(text) => setPassword(text)}
                         leftIcon={
                             <MaterialIcons
@@ -198,13 +216,13 @@ const RegisterScreen = () => {
                     </TouchableOpacity>
                 </View>
 
-                <View style={styles.passwordConfirmContainer}>
+                <View>
                     <Input
                         placeholder="Confirm Password"
                         secureTextEntry={!showPassword}
                         autoCompleteType={"password"}
                         value={confirmPassword}
-                        inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                        inputStyle={globalStyles.inputBar}
                         onChangeText={(text) => setConfirmPassword(text)}
                         leftIcon={
                             <MaterialIcons
@@ -239,7 +257,7 @@ const RegisterScreen = () => {
                     placeholder="Phone Number"
                     autoCompleteType={"tel"}
                     value={phoneNumber}
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={globalStyles.inputBar}
                     leftIcon={
                         <Entypo
                             name="phone"
@@ -251,7 +269,10 @@ const RegisterScreen = () => {
                 />
             </View>
             <Button
-                containerStyle={styles.button}
+                containerStyle={{
+                    width: 200,
+                    marginTop: 10,
+                }}
                 title="Register"
                 onPress={registerEmail}
                 raised
@@ -261,24 +282,3 @@ const RegisterScreen = () => {
 };
 
 export default RegisterScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 10,
-    },
-    passwordContainer: {
-        position: "relative",
-    },
-    inputContainer: {
-        width: 300,
-    },
-    button: {
-        width: 200,
-        marginTop: 10,
-    },
-    inputBar: {},
-    passwordConfirmContainer: {},
-});

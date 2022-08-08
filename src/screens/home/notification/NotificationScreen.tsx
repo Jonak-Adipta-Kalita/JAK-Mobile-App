@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { NotificationTopTab } from "../../../navigation/TopTabNavigator";
 import globalStyles from "../../../globalStyles";
@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const NotificationScreen = () => {
     const navigation = useNavigation();
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Notifications!!",
@@ -25,7 +26,7 @@ const NotificationScreen = () => {
     }, [navigation]);
 
     return (
-        <View style={styles.container}>
+        <View style={{ marginBottom: 10 }}>
             <StatusBar style="auto" />
             <View style={{ height: "100%" }}>
                 <NotificationTopTab />
@@ -35,9 +36,3 @@ const NotificationScreen = () => {
 };
 
 export default NotificationScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        marginBottom: 10,
-    },
-});

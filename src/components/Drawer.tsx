@@ -1,10 +1,12 @@
 import React from "react";
 import {
     View,
-    StyleSheet,
     TouchableOpacity,
     Text,
     Platform,
+    ViewStyle,
+    TextStyle,
+    ImageStyle,
 } from "react-native";
 import {
     DrawerContentComponentProps,
@@ -18,6 +20,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "./Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
+import { useTailwind } from "tailwindcss-react-native";
 
 interface Props extends DrawerContentComponentProps {
     progress?: number;
@@ -30,6 +33,8 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
         outputRange: [0, 1],
         inputRange: [-100, 0],
     });
+
+    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     if (userError) errorAlertShower(userError);
 
@@ -46,7 +51,19 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
         <>
             {user && (
                 <Animated.View style={{ transform: [{ translateX }] }}>
-                    <View style={styles.header}>
+                    <View
+                        style={[
+                            {
+                                marginTop: Platform.OS === "web" ? 0 : 20,
+                                marginBottom: Platform.OS === "web" ? 10 : -15,
+                                padding: 20,
+                                paddingBottom: 20,
+                                borderBottomWidth: 2,
+                                borderBottomColor: "#818181",
+                            },
+                            tailwind("flex-row"),
+                        ]}
+                    >
                         <TouchableOpacity activeOpacity={0.5}>
                             <Avatar
                                 rounded
@@ -84,33 +101,17 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
             )}
             <DrawerContentScrollView
                 {...props}
-                contentContainerStyle={styles.body}
+                contentContainerStyle={tailwind("flex-1")}
             >
                 <Animated.View style={{ transform: [{ translateX }] }}>
                     <DrawerItemList {...props} />
                 </Animated.View>
             </DrawerContentScrollView>
             <Animated.View style={{ transform: [{ translateX }] }}>
-                <View style={styles.footer}></View>
+                <View style={{}}></View>
             </Animated.View>
         </>
     );
 };
 
 export default CustomDrawer;
-
-const styles = StyleSheet.create({
-    header: {
-        marginTop: Platform.OS === "web" ? 0 : 20,
-        marginBottom: Platform.OS === "web" ? 10 : -15,
-        padding: 20,
-        paddingBottom: 20,
-        flexDirection: "row",
-        borderBottomWidth: 2,
-        borderBottomColor: "#818181",
-    },
-    body: {
-        flex: 1,
-    },
-    footer: {},
-});
