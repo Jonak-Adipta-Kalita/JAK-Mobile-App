@@ -20,6 +20,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -47,7 +48,7 @@ const uploadImageAsync = async (uri: string, userUID: string) => {
 const SettingsScreen = () => {
     const navigation: any = useNavigation();
     const [user, userLoading, userError] = useAuthState(auth);
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState<null | string>(null);
 
     const updatePic = async () => {
         const pickerResult: any = await ImagePicker.launchImageLibraryAsync({
@@ -58,9 +59,9 @@ const SettingsScreen = () => {
             if (!pickerResult.cancelled) {
                 const uploadURL = await uploadImageAsync(
                     pickerResult.uri,
-                    user.uid!
+                    user?.uid!
                 );
-                user?.updateProfile({ photoURL: uploadURL });
+                updateProfile(user!, { photoURL: uploadURL });
                 setImage(uploadURL);
             }
         } catch (error) {
@@ -87,7 +88,7 @@ const SettingsScreen = () => {
         const userUID = user?.uid;
         user?.delete()
             .then(() => {
-                deleteDoc(doc(db, "users", userUID));
+                deleteDoc(doc(db, "users", userUID!));
             })
             .then(() => {
                 pushPublicNotification({
@@ -103,7 +104,7 @@ const SettingsScreen = () => {
 
     const verifyEmail = () => {
         if (!user?.emailVerified) {
-            user?.sendEmailVerification()
+            sendEmailVerification(user!)
                 .then(() => {
                     messageAlertShower(
                         "Verification Email Successfully Sent!!",
@@ -118,7 +119,7 @@ const SettingsScreen = () => {
                 })
                 .then(() => {
                     setDoc(
-                        doc(db, "users", user?.uid),
+                        doc(db, "users", user?.uid!),
                         {
                             emailVerified: true,
                         },

@@ -15,7 +15,7 @@ const PrivateScreen = () => {
 
     const [notifications, firestoreLoading, firestoreError] = useCollection(
         query(
-            collection(db, "users", user?.uid, "notifications"),
+            collection(db, "users", user?.uid!, "notifications"),
             orderBy("timestamp", "desc")
         )
     );

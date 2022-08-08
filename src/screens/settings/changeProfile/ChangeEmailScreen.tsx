@@ -12,6 +12,7 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { updateEmail } from "firebase/auth";
 
 const ChangeEmailScreen = () => {
     const navigation: any = useNavigation();
@@ -43,9 +44,9 @@ const ChangeEmailScreen = () => {
                 ]
             );
         } else {
-            user?.updateEmail(email)
+            updateEmail(user!, email)
                 .then(() => {
-                    pushPrivateNotification(user?.uid, {
+                    pushPrivateNotification(user?.uid!, {
                         title: "Email Changed Successfully!!",
                         message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
                         timestamp: serverTimestamp(),
@@ -53,7 +54,7 @@ const ChangeEmailScreen = () => {
                 })
                 .then(() => {
                     setDoc(
-                        doc(db, "users", user?.uid),
+                        doc(db, "users", user?.uid!),
                         {
                             email: email,
                         },

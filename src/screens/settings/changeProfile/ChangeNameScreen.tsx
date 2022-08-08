@@ -12,6 +12,7 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
 
 const ChangeNameScreen = () => {
     const navigation: any = useNavigation();
@@ -43,11 +44,11 @@ const ChangeNameScreen = () => {
                 ]
             );
         } else {
-            user?.updateProfile({
+            updateProfile(user!, {
                 displayName: name,
             })
                 .then(() => {
-                    pushPrivateNotification(user?.uid, {
+                    pushPrivateNotification(user?.uid!, {
                         title: "Name Changed Successfully!!",
                         message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
                         timestamp: serverTimestamp(),
@@ -55,7 +56,7 @@ const ChangeNameScreen = () => {
                 })
                 .then(() => {
                     setDoc(
-                        doc(db, "users", user?.uid),
+                        doc(db, "users", user?.uid!),
                         {
                             displayName: name,
                         },

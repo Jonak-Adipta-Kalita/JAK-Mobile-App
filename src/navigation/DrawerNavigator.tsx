@@ -11,7 +11,6 @@ import {
     HomeStack,
     AboutStack,
     SettingsStack,
-    ContactStack,
     AuthenticationStack,
 } from "./StackNavigator";
 
@@ -65,20 +64,6 @@ const DrawerNavigator = () => {
                     drawerIcon: ({ color, size }) => (
                         <AntDesign
                             name="exclamationcircleo"
-                            size={24}
-                            style={{ fontSize: size, color: color }}
-                        />
-                    ),
-                }}
-            />
-            <Drawer.Screen
-                name="ContactDrawer"
-                component={ContactStack}
-                options={{
-                    drawerLabel: "Contact",
-                    drawerIcon: ({ color, size }) => (
-                        <AntDesign
-                            name="phone"
                             size={24}
                             style={{ fontSize: size, color: color }}
                         />

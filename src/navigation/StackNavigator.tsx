@@ -13,7 +13,6 @@ import SettingsScreen from "../screens/settings/SettingsScreen";
 import ChangeEmailScreen from "../screens/settings/changeProfile/ChangeEmailScreen";
 import ChangeNameScreen from "../screens/settings/changeProfile/ChangeNameScreen";
 import ChangePhoneNumberScreen from "../screens/settings/changeProfile/ChangePhoneNumberScreen";
-import ContactScreen from "../screens/ContactScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 
@@ -127,21 +126,4 @@ const SettingsStack = () => {
     );
 };
 
-const ContactStack = () => {
-    return (
-        <Stack.Navigator
-            screenOptions={stackScreenOption1}
-            initialRouteName="Contact"
-        >
-            <Stack.Screen name="Contact" component={ContactScreen} />
-        </Stack.Navigator>
-    );
-};
-
-export {
-    HomeStack,
-    AboutStack,
-    SettingsStack,
-    ContactStack,
-    AuthenticationStack,
-};
+export { HomeStack, AboutStack, SettingsStack, AuthenticationStack };
