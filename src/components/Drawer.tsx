@@ -14,13 +14,15 @@ import {
     DrawerItemList,
 } from "@react-navigation/drawer";
 import Animated from "react-native-reanimated";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { Avatar } from "react-native-elements";
 import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "./Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import { useTailwind } from "tailwindcss-react-native";
+import { useDocument } from "react-firebase-hooks/firestore";
+import { doc } from "firebase/firestore";
 
 interface Props extends DrawerContentComponentProps {
     progress?: number;
@@ -28,6 +30,9 @@ interface Props extends DrawerContentComponentProps {
 
 const CustomDrawer = ({ progress, ...props }: Props) => {
     const [user, userLoading, userError] = useAuthState(auth);
+    const [userData, firestoreLoading, firestoreError] = useDocument(
+        doc(db, "users", user?.uid!)
+    );
 
     const translateX = Animated.interpolateNode(progress!, {
         outputRange: [0, 1],
@@ -38,7 +43,9 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
 
     if (userError) errorAlertShower(userError);
 
-    if (userLoading) {
+    if (firestoreError) errorAlertShower(firestoreError);
+
+    if (userLoading || firestoreLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}
@@ -93,7 +100,7 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
                                     { fontWeight: "bold", fontSize: 13 },
                                 ]}
                             >
-                                {user.phoneNumber}
+                                {userData?.data()?.phoneNumber}
                             </Text>
                         </View>
                     </View>

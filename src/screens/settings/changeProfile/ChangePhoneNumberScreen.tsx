@@ -54,7 +54,6 @@ const ChangePhoneNumberScreen = () => {
                 ]
             );
         } else {
-            //TODO: Change Phone Number
             pushPrivateNotification(user?.uid!, {
                 title: "Phone Number Changed Successfully!!",
                 message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
