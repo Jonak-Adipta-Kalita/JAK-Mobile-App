@@ -50,34 +50,19 @@ const HomeStack = () => {
     }, []);
     if (isFirstLaunch === null) {
         return null;
-    } else if (isFirstLaunch === true) {
-        return (
-            <Stack.Navigator
-                screenOptions={stackScreenOption1}
-                initialRouteName="GetStarted"
-            >
-                <Stack.Screen name="GetStarted" component={GetStartedScreen} />
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen
-                    name="Notification"
-                    component={NotificationScreen}
-                />
-            </Stack.Navigator>
-        );
-    } else {
-        return (
-            <Stack.Navigator
-                screenOptions={stackScreenOption1}
-                initialRouteName="Home"
-            >
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen
-                    name="Notification"
-                    component={NotificationScreen}
-                />
-            </Stack.Navigator>
-        );
     }
+    return (
+        <Stack.Navigator
+            screenOptions={stackScreenOption1}
+            initialRouteName={isFirstLaunch ? "GetStarted" : "Home"}
+        >
+            {isFirstLaunch && (
+                <Stack.Screen name="GetStarted" component={GetStartedScreen} />
+            )}
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Notification" component={NotificationScreen} />
+        </Stack.Navigator>
+    );
 };
 
 const AuthenticationStack = () => {
