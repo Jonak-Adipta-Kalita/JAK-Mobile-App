@@ -8,7 +8,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import NotificationScreen from "../screens/home/notification/NotificationScreen";
-import AboutScreen from "../screens/AboutScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
 import ChangeEmailScreen from "../screens/settings/changeProfile/ChangeEmailScreen";
 import ChangeNameScreen from "../screens/settings/changeProfile/ChangeNameScreen";
@@ -93,17 +92,6 @@ const AuthenticationStack = () => {
     );
 };
 
-const AboutStack = () => {
-    return (
-        <Stack.Navigator
-            screenOptions={stackScreenOption1}
-            initialRouteName="About"
-        >
-            <Stack.Screen name="About" component={AboutScreen} />
-        </Stack.Navigator>
-    );
-};
-
 const SettingsStack = () => {
     return (
         <Stack.Navigator
@@ -126,4 +114,4 @@ const SettingsStack = () => {
     );
 };
 
-export { HomeStack, AboutStack, SettingsStack, AuthenticationStack };
+export { HomeStack, SettingsStack, AuthenticationStack };
