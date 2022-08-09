@@ -50,7 +50,4 @@ export default {
             ? "./google_services_android-dev.json"
             : "./google_services_android-prod.json",
     },
-    web: {
-        favicon: "./assets/images/favicon.png",
-    },
 };
