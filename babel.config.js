@@ -11,6 +11,7 @@ module.exports = function (api) {
                 },
             ],
             ["tailwindcss-react-native/babel"],
+            "react-native-reanimated/plugin"
         ],
     };
 };
