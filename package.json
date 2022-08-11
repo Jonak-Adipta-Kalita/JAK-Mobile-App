@@ -27,7 +27,7 @@
     "jest": {
         "preset": "jest-expo",
         "transformIgnorePatterns": [
-            "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.|react-navigation|@react-navigation/.|@unimodules/.|unimodules|sentry-expo|native-base|@sentry/.)"
+            "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
         ]
     },
     "bugs": {
@@ -36,7 +36,7 @@
     "homepage": "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App#readme",
     "dependencies": {
         "@react-native-async-storage/async-storage": "~1.17.3",
-        "@react-native-community/masked-view": "^0.1.11",
+        "@react-native-masked-view/masked-view": "0.2.7",
         "@react-navigation/drawer": "^6.4.3",
         "@react-navigation/material-bottom-tabs": "^6.2.2",
         "@react-navigation/material-top-tabs": "^6.2.2",
@@ -73,8 +73,11 @@
     },
     "devDependencies": {
         "@babel/core": "^7.18.6",
+        "@types/jest": "^28.1.6",
+        "@types/react-test-renderer": "^18.0.0",
         "@typescript-eslint/eslint-plugin": "^5.32.0",
         "@typescript-eslint/parser": "^5.32.0",
+        "axios": "^0.27.2",
         "eslint": "^8.21.0",
         "eslint-plugin-react": "^7.30.1",
         "firebase-tools": "^11.4.2",
@@ -84,7 +87,9 @@
         "npm-check-updates": "^16.0.5",
         "prettier": "^2.7.1",
         "prettier-plugin-tailwindcss": "^0.1.13",
+        "react-test-renderer": "17",
         "tailwindcss": "^3.1.8",
+        "ts-jest": "^28.0.7",
         "typescript": "^4.6.3"
     },
     "private": true
