@@ -47,23 +47,25 @@ const App = () => {
 
     if (!fontsLoaded || userLoading) {
         return (
-            <LoadingIndicator
-                dimensions={{ width: 70, height: 70 }}
-                containerStyle={{ flex: 1 }}
-            />
+            <TailwindProvider>
+                <LoadingIndicator
+                    dimensions={{ width: 70, height: 70 }}
+                    containerStyle={{ flex: 1 }}
+                />
+            </TailwindProvider>
         );
     }
 
     return (
-        <ReduxProvider store={reduxStore}>
-            <TailwindProvider>
+        <TailwindProvider>
+            <ReduxProvider store={reduxStore}>
                 <NavigationContainer
                     theme={scheme === "dark" ? DarkTheme : LightTheme}
                 >
                     <DrawerNavigator />
                 </NavigationContainer>
-            </TailwindProvider>
-        </ReduxProvider>
+            </ReduxProvider>
+        </TailwindProvider>
     );
 };
 
