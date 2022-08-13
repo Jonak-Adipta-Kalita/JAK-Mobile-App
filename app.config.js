@@ -1,4 +1,4 @@
-const __DEV__ = true;
+const __DEV__ = process.env.PRODUCTION !== "true";
 const VERSION = "0.0.1";
 
 export default {
