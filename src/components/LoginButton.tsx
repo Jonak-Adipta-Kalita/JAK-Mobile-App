@@ -4,15 +4,26 @@ import images from "../images";
 import { Image } from "react-native-elements";
 import { useAssets } from "expo-asset";
 import LoadingIndicator from "../components/Loading";
-import googleAuth from "../authenticators/googleAuth";
-import appleAuth from "../authenticators/appleAuth";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
+// import * as Google from "expo-auth-session/providers/google";
+// import {
+//     EXPO_CLIENT_ID,
+//     GOOGLE_ANDROID_CLIENT_ID,
+//     GOOGLE_IOS_CLIENT_ID,
+// } from "@env";
 
 interface Props {
     brand: "google" | "apple";
 }
 
 const LoginButton = ({ brand }: Props) => {
+    // const [googleRequest, googleResponse, googlePromptAsync] =
+    //     Google.useAuthRequest({
+    //         androidClientId: GOOGLE_ANDROID_CLIENT_ID,
+    //         iosClientId: GOOGLE_IOS_CLIENT_ID,
+    //         expoClientId: EXPO_CLIENT_ID,
+    //     });
+
     let imageFile;
 
     if (brand === "google") {
@@ -31,9 +42,9 @@ const LoginButton = ({ brand }: Props) => {
 
     const signIn = async () => {
         if (brand === "google") {
-            await googleAuth();
+            // Google Login
         } else if (brand === "apple") {
-            await appleAuth();
+            // Apple Login
         }
     };
 
