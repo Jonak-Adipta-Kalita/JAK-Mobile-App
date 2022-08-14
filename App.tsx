@@ -45,26 +45,22 @@ const App = () => {
 
     if (fontsError || userError) errorAlertShower(fontsError || userError);
 
-    if (!fontsLoaded || userLoading) {
-        return (
-            <TailwindProvider>
+    return (
+        <TailwindProvider>
+            {!fontsLoaded || userLoading ? (
                 <LoadingIndicator
                     dimensions={{ width: 70, height: 70 }}
                     containerStyle={{ flex: 1 }}
                 />
-            </TailwindProvider>
-        );
-    }
-
-    return (
-        <TailwindProvider>
-            <ReduxProvider store={reduxStore}>
-                <NavigationContainer
-                    theme={scheme === "dark" ? DarkTheme : LightTheme}
-                >
-                    <DrawerNavigator />
-                </NavigationContainer>
-            </ReduxProvider>
+            ) : (
+                <ReduxProvider store={reduxStore}>
+                    <NavigationContainer
+                        theme={scheme === "dark" ? DarkTheme : LightTheme}
+                    >
+                        <DrawerNavigator />
+                    </NavigationContainer>
+                </ReduxProvider>
+            )}
         </TailwindProvider>
     );
 };
