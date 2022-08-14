@@ -53,7 +53,7 @@ const HomeScreen = () => {
         navigation.setOptions({
             title: "Welcome!!",
             headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView className="flex-1">
                     <TouchableOpacity
                         style={globalStyles.headerIcon}
                         onPress={() => navigation.openDrawer()}
@@ -63,7 +63,7 @@ const HomeScreen = () => {
                 </SafeAreaView>
             ),
             headerRight: () => (
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView className="flex-1">
                     {user && (
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
@@ -89,7 +89,7 @@ const HomeScreen = () => {
     }
 
     return (
-        <View style={{ marginBottom: 10 }}>
+        <View className="mb-[10px]">
             <StatusBar style="auto" />
             <ScrollView>
                 <Card>

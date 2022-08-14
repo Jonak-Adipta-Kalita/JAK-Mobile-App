@@ -7,9 +7,6 @@ import {
     TouchableOpacity,
     ScrollView,
     Platform,
-    ViewStyle,
-    TextStyle,
-    ImageStyle,
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
@@ -28,7 +25,6 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
-import { useTailwind } from "tailwindcss-react-native";
 
 const LoginScreen = () => {
     const navigation: any = useNavigation();
@@ -36,7 +32,6 @@ const LoginScreen = () => {
     const showPassword = useAppSelector(selectShowPassword);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     useEffect(() => {
         const unSubscribe = auth.onAuthStateChanged((authUser) => {
@@ -70,18 +65,10 @@ const LoginScreen = () => {
         if (Platform.OS === "android" || Platform.OS === "ios") {
             return (
                 <View>
-                    <Text
-                        style={[
-                            tailwind("my-10 self-center"),
-                            {
-                                color: "#594d4c",
-                                fontSize: 20,
-                            },
-                        ]}
-                    >
+                    <Text className="my-[10px] self-center text-[20px] text-[#594d4c]">
                         Or
                     </Text>
-                    <ScrollView style={tailwind("flex flex-row")}>
+                    <ScrollView className="flex flex-row">
                         <LoginButton brand="google" />
                         {Platform.OS === "ios" && <LoginButton brand="apple" />}
                     </ScrollView>
@@ -94,7 +81,7 @@ const LoginScreen = () => {
         navigation.setOptions({
             title: "Login!!",
             headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView className="flex-1">
                     <TouchableOpacity
                         style={globalStyles.headerIcon}
                         onPress={navigation.goBack}
@@ -107,7 +94,7 @@ const LoginScreen = () => {
     }, [navigation]);
 
     return (
-        <View style={tailwind("flex-1 items-center p-10")}>
+        <View className="flex-1 items-center justify-center p-[10px]">
             <StatusBar style="auto" />
             <View
                 style={{
@@ -130,7 +117,7 @@ const LoginScreen = () => {
                     }
                     autoCompleteType={"email"}
                 />
-                <View style={tailwind("relative")}>
+                <View className="relative">
                     <Input
                         placeholder="Password"
                         secureTextEntry={!showPassword}

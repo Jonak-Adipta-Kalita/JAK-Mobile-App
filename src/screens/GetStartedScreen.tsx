@@ -1,14 +1,12 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, ViewStyle, ImageStyle, TextStyle } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-elements";
 import globalStyles from "../globalStyles";
 import { useNavigation } from "@react-navigation/native";
-import { useTailwind } from "tailwindcss-react-native";
 
 const GetStartedScreen = () => {
     const navigation: any = useNavigation();
-    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -26,14 +24,15 @@ const GetStartedScreen = () => {
     return (
         <View>
             <StatusBar style="auto" />
-            <View style={{ padding: 10, paddingRight: 20, paddingLeft: 20 }}>
+            <View className="p-[10px] px-[20px]">
                 <Button
                     containerStyle={[
                         globalStyles.button,
                         {
                             marginTop: 650,
+                            alignSelf: "center",
+                            position: "absolute",
                         },
-                        tailwind("absolute self-center"),
                     ]}
                     title="Lets Goooo!!"
                     onPress={() => navigation.replace("Login")}

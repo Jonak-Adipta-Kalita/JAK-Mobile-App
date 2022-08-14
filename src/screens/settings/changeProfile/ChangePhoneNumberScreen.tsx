@@ -1,13 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    SafeAreaView,
-    TouchableOpacity,
-    ViewStyle,
-    TextStyle,
-    ImageStyle,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { auth, db } from "../../../firebase";
@@ -19,7 +12,6 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { useTailwind } from "tailwindcss-react-native";
 
 const ChangePhoneNumberScreen = () => {
     const navigation: any = useNavigation();
@@ -28,7 +20,6 @@ const ChangePhoneNumberScreen = () => {
         user?.phoneNumber
     );
     const [phoneNumber, setPhoneNumber] = useState("");
-    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     const changePhoneNumber = () => {
         if (phoneNumber === "") {
@@ -125,18 +116,9 @@ const ChangePhoneNumberScreen = () => {
     }
 
     return (
-        <View
-            style={[
-                tailwind("flex-1 items-center"),
-                { padding: 10, marginTop: 20 },
-            ]}
-        >
+        <View className="mt-[20px] flex-1 items-center p-[10px]">
             <StatusBar style="auto" />
-            <View
-                style={{
-                    width: 350,
-                }}
-            >
+            <View className="w-[350px]">
                 <Input
                     placeholder="Phone Number (Use Country Code)"
                     autoFocus
@@ -149,10 +131,7 @@ const ChangePhoneNumberScreen = () => {
             <Button
                 containerStyle={[
                     globalStyles.button,
-                    { marginTop: 10 },
-                    {
-                        width: 200,
-                    },
+                    { marginTop: 10, width: 200 },
                 ]}
                 title="Upgrade"
                 onPress={changePhoneNumber}

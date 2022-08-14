@@ -1,13 +1,5 @@
 import React from "react";
-import {
-    View,
-    TouchableOpacity,
-    Text,
-    Platform,
-    ViewStyle,
-    TextStyle,
-    ImageStyle,
-} from "react-native";
+import { View, TouchableOpacity, Text, Platform } from "react-native";
 import {
     DrawerContentComponentProps,
     DrawerContentScrollView,
@@ -20,9 +12,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "./Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
-import { useTailwind } from "tailwindcss-react-native";
-import { useDocument } from "react-firebase-hooks/firestore";
-import { doc } from "firebase/firestore";
+// import { useDocument } from "react-firebase-hooks/firestore";
+// import { doc } from "firebase/firestore";
 
 interface Props extends DrawerContentComponentProps {
     progress?: number;
@@ -30,22 +21,21 @@ interface Props extends DrawerContentComponentProps {
 
 const CustomDrawer = ({ progress, ...props }: Props) => {
     const [user, userLoading, userError] = useAuthState(auth);
-    const [userData, firestoreLoading, firestoreError] = useDocument(
-        doc(db, "users", user?.uid!)
-    );
+    // const [userData, firestoreLoading, firestoreError] = useDocument(
+    //     doc(db, "users", user?.uid!)
+    // );
 
     const translateX = Animated.interpolateNode(progress!, {
         outputRange: [0, 1],
         inputRange: [-100, 0],
     });
 
-    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
-
     if (userError) errorAlertShower(userError);
 
-    if (firestoreError) errorAlertShower(firestoreError);
+    // if (firestoreError) errorAlertShower(firestoreError);
 
-    if (userLoading || firestoreLoading) {
+    // if (userLoading || firestoreLoading) {
+    if (userLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}
@@ -58,19 +48,7 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
         <>
             {user && (
                 <Animated.View style={{ transform: [{ translateX }] }}>
-                    <View
-                        style={[
-                            {
-                                marginTop: Platform.OS === "web" ? 0 : 20,
-                                marginBottom: Platform.OS === "web" ? 10 : -15,
-                                padding: 20,
-                                paddingBottom: 20,
-                                borderBottomWidth: 2,
-                                borderBottomColor: "#818181",
-                            },
-                            tailwind("flex-row"),
-                        ]}
-                    >
+                    <View className="mt-[20px] mb-[-15px] flex-row border-b-[2px] border-b-[#818181] p-[20px] pb-[20px]">
                         <TouchableOpacity activeOpacity={0.5}>
                             <Avatar
                                 rounded
@@ -80,12 +58,7 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
                                 }}
                             />
                         </TouchableOpacity>
-                        <View
-                            style={{
-                                marginLeft: 30,
-                                marginTop: Platform.OS === "web" ? 17 : 13,
-                            }}
-                        >
+                        <View className="ml-[30px] mt-[13px]">
                             <Text
                                 style={[
                                     globalStyles.text,
@@ -100,7 +73,7 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
                                     { fontWeight: "bold", fontSize: 13 },
                                 ]}
                             >
-                                {userData?.data()?.phoneNumber}
+                                {/* {userData?.data()?.phoneNumber} */}
                             </Text>
                         </View>
                     </View>
@@ -108,7 +81,7 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
             )}
             <DrawerContentScrollView
                 {...props}
-                contentContainerStyle={tailwind("flex-1")}
+                contentContainerStyle={{ flex: 1 }}
             >
                 <Animated.View style={{ transform: [{ translateX }] }}>
                     <DrawerItemList {...props} />

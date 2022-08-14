@@ -1,12 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import {
-    View,
-    SafeAreaView,
-    TouchableOpacity,
-    ViewStyle,
-    TextStyle,
-    ImageStyle,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import {
@@ -32,7 +25,6 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { useTailwind } from "tailwindcss-react-native";
 
 const RegisterScreen = () => {
     const navigation: any = useNavigation();
@@ -45,7 +37,6 @@ const RegisterScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const avatar: string = images.avatar;
-    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -131,12 +122,7 @@ const RegisterScreen = () => {
     };
 
     return (
-        <View
-            style={[
-                tailwind("flex items-center justify-center"),
-                { padding: 10 },
-            ]}
-        >
+        <View className="flex-1 items-center justify-center p-[10px]">
             <StatusBar style="auto" />
             <Text h3 style={[globalStyles.text, { marginBottom: 50 }]}>
                 Create an Account
@@ -177,7 +163,7 @@ const RegisterScreen = () => {
                     autoCompleteType={"email"}
                 />
 
-                <View style={tailwind("relative")}>
+                <View className="relative">
                     <Input
                         placeholder="Password"
                         secureTextEntry={!showPassword}

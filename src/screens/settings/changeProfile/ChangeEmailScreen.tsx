@@ -1,13 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    SafeAreaView,
-    TouchableOpacity,
-    ViewStyle,
-    TextStyle,
-    ImageStyle,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
@@ -20,14 +13,12 @@ import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { updateEmail } from "firebase/auth";
-import { useTailwind } from "tailwindcss-react-native";
 
 const ChangeEmailScreen = () => {
     const navigation: any = useNavigation();
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");
-    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     const changeEmail = () => {
         if (email === "") {
@@ -99,7 +90,7 @@ const ChangeEmailScreen = () => {
         navigation.setOptions({
             title: "Change your Email!!",
             headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView className="flex-1">
                     <TouchableOpacity
                         style={globalStyles.headerIcon}
                         onPress={navigation.goBack}
@@ -123,18 +114,9 @@ const ChangeEmailScreen = () => {
     }
 
     return (
-        <View
-            style={[
-                tailwind("flex-1 items-center"),
-                { padding: 10, marginTop: 20 },
-            ]}
-        >
+        <View className="mt-[20px] flex-1 items-center p-[10px]">
             <StatusBar style="auto" />
-            <View
-                style={{
-                    width: 350,
-                }}
-            >
+            <View className="w-[350px]">
                 <Input
                     placeholder="Email"
                     autoFocus
@@ -147,10 +129,7 @@ const ChangeEmailScreen = () => {
             <Button
                 containerStyle={[
                     globalStyles.button,
-                    { marginTop: 10 },
-                    {
-                        width: 200,
-                    },
+                    { marginTop: 10, width: 200 },
                 ]}
                 title="Upgrade"
                 onPress={changeEmail}

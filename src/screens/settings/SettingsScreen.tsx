@@ -1,14 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    SafeAreaView,
-    TouchableOpacity,
-    ScrollView,
-    ViewStyle,
-    TextStyle,
-    ImageStyle,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
 import { Avatar, Button, ListItem } from "react-native-elements";
@@ -23,7 +15,6 @@ import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
-import { useTailwind } from "tailwindcss-react-native";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -52,7 +43,6 @@ const SettingsScreen = () => {
     const navigation: any = useNavigation();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
-    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
 
     const updatePic = async () => {
         const pickerResult: any = await ImagePicker.launchImageLibraryAsync({
@@ -182,24 +172,10 @@ const SettingsScreen = () => {
     }
 
     return (
-        <View
-            style={[
-                tailwind("flex-col flex-1"),
-                {
-                    marginBottom: 10,
-                },
-            ]}
-        >
+        <View className="mb-[10px] flex-1 flex-col">
             <StatusBar style="auto" />
             <ScrollView>
-                <View
-                    style={[
-                        {
-                            marginTop: 30,
-                        },
-                        tailwind("items-center"),
-                    ]}
-                >
+                <View className="mt-[30px] items-center">
                     {user?.photoURL ? (
                         <TouchableOpacity
                             activeOpacity={0.5}
@@ -275,24 +251,14 @@ const SettingsScreen = () => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-            <View
-                style={[
-                    tailwind("absolute flex-row self-start"),
-                    { paddingLeft: 20, bottom: 20 },
-                ]}
-            >
+            <View className="absolute bottom-[20px] flex-row self-start pl-[20px]">
                 <Button
                     containerStyle={globalStyles.button}
                     onPress={signOut}
                     title="Logout"
                 />
             </View>
-            <View
-                style={[
-                    tailwind("absolute flex-rowself-end"),
-                    { paddingRight: 20, bottom: 20 },
-                ]}
-            >
+            <View className="absolute bottom-[20px] flex-row self-end pr-[20px]">
                 <Button
                     containerStyle={globalStyles.button}
                     onPress={deleteAccount}

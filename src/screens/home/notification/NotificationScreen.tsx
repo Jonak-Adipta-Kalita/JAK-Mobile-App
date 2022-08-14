@@ -13,7 +13,7 @@ const NotificationScreen = () => {
         navigation.setOptions({
             title: "Your Notifications!!",
             headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView className="flex-1">
                     <TouchableOpacity
                         style={globalStyles.headerIcon}
                         onPress={navigation.goBack}
@@ -26,7 +26,7 @@ const NotificationScreen = () => {
     }, [navigation]);
 
     return (
-        <View style={{ marginBottom: 10 }}>
+        <View className="mb-[10px]">
             <StatusBar style="auto" />
             <View style={{ height: "100%" }}>
                 <NotificationTopTab />

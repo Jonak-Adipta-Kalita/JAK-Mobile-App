@@ -1,10 +1,9 @@
 import React from "react";
-import { View, Text, ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { View, Text } from "react-native";
 import { Card } from "react-native-elements";
 import moment from "moment";
 import globalStyles from "../globalStyles";
 import { editMessage } from "@xxjonakadiptaxx/jak_javascript_package";
-import { useTailwind } from "tailwindcss-react-native";
 
 interface Props {
     id: string;
@@ -14,8 +13,6 @@ interface Props {
 }
 
 const Notification = ({ title, message, timestamp }: Props) => {
-    const tailwind = useTailwind<ViewStyle | TextStyle | ImageStyle>();
-
     return (
         <View style={{ paddingBottom: 5 }}>
             <Card containerStyle={{ position: "relative" }}>
@@ -24,8 +21,11 @@ const Notification = ({ title, message, timestamp }: Props) => {
                 <Text
                     style={[
                         globalStyles.font,
-                        tailwind("text-center"),
-                        { color: "#594d4c", marginBottom: 15 },
+                        {
+                            color: "#594d4c",
+                            marginBottom: 15,
+                            textAlign: "center",
+                        },
                     ]}
                 >
                     {message}
