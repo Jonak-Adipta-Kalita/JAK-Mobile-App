@@ -23,7 +23,7 @@ const HomeScreen = () => {
     const [user, userLoading, userError] = useAuthState(auth);
 
     useEffect(() => {
-        if (Platform.OS === "android") {
+        if (Platform.OS === "android" && navigation.getId() === "Home") {
             const backAction = () => {
                 messageAlertShower(
                     "Exit App!!",
