@@ -25,9 +25,10 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
+import { NavigationPropsStack } from "../../../@types/navigation";
 
 const LoginScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsStack>();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
     const [email, setEmail] = useState("");

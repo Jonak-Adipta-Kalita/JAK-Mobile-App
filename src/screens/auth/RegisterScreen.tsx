@@ -25,9 +25,10 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { NavigationPropsStack } from "../../../@types/navigation";
 
 const RegisterScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsStack>();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
 

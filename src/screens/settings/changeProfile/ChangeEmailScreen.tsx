@@ -13,9 +13,10 @@ import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { updateEmail } from "firebase/auth";
+import { NavigationPropsDrawer } from "../../../../@types/navigation";
 
 const ChangeEmailScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");

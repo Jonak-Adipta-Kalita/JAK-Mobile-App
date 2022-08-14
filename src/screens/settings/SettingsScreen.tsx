@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
+import { NavigationPropsDrawer } from "../../../@types/navigation";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -40,7 +41,7 @@ const uploadImageAsync = async (uri: string, userUID: string) => {
 };
 
 const SettingsScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
 

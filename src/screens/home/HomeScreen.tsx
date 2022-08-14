@@ -17,9 +17,10 @@ import globalStyles from "../../globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationPropsDrawer } from "../../../@types/navigation";
 
 const HomeScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
 
     useEffect(() => {
@@ -96,7 +97,7 @@ const HomeScreen = () => {
                     <Card.Title>Note</Card.Title>
                     <Card.Divider />
                     <Button
-                        onPress={() => navigation.jumpTo("NoteScreen")}
+                        onPress={() => navigation.navigate("Note")}
                         title="Go to Note Screen"
                     />
                 </Card>

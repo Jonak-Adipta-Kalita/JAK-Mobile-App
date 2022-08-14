@@ -4,18 +4,20 @@ import { View } from "react-native";
 import { Button } from "react-native-elements";
 import globalStyles from "../globalStyles";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationPropsStack } from "../../@types/navigation";
 
 const GetStartedScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsStack>();
 
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Get Started!!",
             headerStyle: {
                 backgroundColor: "#3f7de0",
-                fontFamily: "OtomanopeeOne",
             },
-            headerTitleStyle: { color: "white" },
+            headerTitleStyle: {
+                color: "white",
+            },
             headerTintColor: "white",
             headerTitleAlign: "center",
         });

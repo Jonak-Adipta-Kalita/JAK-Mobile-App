@@ -5,9 +5,10 @@ import { AntDesign } from "@expo/vector-icons";
 import { NotificationTopTab } from "../../../navigation/TopTabNavigator";
 import globalStyles from "../../../globalStyles";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationPropsStack } from "../../../../@types/navigation";
 
 const NotificationScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationPropsStack>();
 
     useLayoutEffect(() => {
         navigation.setOptions({

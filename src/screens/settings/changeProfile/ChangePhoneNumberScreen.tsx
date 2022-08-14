@@ -12,9 +12,10 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { NavigationPropsDrawer } from "../../../../@types/navigation";
 
 const ChangePhoneNumberScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
         user?.phoneNumber
