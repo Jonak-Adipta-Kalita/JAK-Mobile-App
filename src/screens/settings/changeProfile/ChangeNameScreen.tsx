@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View,  } from "react-native";
+import { View } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
 import globalStyles from "../../../globalStyles";
@@ -92,7 +92,7 @@ const ChangeNameScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Change your Name!!",
-            headerLeft: () => <ArrowGoBack/>,
+            headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
 
