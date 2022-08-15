@@ -57,7 +57,7 @@ const HomeScreen = () => {
                 <SafeAreaView className="flex-1">
                     <TouchableOpacity
                         style={globalStyles.headerIcon}
-                        onPress={() => navigation.openDrawer()}
+                        onPress={navigation.openDrawer}
                     >
                         <FontAwesome5 name="bars" size={24} />
                     </TouchableOpacity>

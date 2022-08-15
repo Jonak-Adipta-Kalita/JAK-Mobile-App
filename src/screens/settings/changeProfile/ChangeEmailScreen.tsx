@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, SafeAreaView, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { View } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { db, auth } from "../../../firebase";
 import globalStyles from "../../../globalStyles";
@@ -14,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { updateEmail } from "firebase/auth";
 import { NavigationPropsDrawer } from "../../../../@types/navigation";
+import ArrowGoBack from "../../../components/ArrowGoBack";
 
 const ChangeEmailScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
@@ -90,16 +90,7 @@ const ChangeEmailScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Change your Email!!",
-            headerLeft: () => (
-                <SafeAreaView className="flex-1">
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+            headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
 

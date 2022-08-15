@@ -3,13 +3,12 @@ import { StatusBar } from "expo-status-bar";
 import {
     Text,
     View,
-    SafeAreaView,
     TouchableOpacity,
     ScrollView,
     Platform,
 } from "react-native";
 import { Button, Input } from "react-native-elements";
-import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
 import globalStyles from "../../globalStyles";
 import {
@@ -26,6 +25,7 @@ import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
 import { NavigationPropsStack } from "../../../@types/navigation";
+import ArrowGoBack from "../../components/ArrowGoBack";
 
 const LoginScreen = () => {
     const navigation = useNavigation<NavigationPropsStack>();
@@ -81,16 +81,7 @@ const LoginScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login!!",
-            headerLeft: () => (
-                <SafeAreaView className="flex-1">
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} color="white" />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+            headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
 

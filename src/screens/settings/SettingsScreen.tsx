@@ -16,6 +16,7 @@ import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { NavigationPropsDrawer } from "../../../@types/navigation";
+import ArrowGoBack from "../../components/ArrowGoBack";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -133,16 +134,7 @@ const SettingsScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+            headerLeft: () => <ArrowGoBack />,
             headerRight: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     {!user?.emailVerified && (

@@ -24,6 +24,11 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
     // const [userData, firestoreLoading, firestoreError] = useDocument(
     //     doc(db, "users", user?.uid!)
     // );
+    const userData = {
+        data: () => {
+            return { phoneNumber: "+91 7099410030" };
+        },
+    };
 
     const translateX = Animated.interpolateNode(progress!, {
         outputRange: [0, 1],
@@ -73,7 +78,8 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
                                     { fontWeight: "bold", fontSize: 13 },
                                 ]}
                             >
-                                {/* {userData?.data()?.phoneNumber} */}
+                                {user?.phoneNumber ||
+                                    userData?.data()?.phoneNumber}
                             </Text>
                         </View>
                     </View>

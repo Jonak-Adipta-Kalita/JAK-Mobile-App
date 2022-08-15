@@ -1,9 +1,8 @@
 import React, { useLayoutEffect, useState } from "react";
-import { View, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "react-native-elements";
 import {
-    AntDesign,
     Feather,
     MaterialIcons,
     FontAwesome5,
@@ -26,6 +25,7 @@ import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { NavigationPropsStack } from "../../../@types/navigation";
+import ArrowGoBack from "../../components/ArrowGoBack";
 
 const RegisterScreen = () => {
     const navigation = useNavigation<NavigationPropsStack>();
@@ -42,16 +42,7 @@ const RegisterScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Register!!",
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} color="white" />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+            headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
 
