@@ -14,7 +14,7 @@ interface Props {
 
 const Notification = ({ title, message, timestamp }: Props) => {
     return (
-        <View style={{ paddingBottom: 5 }}>
+        <View className="pb-[5px]">
             <Card containerStyle={{ position: "relative" }}>
                 <Card.Title>{title}</Card.Title>
                 <Card.Divider />
