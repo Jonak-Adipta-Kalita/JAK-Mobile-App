@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity, Text, Platform } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import {
     DrawerContentComponentProps,
     DrawerContentScrollView,
@@ -12,8 +12,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "./Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
-// import { useDocument } from "react-firebase-hooks/firestore";
-// import { doc } from "firebase/firestore";
+import { useDocument } from "react-firebase-hooks/firestore";
+import { doc } from "firebase/firestore";
 
 interface Props extends DrawerContentComponentProps {
     progress?: number;
@@ -21,14 +21,9 @@ interface Props extends DrawerContentComponentProps {
 
 const CustomDrawer = ({ progress, ...props }: Props) => {
     const [user, userLoading, userError] = useAuthState(auth);
-    // const [userData, firestoreLoading, firestoreError] = useDocument(
-    //     doc(db, "users", user?.uid!)
-    // );
-    const userData = {
-        data: () => {
-            return { phoneNumber: "+91 7099410030" };
-        },
-    };
+    const [userData, firestoreLoading, firestoreError] = useDocument(
+        doc(db, "users", user?.uid!)
+    );
 
     const translateX = Animated.interpolateNode(progress!, {
         outputRange: [0, 1],
@@ -37,10 +32,9 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
 
     if (userError) errorAlertShower(userError);
 
-    // if (firestoreError) errorAlertShower(firestoreError);
+    if (firestoreError) errorAlertShower(firestoreError);
 
-    // if (userLoading || firestoreLoading) {
-    if (userLoading) {
+    if (userLoading || firestoreLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}
