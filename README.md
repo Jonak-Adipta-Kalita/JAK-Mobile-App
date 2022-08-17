@@ -123,7 +123,7 @@ yarn start:android
 
 #### IOS
 
-If you are in MAC: Download [XCode](https://developer.apple.com/xcode/) or [Android Studio](https://developer.android.com/studio)
+If you are in MAC: Download [XCode](https://developer.apple.com/xcode/)
 
 ```bash
 npm run start:ios
