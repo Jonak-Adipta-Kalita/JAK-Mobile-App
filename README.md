@@ -6,7 +6,6 @@
 ![License](https://img.shields.io/github/license/Jonak-Adipta-Kalita/JAK-Mobile-App?style=for-the-badge)
 ![Support for IOS](https://img.shields.io/badge/iOS-4630EB.svg?style=for-the-badge&logo=APPLE&labelColor=999999&logoColor=fff)
 ![Support for Android](https://img.shields.io/badge/Android-4630EB.svg?style=for-the-badge&logo=ANDROID&labelColor=A4C639&logoColor=fff)
-![Support for Web](https://img.shields.io/badge/web-4630EB.svg?style=for-the-badge&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff)
 ![GitHub Repo Stars](https://img.shields.io/github/stars/Jonak-Adipta-Kalita/JAK-Mobile-App?style=for-the-badge)
 ![GitHub Forks](https://img.shields.io/github/forks/Jonak-Adipta-Kalita/JAK-Mobile-App?style=for-the-badge)
 ![GitHub Watchers](https://img.shields.io/github/watchers/Jonak-Adipta-Kalita/JAK-Mobile-App?style=for-the-badge)
@@ -130,14 +129,6 @@ If you are in MAC: Download [XCode](https://developer.apple.com/xcode/) or [Andr
 npm run start:ios
 # or
 yarn start:ios
-```
-
-#### Web
-
-```bash
-npm run start:web
-# or
-yarn start:web
 ```
 
 ### Deploying edited Firebase Rules or Indexes
