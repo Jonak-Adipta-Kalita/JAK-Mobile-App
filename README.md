@@ -102,7 +102,7 @@ Firestore. Start in Test Mode and leave the Timezone as it is.
 #### Enabling Firebase Storage
 
 In the Project in Firebase click on Storage in the Sidebar. Click on Enable.
-(Sometimes Sotrage is automatically Enabled)
+(Sometimes Storage is automatically Enabled)
 
 ### Providing required Credentials
 
