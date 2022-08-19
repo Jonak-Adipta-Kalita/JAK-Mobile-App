@@ -1,4 +1,4 @@
-import "react-native-gesture-handler";
+import 'expo-dev-client';
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
@@ -15,6 +15,7 @@ import registerForPushNotifications from "./src/utils/pushNotification/registerF
 import * as Notifications from "expo-notifications";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
 import { TailwindProvider } from "tailwindcss-react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -47,20 +48,22 @@ const App = () => {
 
     return (
         <TailwindProvider>
-            {!fontsLoaded || userLoading ? (
-                <LoadingIndicator
-                    dimensions={{ width: 70, height: 70 }}
-                    containerStyle={{ flex: 1 }}
-                />
-            ) : (
-                <ReduxProvider store={reduxStore}>
-                    <NavigationContainer
-                        theme={scheme === "dark" ? DarkTheme : LightTheme}
-                    >
-                        <DrawerNavigator />
-                    </NavigationContainer>
-                </ReduxProvider>
-            )}
+            <GestureHandlerRootView>
+                {!fontsLoaded || userLoading ? (
+                    <LoadingIndicator
+                        dimensions={{ width: 70, height: 70 }}
+                        containerStyle={{ flex: 1 }}
+                    />
+                ) : (
+                    <ReduxProvider store={reduxStore}>
+                        <NavigationContainer
+                            theme={scheme === "dark" ? DarkTheme : LightTheme}
+                        >
+                            <DrawerNavigator />
+                        </NavigationContainer>
+                    </ReduxProvider>
+                )}
+            </GestureHandlerRootView>
         </TailwindProvider>
     );
 };
