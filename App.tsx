@@ -1,4 +1,4 @@
-import 'expo-dev-client';
+import "expo-dev-client";
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
