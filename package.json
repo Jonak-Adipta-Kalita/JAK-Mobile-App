@@ -6,6 +6,7 @@
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "start": "expo start",
+        "dev": "expo start --dev-client",
         "test": "jest --passWithNoTests",
         "start:android": "expo start --android",
         "start:ios": "expo start --ios",
