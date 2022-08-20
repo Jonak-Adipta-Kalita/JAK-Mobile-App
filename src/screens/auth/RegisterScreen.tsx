@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { Button, Input, Text } from "react-native-elements";
+import { Button, Input, Text } from "@rneui/themed";
 import {
     Feather,
     MaterialIcons,
@@ -137,7 +137,7 @@ const RegisterScreen = () => {
                             style={globalStyles.inputBarIcon}
                         />
                     }
-                    autoCompleteType={"name"}
+                    autoComplete={"name"}
                 />
 
                 <Input
@@ -152,7 +152,7 @@ const RegisterScreen = () => {
                         />
                     }
                     onChangeText={(text) => setEmail(text)}
-                    autoCompleteType={"email"}
+                    autoComplete={"email"}
                 />
 
                 <View className="relative">
@@ -169,7 +169,7 @@ const RegisterScreen = () => {
                                 style={globalStyles.inputBarIcon}
                             />
                         }
-                        autoCompleteType={"password"}
+                        autoComplete={"password"}
                     />
 
                     <TouchableOpacity
@@ -198,7 +198,7 @@ const RegisterScreen = () => {
                     <Input
                         placeholder="Confirm Password"
                         secureTextEntry={!showPassword}
-                        autoCompleteType={"password"}
+                        autoComplete={"password"}
                         value={confirmPassword}
                         inputStyle={globalStyles.inputBar}
                         onChangeText={(text) => setConfirmPassword(text)}
@@ -233,7 +233,7 @@ const RegisterScreen = () => {
 
                 <Input
                     placeholder="Phone Number"
-                    autoCompleteType={"tel"}
+                    autoComplete={"tel"}
                     value={phoneNumber}
                     inputStyle={globalStyles.inputBar}
                     leftIcon={

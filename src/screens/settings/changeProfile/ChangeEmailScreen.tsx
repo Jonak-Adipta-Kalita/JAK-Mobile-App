@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-import { Input, Button } from "react-native-elements";
+import { Input, Button } from "@rneui/themed";
 import { db, auth } from "../../../firebase";
 import globalStyles from "../../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -115,7 +115,7 @@ const ChangeEmailScreen = () => {
                     inputStyle={[globalStyles.inputBar]}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
-                    autoCompleteType={"email"}
+                    autoComplete={"email"}
                 />
             </View>
             <Button

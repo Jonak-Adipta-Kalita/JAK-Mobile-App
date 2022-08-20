@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { Card } from "react-native-elements";
+import { Card } from "@rneui/themed";
 import moment from "moment";
 import globalStyles from "../globalStyles";
 import { editMessage } from "@xxjonakadiptaxx/jak_javascript_package";

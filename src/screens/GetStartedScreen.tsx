@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-import { Button } from "react-native-elements";
+import { Button } from "@rneui/themed";
 import globalStyles from "../globalStyles";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationPropsStack } from "../../@types/navigation";

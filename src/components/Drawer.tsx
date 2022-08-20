@@ -7,7 +7,7 @@ import {
 } from "@react-navigation/drawer";
 import Animated from "react-native-reanimated";
 import { auth, db } from "../firebase";
-import { Avatar } from "react-native-elements";
+import { Avatar } from "@rneui/themed";
 import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "./Loading";

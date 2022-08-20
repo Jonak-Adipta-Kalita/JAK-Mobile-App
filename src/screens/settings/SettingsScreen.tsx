@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { View, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
-import { Avatar, Button, ListItem } from "react-native-elements";
+import { Avatar, Button, ListItem } from "@rneui/themed";
 import globalStyles from "../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPublicNotification from "../../notify/publicNotification";

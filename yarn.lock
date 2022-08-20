@@ -2770,6 +2770,23 @@
     redux-thunk "^2.4.1"
     reselect "^4.1.5"
 
+"@rneui/base@^4.0.0-rc.6":
+  version "4.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/@rneui/base/-/base-4.0.0-rc.6.tgz#bbb05bec567aae9de64ebdb3370b1fcd5fcf1f1f"
+  integrity sha512-vIr+mrmYtSOaqsqwXQ6c1YMQM9aT462VfeiqOu28rsQZRebQffPc3yEolVjEbqYv1ID6ESQAPttzZ1qZSSe0NQ==
+  dependencies:
+    "@types/react-native-vector-icons" "^6.4.10"
+    color "^3.2.1"
+    deepmerge "^4.2.2"
+    hoist-non-react-statics "^3.3.2"
+    react-native-ratings "^8.1.0"
+    react-native-size-matters "^0.4.0"
+
+"@rneui/themed@^4.0.0-rc.6":
+  version "4.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/@rneui/themed/-/themed-4.0.0-rc.6.tgz#1cc6e23dc1b24e0b60b90acc7a6240cd29a420c2"
+  integrity sha512-iyH+KqbP8wzmrWgnyVtB3uIELZn0kZ8MIvTQ5atxLowO+vqSYSwmuhR2/MQQmpIwnOTMAlGql7Asq2o74Rs6jQ==
+
 "@segment/loosely-validate-event@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@segment/loosely-validate-event/-/loosely-validate-event-2.0.0.tgz#87dfc979e5b4e7b82c5f1d8b722dfd5d77644681"
@@ -3015,7 +3032,7 @@
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
 
-"@types/react-native-vector-icons@^6.4.6":
+"@types/react-native-vector-icons@^6.4.10":
   version "6.4.11"
   resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.11.tgz#8783d4248377aec14e06420397037b96ff242684"
   integrity sha512-jUy9CsTu1Cl3k6WRE7GnqBRHbuSv55PRVfMEel+fF73HKpF8g5JmTzTVMBDX8NfY3PlfIY5VlxiqWZxdjm38Pg==
@@ -3023,7 +3040,7 @@
     "@types/react" "*"
     "@types/react-native" "*"
 
-"@types/react-native@*":
+"@types/react-native@*", "@types/react-native@^0.69.5":
   version "0.69.5"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.69.5.tgz#7709fdbff031a5ecf1956705e6c4a07cdfe6867c"
   integrity sha512-mSUCuGUsW2kJlZiu4GmdYVDKZX/52iyC9rm6dxAmflJj1b7kSO/CMSDy5WbcfS8QerxTqbYGTrIwHD0GnXHzbQ==
@@ -4673,7 +4690,7 @@ color-support@^1.1.3:
   resolved "https://registry.yarnpkg.com/color-support/-/color-support-1.1.3.tgz#93834379a1cc9a0c61f82f52f0d04322251bd5a2"
   integrity sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==
 
-color@^3.1.2, color@^3.1.3:
+color@^3.1.2, color@^3.1.3, color@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/color/-/color-3.2.1.tgz#3544dc198caf4490c3ecc9a790b54fe9ff45e164"
   integrity sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==
@@ -10538,11 +10555,6 @@ openapi3-ts@^2.0.1:
   dependencies:
     yaml "^1.10.2"
 
-opencollective-postinstall@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
-  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
-
 optionator@^0.8.1:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.8.3.tgz#84fa1d036fe9d3c7e21d99884b601167ec8fb495"
@@ -11455,20 +11467,6 @@ react-native-dotenv@^3.3.1:
   dependencies:
     dotenv "^10.0.0"
 
-react-native-elements@^3.4.2:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-3.4.2.tgz#66602be9c5e0e0a2a831913adec80ff6518d1ee2"
-  integrity sha512-m0eAWOn7JuR1wNTNY0WHuaqst4LI/gFE4N5Bbyfsc4DiryWsMST7aAg5w/Gos4IexWIzhLKCIkPxthND1m/8Xg==
-  dependencies:
-    "@types/react-native-vector-icons" "^6.4.6"
-    color "^3.1.2"
-    deepmerge "^4.2.2"
-    hoist-non-react-statics "^3.3.2"
-    lodash.isequal "^4.5.0"
-    opencollective-postinstall "^2.0.3"
-    react-native-ratings "8.0.4"
-    react-native-size-matters "^0.3.1"
-
 react-native-gesture-handler@~2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.5.0.tgz#61385583570ed0a45a9ed142425e35f8fe8274fb"
@@ -11504,10 +11502,10 @@ react-native-paper@^4.12.4:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.3.1"
 
-react-native-ratings@8.0.4:
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-8.0.4.tgz#efd5ebad8acc08bf98d34d39b18fb7a6813ef991"
-  integrity sha512-Xczu5lskIIRD6BEdz9A0jDRpEck/SFxRqiglkXi0u67yAtI1/pcJC76P4MukCbT8K4BPVl+42w83YqXBoBRl7A==
+react-native-ratings@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-8.1.0.tgz#3fa9ad29128dc3a88e59518ba151e61c59dd0647"
+  integrity sha512-+QOJ4G3NjVkI1D+tk4EGx1dCvVfbD2nQdkrj9cXrcAoEiwmbep4z4bZbCKmWMpQ5h2dqbxABU8/eBnbDmvAc3g==
   dependencies:
     lodash "^4.17.15"
 
@@ -11538,10 +11536,10 @@ react-native-screens@~3.15.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-size-matters@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"
-  integrity sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw==
+react-native-size-matters@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.4.0.tgz#01bfd0d59454318f4e0b13fe9c1eb0523d70f2e0"
+  integrity sha512-8/C0htHrFWeUm9N8JegmadovUfgTWkGBkDPZ1N3YkXtDWb+98Ya2gThiKcu445r8c7YhcrBfnHz/mYsXIusaOQ==
 
 react-native-svg@12.3.0:
   version "12.3.0"

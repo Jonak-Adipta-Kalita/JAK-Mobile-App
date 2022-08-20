@@ -7,7 +7,7 @@ import {
     ScrollView,
     Platform,
 } from "react-native";
-import { Button, Input } from "react-native-elements";
+import { Button, Input } from "@rneui/themed";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
 import globalStyles from "../../globalStyles";
@@ -107,7 +107,7 @@ const LoginScreen = () => {
                             style={globalStyles.inputBarIcon}
                         />
                     }
-                    autoCompleteType={"email"}
+                    autoComplete={"email"}
                 />
                 <View className="relative">
                     <Input
@@ -123,7 +123,7 @@ const LoginScreen = () => {
                                 style={globalStyles.inputBarIcon}
                             />
                         }
-                        autoCompleteType={"password"}
+                        autoComplete={"password"}
                     />
                     <TouchableOpacity
                         style={globalStyles.showPasswordContainer}

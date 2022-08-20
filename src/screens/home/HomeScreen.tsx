@@ -9,7 +9,7 @@ import {
     BackHandler,
 } from "react-native";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
-import { Card, Button } from "react-native-elements";
+import { Card, Button } from "@rneui/themed";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";

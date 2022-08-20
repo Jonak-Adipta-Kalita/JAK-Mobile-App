@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-import { Input, Button } from "react-native-elements";
+import { Input, Button } from "@rneui/themed";
 import { auth, db } from "../../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPrivateNotification from "../../../notify/privateNotification";
@@ -117,7 +117,7 @@ const ChangePhoneNumberScreen = () => {
                     inputStyle={[globalStyles.inputBar]}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
-                    autoCompleteType={"tel"}
+                    autoComplete="tel"
                 />
             </View>
             <Button

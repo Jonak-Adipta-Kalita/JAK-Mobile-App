@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-import { Input, Button } from "react-native-elements";
+import { Input, Button } from "@rneui/themed";
 import { db, auth } from "../../../firebase";
 import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
@@ -117,7 +117,7 @@ const ChangeNameScreen = () => {
                     inputStyle={globalStyles.inputBar}
                     value={name}
                     onChangeText={(text) => setName(text)}
-                    autoCompleteType={"name"}
+                    autoComplete={"name"}
                 />
             </View>
             <Button

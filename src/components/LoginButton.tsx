@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import images from "../images";
-import { Image } from "react-native-elements";
+import { Image } from "@rneui/themed";
 import { useAssets } from "expo-asset";
 import LoadingIndicator from "../components/Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
