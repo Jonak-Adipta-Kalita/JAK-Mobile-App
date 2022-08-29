@@ -32,7 +32,9 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
 
     const userData = {
         data: () => {
-            "+91 7099410030";
+            return {
+                phoneNumber: "+91 7099410030",
+            };
         },
     };
 
