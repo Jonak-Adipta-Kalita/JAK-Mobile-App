@@ -21,20 +21,27 @@ interface Props extends DrawerContentComponentProps {
 
 const CustomDrawer = ({ progress, ...props }: Props) => {
     const [user, userLoading, userError] = useAuthState(auth);
-    const [userData, firestoreLoading, firestoreError] = useDocument(
-        doc(db, "users", user?.uid!)
-    );
+    // const [userData, firestoreLoading, firestoreError] = useDocument(
+    //    doc(db, "users", user?.uid!)
+    // );
 
     const translateX = Animated.interpolateNode(progress!, {
         outputRange: [0, 1],
         inputRange: [-100, 0],
     });
 
-    if (userError) errorAlertShower(userError);
+    const userData = {
+        data: () => {
+            "+91 7099410030";
+        },
+    };
 
-    if (firestoreError) errorAlertShower(firestoreError);
+    // if (userError) errorAlertShower(userError);
 
-    if (userLoading || firestoreLoading) {
+    // if (firestoreError) errorAlertShower(firestoreError);
+
+    // if (userLoading || firestoreLoading) {
+    if (userLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}

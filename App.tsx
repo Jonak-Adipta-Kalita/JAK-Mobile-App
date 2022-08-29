@@ -14,8 +14,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import registerForPushNotifications from "./src/utils/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
-import { TailwindProvider } from "tailwindcss-react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -47,24 +45,22 @@ const App = () => {
     if (fontsError || userError) errorAlertShower(fontsError || userError);
 
     return (
-        <TailwindProvider>
-            <GestureHandlerRootView>
-                {!fontsLoaded || userLoading ? (
-                    <LoadingIndicator
-                        dimensions={{ width: 70, height: 70 }}
-                        containerStyle={{ flex: 1 }}
-                    />
-                ) : (
-                    <ReduxProvider store={reduxStore}>
-                        <NavigationContainer
-                            theme={scheme === "dark" ? DarkTheme : LightTheme}
-                        >
-                            <DrawerNavigator />
-                        </NavigationContainer>
-                    </ReduxProvider>
-                )}
-            </GestureHandlerRootView>
-        </TailwindProvider>
+        <>
+            {!fontsLoaded || userLoading ? (
+                <LoadingIndicator
+                    dimensions={{ width: 70, height: 70 }}
+                    containerStyle={{ flex: 1 }}
+                />
+            ) : (
+                <ReduxProvider store={reduxStore}>
+                    <NavigationContainer
+                        theme={scheme === "dark" ? DarkTheme : LightTheme}
+                    >
+                        <DrawerNavigator />
+                    </NavigationContainer>
+                </ReduxProvider>
+            )}
+        </>
     );
 };
 
