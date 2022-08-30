@@ -240,7 +240,8 @@ const SettingsScreen = () => {
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
-                                    {phoneNumberFromUserData}
+                                    {phoneNumberFromUserData ||
+                                        "Provide your Phone Number!!"}
                                 </ListItem.Title>
                                 <ListItem.Subtitle>
                                     Phone Number

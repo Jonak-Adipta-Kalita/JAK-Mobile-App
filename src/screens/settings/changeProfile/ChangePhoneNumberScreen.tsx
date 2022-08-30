@@ -13,12 +13,18 @@ import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { NavigationPropsDrawer } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
+import { useDocument } from "react-firebase-hooks/firestore";
 
 const ChangePhoneNumberScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
+    const [userData, userDataLoading, userDataError] = useDocument(
+        doc(db, "users", user?.uid!)
+    );
+    const phoneNumberFromUserData =
+        user?.phoneNumber || userData?.data()?.phoneNumber;
     const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
-        user?.phoneNumber
+        user?.phoneNumber || userData?.data()?.phoneNumber
     );
     const [phoneNumber, setPhoneNumber] = useState("");
 
@@ -87,14 +93,18 @@ const ChangePhoneNumberScreen = () => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: `${"Change your Phone Number!!"}`,
+            title: `${
+                phoneNumberFromUserData ? "Change" : "Set"
+            } your Phone No.!!`,
             headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
 
     if (userError) errorAlertShower(userError);
 
-    if (userLoading) {
+    if (userDataError) errorAlertShower(userDataError);
+
+    if (userLoading || userDataLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}
