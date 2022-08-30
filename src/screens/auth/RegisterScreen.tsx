@@ -42,7 +42,7 @@ const RegisterScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Register!!",
-            headerLeft: () => <ArrowGoBack />,
+            headerLeft: () => <ArrowGoBack color="white" />,
         });
     }, [navigation]);
 

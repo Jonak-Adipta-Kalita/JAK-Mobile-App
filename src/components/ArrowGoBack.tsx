@@ -5,7 +5,11 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationPropsStack } from "../../@types/navigation";
 
-const ArrowGoBack = () => {
+interface Props {
+    color?: string;
+}
+
+const ArrowGoBack = ({ color }: Props) => {
     const navigation = useNavigation<NavigationPropsStack>();
 
     return (
@@ -14,7 +18,7 @@ const ArrowGoBack = () => {
                 style={globalStyles.headerIcon}
                 onPress={navigation.goBack}
             >
-                <AntDesign name="arrowleft" size={24} />
+                <AntDesign name="arrowleft" size={24} color={color} />
             </TouchableOpacity>
         </SafeAreaView>
     );

@@ -81,12 +81,12 @@ const LoginScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login!!",
-            headerLeft: () => <ArrowGoBack />,
+            headerLeft: () => <ArrowGoBack color="white" />,
         });
     }, [navigation]);
 
     return (
-        <View className="flex-1 items-center justify-center p-[10px]">
+        <View className="flex-1 items-center p-[10px]">
             <StatusBar style="auto" />
             <View
                 style={{
