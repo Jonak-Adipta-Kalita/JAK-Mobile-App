@@ -17,6 +17,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { NavigationPropsDrawer } from "../../../@types/navigation";
 import ArrowGoBack from "../../components/ArrowGoBack";
+import { useDocument } from "react-firebase-hooks/firestore";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -45,6 +46,11 @@ const SettingsScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
+    const [userData, userDataLoading, userDataError] = useDocument(
+        doc(db, "users", user?.uid!)
+    );
+    const phoneNumberFromUserData =
+        user?.phoneNumber || userData?.data()?.phoneNumber;
 
     const updatePic = async () => {
         const pickerResult: any = await ImagePicker.launchImageLibraryAsync({
@@ -155,7 +161,9 @@ const SettingsScreen = () => {
 
     if (userError) errorAlertShower(userError);
 
-    if (userLoading) {
+    if (userDataError) errorAlertShower(userDataError);
+
+    if (userLoading || userDataLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}
@@ -232,9 +240,7 @@ const SettingsScreen = () => {
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
-                                    {user?.phoneNumber
-                                        ? user?.phoneNumber
-                                        : "Provide your Phone Number!!"}
+                                    {phoneNumberFromUserData}
                                 </ListItem.Title>
                                 <ListItem.Subtitle>
                                     Phone Number

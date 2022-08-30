@@ -27,13 +27,13 @@ const DisplayUserData = ({
     user: User;
     translateX: Animated.Node<number>;
 }) => {
-    const [userData, firestoreLoading, firestoreError] = useDocument(
+    const [userData, userDataError, userDataLoading] = useDocument(
         doc(db, "users", user?.uid!)
     );
 
-    if (firestoreError) errorAlertShower(firestoreError);
+    if (userDataLoading) errorAlertShower(userDataLoading);
 
-    if (firestoreLoading) {
+    if (userDataError) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}

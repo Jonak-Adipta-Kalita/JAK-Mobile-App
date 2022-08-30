@@ -87,11 +87,7 @@ const ChangePhoneNumberScreen = () => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: `${
-                user?.phoneNumber
-                    ? "Change your Phone Number!!"
-                    : "Set your Phone Number!!"
-            }`,
+            title: `${"Change your Phone Number!!"}`,
             headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
