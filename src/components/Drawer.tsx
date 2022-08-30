@@ -54,7 +54,7 @@ const DisplayUserData = ({
                         }}
                     />
                 </TouchableOpacity>
-                <View className="ml-[30px] mt-[13px]">
+                <View className="ml-[30px] mt-[13px] space-y-4">
                     <Text
                         style={[
                             globalStyles.text,
