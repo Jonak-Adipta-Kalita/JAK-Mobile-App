@@ -14,35 +14,79 @@ import LoadingIndicator from "./Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { doc } from "firebase/firestore";
+import { User } from "firebase/auth";
 
 interface Props extends DrawerContentComponentProps {
     progress?: number;
 }
 
+const DisplayUserData = ({
+    user,
+    translateX,
+}: {
+    user: User;
+    translateX: Animated.Node<number>;
+}) => {
+    const [userData, firestoreLoading, firestoreError] = useDocument(
+        doc(db, "users", user?.uid!)
+    );
+
+    if (firestoreError) errorAlertShower(firestoreError);
+
+    if (firestoreLoading) {
+        return (
+            <LoadingIndicator
+                dimensions={{ width: 70, height: 70 }}
+                containerStyle={{ flex: 1 }}
+            />
+        );
+    }
+
+    return (
+        <Animated.View style={{ transform: [{ translateX }] }}>
+            <View className="mt-[20px] mb-[-15px] flex-row border-b-[2px] border-b-[#818181] p-[20px] pb-[20px]">
+                <TouchableOpacity activeOpacity={0.5}>
+                    <Avatar
+                        rounded
+                        size="large"
+                        source={{
+                            uri: user.photoURL!,
+                        }}
+                    />
+                </TouchableOpacity>
+                <View className="ml-[30px] mt-[13px]">
+                    <Text
+                        style={[
+                            globalStyles.text,
+                            { fontWeight: "bold", fontSize: 13 },
+                        ]}
+                    >
+                        {user.displayName}
+                    </Text>
+                    <Text
+                        style={[
+                            globalStyles.text,
+                            { fontWeight: "bold", fontSize: 13 },
+                        ]}
+                    >
+                        {user?.phoneNumber || userData?.data()?.phoneNumber}
+                    </Text>
+                </View>
+            </View>
+        </Animated.View>
+    );
+};
+
 const CustomDrawer = ({ progress, ...props }: Props) => {
     const [user, userLoading, userError] = useAuthState(auth);
-    // const [userData, firestoreLoading, firestoreError] = useDocument(
-    //    doc(db, "users", user?.uid!)
-    // );
 
     const translateX = Animated.interpolateNode(progress!, {
         outputRange: [0, 1],
         inputRange: [-100, 0],
     });
 
-    const userData = {
-        data: () => {
-            return {
-                phoneNumber: "+91 7099410030",
-            };
-        },
-    };
+    if (userError) errorAlertShower(userError);
 
-    // if (userError) errorAlertShower(userError);
-
-    // if (firestoreError) errorAlertShower(firestoreError);
-
-    // if (userLoading || firestoreLoading) {
     if (userLoading) {
         return (
             <LoadingIndicator
@@ -54,40 +98,7 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
 
     return (
         <>
-            {user && (
-                <Animated.View style={{ transform: [{ translateX }] }}>
-                    <View className="mt-[20px] mb-[-15px] flex-row border-b-[2px] border-b-[#818181] p-[20px] pb-[20px]">
-                        <TouchableOpacity activeOpacity={0.5}>
-                            <Avatar
-                                rounded
-                                size="large"
-                                source={{
-                                    uri: user.photoURL!,
-                                }}
-                            />
-                        </TouchableOpacity>
-                        <View className="ml-[30px] mt-[13px]">
-                            <Text
-                                style={[
-                                    globalStyles.text,
-                                    { fontWeight: "bold", fontSize: 13 },
-                                ]}
-                            >
-                                {user.displayName}
-                            </Text>
-                            <Text
-                                style={[
-                                    globalStyles.text,
-                                    { fontWeight: "bold", fontSize: 13 },
-                                ]}
-                            >
-                                {user?.phoneNumber ||
-                                    userData?.data()?.phoneNumber}
-                            </Text>
-                        </View>
-                    </View>
-                </Animated.View>
-            )}
+            {user && <DisplayUserData user={user} translateX={translateX} />}
             <DrawerContentScrollView
                 {...props}
                 contentContainerStyle={{ flex: 1 }}
