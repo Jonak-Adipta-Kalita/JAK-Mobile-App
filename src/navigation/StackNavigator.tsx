@@ -62,7 +62,9 @@ const HomeStack = () => {
             )}
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
-            <Stack.Screen name="Note" component={NoteScreen} />
+            <Stack.Group>
+                <Stack.Screen name="Note" component={NoteScreen} />
+            </Stack.Group>
         </Stack.Navigator>
     );
 };
