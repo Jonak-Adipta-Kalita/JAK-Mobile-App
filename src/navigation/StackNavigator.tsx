@@ -8,6 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import NotificationScreen from "../screens/home/notification/NotificationScreen";
+import NoteScreen from "../screens/home/features/NoteScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
 import ChangeEmailScreen from "../screens/settings/changeProfile/ChangeEmailScreen";
 import ChangeNameScreen from "../screens/settings/changeProfile/ChangeNameScreen";
@@ -61,6 +62,7 @@ const HomeStack = () => {
             )}
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Notification" component={NotificationScreen} />
+            <Stack.Screen name="Note" component={NoteScreen} />
         </Stack.Navigator>
     );
 };
