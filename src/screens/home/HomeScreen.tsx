@@ -94,11 +94,11 @@ const HomeScreen = () => {
             <StatusBar style="auto" />
             <ScrollView>
                 <Card>
-                    <Card.Title>Note</Card.Title>
+                    <Card.Title>Todo</Card.Title>
                     <Card.Divider />
                     <Button
-                        onPress={() => navigation.navigate("Note")}
-                        title="Go to Note Screen"
+                        onPress={() => navigation.navigate("Todo")}
+                        title="Go to Todo Screen"
                     />
                 </Card>
             </ScrollView>

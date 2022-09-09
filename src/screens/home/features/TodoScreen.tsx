@@ -19,23 +19,23 @@ import { AntDesign } from "@expo/vector-icons";
 import { Input } from "@rneui/themed";
 import globalStyles from "../../../globalStyles";
 
-const NoteScreen = () => {
+const TodoScreen = () => {
     const navigation = useNavigation<NavigationPropsStack>();
     const [user, userLoading, userError] = useAuthState(auth);
-    const [notes, firestoreLoading, firestoreError] = useCollection(
+    const [todos, firestoreLoading, firestoreError] = useCollection(
         query(
-            collection(db, "users", user?.uid!, "notes"),
+            collection(db, "users", user?.uid!, "todos"),
             orderBy("timestamp", "desc")
         )
     );
     const [modalVisible, setModalVisible] = useState(false);
-    const [title, setTitle] = useState("");
+    const [todoText, setTodoText] = useState("");
 
-    const createNote = () => {};
+    const createTodo = () => {};
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Notes!!",
+            title: "Todo(s)!!",
             headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
@@ -55,9 +55,9 @@ const NoteScreen = () => {
 
     return (
         <SafeAreaView className="flex-1">
-            {notes?.docs.length === 0 && (
+            {todos?.docs.length === 0 && (
                 <Text className="text-bold mt-5 self-center text-lg">
-                    No Notes!! Press the Plus to create!!
+                    No Todo(s)!! Press the Plus to create!!
                 </Text>
             )}
             <Modal
@@ -83,11 +83,11 @@ const NoteScreen = () => {
                         }}
                     >
                         <Input
-                            placeholder="Title"
+                            placeholder="Text"
                             autoFocus
                             inputStyle={globalStyles.inputBar}
-                            value={title}
-                            onChangeText={(text) => setTitle(text)}
+                            value={todoText}
+                            onChangeText={(text) => setTodoText(text)}
                             inputContainerStyle={{ width: 300 }}
                         />
                         <View className="flex flex-row space-x-10">
@@ -96,7 +96,7 @@ const NoteScreen = () => {
                                 style={{
                                     elevation: 2,
                                 }}
-                                onPress={createNote}
+                                onPress={createTodo}
                             >
                                 <Text className="items-center font-bold text-white">
                                     Create
@@ -129,4 +129,4 @@ const NoteScreen = () => {
     );
 };
 
-export default NoteScreen;
+export default TodoScreen;

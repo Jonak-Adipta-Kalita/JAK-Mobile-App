@@ -12,7 +12,7 @@ type ScreensParamList = {
     ChangeEmail: undefined;
     ChangeName: undefined;
     ChangePhoneNumber: undefined;
-    Note: undefined;
+    Todo: undefined;
 };
 
 interface DrawerScreensParamList extends ScreensParamList {
