@@ -1,6 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
-import { collection, orderBy, query } from "firebase/firestore";
-import React, { useLayoutEffect, useState } from "react";
+import {
+    collection,
+    deleteDoc,
+    doc,
+    DocumentData,
+    orderBy,
+    query,
+    serverTimestamp,
+    setDoc,
+} from "firebase/firestore";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
@@ -9,6 +18,8 @@ import {
     SafeAreaView,
     Text,
     Modal,
+    useColorScheme,
+    ScrollView,
 } from "react-native";
 import { NavigationPropsStack } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
@@ -16,13 +27,15 @@ import LoadingIndicator from "../../../components/Loading";
 import { auth, db } from "../../../firebase";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import { AntDesign } from "@expo/vector-icons";
-import { Input } from "@rneui/themed";
+import { Card, Input } from "@rneui/themed";
 import globalStyles from "../../../globalStyles";
+import pushPrivateNotification from "../../../notify/privateNotification";
+import { Entypo } from "@expo/vector-icons";
 
 const TodoScreen = () => {
     const navigation = useNavigation<NavigationPropsStack>();
     const [user, userLoading, userError] = useAuthState(auth);
-    const [todos, firestoreLoading, firestoreError] = useCollection(
+    const [todosFetched, firestoreLoading, firestoreError] = useCollection(
         query(
             collection(db, "users", user?.uid!, "todos"),
             orderBy("timestamp", "desc")
@@ -30,8 +43,10 @@ const TodoScreen = () => {
     );
     const [modalVisible, setModalVisible] = useState(false);
     const [todoText, setTodoText] = useState("");
-
-    const createTodo = () => {};
+    const [todos, setTodos] = useState<{ id: string; data: DocumentData }[]>(
+        []
+    );
+    const scheme = useColorScheme();
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -39,6 +54,17 @@ const TodoScreen = () => {
             headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
+
+    useEffect(() => {
+        setTodos(
+            todosFetched
+                ? todosFetched.docs.map((doc) => ({
+                      id: doc.id,
+                      data: doc.data(),
+                  }))
+                : []
+        );
+    }, [user, navigation, todosFetched]);
 
     if (firestoreError || userError) {
         errorAlertShower(firestoreError || userError);
@@ -53,12 +79,70 @@ const TodoScreen = () => {
         );
     }
 
+    const createTodo = async () => {
+        await setDoc(
+            doc(
+                db,
+                "users",
+                user?.uid!,
+                "todos",
+                `todo_${todosFetched?.docs?.length! + 1}`
+            ),
+            {
+                value: todoText,
+                id: `todo_${todosFetched?.docs?.length! + 1}`,
+                timestamp: serverTimestamp(),
+            }
+        );
+        await pushPrivateNotification(user?.uid!, {
+            title: "Added Todo!!",
+            message: `Added your Todo: ${todoText}`,
+            timestamp: serverTimestamp(),
+        });
+        setModalVisible(false);
+        setTodoText("");
+    };
+
+    const deleteTodo = async (id: string, value: string) => {
+        await deleteDoc(doc(db, "users", user?.uid!, "todos", id));
+        await pushPrivateNotification(user?.uid!, {
+            title: "Deleted Todo!!",
+            message: `Deleted your Todo: ${value}`,
+            timestamp: serverTimestamp(),
+        });
+    };
+
     return (
         <SafeAreaView className="flex-1">
-            {todos?.docs.length === 0 && (
+            {todosFetched?.docs.length === 0 ? (
                 <Text className="text-bold mt-5 self-center text-lg">
                     No Todo(s)!! Press the Plus to create!!
                 </Text>
+            ) : (
+                <ScrollView>
+                    {todos?.map(({ id, data }) => (
+                        <Card key={id}>
+                            <View className="flex flex-row items-center justify-between">
+                                <Text>{data.value}</Text>
+                                <TouchableOpacity
+                                    onPress={() =>
+                                        deleteTodo(data.id, data.value)
+                                    }
+                                >
+                                    <Entypo
+                                        name="cross"
+                                        size={24}
+                                        color={`${
+                                            scheme === "dark"
+                                                ? "white"
+                                                : "black"
+                                        }`}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </Card>
+                    ))}
+                </ScrollView>
             )}
             <Modal
                 animationType="slide"
