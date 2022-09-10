@@ -10,7 +10,7 @@ import {
     setDoc,
 } from "firebase/firestore";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState } from "../../../hooks/auth/useAuthState";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
     View,
@@ -24,7 +24,7 @@ import {
 import { NavigationPropsStack } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
 import LoadingIndicator from "../../../components/Loading";
-import { auth, db } from "../../../firebase";
+import { db } from "../../../firebase";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import { AntDesign } from "@expo/vector-icons";
 import { Card, Input } from "@rneui/themed";
@@ -34,7 +34,10 @@ import { Entypo } from "@expo/vector-icons";
 
 const TodoScreen = () => {
     const navigation = useNavigation<NavigationPropsStack>();
-    const [user, userLoading, userError] = useAuthState(auth);
+    const { user, isLoading: userLoading, error: userError } = useAuthState();
+
+    if (!user) navigation.navigate("Home");
+
     const [todosFetched, firestoreLoading, firestoreError] = useCollection(
         query(
             collection(db, "users", user?.uid!, "todos"),

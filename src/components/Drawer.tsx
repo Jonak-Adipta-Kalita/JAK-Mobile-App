@@ -6,15 +6,15 @@ import {
     DrawerItemList,
 } from "@react-navigation/drawer";
 import Animated from "react-native-reanimated";
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
 import { Avatar } from "@rneui/themed";
-import { useAuthState } from "react-firebase-hooks/auth";
 import globalStyles from "../globalStyles";
 import LoadingIndicator from "./Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { doc } from "firebase/firestore";
 import { User } from "firebase/auth";
+import { useAuthState } from "../hooks/auth/useAuthState";
 
 interface Props extends DrawerContentComponentProps {
     progress?: number;
@@ -78,7 +78,7 @@ const DisplayUserData = ({
 };
 
 const CustomDrawer = ({ progress, ...props }: Props) => {
-    const [user, userLoading, userError] = useAuthState(auth);
+    const { user, isLoading: userLoading, error: userError } = useAuthState();
 
     const translateX = Animated.interpolateNode(progress!, {
         outputRange: [0, 1],

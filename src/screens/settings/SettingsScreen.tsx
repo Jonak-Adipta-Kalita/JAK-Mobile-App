@@ -5,7 +5,7 @@ import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
 import { Avatar, Button, ListItem } from "@rneui/themed";
 import globalStyles from "../../globalStyles";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState } from "../../hooks/auth/useAuthState";
 import pushPublicNotification from "../../notify/publicNotification";
 import LoadingIndicator from "../../components/Loading";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
@@ -44,7 +44,7 @@ const uploadImageAsync = async (uri: string, userUID: string) => {
 
 const SettingsScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
-    const [user, userLoading, userError] = useAuthState(auth);
+    const { user, isLoading: userLoading, error: userError } = useAuthState();
     const [image, setImage] = useState<null | string>(null);
     const [userData, userDataLoading, userDataError] = useDocument(
         doc(db, "users", user?.uid!)

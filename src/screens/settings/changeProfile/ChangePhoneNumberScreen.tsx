@@ -2,8 +2,8 @@ import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { Input, Button } from "@rneui/themed";
-import { auth, db } from "../../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { db } from "../../../firebase";
+import { useAuthState } from "../../../hooks/auth/useAuthState";
 import pushPrivateNotification from "../../../notify/privateNotification";
 import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
@@ -17,7 +17,7 @@ import { useDocument } from "react-firebase-hooks/firestore";
 
 const ChangePhoneNumberScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
-    const [user, userLoading, userError] = useAuthState(auth);
+    const { user, isLoading: userLoading, error: userError } = useAuthState();
     const [userData, userDataLoading, userDataError] = useDocument(
         doc(db, "users", user?.uid!)
     );

@@ -2,10 +2,9 @@ import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { Input, Button } from "@rneui/themed";
-import { db, auth } from "../../../firebase";
+import { db } from "../../../firebase";
 import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
-import { useAuthState } from "react-firebase-hooks/auth";
 import pushPrivateNotification from "../../../notify/privateNotification";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
@@ -14,10 +13,11 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import { NavigationPropsDrawer } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
+import { useAuthState } from "../../../hooks/auth/useAuthState";
 
 const ChangeNameScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
-    const [user, userLoading, userError] = useAuthState(auth);
+    const { user, isLoading: userLoading, error: userError } = useAuthState();
     const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");
 

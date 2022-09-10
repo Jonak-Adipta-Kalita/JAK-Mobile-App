@@ -2,9 +2,9 @@ import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { Input, Button } from "@rneui/themed";
-import { db, auth } from "../../../firebase";
+import { db } from "../../../firebase";
 import globalStyles from "../../../globalStyles";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState } from "../../../hooks/auth/useAuthState";
 import LoadingIndicator from "../../../components/Loading";
 import pushPrivateNotification from "../../../notify/privateNotification";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
@@ -17,7 +17,7 @@ import ArrowGoBack from "../../../components/ArrowGoBack";
 
 const ChangeEmailScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
-    const [user, userLoading, userError] = useAuthState(auth);
+    const { user, isLoading: userLoading, error: userError } = useAuthState();
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");
 

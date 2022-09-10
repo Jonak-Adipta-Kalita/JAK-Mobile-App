@@ -1,8 +1,6 @@
 import React from "react";
 import { useWindowDimensions } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import CustomDrawer from "../components/Drawer";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
@@ -12,11 +10,12 @@ import {
     SettingsStack,
     AuthenticationStack,
 } from "./StackNavigator";
+import { useAuthState } from "../hooks/auth/useAuthState";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
-    const [user, , userError] = useAuthState(auth);
+    const { user, error: userError } = useAuthState();
     const dimensions = useWindowDimensions();
     const isLargeScreen = dimensions.width >= 768;
 

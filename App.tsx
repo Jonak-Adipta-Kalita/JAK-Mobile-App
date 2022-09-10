@@ -9,8 +9,7 @@ import LightTheme from "./src/themes/LightTheme";
 import DarkTheme from "./src/themes/DarkTheme";
 import reduxStore from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
-import { auth } from "./src/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState } from "./src/hooks/auth/useAuthState";
 import registerForPushNotifications from "./src/utils/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
@@ -29,7 +28,7 @@ Notifications.setNotificationHandler({
 });
 
 const App = () => {
-    const [, userLoading, userError] = useAuthState(auth);
+    const { isLoading: userLoading, error: userError } = useAuthState();
     const scheme = useColorScheme();
     const [fontsLoaded, fontsError] = useFonts({
         OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
