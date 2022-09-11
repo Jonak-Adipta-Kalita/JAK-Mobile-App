@@ -7,6 +7,7 @@ import {
     ScrollView,
     Platform,
     BackHandler,
+    Text,
 } from "react-native";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "@rneui/themed";
@@ -92,16 +93,22 @@ const HomeScreen = () => {
     return (
         <View className="mb-[10px]">
             <StatusBar style="auto" />
-            <ScrollView>
-                <Card>
-                    <Card.Title>Todo</Card.Title>
-                    <Card.Divider />
-                    <Button
-                        onPress={() => navigation.navigate("Todo")}
-                        title="Go to Todo Screen"
-                    />
-                </Card>
-            </ScrollView>
+            {user ? (
+                <ScrollView>
+                    <Card>
+                        <Card.Title>Todo</Card.Title>
+                        <Card.Divider />
+                        <Button
+                            onPress={() => navigation.navigate("Todo")}
+                            title="Go to Todo Screen"
+                        />
+                    </Card>
+                </ScrollView>
+            ) : (
+                <Text className="text-bold mt-5 self-center text-lg">
+                    Login or Register to use the Features!!
+                </Text>
+            )}
         </View>
     );
 };

@@ -35,9 +35,6 @@ import { Entypo } from "@expo/vector-icons";
 const TodoScreen = () => {
     const navigation = useNavigation<NavigationPropsStack>();
     const [user, userLoading, userError] = useAuthState(auth);
-
-    if (!user) navigation.goBack();
-
     const [todosFetched, firestoreLoading, firestoreError] = useCollection(
         query(
             collection(db, "users", user?.uid!, "todos"),
