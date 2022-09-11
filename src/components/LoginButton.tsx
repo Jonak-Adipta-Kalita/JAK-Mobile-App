@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import images from "../images";
 import { Image } from "@rneui/themed";
@@ -11,30 +11,22 @@ import {
     GOOGLE_ANDROID_CLIENT_ID,
     GOOGLE_IOS_CLIENT_ID,
 } from "@env";
-import { ProviderId, User } from "firebase/auth";
-import { auth } from "../firebase";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { auth, db } from "../firebase";
+import pushPublicNotification from "../notify/publicNotification";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import pushPrivateNotification from "../notify/privateNotification";
 
 interface Props {
     brand: "google" | "apple";
 }
 
 const LoginButton = ({ brand }: Props) => {
-    const [googleAccessToken, setGoogleAccessToken] = useState<string | null>(
-        null
-    );
-    const [googleUserInfo, setGoogleUserInfo] = useState<User | null>(null);
-    const [googleRequest, googleResponse, googlePromptAsync] =
-        Google.useAuthRequest({
-            androidClientId: GOOGLE_ANDROID_CLIENT_ID,
-            iosClientId: GOOGLE_IOS_CLIENT_ID,
-            expoClientId: EXPO_CLIENT_ID,
-        });
-
-    useEffect(() => {
-        if (googleResponse?.type === "success") {
-            setGoogleAccessToken(googleResponse?.authentication?.accessToken!);
-        }
-    }, [googleResponse, googleRequest]);
+    const [, , googlePromptAsync] = Google.useAuthRequest({
+        androidClientId: GOOGLE_ANDROID_CLIENT_ID,
+        iosClientId: GOOGLE_IOS_CLIENT_ID,
+        expoClientId: EXPO_CLIENT_ID,
+    });
 
     let imageFile;
 
@@ -54,48 +46,58 @@ const LoginButton = ({ brand }: Props) => {
 
     const signIn = async () => {
         if (brand === "google") {
-            if (googleResponse?.type === "success" && googleAccessToken) {
-                const userInfo = await fetch(
-                    "https://www.googleapis.com/userinfo/v2/me?scope=https://www.googleapis.com/auth/userinfo.profile",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${googleAccessToken}`,
-                        },
+            await googlePromptAsync({ showInRecents: true })
+                .then(async (logginResult) => {
+                    if (
+                        logginResult?.type === "success" &&
+                        logginResult?.authentication?.accessToken
+                    ) {
+                        const credentials = GoogleAuthProvider.credential(
+                            logginResult?.authentication?.idToken,
+                            logginResult?.authentication?.accessToken
+                        );
+                        await signInWithCredential(auth, credentials).then(
+                            (authUser) => {
+                                pushPrivateNotification(authUser.user.uid, {
+                                    title: "Welcome!!",
+                                    message: `Welcome ${authUser.user.email}. Nice to meet you!!`,
+                                    timestamp: serverTimestamp(),
+                                })
+                                    .then(() => {
+                                        setDoc(
+                                            doc(
+                                                db,
+                                                "users",
+                                                authUser.user.uid!
+                                            ),
+                                            {
+                                                uid: authUser.user.uid!,
+                                                email: authUser.user.email,
+                                                displayName:
+                                                    authUser.user.displayName,
+                                                photoURL:
+                                                    authUser.user.photoURL,
+                                                phoneNumber:
+                                                    authUser.user.phoneNumber,
+                                                emailVerified:
+                                                    authUser?.user
+                                                        ?.emailVerified,
+                                            }
+                                        );
+                                    })
+                                    .then(() => {
+                                        pushPublicNotification({
+                                            title: "New member in the Ligtning Family!!",
+                                            message: `${authUser.user.email} Joined the Ligtning Family!! Yippie!!`,
+                                            timestamp: serverTimestamp(),
+                                        });
+                                    });
+                            }
+                        );
                     }
-                );
-                userInfo?.json()?.then((data) =>
-                    setGoogleUserInfo({
-                        email: data.email,
-                        displayName: data.name,
-                        photoURL: data.picture,
-                        emailVerified: data.verified_email,
-                        refreshToken:
-                            googleResponse?.authentication?.refreshToken!,
-                        uid: googleResponse?.authentication?.idToken!,
-                        phoneNumber: null,
-                        metadata: {
-                            creationTime: Date.now().toString(),
-                            lastSignInTime: Date.now().toString(),
-                        },
-                        isAnonymous: false,
-                        providerData: [
-                            {
-                                email: data.email,
-                                displayName: data.name,
-                                photoURL: data.picture,
-                                uid: googleResponse?.authentication?.idToken!,
-                                phoneNumber: null,
-                                providerId: ProviderId.GOOGLE,
-                            },
-                        ],
-                        providerId: ProviderId.GOOGLE,
-                        tenantId: auth.tenantId,
-                    })
-                );
-                console.log(googleUserInfo);
-            } else {
-                googlePromptAsync({ showInRecents: true });
-            }
+                    return Promise.reject();
+                })
+                .catch((error) => errorAlertShower(error));
         } else if (brand === "apple") {
             // Apple Login
         }

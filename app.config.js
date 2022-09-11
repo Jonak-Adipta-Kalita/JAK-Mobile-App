@@ -7,6 +7,7 @@ export default {
     version: VERSION,
     orientation: "portrait",
     icon: "./assets/images/icon.png",
+    scheme: __DEV__ ? "host.exp.exponent" : "com.beastnighttv.jakmobileapp",
     splash: {
         image: "./assets/images/splash.png",
         resizeMode: "contain",
