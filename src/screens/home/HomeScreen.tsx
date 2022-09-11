@@ -10,17 +10,18 @@ import {
 } from "react-native";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "@rneui/themed";
+import { auth } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
 import globalStyles from "../../globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationPropsDrawer } from "../../../@types/navigation";
-import { useAuthState } from "../../hooks/auth/useAuthState";
 
 const HomeScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
-    const { user, isLoading: userLoading, error: userError } = useAuthState();
+    const [user, userLoading, userError] = useAuthState(auth);
 
     useEffect(() => {
         if (Platform.OS === "android" && navigation.getId() === "Home") {

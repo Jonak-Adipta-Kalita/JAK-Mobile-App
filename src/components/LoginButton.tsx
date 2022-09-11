@@ -55,8 +55,6 @@ const LoginButton = ({ brand }: Props) => {
     const signIn = async () => {
         if (brand === "google") {
             if (googleResponse?.type === "success" && googleAccessToken) {
-                googlePromptAsync({ showInRecents: true });
-
                 const userInfo = await fetch(
                     "https://www.googleapis.com/userinfo/v2/me?scope=https://www.googleapis.com/auth/userinfo.profile",
                     {
@@ -95,6 +93,8 @@ const LoginButton = ({ brand }: Props) => {
                     })
                 );
                 console.log(googleUserInfo);
+            } else {
+                googlePromptAsync({ showInRecents: true });
             }
         } else if (brand === "apple") {
             // Apple Login
