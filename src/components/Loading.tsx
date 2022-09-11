@@ -1,7 +1,6 @@
 import React from "react";
 import {
     View,
-    StyleSheet,
     ActivityIndicator,
     useColorScheme,
     ViewStyle,
@@ -20,10 +19,11 @@ const LoadingIndicator = ({ containerStyle, dimensions }: Props) => {
         <View
             style={[
                 containerStyle,
-                styles.container,
                 {
                     backgroundColor:
                         colorScheme === "dark" ? "#202124" : "#fff",
+                    justifyContent: "center",
+                    alignItems: "center",
                 },
             ]}
         >
@@ -37,10 +37,3 @@ const LoadingIndicator = ({ containerStyle, dimensions }: Props) => {
 };
 
 export default LoadingIndicator;
-
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: "center",
-        alignItems: "center",
-    },
-});

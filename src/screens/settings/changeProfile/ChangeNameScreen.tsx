@@ -1,8 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { Input, Button } from "react-native-elements";
+import { View } from "react-native";
+import { Input, Button } from "@rneui/themed";
 import { db, auth } from "../../../firebase";
 import globalStyles from "../../../globalStyles";
 import LoadingIndicator from "../../../components/Loading";
@@ -12,9 +11,12 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
+import { NavigationPropsDrawer } from "../../../../@types/navigation";
+import ArrowGoBack from "../../../components/ArrowGoBack";
 
 const ChangeNameScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");
@@ -43,11 +45,11 @@ const ChangeNameScreen = () => {
                 ]
             );
         } else {
-            user?.updateProfile({
+            updateProfile(user!, {
                 displayName: name,
             })
                 .then(() => {
-                    pushPrivateNotification(user?.uid, {
+                    pushPrivateNotification(user?.uid!, {
                         title: "Name Changed Successfully!!",
                         message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
                         timestamp: serverTimestamp(),
@@ -55,7 +57,7 @@ const ChangeNameScreen = () => {
                 })
                 .then(() => {
                     setDoc(
-                        doc(db, "users", user?.uid),
+                        doc(db, "users", user?.uid!),
                         {
                             displayName: name,
                         },
@@ -90,16 +92,7 @@ const ChangeNameScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Change your Name!!",
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+            headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
 
@@ -115,20 +108,20 @@ const ChangeNameScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View className="mt-[20px] flex-1 items-center p-[10px]">
             <StatusBar style="auto" />
-            <View style={styles.inputContainer}>
+            <View className="w-[350px]">
                 <Input
                     placeholder="Name"
                     autoFocus
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={globalStyles.inputBar}
                     value={name}
                     onChangeText={(text) => setName(text)}
-                    autoCompleteType={"name"}
+                    autoComplete={"name"}
                 />
             </View>
             <Button
-                containerStyle={[globalStyles.button, styles.button]}
+                containerStyle={[globalStyles.button, { marginTop: 10 }]}
                 title="Upgrade"
                 onPress={changeName}
             />
@@ -137,19 +130,3 @@ const ChangeNameScreen = () => {
 };
 
 export default ChangeNameScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        padding: 10,
-        marginTop: 20,
-    },
-    inputContainer: {
-        width: 350,
-    },
-    button: {
-        marginTop: 10,
-    },
-    inputBar: {},
-});

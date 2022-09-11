@@ -2,15 +2,15 @@ import React, { useLayoutEffect, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
     View,
-    StyleSheet,
     SafeAreaView,
     TouchableOpacity,
     ScrollView,
     Platform,
     BackHandler,
+    Text,
 } from "react-native";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
-import { Card, Button } from "react-native-elements";
+import { Card, Button } from "@rneui/themed";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
@@ -18,13 +18,14 @@ import globalStyles from "../../globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationPropsDrawer } from "../../../@types/navigation";
 
 const HomeScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
 
     useEffect(() => {
-        if (Platform.OS === "android") {
+        if (Platform.OS === "android" && navigation.getId() === "Home") {
             const backAction = () => {
                 messageAlertShower(
                     "Exit App!!",
@@ -54,17 +55,17 @@ const HomeScreen = () => {
         navigation.setOptions({
             title: "Welcome!!",
             headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView className="flex-1">
                     <TouchableOpacity
                         style={globalStyles.headerIcon}
-                        onPress={() => navigation.openDrawer()}
+                        onPress={navigation.openDrawer}
                     >
                         <FontAwesome5 name="bars" size={24} />
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
             headerRight: () => (
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView className="flex-1">
                     {user && (
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
@@ -90,34 +91,26 @@ const HomeScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View className="mb-[10px]">
             <StatusBar style="auto" />
-            <ScrollView>
-                <Card>
-                    <Card.Title>About Me!!</Card.Title>
-                    <Card.Divider />
-                    <Button
-                        onPress={() => navigation.jumpTo("AboutDrawer")}
-                        title="Go to About Screen"
-                    />
-                </Card>
-                <Card>
-                    <Card.Title>Contact Me!!</Card.Title>
-                    <Card.Divider />
-                    <Button
-                        onPress={() => navigation.jumpTo("ContactDrawer")}
-                        title="Go to Contact Screen"
-                    />
-                </Card>
-            </ScrollView>
+            {user ? (
+                <ScrollView>
+                    <Card>
+                        <Card.Title>Todo</Card.Title>
+                        <Card.Divider />
+                        <Button
+                            onPress={() => navigation.navigate("Todo")}
+                            title="Go to Todo Screen"
+                        />
+                    </Card>
+                </ScrollView>
+            ) : (
+                <Text className="text-bold mt-5 self-center text-lg">
+                    Login or Register to use the Features!!
+                </Text>
+            )}
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        marginBottom: 10,
-    },
-});
 
 export default HomeScreen;

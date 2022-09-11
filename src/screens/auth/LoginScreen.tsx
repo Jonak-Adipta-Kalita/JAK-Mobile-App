@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
-    StyleSheet,
     Text,
     View,
-    SafeAreaView,
     TouchableOpacity,
     ScrollView,
     Platform,
 } from "react-native";
-import { Button, Input } from "react-native-elements";
-import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
+import { Button, Input } from "@rneui/themed";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
 import globalStyles from "../../globalStyles";
 import {
@@ -26,12 +24,13 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
+import { NavigationPropsStack } from "../../../@types/navigation";
+import ArrowGoBack from "../../components/ArrowGoBack";
 
 const LoginScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsStack>();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -67,23 +66,10 @@ const LoginScreen = () => {
         if (Platform.OS === "android" || Platform.OS === "ios") {
             return (
                 <View>
-                    <Text
-                        style={{
-                            marginTop: 10,
-                            marginBottom: 10,
-                            color: "#594d4c",
-                            alignSelf: "center",
-                            fontSize: 20,
-                        }}
-                    >
+                    <Text className="my-[10px] self-center text-[20px] text-[#594d4c]">
                         Or
                     </Text>
-                    <ScrollView
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                        }}
-                    >
+                    <ScrollView className="flex flex-row">
                         <LoginButton brand="google" />
                         {Platform.OS === "ios" && <LoginButton brand="apple" />}
                     </ScrollView>
@@ -95,28 +81,24 @@ const LoginScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Login!!",
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} color="white" />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+            headerLeft: () => <ArrowGoBack color="white" />,
         });
     }, [navigation]);
 
     return (
-        <View style={styles.container}>
+        <View className="flex-1 items-center p-[10px]">
             <StatusBar style="auto" />
-            <View style={styles.inputContainer}>
+            <View
+                style={{
+                    width: 300,
+                    marginTop: 10,
+                }}
+            >
                 <Input
                     placeholder="Email"
                     autoFocus
                     value={email}
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={globalStyles.inputBar}
                     onChangeText={(text) => setEmail(text)}
                     leftIcon={
                         <MaterialIcons
@@ -125,14 +107,14 @@ const LoginScreen = () => {
                             style={globalStyles.inputBarIcon}
                         />
                     }
-                    autoCompleteType={"email"}
+                    autoComplete={"email"}
                 />
-                <View style={styles.passwordContainer}>
+                <View className="relative">
                     <Input
                         placeholder="Password"
                         secureTextEntry={!showPassword}
                         value={password}
-                        inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                        inputStyle={globalStyles.inputBar}
                         onChangeText={(text) => setPassword(text)}
                         leftIcon={
                             <MaterialIcons
@@ -141,7 +123,7 @@ const LoginScreen = () => {
                                 style={globalStyles.inputBarIcon}
                             />
                         }
-                        autoCompleteType={"password"}
+                        autoComplete={"password"}
                     />
                     <TouchableOpacity
                         style={globalStyles.showPasswordContainer}
@@ -165,11 +147,17 @@ const LoginScreen = () => {
             </View>
             <Button
                 onPress={loginEmail}
-                containerStyle={styles.button}
+                containerStyle={{
+                    width: 200,
+                    marginTop: 10,
+                }}
                 title="Login"
             />
             <Button
-                containerStyle={styles.button}
+                containerStyle={{
+                    width: 200,
+                    marginTop: 10,
+                }}
                 title="Register"
                 type="outline"
                 onPress={() => navigation.navigate("Register")}
@@ -181,27 +169,3 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        padding: 10,
-    },
-    inputContainer: {
-        width: 300,
-        marginTop: 10,
-    },
-    passwordContainer: {
-        position: "relative",
-    },
-    button: {
-        width: 200,
-        marginTop: 10,
-    },
-    loginButton: {
-        width: 300,
-        marginTop: 40,
-    },
-    inputBar: {},
-});

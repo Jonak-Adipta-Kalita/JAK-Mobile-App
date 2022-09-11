@@ -1,8 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { Input, Button } from "react-native-elements";
+import { View } from "react-native";
+import { Input, Button } from "@rneui/themed";
 import { db, auth } from "../../../firebase";
 import globalStyles from "../../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,9 +11,12 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { updateEmail } from "firebase/auth";
+import { NavigationPropsDrawer } from "../../../../@types/navigation";
+import ArrowGoBack from "../../../components/ArrowGoBack";
 
 const ChangeEmailScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");
@@ -43,9 +45,9 @@ const ChangeEmailScreen = () => {
                 ]
             );
         } else {
-            user?.updateEmail(email)
+            updateEmail(user!, email)
                 .then(() => {
-                    pushPrivateNotification(user?.uid, {
+                    pushPrivateNotification(user?.uid!, {
                         title: "Email Changed Successfully!!",
                         message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
                         timestamp: serverTimestamp(),
@@ -53,7 +55,7 @@ const ChangeEmailScreen = () => {
                 })
                 .then(() => {
                     setDoc(
-                        doc(db, "users", user?.uid),
+                        doc(db, "users", user?.uid!),
                         {
                             email: email,
                         },
@@ -88,16 +90,7 @@ const ChangeEmailScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Change your Email!!",
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+            headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
 
@@ -113,20 +106,23 @@ const ChangeEmailScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View className="mt-[20px] flex-1 items-center p-[10px]">
             <StatusBar style="auto" />
-            <View style={styles.inputContainer}>
+            <View className="w-[350px]">
                 <Input
                     placeholder="Email"
                     autoFocus
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={[globalStyles.inputBar]}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
-                    autoCompleteType={"email"}
+                    autoComplete={"email"}
                 />
             </View>
             <Button
-                containerStyle={[globalStyles.button, styles.button]}
+                containerStyle={[
+                    globalStyles.button,
+                    { marginTop: 10, width: 200 },
+                ]}
                 title="Upgrade"
                 onPress={changeEmail}
             />
@@ -135,20 +131,3 @@ const ChangeEmailScreen = () => {
 };
 
 export default ChangeEmailScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        padding: 10,
-        marginTop: 20,
-    },
-    inputContainer: {
-        width: 350,
-    },
-    button: {
-        width: 200,
-        marginTop: 10,
-    },
-    inputBar: {},
-});

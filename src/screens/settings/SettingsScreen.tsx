@@ -1,15 +1,9 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    View,
-    StyleSheet,
-    SafeAreaView,
-    TouchableOpacity,
-    ScrollView,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
-import { Avatar, Button, ListItem } from "react-native-elements";
+import { Avatar, Button, ListItem } from "@rneui/themed";
 import globalStyles from "../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPublicNotification from "../../notify/publicNotification";
@@ -20,6 +14,10 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
+import { NavigationPropsDrawer } from "../../../@types/navigation";
+import ArrowGoBack from "../../components/ArrowGoBack";
+import { useDocument } from "react-firebase-hooks/firestore";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -45,9 +43,14 @@ const uploadImageAsync = async (uri: string, userUID: string) => {
 };
 
 const SettingsScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState<null | string>(null);
+    const [userData, userDataLoading, userDataError] = useDocument(
+        doc(db, "users", user?.uid!)
+    );
+    const phoneNumberFromUserData =
+        user?.phoneNumber || userData?.data()?.phoneNumber;
 
     const updatePic = async () => {
         const pickerResult: any = await ImagePicker.launchImageLibraryAsync({
@@ -58,9 +61,9 @@ const SettingsScreen = () => {
             if (!pickerResult.cancelled) {
                 const uploadURL = await uploadImageAsync(
                     pickerResult.uri,
-                    user.uid!
+                    user?.uid!
                 );
-                user?.updateProfile({ photoURL: uploadURL });
+                updateProfile(user!, { photoURL: uploadURL });
                 setImage(uploadURL);
             }
         } catch (error) {
@@ -87,7 +90,7 @@ const SettingsScreen = () => {
         const userUID = user?.uid;
         user?.delete()
             .then(() => {
-                deleteDoc(doc(db, "users", userUID));
+                deleteDoc(doc(db, "users", userUID!));
             })
             .then(() => {
                 pushPublicNotification({
@@ -103,7 +106,7 @@ const SettingsScreen = () => {
 
     const verifyEmail = () => {
         if (!user?.emailVerified) {
-            user?.sendEmailVerification()
+            sendEmailVerification(user!)
                 .then(() => {
                     messageAlertShower(
                         "Verification Email Successfully Sent!!",
@@ -118,7 +121,7 @@ const SettingsScreen = () => {
                 })
                 .then(() => {
                     setDoc(
-                        doc(db, "users", user?.uid),
+                        doc(db, "users", user?.uid!),
                         {
                             emailVerified: true,
                         },
@@ -137,16 +140,7 @@ const SettingsScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Your Profile!!",
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+            headerLeft: () => <ArrowGoBack />,
             headerRight: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     {!user?.emailVerified && (
@@ -167,7 +161,9 @@ const SettingsScreen = () => {
 
     if (userError) errorAlertShower(userError);
 
-    if (userLoading) {
+    if (userDataError) errorAlertShower(userDataError);
+
+    if (userLoading || userDataLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}
@@ -177,10 +173,10 @@ const SettingsScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View className="mb-[10px] flex-1 flex-col">
             <StatusBar style="auto" />
             <ScrollView>
-                <View style={{ marginTop: 30, alignItems: "center" }}>
+                <View className="mt-[30px] items-center">
                     {user?.photoURL ? (
                         <TouchableOpacity
                             activeOpacity={0.5}
@@ -244,9 +240,8 @@ const SettingsScreen = () => {
                             <AntDesign name="edit" style={{ fontSize: 30 }} />
                             <ListItem.Content>
                                 <ListItem.Title>
-                                    {user?.phoneNumber
-                                        ? user?.phoneNumber
-                                        : "Provide your Phone Number!!"}
+                                    {phoneNumberFromUserData ||
+                                        "Provide your Phone Number!!"}
                                 </ListItem.Title>
                                 <ListItem.Subtitle>
                                     Phone Number
@@ -256,30 +251,14 @@ const SettingsScreen = () => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-            <View
-                style={[
-                    styles.bottomButton,
-                    {
-                        alignSelf: "flex-start",
-                        paddingLeft: 20,
-                    },
-                ]}
-            >
+            <View className="absolute bottom-[20px] flex-row self-start pl-[20px]">
                 <Button
                     containerStyle={globalStyles.button}
                     onPress={signOut}
                     title="Logout"
                 />
             </View>
-            <View
-                style={[
-                    styles.bottomButton,
-                    {
-                        paddingRight: 20,
-                        alignSelf: "flex-end",
-                    },
-                ]}
-            >
+            <View className="absolute bottom-[20px] flex-row self-end pr-[20px]">
                 <Button
                     containerStyle={globalStyles.button}
                     onPress={deleteAccount}
@@ -291,16 +270,3 @@ const SettingsScreen = () => {
 };
 
 export default SettingsScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "column",
-        flex: 1,
-        marginBottom: 10,
-    },
-    bottomButton: {
-        position: "absolute",
-        bottom: 20,
-        flexDirection: "row",
-    },
-});

@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Card } from "react-native-elements";
+import { View, Text } from "react-native";
+import { Card } from "@rneui/themed";
 import moment from "moment";
 import globalStyles from "../globalStyles";
-import toTitleCase from "../utils/toTitleCase";
+import { editMessage } from "@xxjonakadiptaxx/jak_javascript_package";
 
 interface Props {
     id: string;
@@ -14,17 +14,28 @@ interface Props {
 
 const Notification = ({ title, message, timestamp }: Props) => {
     return (
-        <View style={styles.container}>
+        <View className="pb-[5px]">
             <Card containerStyle={{ position: "relative" }}>
                 <Card.Title>{title}</Card.Title>
                 <Card.Divider />
-                <Text style={[globalStyles.font, styles.message]}>
+                <Text
+                    style={[
+                        globalStyles.font,
+                        {
+                            color: "#594d4c",
+                            marginBottom: 15,
+                            textAlign: "center",
+                        },
+                    ]}
+                >
                     {message}
                 </Text>
                 <Card.Divider />
                 <Text style={{ color: "#43484D", fontWeight: "bold" }}>
                     {timestamp
-                        ? toTitleCase(moment(timestamp.toDate()).fromNow())
+                        ? new editMessage(
+                              moment(timestamp.toDate()).fromNow()
+                          ).toTitleCase()
                         : "..."}
                 </Text>
             </Card>
@@ -33,14 +44,3 @@ const Notification = ({ title, message, timestamp }: Props) => {
 };
 
 export default Notification;
-
-const styles = StyleSheet.create({
-    container: {
-        paddingBottom: 5,
-    },
-    message: {
-        textAlign: "center",
-        color: "#594d4c",
-        marginBottom: 15,
-    },
-});

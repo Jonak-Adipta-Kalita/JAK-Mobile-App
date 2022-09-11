@@ -1,4 +1,4 @@
-import "react-native-gesture-handler";
+import "expo-dev-client";
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
@@ -44,23 +44,23 @@ const App = () => {
 
     if (fontsError || userError) errorAlertShower(fontsError || userError);
 
-    if (!fontsLoaded || userLoading) {
-        return (
-            <LoadingIndicator
-                dimensions={{ width: 70, height: 70 }}
-                containerStyle={{ flex: 1 }}
-            />
-        );
-    }
-
     return (
-        <ReduxProvider store={reduxStore}>
-            <NavigationContainer
-                theme={scheme === "dark" ? DarkTheme : LightTheme}
-            >
-                <DrawerNavigator />
-            </NavigationContainer>
-        </ReduxProvider>
+        <>
+            {!fontsLoaded || userLoading ? (
+                <LoadingIndicator
+                    dimensions={{ width: 70, height: 70 }}
+                    containerStyle={{ flex: 1 }}
+                />
+            ) : (
+                <ReduxProvider store={reduxStore}>
+                    <NavigationContainer
+                        theme={scheme === "dark" ? DarkTheme : LightTheme}
+                    >
+                        <DrawerNavigator />
+                    </NavigationContainer>
+                </ReduxProvider>
+            )}
+        </>
     );
 };
 

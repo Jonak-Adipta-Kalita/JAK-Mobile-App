@@ -1,4 +1,4 @@
-const __DEV__ = true;
+const __DEV__ = process.env.PRODUCTION !== "true";
 const VERSION = "0.0.1";
 
 export default {
@@ -7,6 +7,7 @@ export default {
     version: VERSION,
     orientation: "portrait",
     icon: "./assets/images/icon.png",
+    scheme: __DEV__ ? "host.exp.exponent" : "com.beastnighttv.jakmobileapp",
     splash: {
         image: "./assets/images/splash.png",
         resizeMode: "contain",
@@ -49,8 +50,5 @@ export default {
         googleServicesFile: __DEV__
             ? "./google_services_android-dev.json"
             : "./google_services_android-prod.json",
-    },
-    web: {
-        favicon: "./assets/images/favicon.png",
     },
 };

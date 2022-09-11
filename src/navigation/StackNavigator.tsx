@@ -8,12 +8,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import NotificationScreen from "../screens/home/notification/NotificationScreen";
-import AboutScreen from "../screens/AboutScreen";
+import TodoScreen from "../screens/home/features/TodoScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
 import ChangeEmailScreen from "../screens/settings/changeProfile/ChangeEmailScreen";
 import ChangeNameScreen from "../screens/settings/changeProfile/ChangeNameScreen";
 import ChangePhoneNumberScreen from "../screens/settings/changeProfile/ChangePhoneNumberScreen";
-import ContactScreen from "../screens/ContactScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 
@@ -52,34 +51,22 @@ const HomeStack = () => {
     }, []);
     if (isFirstLaunch === null) {
         return null;
-    } else if (isFirstLaunch === true) {
-        return (
-            <Stack.Navigator
-                screenOptions={stackScreenOption1}
-                initialRouteName="GetStarted"
-            >
-                <Stack.Screen name="GetStarted" component={GetStartedScreen} />
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen
-                    name="Notification"
-                    component={NotificationScreen}
-                />
-            </Stack.Navigator>
-        );
-    } else {
-        return (
-            <Stack.Navigator
-                screenOptions={stackScreenOption1}
-                initialRouteName="Home"
-            >
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen
-                    name="Notification"
-                    component={NotificationScreen}
-                />
-            </Stack.Navigator>
-        );
     }
+    return (
+        <Stack.Navigator
+            screenOptions={stackScreenOption1}
+            initialRouteName={isFirstLaunch ? "GetStarted" : "Home"}
+        >
+            {isFirstLaunch && (
+                <Stack.Screen name="GetStarted" component={GetStartedScreen} />
+            )}
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Notification" component={NotificationScreen} />
+            <Stack.Group>
+                <Stack.Screen name="Todo" component={TodoScreen} />
+            </Stack.Group>
+        </Stack.Navigator>
+    );
 };
 
 const AuthenticationStack = () => {
@@ -90,17 +77,6 @@ const AuthenticationStack = () => {
         >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
-        </Stack.Navigator>
-    );
-};
-
-const AboutStack = () => {
-    return (
-        <Stack.Navigator
-            screenOptions={stackScreenOption1}
-            initialRouteName="About"
-        >
-            <Stack.Screen name="About" component={AboutScreen} />
         </Stack.Navigator>
     );
 };
@@ -127,21 +103,4 @@ const SettingsStack = () => {
     );
 };
 
-const ContactStack = () => {
-    return (
-        <Stack.Navigator
-            screenOptions={stackScreenOption1}
-            initialRouteName="Contact"
-        >
-            <Stack.Screen name="Contact" component={ContactScreen} />
-        </Stack.Navigator>
-    );
-};
-
-export {
-    HomeStack,
-    AboutStack,
-    SettingsStack,
-    ContactStack,
-    AuthenticationStack,
-};
+export { HomeStack, SettingsStack, AuthenticationStack };

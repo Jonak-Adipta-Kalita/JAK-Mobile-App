@@ -1,32 +1,41 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet } from "react-native";
-import { Button } from "react-native-elements";
+import { View } from "react-native";
+import { Button } from "@rneui/themed";
 import globalStyles from "../globalStyles";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationPropsStack } from "../../@types/navigation";
 
 const GetStartedScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsStack>();
 
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Get Started!!",
             headerStyle: {
                 backgroundColor: "#3f7de0",
-                fontFamily: "OtomanopeeOne",
             },
-            headerTitleStyle: { color: "white" },
+            headerTitleStyle: {
+                color: "white",
+            },
             headerTintColor: "white",
             headerTitleAlign: "center",
         });
     }, [navigation]);
 
     return (
-        <View style={styles.container}>
+        <View>
             <StatusBar style="auto" />
-            <View style={styles.mainView}>
+            <View className="p-[10px] px-[20px]">
                 <Button
-                    containerStyle={[globalStyles.button, styles.button]}
+                    containerStyle={[
+                        globalStyles.button,
+                        {
+                            marginTop: 650,
+                            alignSelf: "center",
+                            position: "absolute",
+                        },
+                    ]}
                     title="Lets Goooo!!"
                     onPress={() => navigation.replace("Login")}
                 />
@@ -36,17 +45,3 @@ const GetStartedScreen = () => {
 };
 
 export default GetStartedScreen;
-
-const styles = StyleSheet.create({
-    container: {},
-    mainView: {
-        padding: 10,
-        paddingRight: 20,
-        paddingLeft: 20,
-    },
-    button: {
-        position: "absolute",
-        marginTop: 650,
-        alignSelf: "center",
-    },
-});

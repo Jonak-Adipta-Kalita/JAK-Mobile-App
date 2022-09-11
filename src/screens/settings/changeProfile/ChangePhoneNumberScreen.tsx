@@ -1,8 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { Input, Button } from "react-native-elements";
+import { View } from "react-native";
+import { Input, Button } from "@rneui/themed";
 import { auth, db } from "../../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import pushPrivateNotification from "../../../notify/privateNotification";
@@ -12,12 +11,20 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { NavigationPropsDrawer } from "../../../../@types/navigation";
+import ArrowGoBack from "../../../components/ArrowGoBack";
+import { useDocument } from "react-firebase-hooks/firestore";
 
 const ChangePhoneNumberScreen = () => {
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
+    const [userData, userDataLoading, userDataError] = useDocument(
+        doc(db, "users", user?.uid!)
+    );
+    const phoneNumberFromUserData =
+        user?.phoneNumber || userData?.data()?.phoneNumber;
     const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
-        user?.phoneNumber
+        user?.phoneNumber || userData?.data()?.phoneNumber
     );
     const [phoneNumber, setPhoneNumber] = useState("");
 
@@ -45,15 +52,14 @@ const ChangePhoneNumberScreen = () => {
                 ]
             );
         } else {
-            //TODO: Change Phone Number
-            pushPrivateNotification(user.uid!, {
+            pushPrivateNotification(user?.uid!, {
                 title: "Phone Number Changed Successfully!!",
                 message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
                 timestamp: serverTimestamp(),
             })
                 .then(() => {
                     setDoc(
-                        doc(db, "users", user?.uid),
+                        doc(db, "users", user?.uid!),
                         {
                             phoneNumber: phoneNumber,
                         },
@@ -88,26 +94,17 @@ const ChangePhoneNumberScreen = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: `${
-                user?.phoneNumber
-                    ? "Change your Phone Number!!"
-                    : "Set your Phone Number!!"
-            }`,
-            headerLeft: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                    >
-                        <AntDesign name="arrowleft" size={24} />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
+                phoneNumberFromUserData ? "Change" : "Set"
+            } your Phone No.!!`,
+            headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
 
     if (userError) errorAlertShower(userError);
 
-    if (userLoading) {
+    if (userDataError) errorAlertShower(userDataError);
+
+    if (userLoading || userDataLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}
@@ -117,20 +114,23 @@ const ChangePhoneNumberScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View className="mt-[20px] flex-1 items-center p-[10px]">
             <StatusBar style="auto" />
-            <View style={styles.inputContainer}>
+            <View className="w-[350px]">
                 <Input
                     placeholder="Phone Number (Use Country Code)"
                     autoFocus
-                    inputStyle={[globalStyles.inputBar, styles.inputBar]}
+                    inputStyle={[globalStyles.inputBar]}
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
-                    autoCompleteType={"tel"}
+                    autoComplete="tel"
                 />
             </View>
             <Button
-                containerStyle={[globalStyles.button, styles.button]}
+                containerStyle={[
+                    globalStyles.button,
+                    { marginTop: 10, width: 200 },
+                ]}
                 title="Upgrade"
                 onPress={changePhoneNumber}
             />
@@ -139,20 +139,3 @@ const ChangePhoneNumberScreen = () => {
 };
 
 export default ChangePhoneNumberScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        padding: 10,
-        marginTop: 20,
-    },
-    inputContainer: {
-        width: 350,
-    },
-    button: {
-        width: 200,
-        marginTop: 10,
-    },
-    inputBar: {},
-});

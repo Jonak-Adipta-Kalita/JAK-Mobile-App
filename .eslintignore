@@ -6,7 +6,6 @@ out/
 dist/
 test-fixtures/
 node_modules/
-web-build/
 android/
 ios/
 build/
@@ -14,3 +13,4 @@ public/
 __tests__/
 google-services.json
 GoogleService-Info.plist
+metro.config.js

@@ -8,7 +8,6 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
-web-build/
 android/
 ios/
 build/
@@ -20,6 +19,8 @@ google_services_ios-prod.plist
 google_services_ios-dev.plist
 google_services_android-dev.json
 google_services_android-prod.json
+
+*.log
 
 # macOS
 .DS_Store

@@ -1,8 +1,23 @@
-import { StyleSheet, Appearance, Platform } from "react-native";
+import {
+    StyleSheet,
+    Appearance,
+    Platform,
+    ViewStyle,
+    TextStyle,
+} from "react-native";
 
 const colorScheme = Appearance.getColorScheme();
 
-export default StyleSheet.create({
+export default StyleSheet.create<{
+    button: ViewStyle;
+    font: TextStyle;
+    inputBar: TextStyle;
+    inputBarIcon: TextStyle;
+    text: TextStyle;
+    showPasswordContainer: ViewStyle;
+    showPasswordIcon: TextStyle;
+    headerIcon: ViewStyle;
+}>({
     button: {
         width: 150,
         borderRadius: 20,
