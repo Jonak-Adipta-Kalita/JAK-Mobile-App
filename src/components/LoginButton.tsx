@@ -63,11 +63,11 @@ const LoginButton = ({ brand }: Props) => {
                                 );
 
                                 if (userFetched.exists()) {
-									await pushPublicNotification({
-                                                title: "Member came back to the Ligtning Family!!",
-                                                message: `${authUser.user.displayName} came back to the Ligtning Family!! Yippie!!`,
-                                                timestamp: serverTimestamp(),
-                                            });
+                                    await pushPublicNotification({
+                                        title: "Member came back to the Ligtning Family!!",
+                                        message: `${authUser.user.displayName} came back to the Ligtning Family!! Yippie!!`,
+                                        timestamp: serverTimestamp(),
+                                    });
                                     await pushPrivateNotification(
                                         authUser.user.uid,
                                         {
