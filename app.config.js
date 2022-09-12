@@ -1,6 +1,6 @@
 const __DEV__ = process.env.PRODUCTION !== "true";
 const VERSION = "0.0.1";
-const PROJECT_ID = process.env.EXPO_PROJECT_ID
+const PROJECT_ID = process.env.EXPO_PROJECT_ID;
 
 export default {
     name: "jak-mobile-app",

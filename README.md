@@ -42,9 +42,11 @@ and hit enter.
 ### Getting `EXPO_PROJECT_ID`
 
 Open a Terminal in the Base Directory and type:
+
 ```bash
 npx eas project:info
 ```
+
 and hit Enter. You will get the `ID` which is your `EXPO_PROJECT_ID`
 
 ### Getting Firebase Credentials
