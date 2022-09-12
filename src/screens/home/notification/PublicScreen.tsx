@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import { db } from "../../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import LoadingIndicator from "../../../components/Loading";
@@ -37,17 +37,23 @@ const PublicScreen = () => {
 
     return (
         <View>
-            <ScrollView>
-                {notifications?.docs?.map((notification) => (
-                    <Notification
-                        key={notification.id}
-                        id={notification.id}
-                        title={notification.data().title}
-                        message={notification.data().message}
-                        timestamp={notification.data().timestamp}
-                    />
-                ))}
-            </ScrollView>
+            {notifications?.docs.length === 0 ? (
+                <Text className="text-bold mt-5 self-center text-lg">
+                    No Notification(s)!!
+                </Text>
+            ) : (
+                <ScrollView>
+                    {notifications?.docs?.map((notification) => (
+                        <Notification
+                            key={notification.id}
+                            id={notification.id}
+                            title={notification.data().title}
+                            message={notification.data().message}
+                            timestamp={notification.data().timestamp}
+                        />
+                    ))}
+                </ScrollView>
+            )}
         </View>
     );
 };

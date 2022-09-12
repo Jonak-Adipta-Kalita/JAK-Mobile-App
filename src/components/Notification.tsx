@@ -1,22 +1,50 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, useColorScheme, TouchableOpacity } from "react-native";
 import { Card } from "@rneui/themed";
 import moment from "moment";
 import globalStyles from "../globalStyles";
 import { editMessage } from "@xxjonakadiptaxx/jak_javascript_package";
+import { Entypo } from "@expo/vector-icons";
+import { deleteDoc, doc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 interface Props {
     id: string;
     title: string;
     message: string;
     timestamp: any;
+    canDelete?: boolean;
 }
 
-const Notification = ({ title, message, timestamp }: Props) => {
+const Notification = ({ id, title, message, timestamp, canDelete }: Props) => {
+    const [user] = useAuthState(auth);
+    const scheme = useColorScheme();
+
+    const removeNotification = async () => {
+        await deleteDoc(doc(db, "users", user?.uid!, "notifications", id));
+    };
+
     return (
         <View className="pb-[5px]">
             <Card containerStyle={{ position: "relative" }}>
-                <Card.Title>{title}</Card.Title>
+                <View className="relative flex flex-row justify-center">
+                    <Card.Title>{title} </Card.Title>
+                    {canDelete && (
+                        <TouchableOpacity
+                            className="absolute right-0"
+                            onPress={removeNotification}
+                        >
+                            <Entypo
+                                name="cross"
+                                size={24}
+                                color={`${
+                                    scheme === "dark" ? "white" : "black"
+                                }`}
+                            />
+                        </TouchableOpacity>
+                    )}
+                </View>
                 <Card.Divider />
                 <Text
                     style={[
