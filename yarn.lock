@@ -3086,10 +3086,10 @@
   resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.5.tgz#09fa51e356d07d0be200642b0e4f91d8e6dd408d"
   integrity sha512-V3BIhmY36fXZ1OtVcI9W+FxQqxVLsPKcNjWigIaa81dLC9IolJl5Mt4Cvhmr0flUnjSpTdrbMTSbXqYqV5dT6A==
 
-"@xxjonakadiptaxx/jak_javascript_package@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@xxjonakadiptaxx/jak_javascript_package/-/jak_javascript_package-3.3.0.tgz#a0314be3ae0483fe37b0f487b2937f071bba85c9"
-  integrity sha512-6BPsSoN9/zrC65eKoyXSyxoYU4wN3Apd06ZYw2dCYgOmhxOX3EF9V998PvLrSSa6JlFURCGwkJU4ebfJkUVo+g==
+"@xxjonakadiptaxx/jak_javascript_package@^3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@xxjonakadiptaxx/jak_javascript_package/-/jak_javascript_package-3.3.2.tgz#5ec64cc6a4ca5d0c3c6891e87c2c25b41173dd41"
+  integrity sha512-ys8SYqFPFKJvT8hT6Obpa88ZBlSJrr7s4LWNtHH/WamD+n99Zz8kI1AwLv0YUYLJ2efCO2oNJbLwxvoRqafR1A==
 
 abbrev@1:
   version "1.1.1"

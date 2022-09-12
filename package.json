@@ -46,7 +46,7 @@
         "@reduxjs/toolkit": "^1.8.5",
         "@rneui/base": "^4.0.0-rc.6",
         "@rneui/themed": "^4.0.0-rc.6",
-        "@xxjonakadiptaxx/jak_javascript_package": "^3.3.0",
+        "@xxjonakadiptaxx/jak_javascript_package": "^3.3.2",
         "expo": "~46.0.9",
         "expo-asset": "~8.6.1",
         "expo-auth-session": "~3.7.1",
