@@ -11,6 +11,7 @@ npm-debug.*
 android/
 ios/
 build/
+dist/
 .env
 !assets/loginButtons/android
 !assets/loginButtons/ios

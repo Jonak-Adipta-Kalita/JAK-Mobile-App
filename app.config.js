@@ -1,5 +1,6 @@
 const __DEV__ = process.env.PRODUCTION !== "true";
 const VERSION = "0.0.1";
+const PROJECT_ID = process.env.EXPO_PROJECT_ID
 
 export default {
     name: "jak-mobile-app",
@@ -8,6 +9,13 @@ export default {
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     scheme: __DEV__ ? "host.exp.exponent" : "com.beastnighttv.jakmobileapp",
+    runtimeVersion: {
+        policy: "sdkVersion",
+    },
+    updates: {
+        fallbackToCacheTimeout: 0,
+        url: `https://u.expo.dev/3b429135-b765-4db5-b4b5-effcbfe49940`,
+    },
     splash: {
         image: "./assets/images/splash.png",
         resizeMode: "contain",
@@ -15,9 +23,6 @@ export default {
     },
     privacy: "public",
     githubUrl: "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App",
-    updates: {
-        fallbackToCacheTimeout: 0,
-    },
     assetBundlePatterns: ["**/*"],
     notification: {
         icon: "./assets/images/icon.png",
