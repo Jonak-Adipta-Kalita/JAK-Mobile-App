@@ -62,12 +62,17 @@ const LoginButton = ({ brand }: Props) => {
                                     doc(db, "users", authUser?.user?.uid!)
                                 );
 
-                                if (userFetched) {
+                                if (userFetched.exists()) {
+									await pushPublicNotification({
+                                                title: "Member came back to the Ligtning Family!!",
+                                                message: `${authUser.user.displayName} came back to the Ligtning Family!! Yippie!!`,
+                                                timestamp: serverTimestamp(),
+                                            });
                                     await pushPrivateNotification(
                                         authUser.user.uid,
                                         {
-                                            title: `Welcome again ${authUser.user.displayName}!!`,
-                                            message: `Welcome again ${authUser.user.email}. Nice to meet you!!`,
+                                            title: `Welcome back ${authUser.user.displayName}!!`,
+                                            message: `Welcome back ${authUser.user.displayName}. Nice to meet you!!`,
                                             timestamp: serverTimestamp(),
                                         }
                                     );
@@ -76,7 +81,7 @@ const LoginButton = ({ brand }: Props) => {
                                         authUser.user.uid,
                                         {
                                             title: "Welcome!!",
-                                            message: `Welcome ${authUser.user.email}. Nice to meet you!!`,
+                                            message: `Welcome ${authUser.user.displayName}. Nice to meet you!!`,
                                             timestamp: serverTimestamp(),
                                         }
                                     )
@@ -88,7 +93,7 @@ const LoginButton = ({ brand }: Props) => {
                                                     authUser.user.uid!
                                                 ),
                                                 {
-                                                    uid: authUser.user.uid!,
+                                                    uid: authUser.user.uid,
                                                     email: authUser.user.email,
                                                     displayName:
                                                         authUser.user
@@ -107,7 +112,7 @@ const LoginButton = ({ brand }: Props) => {
                                         .then(() => {
                                             pushPublicNotification({
                                                 title: "New member in the Ligtning Family!!",
-                                                message: `${authUser.user.email} Joined the Ligtning Family!! Yippie!!`,
+                                                message: `${authUser.user.displayName} Joined the Ligtning Family!! Yippie!!`,
                                                 timestamp: serverTimestamp(),
                                             });
                                         });
