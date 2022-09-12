@@ -14,7 +14,7 @@ import {
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { auth, db } from "../firebase";
 import pushPublicNotification from "../notify/publicNotification";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import pushPrivateNotification from "../notify/privateNotification";
 
 interface Props {
@@ -57,41 +57,61 @@ const LoginButton = ({ brand }: Props) => {
                             logginResult?.authentication?.accessToken
                         );
                         await signInWithCredential(auth, credentials).then(
-                            (authUser) => {
-                                pushPrivateNotification(authUser.user.uid, {
-                                    title: "Welcome!!",
-                                    message: `Welcome ${authUser.user.email}. Nice to meet you!!`,
-                                    timestamp: serverTimestamp(),
-                                })
-                                    .then(() => {
-                                        setDoc(
-                                            doc(
-                                                db,
-                                                "users",
-                                                authUser.user.uid!
-                                            ),
-                                            {
-                                                uid: authUser.user.uid!,
-                                                email: authUser.user.email,
-                                                displayName:
-                                                    authUser.user.displayName,
-                                                photoURL:
-                                                    authUser.user.photoURL,
-                                                phoneNumber:
-                                                    authUser.user.phoneNumber,
-                                                emailVerified:
-                                                    authUser?.user
-                                                        ?.emailVerified,
-                                            }
-                                        );
-                                    })
-                                    .then(() => {
-                                        pushPublicNotification({
-                                            title: "New member in the Ligtning Family!!",
-                                            message: `${authUser.user.email} Joined the Ligtning Family!! Yippie!!`,
+                            async (authUser) => {
+                                const userFetched = await getDoc(
+                                    doc(db, "users", authUser?.user?.uid!)
+                                );
+
+                                if (userFetched) {
+                                    await pushPrivateNotification(
+                                        authUser.user.uid,
+                                        {
+                                            title: `Welcome again ${authUser.user.displayName}!!`,
+                                            message: `Welcome again ${authUser.user.email}. Nice to meet you!!`,
                                             timestamp: serverTimestamp(),
+                                        }
+                                    );
+                                } else {
+                                    await pushPrivateNotification(
+                                        authUser.user.uid,
+                                        {
+                                            title: "Welcome!!",
+                                            message: `Welcome ${authUser.user.email}. Nice to meet you!!`,
+                                            timestamp: serverTimestamp(),
+                                        }
+                                    )
+                                        .then(() => {
+                                            setDoc(
+                                                doc(
+                                                    db,
+                                                    "users",
+                                                    authUser.user.uid!
+                                                ),
+                                                {
+                                                    uid: authUser.user.uid!,
+                                                    email: authUser.user.email,
+                                                    displayName:
+                                                        authUser.user
+                                                            .displayName,
+                                                    photoURL:
+                                                        authUser.user.photoURL,
+                                                    phoneNumber:
+                                                        authUser.user
+                                                            .phoneNumber || "",
+                                                    emailVerified:
+                                                        authUser?.user
+                                                            ?.emailVerified,
+                                                }
+                                            );
+                                        })
+                                        .then(() => {
+                                            pushPublicNotification({
+                                                title: "New member in the Ligtning Family!!",
+                                                message: `${authUser.user.email} Joined the Ligtning Family!! Yippie!!`,
+                                                timestamp: serverTimestamp(),
+                                            });
                                         });
-                                    });
+                                }
                             }
                         );
                     }

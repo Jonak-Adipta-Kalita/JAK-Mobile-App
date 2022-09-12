@@ -21,8 +21,6 @@ const ChangePhoneNumberScreen = () => {
     const [userData, userDataLoading, userDataError] = useDocument(
         doc(db, "users", user?.uid!)
     );
-    const phoneNumberFromUserData =
-        user?.phoneNumber || userData?.data()?.phoneNumber;
     const [previousPhoneNumber, setPreviousPhoneNumber] = useState(
         user?.phoneNumber || userData?.data()?.phoneNumber
     );
@@ -54,7 +52,9 @@ const ChangePhoneNumberScreen = () => {
         } else {
             pushPrivateNotification(user?.uid!, {
                 title: "Phone Number Changed Successfully!!",
-                message: `Your Phone Number has been Successfully Changed to ${phoneNumber} from ${previousPhoneNumber}!!`,
+                message: `Your Phone Number has been Successfully Changed to ${phoneNumber} ${
+                    previousPhoneNumber ? `from ${previousPhoneNumber}!!` : ""
+                }`,
                 timestamp: serverTimestamp(),
             })
                 .then(() => {
@@ -93,9 +93,7 @@ const ChangePhoneNumberScreen = () => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: `${
-                phoneNumberFromUserData ? "Change" : "Set"
-            } your Phone No.!!`,
+            title: `${previousPhoneNumber ? "Change" : "Set"} your Phone No.!!`,
             headerLeft: () => <ArrowGoBack />,
         });
     }, [navigation]);
