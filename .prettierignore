@@ -12,3 +12,4 @@ build/
 public/
 google-services.json
 GoogleService-Info.plist
+eas.json

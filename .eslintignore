@@ -14,3 +14,4 @@ __tests__/
 google-services.json
 GoogleService-Info.plist
 metro.config.js
+eas.json
