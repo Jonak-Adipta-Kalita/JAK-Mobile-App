@@ -2,6 +2,7 @@ import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 
 const schedulePushNotification = async (
+    userUID: string,
     title: string,
     body: string,
     data: any
@@ -13,7 +14,7 @@ const schedulePushNotification = async (
                 body: body,
                 data: data,
             },
-            trigger: { seconds: 2 },
+            trigger: { seconds: 2, channelId: userUID },
         });
     }
 };

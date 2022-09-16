@@ -1,5 +1,5 @@
 import "expo-dev-client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import { useColorScheme, LogBox } from "react-native";
@@ -14,6 +14,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import registerForPushNotifications from "./src/utils/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
+import { useAppDispatch } from "./src/hooks/useDispatch";
+import { setToken } from "./src/redux/slices/pushNotificationSlice";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -28,19 +30,28 @@ Notifications.setNotificationHandler({
     }),
 });
 
-const App = () => {
-    const [, userLoading, userError] = useAuthState(auth);
+const AppChildren = () => {
+    const dispatch = useAppDispatch();
     const scheme = useColorScheme();
-    const [fontsLoaded, fontsError] = useFonts({
-        OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
-    });
-    const [, setExpoPushToken] = useState("");
 
     useEffect(() => {
         registerForPushNotifications().then((token) => {
-            setExpoPushToken(token!);
+            dispatch(setToken(token!));
         });
     }, []);
+
+    return (
+        <NavigationContainer theme={scheme === "dark" ? DarkTheme : LightTheme}>
+            <DrawerNavigator />
+        </NavigationContainer>
+    );
+};
+
+const App = () => {
+    const [, userLoading, userError] = useAuthState(auth);
+    const [fontsLoaded, fontsError] = useFonts({
+        OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
+    });
 
     if (fontsError || userError) errorAlertShower(fontsError || userError);
 
@@ -53,11 +64,7 @@ const App = () => {
                 />
             ) : (
                 <ReduxProvider store={reduxStore}>
-                    <NavigationContainer
-                        theme={scheme === "dark" ? DarkTheme : LightTheme}
-                    >
-                        <DrawerNavigator />
-                    </NavigationContainer>
+                    <AppChildren />
                 </ReduxProvider>
             )}
         </>
