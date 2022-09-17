@@ -105,7 +105,9 @@ const HomeScreen = () => {
                     </Card>
                 </ScrollView>
             ) : (
-                <Text className="text-bold mt-5 self-center text-lg">
+				<Text className={`text-bold mt-5 self-center text-lg ${scheme === "dark"
+                                                ? "text-white"
+                                                : "text-black"}`}>
                     Login or Register to use the Features!!
                 </Text>
             )}
