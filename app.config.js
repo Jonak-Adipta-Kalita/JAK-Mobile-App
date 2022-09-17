@@ -2,7 +2,7 @@ const __DEV__ = process.env.PRODUCTION !== "true";
 const VERSION = "0.0.1";
 
 export default {
-    name: "JAK-Mobile-App",
+    name: "JAK Mobile App",
     slug: "JAK-Mobile-App",
     version: VERSION,
     orientation: "portrait",
