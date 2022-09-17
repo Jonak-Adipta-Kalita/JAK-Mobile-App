@@ -37,7 +37,7 @@ const GetStartedScreen = () => {
                         },
                     ]}
                     title="Lets Goooo!!"
-                    onPress={() => navigation.replace("Login")}
+                    onPress={() => navigation.replace("Home")}
                 />
             </View>
         </View>

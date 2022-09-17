@@ -8,6 +8,7 @@ import {
     Platform,
     BackHandler,
     Text,
+    useColorScheme,
 } from "react-native";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "@rneui/themed";
@@ -23,6 +24,7 @@ import { NavigationPropsDrawer } from "../../../@types/navigation";
 const HomeScreen = () => {
     const navigation = useNavigation<NavigationPropsDrawer>();
     const [user, userLoading, userError] = useAuthState(auth);
+    const scheme = useColorScheme();
 
     useEffect(() => {
         if (Platform.OS === "android" && navigation.getId() === "Home") {
