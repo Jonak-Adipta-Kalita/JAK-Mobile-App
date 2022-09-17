@@ -15,7 +15,6 @@ dist/
 .env
 !assets/loginButtons/android
 !assets/loginButtons/ios
-eas.json
 
 google_services_ios-prod.plist
 google_services_ios-dev.plist
