@@ -3,7 +3,7 @@ import { db } from "../firebase";
 import schedulePushNotification from "../utils/pushNotification/scheduleForPushNotification";
 
 const pushPrivateNotification = async (userUID: string, data: any) => {
-    await schedulePushNotification(userUID, data?.title, data?.message, data);
+    await schedulePushNotification(data?.title, data?.message, data, userUID);
 
     return addDoc(collection(db, "users", userUID, "notifications"), data);
 };

@@ -9,7 +9,7 @@ interface Data {
 }
 
 const pushPublicNotification = async (data: Data) => {
-    await schedulePushNotification(data?.title, data?.message, data);
+    await schedulePushNotification(data?.title, data?.message, data, null);
 
     return addDoc(collection(db, "publicNotifications"), data);
 };

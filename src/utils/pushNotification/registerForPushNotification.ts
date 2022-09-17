@@ -1,7 +1,9 @@
 import { Platform } from "react-native";
 import * as Notifications from "expo-notifications";
 
-const registerForPushNotifications = async () => {
+const registerForPushNotifications = async (userUID: string) => {
+    console.log(userUID);
+
     if (Platform.OS === "android" || Platform.OS === "ios") {
         const { status: existingStatus } =
             await Notifications.getPermissionsAsync();
@@ -19,8 +21,8 @@ const registerForPushNotifications = async () => {
         const token = (await Notifications.getExpoPushTokenAsync()).data;
 
         if (Platform.OS === "android") {
-            Notifications.setNotificationChannelAsync("default", {
-                name: "default",
+            Notifications.setNotificationChannelAsync(userUID || "default", {
+                name: userUID || "default",
                 importance: Notifications.AndroidImportance.MAX,
                 vibrationPattern: [0, 250, 250, 250],
                 lightColor: "#FF231F7C",

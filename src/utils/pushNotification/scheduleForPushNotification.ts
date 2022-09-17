@@ -2,10 +2,10 @@ import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 
 const schedulePushNotification = async (
-    userUID: string,
     title: string,
     body: string,
-    data: any
+    data: any,
+    userUID: string | null
 ) => {
     if (Platform.OS === "android" || Platform.OS === "ios") {
         await Notifications.scheduleNotificationAsync({
@@ -14,7 +14,7 @@ const schedulePushNotification = async (
                 body: body,
                 data: data,
             },
-            trigger: { seconds: 2, channelId: userUID },
+            trigger: { seconds: 2, channelId: userUID || "default" },
         });
     }
 };
