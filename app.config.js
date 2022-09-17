@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+require("dotenv").config();
+
 const __DEV__ = process.env.PRODUCTION !== "true";
 const VERSION = "0.0.1";
 
