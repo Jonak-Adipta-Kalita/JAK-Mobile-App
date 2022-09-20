@@ -6,8 +6,9 @@ import {
 } from "@react-navigation/material-top-tabs";
 import PublicScreen from "../screens/home/notification/PublicScreen";
 import PrivateScreen from "../screens/home/notification/PrivateScreen";
+import { TopTabScreensParamList } from "../../@types/navigation"
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator<TopTabScreensParamList>();
 const colorScheme = Appearance.getColorScheme();
 
 const tabBarOptions: MaterialTopTabNavigationOptions = {

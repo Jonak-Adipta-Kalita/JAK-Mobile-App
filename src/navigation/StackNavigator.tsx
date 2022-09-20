@@ -15,8 +15,9 @@ import ChangeNameScreen from "../screens/settings/changeProfile/ChangeNameScreen
 import ChangePhoneNumberScreen from "../screens/settings/changeProfile/ChangePhoneNumberScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
+import { ScreensParamList } from "../../@types/navigation";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<ScreensParamList>();
 
 const globalStackScreenOptions: StackNavigationOptions = {
     headerBackTitle: "Back",

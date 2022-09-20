@@ -1,11 +1,10 @@
 import React, { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, Text, Image } from "react-native";
+import { View, Image } from "react-native";
 import { Button } from "@rneui/themed";
 import globalStyles from "../globalStyles";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationPropsStack } from "../../@types/navigation";
-import LoadingIndicator from "../components/Loading";
 import images from "../images";
 
 const GetStartedScreen = () => {
