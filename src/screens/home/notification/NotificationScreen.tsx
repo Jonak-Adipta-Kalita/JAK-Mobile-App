@@ -3,11 +3,11 @@ import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { NotificationTopTab } from "../../../navigation/TopTabNavigator";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationPropsStack } from "../../../../@types/navigation";
+import { DrawerStackNavigationProps } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
 
 const NotificationScreen = () => {
-    const navigation = useNavigation<NavigationPropsStack>();
+    const navigation = useNavigation<DrawerStackNavigationProps>();
 
     useLayoutEffect(() => {
         navigation.setOptions({

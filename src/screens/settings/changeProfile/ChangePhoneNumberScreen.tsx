@@ -11,12 +11,12 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { NavigationPropsDrawer } from "../../../../@types/navigation";
+import { DrawerStackNavigationProps } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
 import { useDocument } from "react-firebase-hooks/firestore";
 
 const ChangePhoneNumberScreen = () => {
-    const navigation = useNavigation<NavigationPropsDrawer>();
+    const navigation = useNavigation<DrawerStackNavigationProps>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [userData, userDataLoading, userDataError] = useDocument(
         doc(db, "users", user?.uid!)

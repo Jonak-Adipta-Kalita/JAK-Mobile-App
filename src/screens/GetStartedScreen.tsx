@@ -4,11 +4,11 @@ import { View, Image } from "react-native";
 import { Button } from "@rneui/themed";
 import globalStyles from "../globalStyles";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationPropsStack } from "../../@types/navigation";
+import { DrawerStackNavigationProps } from "../../@types/navigation";
 import images from "../images";
 
 const GetStartedScreen = () => {
-    const navigation = useNavigation<NavigationPropsStack>();
+    const navigation = useNavigation<DrawerStackNavigationProps>();
 
     useLayoutEffect(() => {
         navigation.setOptions({

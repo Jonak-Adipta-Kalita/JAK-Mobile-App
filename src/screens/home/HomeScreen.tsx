@@ -19,10 +19,10 @@ import globalStyles from "../../globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationPropsDrawer } from "../../../@types/navigation";
+import { DrawerStackNavigationProps } from "../../../@types/navigation";
 
 const HomeScreen = () => {
-    const navigation = useNavigation<NavigationPropsDrawer>();
+    const navigation = useNavigation<DrawerStackNavigationProps>();
     const [user, userLoading, userError] = useAuthState(auth);
     const scheme = useColorScheme();
 

@@ -12,11 +12,11 @@ import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
-import { NavigationPropsDrawer } from "../../../../@types/navigation";
+import { DrawerStackNavigationProps } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
 
 const ChangeNameScreen = () => {
-    const navigation = useNavigation<NavigationPropsDrawer>();
+    const navigation = useNavigation<DrawerStackNavigationProps>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");

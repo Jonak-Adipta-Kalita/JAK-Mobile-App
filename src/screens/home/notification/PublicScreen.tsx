@@ -7,10 +7,10 @@ import Notification from "../../../components/Notification";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { collection, orderBy, query } from "firebase/firestore";
-import { NavigationPropsTopTab } from "../../../../@types/navigation";
+import { TopTabDrawerStackNavigationProps } from "../../../../@types/navigation";
 
 const PublicScreen = () => {
-    const navigation = useNavigation<NavigationPropsTopTab>();
+    const navigation = useNavigation<TopTabDrawerStackNavigationProps>();
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Public!!",

@@ -21,7 +21,7 @@ import {
     useColorScheme,
     ScrollView,
 } from "react-native";
-import { NavigationPropsStack } from "../../../../@types/navigation";
+import { DrawerStackNavigationProps } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
 import LoadingIndicator from "../../../components/Loading";
 import { auth, db } from "../../../firebase";
@@ -33,7 +33,7 @@ import pushPrivateNotification from "../../../notify/privateNotification";
 import { Entypo } from "@expo/vector-icons";
 
 const TodoScreen = () => {
-    const navigation = useNavigation<NavigationPropsStack>();
+    const navigation = useNavigation<DrawerStackNavigationProps>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [todosFetched, firestoreLoading, firestoreError] = useCollection(
         query(

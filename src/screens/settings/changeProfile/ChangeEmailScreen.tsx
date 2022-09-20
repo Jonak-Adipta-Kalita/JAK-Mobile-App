@@ -12,7 +12,7 @@ import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { updateEmail } from "firebase/auth";
-import { NavigationPropsDrawer } from "../../../../@types/navigation";
+import { DrawerStackNavigationProps } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
 
 const ChangeEmailScreen = () => {

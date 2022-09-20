@@ -3,14 +3,14 @@ import React from "react";
 import globalStyles from "../globalStyles";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationPropsStack } from "../../@types/navigation";
+import { DrawerStackNavigationProps } from "../../@types/navigation";
 
 interface Props {
     color?: string;
 }
 
 const ArrowGoBack = ({ color }: Props) => {
-    const navigation = useNavigation<NavigationPropsStack>();
+    const navigation = useNavigation<DrawerStackNavigationProps>();
 
     return (
         <SafeAreaView className="flex-1">
