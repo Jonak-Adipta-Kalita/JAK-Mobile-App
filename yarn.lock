@@ -7725,7 +7725,7 @@ hosted-git-info@^3.0.2:
   dependencies:
     lru-cache "^6.0.0"
 
-hosted-git-info@^5.0.0:
+hosted-git-info@^5.0.0, hosted-git-info@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-5.1.0.tgz#9786123f92ef3627f24abc3f15c20d98ec4a6594"
   integrity sha512-Ek+QmMEqZF8XrbFdwoDjSbm7rT23pCgEMOJmz6GPk/s4yH//RQfNPArhIxbguNxROq/+5lNBwCDHMhA903Kx1Q==
@@ -10766,10 +10766,10 @@ npm-bundled@^2.0.0:
   dependencies:
     npm-normalize-package-bin "^2.0.0"
 
-npm-check-updates@^16.0.6:
-  version "16.0.6"
-  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-16.0.6.tgz#f3d2ffdca9ca8f45d57a9360cb94728a1fd8d29b"
-  integrity sha512-lASxdKqOGAkxriOLuscNM93V3L92tU/9uWepyqeKN7UPtd6oPKM/J/CYg0ll4Mxm2YvqzB21IaGHJq0vsHm3Ag==
+npm-check-updates@^16.3.4:
+  version "16.3.4"
+  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-16.3.4.tgz#5084530a6e035ab11e83c25ba9d94d3690043d78"
+  integrity sha512-PDkd+KRhgzsB01c9dCo8O/Aad98ODb7aRxPamg+QOUXEdi/CcbItynxdCvHx9r1AXoMm0w1zixHeUZf8ktBwqQ==
   dependencies:
     chalk "^5.0.1"
     cli-table "^0.3.11"
@@ -10779,13 +10779,13 @@ npm-check-updates@^16.0.6:
     fp-and-or "^0.1.3"
     get-stdin "^8.0.0"
     globby "^11.0.4"
-    hosted-git-info "^5.0.0"
+    hosted-git-info "^5.1.0"
     json-parse-helpfulerror "^1.0.3"
     jsonlines "^0.1.1"
     lodash "^4.17.21"
     minimatch "^5.1.0"
     p-map "^4.0.0"
-    pacote "^13.6.1"
+    pacote "^13.6.2"
     parse-github-url "^1.0.2"
     progress "^2.0.3"
     prompts-ncu "^2.5.1"
@@ -10796,6 +10796,7 @@ npm-check-updates@^16.0.6:
     semver-utils "^1.1.4"
     source-map-support "^0.5.21"
     spawn-please "^1.0.0"
+    untildify "^4.0.0"
     update-notifier "^6.0.2"
     yaml "^2.1.1"
 
@@ -11280,7 +11281,7 @@ package-json@^8.1.0:
     registry-url "^6.0.0"
     semver "^7.3.7"
 
-pacote@^13.6.1:
+pacote@^13.6.2:
   version "13.6.2"
   resolved "https://registry.yarnpkg.com/pacote/-/pacote-13.6.2.tgz#0d444ba3618ab3e5cd330b451c22967bbd0ca48a"
   integrity sha512-Gu8fU3GsvOPkak2CkbojR7vjs3k3P9cA6uazKTHdsdV0gpCEQq2opelnEv30KRQWgVzP5Vd/5umjcedma3MKtg==
@@ -14071,7 +14072,7 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-untildify@4.0.0:
+untildify@4.0.0, untildify@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/untildify/-/untildify-4.0.0.tgz#2bc947b953652487e4600949fb091e3ae8cd919b"
   integrity sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==
