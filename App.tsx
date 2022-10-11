@@ -37,7 +37,7 @@ const AppChildren = () => {
     const scheme = useColorScheme();
 
     useEffect(() => {
-        registerForPushNotifications(user ? user?.uid : null).then((token) => {
+        registerForPushNotifications(user ? user?.uid! : null).then((token) => {
             dispatch(setToken(token!));
         });
     }, []);

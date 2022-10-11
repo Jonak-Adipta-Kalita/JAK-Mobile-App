@@ -12,9 +12,6 @@ const Tab = createMaterialTopTabNavigator<TopTabScreensParamList>();
 const colorScheme = Appearance.getColorScheme();
 
 const tabBarOptions: MaterialTopTabNavigationOptions = {
-    tabBarLabelStyle: {
-        color: colorScheme === "dark" ? "#fff" : "#000000",
-    },
     tabBarActiveTintColor: colorScheme === "dark" ? "#fff" : "#000000",
 };
 

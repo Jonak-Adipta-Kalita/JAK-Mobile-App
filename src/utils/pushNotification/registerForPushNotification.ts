@@ -1,7 +1,9 @@
 import { Platform } from "react-native";
 import * as Notifications from "expo-notifications";
 
-const registerForPushNotifications = async (userUID: string) => {
+const registerForPushNotifications = async (
+    userUID: string | null | undefined
+) => {
     if (Platform.OS === "android" || Platform.OS === "ios") {
         const { status: existingStatus } =
             await Notifications.getPermissionsAsync();
