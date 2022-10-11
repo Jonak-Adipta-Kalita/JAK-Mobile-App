@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Appearance } from "react-native";
 import {
     createStackNavigator,
     StackNavigationOptions,
@@ -18,6 +19,7 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 import { StackScreenParamList } from "../../@types/navigation";
 
 const Stack = createStackNavigator<StackScreenParamList>();
+const colorScheme = Appearance.getColorScheme();
 
 const globalStackScreenOptions: StackNavigationOptions = {
     headerBackTitle: "Back",
@@ -26,9 +28,14 @@ const globalStackScreenOptions: StackNavigationOptions = {
 
 const stackScreenOption1: StackNavigationOptions = {
     ...globalStackScreenOptions,
-    headerStyle: { backgroundColor: "#fff" },
-    headerTitleStyle: { color: "black", fontFamily: "OtomanopeeOne" },
-    headerTintColor: "black",
+    headerStyle: {
+        backgroundColor: colorScheme === "dark" ? "#000000" : "#fff",
+    },
+    headerTitleStyle: {
+        color: colorScheme === "dark" ? "#fff" : "#000000",
+        fontFamily: "OtomanopeeOne",
+    },
+    headerTintColor: colorScheme === "dark" ? "#fff" : "#000000",
 };
 
 const stackScreenOption2: StackNavigationOptions = {
