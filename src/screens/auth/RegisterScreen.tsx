@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
 import { View, TouchableOpacity } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import { Button, Input, Text } from "@rneui/themed";
 import {
     Feather,
@@ -26,6 +25,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
 import ArrowGoBack from "../../components/ArrowGoBack";
+import StatusBar from "../../components/StatusBar";
 
 const RegisterScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -115,7 +115,7 @@ const RegisterScreen = () => {
 
     return (
         <View className="flex-1 items-center justify-center p-[10px]">
-            <StatusBar style="auto" />
+            <StatusBar />
             <Text h3 style={[globalStyles.text, { marginBottom: 50 }]}>
                 Create an Account
             </Text>

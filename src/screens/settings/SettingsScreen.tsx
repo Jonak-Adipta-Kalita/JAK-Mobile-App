@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
 import { View, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../../firebase";
@@ -18,6 +17,7 @@ import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
 import ArrowGoBack from "../../components/ArrowGoBack";
 import { useDocument } from "react-firebase-hooks/firestore";
+import StatusBar from "../../components/StatusBar";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -174,7 +174,7 @@ const SettingsScreen = () => {
 
     return (
         <View className="mb-[10px] flex-1 flex-col">
-            <StatusBar style="auto" />
+            <StatusBar />
             <ScrollView>
                 <View className="mt-[30px] items-center">
                     {user?.photoURL ? (

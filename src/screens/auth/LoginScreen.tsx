@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import {
     Text,
     View,
@@ -26,6 +25,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
 import ArrowGoBack from "../../components/ArrowGoBack";
+import StatusBar from "../../components/StatusBar";
 
 const LoginScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -87,7 +87,7 @@ const LoginScreen = () => {
 
     return (
         <View className="flex-1 items-center p-[10px]">
-            <StatusBar style="auto" />
+            <StatusBar />
             <View
                 style={{
                     width: 300,

@@ -1,11 +1,11 @@
 import React, { useLayoutEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import { View, Image } from "react-native";
 import { Button } from "@rneui/themed";
 import globalStyles from "../globalStyles";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerStackNavigationProps } from "../../@types/navigation";
 import images from "../images";
+import StatusBar from "../components/StatusBar";
 
 const GetStartedScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -26,7 +26,7 @@ const GetStartedScreen = () => {
 
     return (
         <View>
-            <StatusBar style="auto" />
+            <StatusBar />
             <View className="relative h-screen p-[10px] px-[20px]">
                 <View className="mt-[20px] flex items-center justify-center">
                     <Image

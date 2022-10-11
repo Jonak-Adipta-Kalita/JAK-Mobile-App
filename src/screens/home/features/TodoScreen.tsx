@@ -31,6 +31,7 @@ import { Card, Input } from "@rneui/themed";
 import globalStyles from "../../../globalStyles";
 import pushPrivateNotification from "../../../notify/privateNotification";
 import { Entypo } from "@expo/vector-icons";
+import StatusBar from "../../../components/StatusBar";
 
 const TodoScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -114,6 +115,7 @@ const TodoScreen = () => {
 
     return (
         <SafeAreaView className="flex-1">
+            <StatusBar />
             {todosFetched?.docs.length === 0 ? (
                 <Text className="text-bold mt-5 self-center text-lg">
                     No Todo(s)!! Press the Plus to create!!

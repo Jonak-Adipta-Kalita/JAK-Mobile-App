@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import {
     View,
     SafeAreaView,
@@ -20,6 +19,7 @@ import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
+import StatusBar from "../../components/StatusBar";
 
 const HomeScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -94,7 +94,7 @@ const HomeScreen = () => {
 
     return (
         <View className="mb-[10px]">
-            <StatusBar style="auto" />
+            <StatusBar />
             {user ? (
                 <ScrollView>
                     <Card>

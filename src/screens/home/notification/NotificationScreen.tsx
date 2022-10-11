@@ -1,10 +1,10 @@
 import React, { useLayoutEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { NotificationTopTab } from "../../../navigation/TopTabNavigator";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerStackNavigationProps } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
+import StatusBar from "../../../components/StatusBar";
 
 const NotificationScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -18,7 +18,7 @@ const NotificationScreen = () => {
 
     return (
         <View className="mb-[10px]">
-            <StatusBar style="auto" />
+            <StatusBar />
             <View style={{ height: "100%" }}>
                 <NotificationTopTab />
             </View>

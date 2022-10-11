@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { Input, Button } from "@rneui/themed";
 import { auth, db } from "../../../firebase";
@@ -14,6 +13,7 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { DrawerStackNavigationProps } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
 import { useDocument } from "react-firebase-hooks/firestore";
+import StatusBar from "../../../components/StatusBar";
 
 const ChangePhoneNumberScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -113,7 +113,7 @@ const ChangePhoneNumberScreen = () => {
 
     return (
         <View className="mt-[20px] flex-1 items-center p-[10px]">
-            <StatusBar style="auto" />
+            <StatusBar />
             <View className="w-[350px]">
                 <Input
                     placeholder="Phone Number (Use Country Code)"
