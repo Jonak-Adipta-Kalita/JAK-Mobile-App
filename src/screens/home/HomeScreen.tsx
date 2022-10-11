@@ -62,7 +62,11 @@ const HomeScreen = () => {
                         style={globalStyles.headerIcon}
                         onPress={navigation.openDrawer}
                     >
-                        <FontAwesome5 name="bars" size={24} />
+                        <FontAwesome5
+                            name="bars"
+                            size={24}
+                            color={scheme === "dark" ? "#fff" : "#000000"}
+                        />
                     </TouchableOpacity>
                 </SafeAreaView>
             ),
@@ -73,7 +77,11 @@ const HomeScreen = () => {
                             style={globalStyles.headerIcon}
                             onPress={() => navigation.navigate("Notification")}
                         >
-                            <Ionicons name="notifications-outline" size={24} />
+                            <Ionicons
+                                name="notifications-outline"
+                                size={24}
+                                color={scheme === "dark" ? "#fff" : "#000000"}
+                            />
                         </TouchableOpacity>
                     )}
                 </SafeAreaView>

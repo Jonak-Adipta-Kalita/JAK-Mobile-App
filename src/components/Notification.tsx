@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, useColorScheme, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Card } from "@rneui/themed";
 import moment from "moment";
 import globalStyles from "../globalStyles";
@@ -19,7 +19,6 @@ interface Props {
 
 const Notification = ({ id, title, message, timestamp, canDelete }: Props) => {
     const [user] = useAuthState(auth);
-    const scheme = useColorScheme();
 
     const removeNotification = async () => {
         await deleteDoc(doc(db, "users", user?.uid!, "notifications", id));
@@ -35,13 +34,7 @@ const Notification = ({ id, title, message, timestamp, canDelete }: Props) => {
                             className="absolute right-0"
                             onPress={removeNotification}
                         >
-                            <Entypo
-                                name="cross"
-                                size={24}
-                                color={`${
-                                    scheme === "dark" ? "white" : "black"
-                                }`}
-                            />
+                            <Entypo name="cross" size={24} color="black" />
                         </TouchableOpacity>
                     )}
                 </View>

@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { View, ScrollView, Text } from "react-native";
+import { View, ScrollView, Text, useColorScheme } from "react-native";
 import { db, auth } from "../../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import LoadingIndicator from "../../../components/Loading";
@@ -13,6 +13,7 @@ import { TopTabDrawerStackNavigationProps } from "../../../../@types/navigation"
 const PrivateScreen = () => {
     const navigation = useNavigation<TopTabDrawerStackNavigationProps>();
     const [user, userLoading, userError] = useAuthState(auth);
+    const scheme = useColorScheme();
 
     const [notifications, firestoreLoading, firestoreError] = useCollection(
         query(
@@ -43,7 +44,11 @@ const PrivateScreen = () => {
     return (
         <View>
             {notifications?.docs.length === 0 ? (
-                <Text className="text-bold mt-5 self-center text-lg">
+                <Text
+                    className={`text-bold mt-5 self-center text-lg ${
+                        scheme === "dark" ? "text-white" : "text-black"
+                    }`}
+                >
                     No Notification(s)!!
                 </Text>
             ) : (

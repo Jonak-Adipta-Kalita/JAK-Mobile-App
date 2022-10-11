@@ -117,15 +117,33 @@ const TodoScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             {todosFetched?.docs.length === 0 ? (
-                <Text className="text-bold mt-5 self-center text-lg">
+                <Text
+                    className="text-bold mt-5 self-center text-lg"
+                    style={globalStyles.text}
+                >
                     No Todo(s)!! Press the Plus to create!!
                 </Text>
             ) : (
                 <ScrollView>
                     {todos?.map(({ id, data }) => (
-                        <Card key={id}>
+                        <Card
+                            key={id}
+                            containerStyle={{
+                                backgroundColor:
+                                    scheme === "dark" ? "#000000" : "#fff",
+                            }}
+                        >
                             <View className="flex flex-row items-center justify-between">
-                                <Text>{data.value}</Text>
+                                <Text
+                                    style={{
+                                        color:
+                                            scheme === "dark"
+                                                ? "#fff"
+                                                : "#000000",
+                                    }}
+                                >
+                                    {data.value}
+                                </Text>
                                 <TouchableOpacity
                                     onPress={() =>
                                         deleteTodo(data.id, data.value)
@@ -134,11 +152,11 @@ const TodoScreen = () => {
                                     <Entypo
                                         name="cross"
                                         size={24}
-                                        color={`${
+                                        color={
                                             scheme === "dark"
-                                                ? "white"
-                                                : "black"
-                                        }`}
+                                                ? "#fff"
+                                                : "#000000"
+                                        }
                                     />
                                 </TouchableOpacity>
                             </View>
@@ -156,7 +174,9 @@ const TodoScreen = () => {
             >
                 <View className="mt-[22px] flex-1 items-center justify-center">
                     <View
-                        className="m-[20px] items-center rounded-[20px] bg-white p-[35px] pt-[-20px]"
+                        className={`m-[20px] items-center rounded-[20px] ${
+                            scheme === "dark" ? "bg-black" : "bg-white"
+                        } p-[35px] pt-[-20px]`}
                         style={{
                             shadowColor: "#000",
                             shadowOffset: {
@@ -205,10 +225,16 @@ const TodoScreen = () => {
             </Modal>
             <View className="absolute bottom-10 right-10">
                 <TouchableOpacity
-                    className="rounded-full border-8 border-black"
+                    className={`rounded-full border-8 ${
+                        scheme === "dark" ? "border-white" : "border-black"
+                    }`}
                     onPress={() => setModalVisible(true)}
                 >
-                    <AntDesign name="plus" size={60} color="black" />
+                    <AntDesign
+                        name="plus"
+                        size={60}
+                        color={scheme === "dark" ? "#fff" : "#000000"}
+                    />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
