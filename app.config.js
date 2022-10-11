@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 
-const __DEV__ = process.env.PRODUCTION !== "true";
+const PACKAGE_NAME = process.env.PACKAGE_NAME;
 const VERSION = "0.0.1";
 
 export default {
@@ -11,7 +11,7 @@ export default {
     version: VERSION,
     orientation: "portrait",
     icon: "./assets/images/icon.png",
-    scheme: __DEV__ ? "host.exp.exponent" : "com.beastnighttv.jakmobileapp",
+    scheme: PACKAGE_NAME,
     splash: {
         image: "./assets/images/splash.png",
         resizeMode: "contain",
@@ -31,13 +31,9 @@ export default {
     ios: {
         usesAppleSignIn: true,
         supportsTablet: true,
-        bundleIdentifier: __DEV__
-            ? "host.exp.exponent"
-            : "com.beastnighttv.jakmobileapp",
+        bundleIdentifier: PACKAGE_NAME,
         buildNumber: VERSION,
-        googleServicesFile: __DEV__
-            ? "./google_services_ios-dev.plist"
-            : "./google_services_ios-prod.plist",
+        googleServicesFile: "./google_services_ios.plist",
     },
     android: {
         permissions: [],
@@ -45,11 +41,7 @@ export default {
             foregroundImage: "./assets/images/adaptive-icon.png",
             backgroundColor: "#FFFFFF",
         },
-        package: __DEV__
-            ? "host.exp.exponent"
-            : "com.beastnighttv.jakmobileapp",
-        googleServicesFile: __DEV__
-            ? "./google_services_android-dev.json"
-            : "./google_services_android-prod.json",
+        package: PACKAGE_NAME,
+        googleServicesFile: "./google_services_android.json",
     },
 };

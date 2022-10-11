@@ -16,7 +16,7 @@ import { DrawerStackNavigationProps } from "../../../../@types/navigation";
 import ArrowGoBack from "../../../components/ArrowGoBack";
 
 const ChangeEmailScreen = () => {
-    const navigation = useNavigation<NavigationPropsDrawer>();
+    const navigation = useNavigation<DrawerStackNavigationProps>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");

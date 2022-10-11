@@ -16,10 +16,7 @@ dist/
 !assets/loginButtons/android
 !assets/loginButtons/ios
 
-google_services_ios-prod.plist
-google_services_ios-dev.plist
-google_services_android-dev.json
-google_services_android-prod.json
+google_services*
 
 *.log
 

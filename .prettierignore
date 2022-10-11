@@ -10,6 +10,5 @@ android/
 ios/
 build/
 public/
-google-services.json
-GoogleService-Info.plist
+google_services*
 eas.json
