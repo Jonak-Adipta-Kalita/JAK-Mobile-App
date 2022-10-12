@@ -1,4 +1,6 @@
 declare module "@env" {
+    export const PACKAGE_NAME: string;
+
     // FIREBASE
     export const FIREBASE_API_KEY: string;
     export const FIREBASE_AUTH_DOMAIN: string;

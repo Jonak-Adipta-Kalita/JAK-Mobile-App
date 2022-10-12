@@ -10,12 +10,15 @@ import {
     EXPO_CLIENT_ID,
     GOOGLE_ANDROID_CLIENT_ID,
     GOOGLE_IOS_CLIENT_ID,
+    PACKAGE_NAME,
 } from "@env";
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { auth, db } from "../firebase";
 import pushPublicNotification from "../notify/publicNotification";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import pushPrivateNotification from "../notify/privateNotification";
+import { makeRedirectUri } from "expo-auth-session";
+import Constants from "expo-constants";
 
 interface Props {
     brand: "google" | "apple";
@@ -26,6 +29,14 @@ const LoginButton = ({ brand }: Props) => {
         androidClientId: GOOGLE_ANDROID_CLIENT_ID,
         iosClientId: GOOGLE_IOS_CLIENT_ID,
         expoClientId: EXPO_CLIENT_ID,
+        redirectUri: makeRedirectUri(
+            Constants.appOwnership === "expo"
+                ? {
+                      useProxy: true,
+                      projectNameForProxy: `@${Constants.expoConfig?.owner}/${Constants.expoConfig?.slug}`,
+                  }
+                : { native: `${PACKAGE_NAME}://` }
+        ),
     });
 
     let imageFile;
@@ -47,14 +58,14 @@ const LoginButton = ({ brand }: Props) => {
     const signIn = async () => {
         if (brand === "google") {
             await googlePromptAsync({ showInRecents: true })
-                .then(async (logginResult) => {
+                .then(async (loginResult) => {
                     if (
-                        logginResult?.type === "success" &&
-                        logginResult?.authentication?.accessToken
+                        loginResult?.type === "success" &&
+                        loginResult?.authentication?.accessToken
                     ) {
                         const credentials = GoogleAuthProvider.credential(
-                            logginResult?.authentication?.idToken,
-                            logginResult?.authentication?.accessToken
+                            loginResult?.authentication?.idToken,
+                            loginResult?.authentication?.accessToken
                         );
                         await signInWithCredential(auth, credentials).then(
                             async (authUser) => {
