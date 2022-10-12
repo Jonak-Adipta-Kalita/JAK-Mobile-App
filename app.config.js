@@ -3,6 +3,7 @@
 require("dotenv").config();
 
 const PACKAGE_NAME = process.env.PACKAGE_NAME;
+const PROJECT_ID = process.env.PROJECT_ID;
 const VERSION = "0.0.1";
 
 export default {
@@ -45,5 +46,10 @@ export default {
         },
         package: PACKAGE_NAME,
         googleServicesFile: "./google_services_android.json",
+    },
+    extra: {
+        eas: {
+            projectId: PROJECT_ID,
+        },
     },
 };
