@@ -82,7 +82,7 @@
         "@types/react": "~18.0.14",
         "@types/react-native": "~0.69.1",
         "@types/react-test-renderer": "^18.0.0",
-        "@typescript-eslint/eslint-plugin": "^5.35.1",
+        "@typescript-eslint/eslint-plugin": "^5.46.0",
         "@typescript-eslint/parser": "^5.35.1",
         "axios": "^0.27.2",
         "dotenv": "^16.0.2",
