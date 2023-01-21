@@ -87,7 +87,7 @@
         "axios": "^0.27.2",
         "dotenv": "^16.0.2",
         "eas-cli": "^2.1.0",
-        "eslint": "^8.23.0",
+        "eslint": "^8.32.0",
         "eslint-plugin-react": "^7.31.1",
         "firebase-tools": "^11.9.0",
         "husky": "^8.0.1",
