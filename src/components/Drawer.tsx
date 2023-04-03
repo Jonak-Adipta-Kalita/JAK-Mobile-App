@@ -44,7 +44,7 @@ const DisplayUserData = ({
 
     return (
         <Animated.View style={{ transform: [{ translateX }] }}>
-            <View className="mt-[20px] mb-[-15px] flex-row border-b-[2px] border-b-[#818181] p-[20px] pb-[20px]">
+            <View className="mb-[-15px] mt-[20px] flex-row border-b-[2px] border-b-[#818181] p-[20px] pb-[20px]">
                 <TouchableOpacity activeOpacity={0.5}>
                     <Avatar
                         rounded

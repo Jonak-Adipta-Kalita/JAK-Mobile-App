@@ -198,11 +198,12 @@ const TodoScreen = () => {
                         />
                         <View className="flex flex-row space-x-10">
                             <TouchableOpacity
-                                className="rounded-[20px] bg-[#2196F3] p-[10px]"
+                                className="rounded-[20px] bg-[#2196F3] p-[10px] disabled:bg-gray-400"
                                 style={{
                                     elevation: 2,
                                 }}
                                 onPress={createTodo}
+                                disabled={!todoText}
                             >
                                 <Text className="items-center font-bold text-white">
                                     Create
