@@ -55,7 +55,6 @@ const HomeScreen = () => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Welcome!!",
             headerLeft: () => (
                 <SafeAreaView className="flex-1">
                     <TouchableOpacity

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import { View, Image } from "react-native";
 import { Button } from "@rneui/themed";
 import globalStyles from "../globalStyles";
@@ -9,20 +9,6 @@ import StatusBar from "../components/StatusBar";
 
 const GetStartedScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Get Started!!",
-            headerStyle: {
-                backgroundColor: "#3f7de0",
-            },
-            headerTitleStyle: {
-                color: "white",
-            },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
-        });
-    }, [navigation]);
 
     return (
         <View>

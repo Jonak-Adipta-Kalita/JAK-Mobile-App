@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Button, Input, Text } from "@rneui/themed";
 import {
@@ -17,17 +17,13 @@ import pushPrivateNotification from "../../notify/privateNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import images from "../../images";
-import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { DrawerStackNavigationProps } from "../../../@types/navigation";
-import ArrowGoBack from "../../components/ArrowGoBack";
 import StatusBar from "../../components/StatusBar";
 
 const RegisterScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
 
@@ -37,13 +33,6 @@ const RegisterScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const avatar: string = images.avatar;
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Register!!",
-            headerLeft: () => <ArrowGoBack color="white" />,
-        });
-    }, [navigation]);
 
     const registerEmail = () => {
         if (

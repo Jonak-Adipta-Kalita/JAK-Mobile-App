@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Text,
     View,
@@ -23,7 +23,6 @@ import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
-import ArrowGoBack from "../../components/ArrowGoBack";
 import StatusBar from "../../components/StatusBar";
 
 const LoginScreen = () => {
@@ -70,13 +69,6 @@ const LoginScreen = () => {
             );
         }
     };
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Login!!",
-            headerLeft: () => <ArrowGoBack color="white" />,
-        });
-    }, [navigation]);
 
     return (
         <View className="flex-1 items-center p-[10px]">

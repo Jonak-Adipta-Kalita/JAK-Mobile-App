@@ -14,7 +14,6 @@ import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
-import ArrowGoBack from "../../components/ArrowGoBack";
 import { useDocument } from "react-firebase-hooks/firestore";
 import StatusBar from "../../components/StatusBar";
 
@@ -122,8 +121,6 @@ const SettingsScreen = () => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Your Profile!!",
-            headerLeft: () => <ArrowGoBack />,
             headerRight: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     {!user?.emailVerified && (

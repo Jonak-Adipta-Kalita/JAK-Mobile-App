@@ -17,6 +17,7 @@ import ChangePhoneNumberScreen from "../screens/settings/changeProfile/ChangePho
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 import { StackScreenParamList } from "../../@types/navigation";
+import ArrowGoBack from "../components/ArrowGoBack";
 
 const Stack = createStackNavigator<StackScreenParamList>();
 const colorScheme = Appearance.getColorScheme();
@@ -66,12 +67,46 @@ const HomeStack = () => {
             initialRouteName={isFirstLaunch ? "GetStarted" : "Home"}
         >
             {isFirstLaunch && (
-                <Stack.Screen name="GetStarted" component={GetStartedScreen} />
+                <Stack.Screen
+                    name="GetStarted"
+                    component={GetStartedScreen}
+                    options={{
+                        title: "Get Started",
+                        headerStyle: {
+                            backgroundColor: "#3f7de0",
+                        },
+                        headerTitleStyle: {
+                            color: "white",
+                        },
+                        headerTintColor: "white",
+                        headerTitleAlign: "center",
+                    }}
+                />
             )}
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Notification" component={NotificationScreen} />
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    title: "Welcome",
+                }}
+            />
+            <Stack.Screen
+                name="Notification"
+                component={NotificationScreen}
+                options={{
+                    title: "Your Notifications",
+                    headerLeft: () => <ArrowGoBack />,
+                }}
+            />
             <Stack.Group>
-                <Stack.Screen name="Todo" component={TodoScreen} />
+                <Stack.Screen
+                    name="Todo"
+                    component={TodoScreen}
+                    options={{
+                        title: "Todo(s)",
+                        headerLeft: () => <ArrowGoBack />,
+                    }}
+                />
             </Stack.Group>
         </Stack.Navigator>
     );
@@ -83,8 +118,22 @@ const AuthenticationStack = () => {
             screenOptions={stackScreenOption2}
             initialRouteName="Login"
         >
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{
+                    title: "Login",
+                    headerLeft: () => <ArrowGoBack color="white" />,
+                }}
+            />
+            <Stack.Screen
+                name="Register"
+                component={RegisterScreen}
+                options={{
+                    title: "Register",
+                    headerLeft: () => <ArrowGoBack color="white" />,
+                }}
+            />
         </Stack.Navigator>
     );
 };
@@ -95,7 +144,14 @@ const SettingsStack = () => {
             screenOptions={stackScreenOption1}
             initialRouteName="Settings"
         >
-            <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen
+                name="Settings"
+                component={SettingsScreen}
+                options={{
+                    title: "Your Profile",
+                    headerLeft: () => <ArrowGoBack />,
+                }}
+            />
             <Stack.Group>
                 <Stack.Screen name="ChangeName" component={ChangeNameScreen} />
                 <Stack.Screen

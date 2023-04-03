@@ -9,7 +9,7 @@ import {
     serverTimestamp,
     setDoc,
 } from "firebase/firestore";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
@@ -22,7 +22,6 @@ import {
     ScrollView,
 } from "react-native";
 import { DrawerStackNavigationProps } from "../../../../@types/navigation";
-import ArrowGoBack from "../../../components/ArrowGoBack";
 import LoadingIndicator from "../../../components/Loading";
 import { auth, db } from "../../../firebase";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
@@ -48,13 +47,6 @@ const TodoScreen = () => {
         []
     );
     const scheme = useColorScheme();
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Todo(s)!!",
-            headerLeft: () => <ArrowGoBack />,
-        });
-    }, [navigation]);
 
     useEffect(() => {
         setTodos(
