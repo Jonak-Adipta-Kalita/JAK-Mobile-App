@@ -57,7 +57,7 @@ const SettingsScreen = () => {
             aspect: [4, 3],
         });
         try {
-            if (!pickerResult.cancelled) {
+            if (!pickerResult.canceled) {
                 const uploadURL = await uploadImageAsync(
                     pickerResult.uri,
                     user?.uid!
