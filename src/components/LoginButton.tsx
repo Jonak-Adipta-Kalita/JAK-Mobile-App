@@ -14,7 +14,6 @@ import {
 } from "@env";
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { auth, db } from "../firebase";
-import pushPublicNotification from "../notify/publicNotification";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import pushPrivateNotification from "../notify/privateNotification";
 import { makeRedirectUri } from "expo-auth-session";
@@ -74,11 +73,6 @@ const LoginButton = ({ brand }: Props) => {
                                 );
 
                                 if (userFetched.exists()) {
-                                    await pushPublicNotification({
-                                        title: "Member came back to the Ligtning Family!!",
-                                        message: `${authUser.user.displayName} came back to the Ligtning Family!! Yippie!!`,
-                                        timestamp: serverTimestamp(),
-                                    });
                                     await pushPrivateNotification(
                                         authUser.user.uid,
                                         {
@@ -95,38 +89,29 @@ const LoginButton = ({ brand }: Props) => {
                                             message: `Welcome ${authUser.user.displayName}. Nice to meet you!!`,
                                             timestamp: serverTimestamp(),
                                         }
-                                    )
-                                        .then(() => {
-                                            setDoc(
-                                                doc(
-                                                    db,
-                                                    "users",
-                                                    authUser.user.uid!
-                                                ),
-                                                {
-                                                    uid: authUser.user.uid,
-                                                    email: authUser.user.email,
-                                                    displayName:
-                                                        authUser.user
-                                                            .displayName,
-                                                    photoURL:
-                                                        authUser.user.photoURL,
-                                                    phoneNumber:
-                                                        authUser.user
-                                                            .phoneNumber || "",
-                                                    emailVerified:
-                                                        authUser?.user
-                                                            ?.emailVerified,
-                                                }
-                                            );
-                                        })
-                                        .then(() => {
-                                            pushPublicNotification({
-                                                title: "New member in the Ligtning Family!!",
-                                                message: `${authUser.user.displayName} Joined the Ligtning Family!! Yippie!!`,
-                                                timestamp: serverTimestamp(),
-                                            });
-                                        });
+                                    ).then(() => {
+                                        setDoc(
+                                            doc(
+                                                db,
+                                                "users",
+                                                authUser.user.uid!
+                                            ),
+                                            {
+                                                uid: authUser.user.uid,
+                                                email: authUser.user.email,
+                                                displayName:
+                                                    authUser.user.displayName,
+                                                photoURL:
+                                                    authUser.user.photoURL,
+                                                phoneNumber:
+                                                    authUser.user.phoneNumber ||
+                                                    "",
+                                                emailVerified:
+                                                    authUser?.user
+                                                        ?.emailVerified,
+                                            }
+                                        );
+                                    });
                                 }
                             }
                         );

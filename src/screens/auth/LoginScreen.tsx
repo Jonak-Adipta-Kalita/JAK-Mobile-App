@@ -16,7 +16,6 @@ import {
 } from "../../redux/slices/showPasswordSlice";
 import LoginButton from "../../components/LoginButton";
 import pushPrivateNotification from "../../notify/privateNotification";
-import pushPublicNotification from "../../notify/publicNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch } from "../../hooks/useDispatch";
@@ -45,16 +44,10 @@ const LoginScreen = () => {
     const loginEmail = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((authUser) => {
-                pushPublicNotification({
-                    title: "Member came back to the Ligtning Family!!",
-                    message: `${email} came back to the Ligtning Family!! Yippie!!`,
+                pushPrivateNotification(authUser.user.uid!, {
+                    title: "Welcome Back!!",
+                    message: `Welcome back ${email}. Nice to meet you again!!`,
                     timestamp: serverTimestamp(),
-                }).then(() => {
-                    pushPrivateNotification(authUser.user.uid!, {
-                        title: "Welcome Back!!",
-                        message: `Welcome back ${email}. Nice to meet you again!!`,
-                        timestamp: serverTimestamp(),
-                    });
                 });
             })
             .catch((error) => {

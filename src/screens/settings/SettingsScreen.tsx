@@ -5,13 +5,12 @@ import { auth, db, storage } from "../../firebase";
 import { Avatar, Button, ListItem } from "@rneui/themed";
 import globalStyles from "../../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
-import pushPublicNotification from "../../notify/publicNotification";
 import LoadingIndicator from "../../components/Loading";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
-import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
@@ -72,18 +71,9 @@ const SettingsScreen = () => {
     };
 
     const signOut = () => {
-        auth.signOut()
-            .then(() =>
-                pushPublicNotification({
-                    title: "Member left the Ligtning Family!!",
-                    message:
-                        "Someone left the Ligtning Family!! But I am sure He/She will return for sure!!",
-                    timestamp: serverTimestamp(),
-                })
-            )
-            .catch((error) => {
-                errorAlertShower(error);
-            });
+        auth.signOut().catch((error) => {
+            errorAlertShower(error);
+        });
     };
 
     const deleteAccount = () => {
@@ -91,13 +81,6 @@ const SettingsScreen = () => {
         user?.delete()
             .then(() => {
                 deleteDoc(doc(db, "users", userUID!));
-            })
-            .then(() => {
-                pushPublicNotification({
-                    title: "Someone left us Forever!!",
-                    message: "Someone left the Family forever!! Noooooooo!!",
-                    timestamp: serverTimestamp(),
-                });
             })
             .catch((error) => {
                 errorAlertShower(error);

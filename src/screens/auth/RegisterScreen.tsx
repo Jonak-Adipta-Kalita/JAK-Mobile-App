@@ -14,7 +14,6 @@ import {
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
 import pushPrivateNotification from "../../notify/privateNotification";
-import pushPublicNotification from "../../notify/publicNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import images from "../../images";
@@ -97,13 +96,6 @@ const RegisterScreen = () => {
                                 photoURL: avatar,
                                 phoneNumber: phoneNumber,
                                 emailVerified: authUser?.user?.emailVerified,
-                            });
-                        })
-                        .then(() => {
-                            pushPublicNotification({
-                                title: "New member in the Ligtning Family!!",
-                                message: `${email} Joined the Ligtning Family!! Yippie!!`,
-                                timestamp: serverTimestamp(),
                             });
                         });
                 })
