@@ -21,8 +21,18 @@ const NotificationTopTab = () => {
             initialRouteName="PublicNotifications"
             screenOptions={tabBarOptions}
         >
-            <Tab.Screen name="PublicNotifications" component={PublicScreen} />
-            <Tab.Screen name="PrivateNotifications" component={PrivateScreen} />
+            <Tab.Screen
+                name="PublicNotifications"
+                component={PublicScreen}
+                options={{
+                    title: "Public",
+                }}
+            />
+            <Tab.Screen
+                name="PrivateNotifications"
+                component={PrivateScreen}
+                options={{ title: "Private" }}
+            />
         </Tab.Navigator>
     );
 };

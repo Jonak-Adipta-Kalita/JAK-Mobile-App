@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import { View, ScrollView, Text, useColorScheme } from "react-native";
 import { db, auth } from "../../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -6,12 +6,9 @@ import LoadingIndicator from "../../../components/Loading";
 import Notification from "../../../components/Notification";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigation } from "@react-navigation/native";
 import { collection, orderBy, query } from "firebase/firestore";
-import { TopTabDrawerStackNavigationProps } from "../../../../@types/navigation";
 
 const PrivateScreen = () => {
-    const navigation = useNavigation<TopTabDrawerStackNavigationProps>();
     const [user, userLoading, userError] = useAuthState(auth);
     const scheme = useColorScheme();
 
@@ -21,12 +18,6 @@ const PrivateScreen = () => {
             orderBy("timestamp", "desc")
         )
     );
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Private!!",
-        });
-    }, [navigation]);
 
     if (firestoreError || userError) {
         errorAlertShower(firestoreError || userError);
