@@ -24,6 +24,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
+import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 
 const LoginScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -41,17 +42,30 @@ const LoginScreen = () => {
     }, []);
 
     const loginEmail = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((authUser) => {
-                pushPrivateNotification(authUser.user.uid!, {
-                    title: "Welcome Back!!",
-                    message: `Welcome back ${email}. Nice to meet you again!!`,
-                    timestamp: serverTimestamp(),
+        if (email === "" || password === "") {
+            messageAlertShower(
+                "Value not Filled!!",
+                "Please Enter all the Values in the Form!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
+        } else {
+            signInWithEmailAndPassword(auth, email, password)
+                .then((authUser) => {
+                    pushPrivateNotification(authUser.user.uid!, {
+                        title: "Welcome Back!!",
+                        message: `Welcome back ${email}. Nice to meet you again!!`,
+                        timestamp: serverTimestamp(),
+                    });
+                })
+                .catch((error) => {
+                    errorAlertShower(error);
                 });
-            })
-            .catch((error) => {
-                errorAlertShower(error);
-            });
+        }
     };
 
     const signInMethods = () => {
