@@ -44,7 +44,7 @@ const DisplayUserData = ({
 
     return (
         <Animated.View style={{ transform: [{ translateX }] }}>
-            <View className="mb-[-15px] mt-[20px] flex-row border-b-[2px] border-b-[#818181] p-[20px] pb-[20px]">
+            <View className="mb-[-15px] mt-[20px] flex-row p-[20px] pb-[20px]">
                 <TouchableOpacity activeOpacity={0.5}>
                     <Avatar
                         rounded
@@ -98,7 +98,12 @@ const CustomDrawer = ({ progress, ...props }: Props) => {
 
     return (
         <>
-            {user && <DisplayUserData user={user} translateX={translateX} />}
+            {user && (
+                <>
+                    <DisplayUserData user={user} translateX={translateX} />
+                    <View className="mt-6 border-b-[2px] border-b-[#818181]" />
+                </>
+            )}
             <DrawerContentScrollView
                 {...props}
                 contentContainerStyle={{ flex: 1 }}
