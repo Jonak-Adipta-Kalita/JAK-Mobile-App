@@ -38,16 +38,14 @@ const ChangeSettings = ({
     }
 
     return (
-        <View>
-            <View className="mt-[20px] flex-1 items-center p-[10px]">
-                <StatusBar />
-                <View className="w-[350px]">{children}</View>
-                <Button
-                    containerStyle={[globalStyles.button, { marginTop: 10 }]}
-                    title="Upgrade"
-                    onPress={changeFunction}
-                />
-            </View>
+        <View className="mt-[20px] flex-1 items-center p-[10px]">
+            <StatusBar />
+            <View className="w-[350px]">{children}</View>
+            <Button
+                containerStyle={[globalStyles.button, { marginTop: 10 }]}
+                title="Upgrade"
+                onPress={changeFunction}
+            />
         </View>
     );
 };
