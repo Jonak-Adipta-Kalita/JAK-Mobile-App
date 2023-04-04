@@ -11,9 +11,11 @@ import HomeScreen from "../screens/home/HomeScreen";
 import NotificationScreen from "../screens/home/notification/NotificationScreen";
 import TodoScreen from "../screens/home/features/TodoScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
-import ChangeEmailScreen from "../screens/settings/changeProfile/ChangeEmailScreen";
-import ChangeNameScreen from "../screens/settings/changeProfile/ChangeNameScreen";
-import ChangePhoneNumberScreen from "../screens/settings/changeProfile/ChangePhoneNumberScreen";
+import {
+    ChangeEmailScreen,
+    ChangeNameScreen,
+    ChangePhoneNumberScreen,
+} from "../components/ChangeSettings";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 import { StackScreenParamList } from "../../@types/navigation";
@@ -153,14 +155,26 @@ const SettingsStack = () => {
                 }}
             />
             <Stack.Group>
-                <Stack.Screen name="ChangeName" component={ChangeNameScreen} />
+                <Stack.Screen
+                    name="ChangeName"
+                    component={ChangeNameScreen}
+                    options={{
+                        title: "Change your Name",
+                        headerLeft: () => <ArrowGoBack />,
+                    }}
+                />
                 <Stack.Screen
                     name="ChangeEmail"
                     component={ChangeEmailScreen}
+                    options={{
+                        title: "Change your Email",
+                        headerLeft: () => <ArrowGoBack />,
+                    }}
                 />
                 <Stack.Screen
                     name="ChangePhoneNumber"
                     component={ChangePhoneNumberScreen}
+                    options={{ headerLeft: () => <ArrowGoBack /> }}
                 />
             </Stack.Group>
         </Stack.Navigator>
