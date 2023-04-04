@@ -51,14 +51,14 @@ const SettingsScreen = () => {
         user?.phoneNumber || userData?.data()?.phoneNumber;
 
     const updatePic = async () => {
-        const pickerResult: any = await ImagePicker.launchImageLibraryAsync({
+        const pickerResult = await ImagePicker.launchImageLibraryAsync({
             allowsEditing: true,
             aspect: [4, 3],
         });
         try {
             if (!pickerResult.canceled) {
                 const uploadURL = await uploadImageAsync(
-                    pickerResult.uri,
+                    pickerResult.assets[0].uri,
                     user?.uid!
                 );
                 updateProfile(user!, { photoURL: uploadURL });
@@ -234,14 +234,44 @@ const SettingsScreen = () => {
             <View className="absolute bottom-[20px] flex-row self-start pl-[20px]">
                 <Button
                     containerStyle={globalStyles.button}
-                    onPress={signOut}
+                    onPress={() => {
+                        messageAlertShower(
+                            "Are you sure?",
+                            "Do want to Logout?",
+                            [
+                                {
+                                    text: "Yes",
+                                    onPress: signOut,
+                                },
+                                {
+                                    text: "No",
+                                    onPress: () => {},
+                                },
+                            ]
+                        );
+                    }}
                     title="Logout"
                 />
             </View>
             <View className="absolute bottom-[20px] flex-row self-end pr-[20px]">
                 <Button
                     containerStyle={globalStyles.button}
-                    onPress={deleteAccount}
+                    onPress={() => {
+                        messageAlertShower(
+                            "Are you sure?",
+                            "Do want to Delete your Account?",
+                            [
+                                {
+                                    text: "Yes",
+                                    onPress: deleteAccount,
+                                },
+                                {
+                                    text: "No",
+                                    onPress: () => {},
+                                },
+                            ]
+                        );
+                    }}
                     title="Delete Account"
                 />
             </View>
