@@ -5,6 +5,8 @@ import {
     StackNavigationOptions,
 } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StackScreenParamList } from "../../@types/navigation";
+import ArrowGoBack from "../components/ArrowGoBack";
 
 import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
@@ -18,8 +20,6 @@ import {
 } from "../components/ChangeSettings";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
-import { StackScreenParamList } from "../../@types/navigation";
-import ArrowGoBack from "../components/ArrowGoBack";
 
 const Stack = createStackNavigator<StackScreenParamList>();
 const colorScheme = Appearance.getColorScheme();
