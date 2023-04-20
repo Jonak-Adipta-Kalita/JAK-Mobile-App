@@ -17,12 +17,12 @@ const GetStartedScreen = () => {
                     uri: "https://i.pinimg.com/564x/26/47/62/2647624ed5ad7274676372e560210249--orange-wallpaper-wallpaper-backgrounds.jpg",
                 }}
                 resizeMode="cover"
-                className="flex-1"
+                className="flex-1 rotate-180"
             >
                 <PagerView initialPage={0} style={{ flex: 1 }}>
                     <View
                         key="1"
-                        className="items-center justify-center space-y-5"
+                        className="rotate-180 items-center justify-center space-y-5"
                     >
                         <Text
                             className={`px-10 text-center text-2xl text-gray-50`}
