@@ -1,10 +1,7 @@
 import React from "react";
-import { View, Image } from "react-native";
-import { Button } from "@rneui/themed";
-import globalStyles from "../globalStyles";
+import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerStackNavigationProps } from "../../@types/navigation";
-import images from "../images";
 import StatusBar from "../components/StatusBar";
 
 const GetStartedScreen = () => {
@@ -13,26 +10,6 @@ const GetStartedScreen = () => {
     return (
         <View>
             <StatusBar />
-            <View className="relative h-screen p-[10px] px-[20px]">
-                <View className="mt-[20px] flex items-center justify-center">
-                    <Image
-                        source={images.welcomeText}
-                        className="h-[350px] w-[350px]"
-                    />
-                </View>
-                <Button
-                    containerStyle={[
-                        globalStyles.button,
-                        {
-                            marginTop: 650,
-                            alignSelf: "center",
-                            position: "absolute",
-                        },
-                    ]}
-                    title="Lets Goooo!!"
-                    onPress={() => navigation.replace("Home")}
-                />
-            </View>
         </View>
     );
 };
