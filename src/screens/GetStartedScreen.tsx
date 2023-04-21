@@ -74,7 +74,7 @@ const GetStartedScreen = () => {
                     </View>
                     <TouchableOpacity
                         className="absolute bottom-52"
-                        onPress={() => navigation.replace("Home")}
+                        onPress={() => navigation.replace("Login")}
                     >
                         <Feather
                             name="arrow-right-circle"
