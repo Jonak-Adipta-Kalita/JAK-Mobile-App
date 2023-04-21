@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerStackNavigationProps } from "../../@types/navigation";
@@ -11,11 +11,18 @@ import { useColorScheme } from "react-native";
 const GetStartedScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
     const colorScheme = useColorScheme();
+    const [pageNumber, setPageNumber] = useState<number>(1);
 
     return (
         <View className="relative flex-1">
             <StatusBar />
-            <PagerView initialPage={0} style={{ flex: 1 }}>
+            <PagerView
+                initialPage={0}
+                style={{ flex: 1 }}
+                onPageSelected={(e) => {
+                    setPageNumber(e.nativeEvent.position + 1);
+                }}
+            >
                 <View key="1" className="items-center justify-center">
                     <View className="space-y-5 rounded-lg bg-orange-500 p-3 py-20">
                         <Text
@@ -77,6 +84,41 @@ const GetStartedScreen = () => {
                     </TouchableOpacity>
                 </View>
             </PagerView>
+            <View className="absolute bottom-32 left-[38.5%] flex flex-row space-x-4">
+                <View
+                    className={`rounded-xl ${
+                        pageNumber === 1 ? "bg-white" : ""
+                    }`}
+                >
+                    <Feather
+                        name="circle"
+                        size={20}
+                        color={colorScheme === "dark" ? "white" : "black"}
+                    />
+                </View>
+                <View
+                    className={`rounded-xl ${
+                        pageNumber === 2 ? "bg-white" : ""
+                    }`}
+                >
+                    <Feather
+                        name="circle"
+                        size={20}
+                        color={colorScheme === "dark" ? "white" : "black"}
+                    />
+                </View>
+                <View
+                    className={`rounded-xl ${
+                        pageNumber === 3 ? "bg-white" : ""
+                    }`}
+                >
+                    <Feather
+                        name="circle"
+                        size={20}
+                        color={colorScheme === "dark" ? "white" : "black"}
+                    />
+                </View>
+            </View>
         </View>
     );
 };
