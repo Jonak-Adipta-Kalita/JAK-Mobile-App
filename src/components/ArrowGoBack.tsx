@@ -1,6 +1,5 @@
-import { SafeAreaView, TouchableOpacity, useColorScheme } from "react-native";
+import { TouchableOpacity, useColorScheme } from "react-native";
 import React from "react";
-import globalStyles from "../globalStyles";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerStackNavigationProps } from "../../@types/navigation";
@@ -14,18 +13,18 @@ const ArrowGoBack = ({ color }: Props) => {
     const scheme = useColorScheme();
 
     return (
-        <SafeAreaView className="flex-1">
-            <TouchableOpacity
-                style={globalStyles.headerIcon}
-                onPress={navigation.goBack}
-            >
-                <AntDesign
-                    name="arrowleft"
-                    size={24}
-                    color={color || (scheme === "dark" ? "#fff" : "#000000")}
-                />
-            </TouchableOpacity>
-        </SafeAreaView>
+        <TouchableOpacity
+            onPress={navigation.goBack}
+            className={`rounded-full border-[2px] p-2 ${
+                scheme === "dark" ? "border-[#fff]" : "border-[#000000]"
+            }`}
+        >
+            <AntDesign
+                name="arrowleft"
+                size={24}
+                color={color || (scheme === "dark" ? "#fff" : "#000000")}
+            />
+        </TouchableOpacity>
     );
 };
 

@@ -26,6 +26,8 @@ import { DrawerStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useColorScheme } from "react-native";
+import ArrowGoBack from "../../components/ArrowGoBack";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
@@ -82,7 +84,7 @@ const LoginScreen = () => {
                                 : "text-gray-800"
                         }`}
                     >
-                        Or
+                        OR
                     </Text>
                     <ScrollView className="flex flex-row">
                         <LoginButton brand="google" />
@@ -94,87 +96,95 @@ const LoginScreen = () => {
     };
 
     return (
-        <View className="mt-[50px] flex-1 items-center">
+        <SafeAreaView className="mt-[30px] flex-1">
             <StatusBar />
-            <View
-                style={{
-                    width: 350,
-                    marginTop: 10,
-                }}
-            >
-                <Input
-                    placeholder="Email"
-                    autoFocus
-                    value={email}
-                    inputStyle={globalStyles.inputBar}
-                    onChangeText={(text) => setEmail(text)}
-                    leftIcon={
-                        <MaterialIcons
-                            name="email"
-                            size={24}
-                            style={globalStyles.inputBarIcon}
-                        />
-                    }
-                    autoComplete={"email"}
-                />
-                <View className="relative">
+            <View className="items-center">
+                <View
+                    style={{
+                        width: 350,
+                        marginTop: 10,
+                    }}
+                >
                     <Input
-                        placeholder="Password"
-                        secureTextEntry={!showPassword}
-                        value={password}
+                        placeholder="Email"
+                        autoFocus
+                        value={email}
                         inputStyle={globalStyles.inputBar}
-                        onChangeText={(text) => setPassword(text)}
+                        onChangeText={(text) => setEmail(text)}
                         leftIcon={
                             <MaterialIcons
-                                name="lock"
+                                name="email"
                                 size={24}
                                 style={globalStyles.inputBarIcon}
                             />
                         }
-                        autoComplete={"password"}
+                        autoComplete={"email"}
                     />
-                    <TouchableOpacity
-                        style={globalStyles.showPasswordContainer}
-                        onPress={() => dispatch(setShowPassword())}
-                    >
-                        {showPassword ? (
-                            <Feather
-                                name="eye"
-                                size={20}
-                                style={globalStyles.showPasswordIcon}
-                            />
-                        ) : (
-                            <Feather
-                                name="eye-off"
-                                size={20}
-                                style={globalStyles.showPasswordIcon}
-                            />
-                        )}
-                    </TouchableOpacity>
+                    <View className="relative">
+                        <Input
+                            placeholder="Password"
+                            secureTextEntry={!showPassword}
+                            value={password}
+                            inputStyle={globalStyles.inputBar}
+                            onChangeText={(text) => setPassword(text)}
+                            leftIcon={
+                                <MaterialIcons
+                                    name="lock"
+                                    size={24}
+                                    style={globalStyles.inputBarIcon}
+                                />
+                            }
+                            autoComplete={"password"}
+                        />
+                        <TouchableOpacity
+                            style={globalStyles.showPasswordContainer}
+                            onPress={() => dispatch(setShowPassword())}
+                        >
+                            {showPassword ? (
+                                <Feather
+                                    name="eye"
+                                    size={20}
+                                    style={globalStyles.showPasswordIcon}
+                                />
+                            ) : (
+                                <Feather
+                                    name="eye-off"
+                                    size={20}
+                                    style={globalStyles.showPasswordIcon}
+                                />
+                            )}
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-            <View className="mt-[50px] w-[350px]">
-                <Button
-                    onPress={loginEmail}
-                    containerStyle={{
-                        borderRadius: 50,
-                    }}
-                    buttonStyle={{ padding: 20, backgroundColor: "#609fe6" }}
-                    title="LOGIN"
-                />
-                <Button
-                    containerStyle={{
-                        borderRadius: 50,
-                        marginTop: 40,
-                    }}
-                    buttonStyle={{ padding: 20, backgroundColor: "#e3ad3e" }}
-                    title="REGISTER"
-                    onPress={() => navigation.navigate("Register")}
-                />
-            </View>
+                <View className="mt-[50px] w-[350px]">
+                    <Button
+                        onPress={loginEmail}
+                        containerStyle={{
+                            borderRadius: 50,
+                        }}
+                        buttonStyle={{
+                            padding: 20,
+                            backgroundColor: "#609fe6",
+                        }}
+                        title="LOGIN"
+                    />
+                    <Button
+                        containerStyle={{
+                            borderRadius: 50,
+                            marginTop: 40,
+                        }}
+                        buttonStyle={{
+                            padding: 20,
+                            backgroundColor: "#e3ad3e",
+                        }}
+                        title="REGISTER"
+                        onPress={() => navigation.navigate("Register")}
+                    />
+                </View>
 
-            {signInMethods()}
-        </View>
+                {signInMethods()}
+            </View>
+        </SafeAreaView>
     );
 };
 
