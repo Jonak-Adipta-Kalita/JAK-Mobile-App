@@ -26,7 +26,6 @@ import { DrawerStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useColorScheme } from "react-native";
-import ArrowGoBack from "../../components/ArrowGoBack";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
