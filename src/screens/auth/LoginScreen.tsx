@@ -25,11 +25,14 @@ import { serverTimestamp } from "firebase/firestore";
 import { DrawerStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
+import { useColorScheme } from "react-native";
 
 const LoginScreen = () => {
     const navigation = useNavigation<DrawerStackNavigationProps>();
+    const colorScheme = useColorScheme();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -72,7 +75,13 @@ const LoginScreen = () => {
         if (Platform.OS === "android" || Platform.OS === "ios") {
             return (
                 <View>
-                    <Text className="my-[10px] self-center text-[20px] text-[#594d4c]">
+                    <Text
+                        className={`mb-[30px] mt-[50px] self-center text-[20px] ${
+                            colorScheme === "dark"
+                                ? "text-gray-300"
+                                : "text-gray-800"
+                        }`}
+                    >
                         Or
                     </Text>
                     <ScrollView className="flex flex-row">
@@ -85,11 +94,11 @@ const LoginScreen = () => {
     };
 
     return (
-        <View className="flex-1 items-center p-[10px]">
+        <View className="mt-[50px] flex-1 items-center">
             <StatusBar />
             <View
                 style={{
-                    width: 300,
+                    width: 350,
                     marginTop: 10,
                 }}
             >
@@ -144,23 +153,25 @@ const LoginScreen = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <Button
-                onPress={loginEmail}
-                containerStyle={{
-                    width: 200,
-                    marginTop: 10,
-                }}
-                title="Login"
-            />
-            <Button
-                containerStyle={{
-                    width: 200,
-                    marginTop: 10,
-                }}
-                title="Register"
-                type="outline"
-                onPress={() => navigation.navigate("Register")}
-            />
+            <View className="mt-[50px] w-[350px]">
+                <Button
+                    onPress={loginEmail}
+                    containerStyle={{
+                        borderRadius: 50,
+                    }}
+                    buttonStyle={{ padding: 20, backgroundColor: "#609fe6" }}
+                    title="LOGIN"
+                />
+                <Button
+                    containerStyle={{
+                        borderRadius: 50,
+                        marginTop: 40,
+                    }}
+                    buttonStyle={{ padding: 20, backgroundColor: "#e3ad3e" }}
+                    title="REGISTER"
+                    onPress={() => navigation.navigate("Register")}
+                />
+            </View>
 
             {signInMethods()}
         </View>

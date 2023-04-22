@@ -119,7 +119,7 @@ const HomeScreen = () => {
                         scheme === "dark" ? "text-white" : "text-black"
                     }`}
                 >
-                    Login or Register to use the Features!!
+                    Login or Register to use the Features
                 </Text>
             )}
         </View>
