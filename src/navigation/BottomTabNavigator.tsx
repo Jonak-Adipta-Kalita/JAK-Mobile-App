@@ -22,7 +22,13 @@ const BottomTabNavigator = () => {
     return (
         <Tab.Navigator
             initialRouteName="HomeTab"
-            screenOptions={{ headerShown: false, tabBarShowLabel: false }}
+            screenOptions={{
+                headerShown: false,
+                tabBarShowLabel: false,
+                tabBarActiveTintColor: "skyblue",
+                tabBarHideOnKeyboard: true,
+                tabBarStyle: { height: 100 },
+            }}
         >
             <Tab.Screen
                 name="HomeTab"
