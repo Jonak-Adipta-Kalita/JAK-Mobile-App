@@ -102,7 +102,7 @@ const RegisterScreen = () => {
             </Text>
             <View
                 style={{
-                    width: 300,
+                    width: 350,
                 }}
             >
                 <Input
@@ -229,9 +229,10 @@ const RegisterScreen = () => {
             </View>
             <Button
                 containerStyle={{
-                    width: 200,
-                    marginTop: 10,
+                    marginTop: 40,
+                    width: 350,
                 }}
+                buttonStyle={{ padding: 20, backgroundColor: "#e3ad3e" }}
                 title="Register"
                 onPress={registerEmail}
                 raised
