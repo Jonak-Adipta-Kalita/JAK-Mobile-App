@@ -38,10 +38,10 @@ const HomeStack = () => {
 
     return (
         <Stack.Navigator
-            initialRouteName={!isFirstLaunch ? "GetStarted" : "Home"}
+            initialRouteName={isFirstLaunch ? "GetStarted" : "Home"}
             screenOptions={{ headerShown: false }}
         >
-            {!isFirstLaunch && (
+            {isFirstLaunch && (
                 <Stack.Screen name="GetStarted" component={GetStartedScreen} />
             )}
             <Stack.Screen name="Home" component={HomeScreen} />
