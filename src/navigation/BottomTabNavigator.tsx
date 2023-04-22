@@ -1,5 +1,5 @@
 import React from "react";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
@@ -12,7 +12,7 @@ import {
 } from "./StackNavigator";
 import { BottomTabScreensParamList } from "../../@types/navigation";
 
-const Tab = createMaterialBottomTabNavigator<BottomTabScreensParamList>();
+const Tab = createBottomTabNavigator<BottomTabScreensParamList>();
 
 const BottomTabNavigator = () => {
     const [user, , userError] = useAuthState(auth);
@@ -20,17 +20,20 @@ const BottomTabNavigator = () => {
     if (userError) errorAlertShower(userError);
 
     return (
-        <Tab.Navigator initialRouteName="HomeTab" labeled={false}>
+        <Tab.Navigator
+            initialRouteName="HomeTab"
+            screenOptions={{ headerShown: false, tabBarShowLabel: false }}
+        >
             <Tab.Screen
                 name="HomeTab"
                 component={HomeStack}
                 options={{
                     tabBarLabel: "Home",
-                    tabBarIcon: ({ color }) => (
+                    tabBarIcon: ({ color, size }) => (
                         <AntDesign
                             name="home"
                             size={24}
-                            style={{ color: color }}
+                            style={{ color: color, fontSize: size }}
                         />
                     ),
                 }}
@@ -41,14 +44,16 @@ const BottomTabNavigator = () => {
                     component={AuthenticationStack}
                     options={{
                         tabBarLabel: "Login",
-                        tabBarIcon: ({ color }) => (
+                        tabBarIcon: ({ color, size }) => (
                             <AntDesign
                                 name="login"
                                 size={24}
-                                style={{ color: color, marginRight: 4 }}
+                                style={{
+                                    color: color,
+                                    fontSize: size,
+                                }}
                             />
                         ),
-                        tabBarBadge: true,
                     }}
                 />
             ) : (
@@ -57,11 +62,11 @@ const BottomTabNavigator = () => {
                     component={SettingsStack}
                     options={{
                         tabBarLabel: "Profile",
-                        tabBarIcon: ({ color }) => (
+                        tabBarIcon: ({ color, size }) => (
                             <AntDesign
                                 name="setting"
                                 size={24}
-                                style={{ color: color }}
+                                style={{ color: color, fontSize: size }}
                             />
                         ),
                     }}

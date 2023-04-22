@@ -1,5 +1,5 @@
 import type { MaterialTopTabNavigationProp } from "@react-navigation/material-top-tabs";
-import type { MaterialBottomTabNavigationProp } from "@react-navigation/material-bottom-tabs";
+import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { CompositeNavigationProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
@@ -30,7 +30,7 @@ export type TopTabScreensParamList = {
 export type BottomTabStackNavigationProps<
     StackRouteName extends keyof StackScreenParamList
 > = CompositeNavigationProp<
-    MaterialBottomTabNavigationProp<BottomTabScreensParamList>,
+    BottomTabNavigationProp<BottomTabScreensParamList>,
     StackNavigationProp<StackScreenParamList, StackRouteName>
 >;
 

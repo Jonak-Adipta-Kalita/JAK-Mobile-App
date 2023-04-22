@@ -16,7 +16,6 @@ import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
 import { useAppDispatch } from "./src/hooks/useDispatch";
 import { setToken } from "./src/redux/slices/pushNotificationSlice";
 import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
-import { Provider as PaperProvider } from "react-native-paper";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -45,9 +44,7 @@ const AppChildren = () => {
 
     return (
         <NavigationContainer theme={scheme === "dark" ? DarkTheme : LightTheme}>
-            <PaperProvider>
-                <BottomTabNavigator />
-            </PaperProvider>
+            <BottomTabNavigator />
         </NavigationContainer>
     );
 };
