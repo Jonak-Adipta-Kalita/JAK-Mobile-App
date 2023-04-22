@@ -7,7 +7,7 @@ import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import NotificationScreen from "../screens/home/notification/NotificationScreen";
 import TodoScreen from "../screens/home/features/TodoScreen";
-import SettingsScreen from "../screens/settings/SettingsScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 import {
     ChangeEmailScreen,
     ChangeNameScreen,

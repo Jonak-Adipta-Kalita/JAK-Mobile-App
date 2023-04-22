@@ -1,21 +1,21 @@
 import React, { useLayoutEffect, useState } from "react";
 import { View, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { auth, db, storage } from "../../firebase";
+import { auth, db, storage } from "../firebase";
 import { Avatar, Button, ListItem } from "@rneui/themed";
-import globalStyles from "../../globalStyles";
+import globalStyles from "../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
-import LoadingIndicator from "../../components/Loading";
-import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
-import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
+import LoadingIndicator from "../components/Loading";
+import errorAlertShower from "../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
-import { BottomTabStackNavigationProps } from "../../../@types/navigation";
+import { BottomTabStackNavigationProps } from "../../@types/navigation";
 import { useDocument } from "react-firebase-hooks/firestore";
-import StatusBar from "../../components/StatusBar";
+import StatusBar from "../components/StatusBar";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
