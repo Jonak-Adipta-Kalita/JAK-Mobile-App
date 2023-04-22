@@ -1,7 +1,6 @@
 import "expo-dev-client";
 import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import DrawerNavigator from "./src/navigation/DrawerNavigator";
 import { useColorScheme, LogBox } from "react-native";
 import { useFonts } from "expo-font";
 import { Provider as ReduxProvider } from "react-redux";
@@ -16,6 +15,8 @@ import * as Notifications from "expo-notifications";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
 import { useAppDispatch } from "./src/hooks/useDispatch";
 import { setToken } from "./src/redux/slices/pushNotificationSlice";
+import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
+import { Provider as PaperProvider } from "react-native-paper";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -44,7 +45,9 @@ const AppChildren = () => {
 
     return (
         <NavigationContainer theme={scheme === "dark" ? DarkTheme : LightTheme}>
-            <DrawerNavigator />
+            <PaperProvider>
+                <BottomTabNavigator />
+            </PaperProvider>
         </NavigationContainer>
     );
 };

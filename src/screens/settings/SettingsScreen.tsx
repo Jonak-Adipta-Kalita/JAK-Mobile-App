@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
-import { DrawerStackNavigationProps } from "../../../@types/navigation";
+import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import { useDocument } from "react-firebase-hooks/firestore";
 import StatusBar from "../../components/StatusBar";
 
@@ -41,7 +41,8 @@ const uploadImageAsync = async (uri: string, userUID: string) => {
 };
 
 const SettingsScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
+    const navigation =
+        useNavigation<BottomTabStackNavigationProps<"Settings">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
     const [userData, userDataLoading, userDataError] = useDocument(

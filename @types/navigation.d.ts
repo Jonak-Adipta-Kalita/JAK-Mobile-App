@@ -1,6 +1,7 @@
-import { DrawerNavigationProp } from "@react-navigation/drawer";
+import type { MaterialTopTabNavigationProp } from "@react-navigation/material-top-tabs";
+import type { MaterialBottomTabNavigationProp } from "@react-navigation/material-bottom-tabs";
 import type { CompositeNavigationProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 export type StackScreenParamList = {
     Login: undefined;
@@ -15,10 +16,10 @@ export type StackScreenParamList = {
     Todo: undefined;
 };
 
-export type DrawerScreensParamList = {
-    HomeDrawer: undefined;
-    AuthDrawer: undefined;
-    ProfileDrawer: undefined;
+export type BottomTabScreensParamList = {
+    HomeTab: undefined;
+    AuthTab: undefined;
+    ProfileTab: undefined;
 };
 
 export type TopTabScreensParamList = {
@@ -26,15 +27,17 @@ export type TopTabScreensParamList = {
     PrivateNotifications: undefined;
 };
 
-export type DrawerStackNavigationProps = CompositeNavigationProp<
-    DrawerNavigationProp<DrawerScreensParamList>,
-    StackNavigationProp<StackScreenParamList>
+export type BottomTabStackNavigationProps<
+    StackRouteName extends keyof StackScreenParamList
+> = CompositeNavigationProp<
+    MaterialBottomTabNavigationProp<BottomTabScreensParamList>,
+    StackNavigationProp<StackScreenParamList, StackRouteName>
 >;
 
-export type TopTabDrawerStackNavigationProps = CompositeNavigationProp<
-    CompositeNavigationProp<
-        DrawerNavigationProp<DrawerScreensParamList>,
-        StackNavigationProp<StackScreenParamList>
-    >,
-    MaterialTopTabScreenProps<TopTabScreensParamList>
+export type TopBottomTabStackNavigationProps<
+    StackRouteName extends keyof StackScreenParamList,
+    TopTabRouteName extends keyof TopTabScreensParamList
+> = CompositeNavigationProp<
+    BottomTabStackNavigationProps<StackRouteName>,
+    MaterialTopTabNavigationProp<TopTabScreensParamList, TopTabRouteName>
 >;

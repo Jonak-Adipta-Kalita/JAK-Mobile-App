@@ -22,14 +22,14 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
-import { DrawerStackNavigationProps } from "../../../@types/navigation";
+import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
+    const navigation = useNavigation<BottomTabStackNavigationProps<"Login">>();
     const colorScheme = useColorScheme();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);

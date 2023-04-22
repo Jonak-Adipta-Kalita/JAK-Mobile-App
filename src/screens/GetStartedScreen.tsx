@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { DrawerStackNavigationProps } from "../../@types/navigation";
+import { BottomTabStackNavigationProps } from "../../@types/navigation";
 import StatusBar from "../components/StatusBar";
 import PagerView from "react-native-pager-view";
 import { Feather } from "@expo/vector-icons";
@@ -9,7 +9,8 @@ import globalStyles from "../globalStyles";
 import { useColorScheme } from "react-native";
 
 const GetStartedScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
+    const navigation =
+        useNavigation<BottomTabStackNavigationProps<"GetStarted">>();
     const colorScheme = useColorScheme();
     const [pageNumber, setPageNumber] = useState<number>(1);
 

@@ -9,7 +9,7 @@ import {
     Text,
     useColorScheme,
 } from "react-native";
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { Card, Button } from "@rneui/themed";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -18,11 +18,11 @@ import globalStyles from "../../globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
-import { DrawerStackNavigationProps } from "../../../@types/navigation";
+import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 
 const HomeScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
+    const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const scheme = useColorScheme();
 
@@ -55,20 +55,6 @@ const HomeScreen = () => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerLeft: () => (
-                <SafeAreaView className="flex-1">
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.openDrawer}
-                    >
-                        <FontAwesome5
-                            name="bars"
-                            size={24}
-                            color={scheme === "dark" ? "#fff" : "#000000"}
-                        />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
             headerRight: () => (
                 <SafeAreaView className="flex-1">
                     {user && (
