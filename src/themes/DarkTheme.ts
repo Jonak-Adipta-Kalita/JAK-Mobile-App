@@ -4,6 +4,6 @@ export default {
     ...DarkTheme,
     colors: {
         ...DarkTheme.colors,
-        background: "#202124",
+        background: "#413f44",
     },
 };
