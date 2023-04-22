@@ -3,6 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
+import { AntDesign } from "@expo/vector-icons";
 
 import {
     HomeStack,
@@ -19,12 +20,52 @@ const BottomTabNavigator = () => {
     if (userError) errorAlertShower(userError);
 
     return (
-        <Tab.Navigator initialRouteName="HomeTab">
-            <Tab.Screen name="HomeTab" component={HomeStack} />
+        <Tab.Navigator initialRouteName="HomeTab" labeled={false}>
+            <Tab.Screen
+                name="HomeTab"
+                component={HomeStack}
+                options={{
+                    tabBarLabel: "Home",
+                    tabBarIcon: ({ color }) => (
+                        <AntDesign
+                            name="home"
+                            size={24}
+                            style={{ color: color }}
+                        />
+                    ),
+                }}
+            />
             {!user ? (
-                <Tab.Screen name="AuthTab" component={AuthenticationStack} />
+                <Tab.Screen
+                    name="AuthTab"
+                    component={AuthenticationStack}
+                    options={{
+                        tabBarLabel: "Login",
+                        tabBarIcon: ({ color }) => (
+                            <AntDesign
+                                name="login"
+                                size={24}
+                                style={{ color: color, marginRight: 4 }}
+                            />
+                        ),
+                        tabBarBadge: true,
+                    }}
+                />
             ) : (
-                <Tab.Screen name="ProfileTab" component={SettingsStack} />
+                <Tab.Screen
+                    name="ProfileTab"
+                    component={SettingsStack}
+                    options={{
+                        tabBarLabel: "Profile",
+                        tabBarIcon: ({ color }) => (
+                            <AntDesign
+                                name="setting"
+                                size={24}
+                                style={{ color: color }}
+                            />
+                        ),
+                    }}
+                />
             )}
         </Tab.Navigator>
     );
