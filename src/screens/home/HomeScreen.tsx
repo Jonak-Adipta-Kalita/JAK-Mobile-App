@@ -9,7 +9,7 @@ import {
     useColorScheme,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Card, Button } from "@rneui/themed";
+// import { Card, Button } from "@rneui/themed";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
@@ -69,25 +69,30 @@ const HomeScreen = () => {
             <StatusBar />
             {user ? (
                 <View>
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={() => navigation.navigate("Notification")}
-                    >
-                        <Ionicons
-                            name="notifications-outline"
-                            size={24}
-                            color={scheme === "dark" ? "#fff" : "#000000"}
-                        />
-                    </TouchableOpacity>
+                    <View className="flex flex-row items-center justify-between">
+                        <Text className="m-5 mx-10 flex-1 rounded-2xl bg-gray-300 p-2 text-center text-lg">
+                            Tools
+                        </Text>
+                        <TouchableOpacity
+                            style={globalStyles.headerIcon}
+                            onPress={() => navigation.navigate("Notification")}
+                        >
+                            <Ionicons
+                                name="notifications-outline"
+                                size={24}
+                                color={scheme === "dark" ? "#fff" : "#000000"}
+                            />
+                        </TouchableOpacity>
+                    </View>
                     <ScrollView>
-                        <Card>
+                        {/* <Card>
                             <Card.Title>Todo</Card.Title>
                             <Card.Divider />
                             <Button
                                 onPress={() => navigation.navigate("Todo")}
                                 title="Go to Todo Screen"
                             />
-                        </Card>
+                        </Card> */}
                     </ScrollView>
                 </View>
             ) : (
