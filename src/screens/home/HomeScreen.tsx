@@ -76,6 +76,7 @@ const HomeScreen = () => {
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
                             onPress={() => navigation.navigate("Notification")}
+                            className="-mt-[0.5px]"
                         >
                             <Ionicons
                                 name="notifications-outline"
