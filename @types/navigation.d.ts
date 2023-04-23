@@ -1,4 +1,3 @@
-import type { MaterialTopTabNavigationProp } from "@react-navigation/material-top-tabs";
 import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import type { CompositeNavigationProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
@@ -22,22 +21,9 @@ export type BottomTabScreensParamList = {
     ProfileTab: undefined;
 };
 
-export type TopTabScreensParamList = {
-    PublicNotifications: undefined;
-    PrivateNotifications: undefined;
-};
-
 export type BottomTabStackNavigationProps<
     StackRouteName extends keyof StackScreenParamList
 > = CompositeNavigationProp<
     BottomTabNavigationProp<BottomTabScreensParamList>,
     StackNavigationProp<StackScreenParamList, StackRouteName>
->;
-
-export type TopBottomTabStackNavigationProps<
-    StackRouteName extends keyof StackScreenParamList,
-    TopTabRouteName extends keyof TopTabScreensParamList
-> = CompositeNavigationProp<
-    BottomTabStackNavigationProps<StackRouteName>,
-    MaterialTopTabNavigationProp<TopTabScreensParamList, TopTabRouteName>
 >;
