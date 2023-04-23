@@ -1,7 +1,6 @@
-import React, { useLayoutEffect, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
     View,
-    SafeAreaView,
     TouchableOpacity,
     ScrollView,
     Platform,
@@ -20,6 +19,7 @@ import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
@@ -53,27 +53,6 @@ const HomeScreen = () => {
         }
     }, []);
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <SafeAreaView className="flex-1">
-                    {user && (
-                        <TouchableOpacity
-                            style={globalStyles.headerIcon}
-                            onPress={() => navigation.navigate("Notification")}
-                        >
-                            <Ionicons
-                                name="notifications-outline"
-                                size={24}
-                                color={scheme === "dark" ? "#fff" : "#000000"}
-                            />
-                        </TouchableOpacity>
-                    )}
-                </SafeAreaView>
-            ),
-        });
-    }, [navigation, user]);
-
     if (userError) errorAlertShower(userError);
 
     if (userLoading) {
@@ -86,29 +65,41 @@ const HomeScreen = () => {
     }
 
     return (
-        <View className="mb-[10px]">
+        <SafeAreaView className="flex-1">
             <StatusBar />
             {user ? (
-                <ScrollView>
-                    <Card>
-                        <Card.Title>Todo</Card.Title>
-                        <Card.Divider />
-                        <Button
-                            onPress={() => navigation.navigate("Todo")}
-                            title="Go to Todo Screen"
+                <View>
+                    <TouchableOpacity
+                        style={globalStyles.headerIcon}
+                        onPress={() => navigation.navigate("Notification")}
+                    >
+                        <Ionicons
+                            name="notifications-outline"
+                            size={24}
+                            color={scheme === "dark" ? "#fff" : "#000000"}
                         />
-                    </Card>
-                </ScrollView>
+                    </TouchableOpacity>
+                    <ScrollView>
+                        <Card>
+                            <Card.Title>Todo</Card.Title>
+                            <Card.Divider />
+                            <Button
+                                onPress={() => navigation.navigate("Todo")}
+                                title="Go to Todo Screen"
+                            />
+                        </Card>
+                    </ScrollView>
+                </View>
             ) : (
-                <Text
-                    className={`text-bold mt-5 self-center text-lg ${
-                        scheme === "dark" ? "text-white" : "text-black"
-                    }`}
-                >
-                    Login or Register to use the Features
-                </Text>
+                <View className="flex-1 items-center justify-center">
+                    <Text
+                        className={`self-center rounded-2xl bg-gray-300 p-5 text-center text-2xl text-black`}
+                    >
+                        Login or Register to use the Features.
+                    </Text>
+                </View>
             )}
-        </View>
+        </SafeAreaView>
     );
 };
 
