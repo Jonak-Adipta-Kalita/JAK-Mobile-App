@@ -45,7 +45,7 @@ const LoginScreen = () => {
         return unSubscribe;
     }, []);
 
-    const loginEmail = () => {
+    const loginEmail = async () => {
         if (email === "" || password === "") {
             messageAlertShower(
                 "Value not Filled!!",
@@ -58,17 +58,20 @@ const LoginScreen = () => {
                 ]
             );
         } else {
-            signInWithEmailAndPassword(auth, email, password)
-                .then((authUser) => {
-                    pushPrivateNotification(authUser.user.uid!, {
-                        title: "Welcome Back!!",
-                        message: `Welcome back ${email}. Nice to meet you again!!`,
-                        timestamp: serverTimestamp(),
-                    });
-                })
-                .catch((error) => {
-                    errorAlertShower(error);
+            try {
+                const authUser = await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+                await pushPrivateNotification(authUser.user.uid!, {
+                    title: "Welcome Back!!",
+                    message: `Welcome back ${email}. Nice to meet you again!!`,
+                    timestamp: serverTimestamp(),
                 });
+            } catch (error) {
+                errorAlertShower(error);
+            }
         }
     };
 

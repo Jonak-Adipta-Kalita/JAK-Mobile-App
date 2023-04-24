@@ -34,7 +34,7 @@ const RegisterScreen = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const avatar: string = images.avatar;
 
-    const registerEmail = () => {
+    const registerEmail = async () => {
         if (
             name === "" ||
             email === "" ||
@@ -64,33 +64,32 @@ const RegisterScreen = () => {
                 ]
             );
         } else {
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((authUser) => {
-                    updateProfile(authUser?.user, {
-                        displayName: name,
-                        photoURL: avatar,
-                    })
-                        .then(() => {
-                            pushPrivateNotification(authUser.user.uid!, {
-                                title: "Welcome!!",
-                                message: `Welcome ${email}. Nice to meet you!!`,
-                                timestamp: serverTimestamp(),
-                            });
-                        })
-                        .then(() => {
-                            setDoc(doc(db, "users", authUser.user.uid!), {
-                                uid: authUser.user.uid!,
-                                email: email,
-                                displayName: name,
-                                photoURL: avatar,
-                                phoneNumber: phoneNumber,
-                                emailVerified: authUser?.user?.emailVerified,
-                            });
-                        });
-                })
-                .catch((error) => {
-                    errorAlertShower(error);
+            try {
+                const authUser = await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+                await updateProfile(authUser?.user, {
+                    displayName: name,
+                    photoURL: avatar,
                 });
+                pushPrivateNotification(authUser.user.uid!, {
+                    title: "Welcome!!",
+                    message: `Welcome ${email}. Nice to meet you!!`,
+                    timestamp: serverTimestamp(),
+                });
+                setDoc(doc(db, "users", authUser.user.uid!), {
+                    uid: authUser.user.uid!,
+                    email: email,
+                    displayName: name,
+                    photoURL: avatar,
+                    phoneNumber: phoneNumber,
+                    emailVerified: authUser?.user?.emailVerified,
+                });
+            } catch (error) {
+                errorAlertShower(error);
+            }
         }
     };
 
