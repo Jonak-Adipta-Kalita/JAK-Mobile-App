@@ -8,6 +8,7 @@ import Notification from "../components/Notification";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, orderBy, query } from "firebase/firestore";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const NotificationScreen = () => {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -34,7 +35,7 @@ const NotificationScreen = () => {
     }
 
     return (
-        <View className="mb-[10px]">
+        <SafeAreaView>
             <StatusBar />
             <View style={{ height: "100%" }}>
                 <View>
@@ -62,7 +63,7 @@ const NotificationScreen = () => {
                     )}
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
