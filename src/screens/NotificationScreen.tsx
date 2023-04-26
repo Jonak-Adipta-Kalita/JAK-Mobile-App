@@ -101,7 +101,10 @@ const NotificationScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <View></View>
+                <View>
+                    {/* BackButton */}
+                    <Text>Notifications</Text>
+                </View>
                 {notifications?.docs.length === 0 ? (
                     <View className="flex-1 items-center justify-center">
                         <Text
