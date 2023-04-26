@@ -114,19 +114,18 @@ const NotificationScreen = () => {
                         </Text>
                     </View>
                 ) : (
-                    <View></View>
-                    // <ScrollView>
-                    //     {notifications?.docs?.map((notification) => (
-                    //         <Notification
-                    //             key={notification.id}
-                    //             id={notification.id}
-                    //             title={notification.data().title}
-                    //             message={notification.data().message}
-                    //             timestamp={notification.data().timestamp}
-                    //             canDelete={true}
-                    //         />
-                    //     ))}
-                    // </ScrollView>
+                    <ScrollView>
+                        {notifications?.docs?.map((notification) => (
+                            <Notification
+                                key={notification.id}
+                                id={notification.id}
+                                title={notification.data().title}
+                                message={notification.data().message}
+                                timestamp={notification.data().timestamp}
+                                canDelete={true}
+                            />
+                        ))}
+                    </ScrollView>
                 )}
             </View>
         </SafeAreaView>
