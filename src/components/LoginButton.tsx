@@ -17,7 +17,6 @@ import { auth, db } from "../firebase";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import pushPrivateNotification from "../notify/privateNotification";
 import { makeRedirectUri } from "expo-auth-session";
-import Constants from "expo-constants";
 
 interface Props {
     brand: "google" | "apple";
@@ -28,14 +27,7 @@ const LoginButton = ({ brand }: Props) => {
         androidClientId: GOOGLE_ANDROID_CLIENT_ID,
         iosClientId: GOOGLE_IOS_CLIENT_ID,
         expoClientId: EXPO_CLIENT_ID,
-        redirectUri: makeRedirectUri(
-            Constants.appOwnership === "expo"
-                ? {
-                      useProxy: true,
-                      projectNameForProxy: `@${Constants.expoConfig?.owner}/${Constants.expoConfig?.slug}`,
-                  }
-                : { native: `${PACKAGE_NAME}://` }
-        ),
+        redirectUri: makeRedirectUri({ scheme: PACKAGE_NAME }),
     });
 
     let imageFile;
