@@ -7,6 +7,7 @@ import LoadingIndicator from "../components/Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import * as Google from "expo-auth-session/providers/google";
 import {
+    EXPO_CLIENT_ID,
     GOOGLE_ANDROID_CLIENT_ID,
     GOOGLE_IOS_CLIENT_ID,
     PACKAGE_NAME,
@@ -25,6 +26,7 @@ const LoginButton = ({ brand }: Props) => {
     const [, , googlePromptAsync] = Google.useAuthRequest({
         androidClientId: GOOGLE_ANDROID_CLIENT_ID,
         iosClientId: GOOGLE_IOS_CLIENT_ID,
+        expoClientId: EXPO_CLIENT_ID,
         redirectUri: makeRedirectUri({ scheme: PACKAGE_NAME }),
     });
 
