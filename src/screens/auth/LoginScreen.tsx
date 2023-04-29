@@ -28,13 +28,13 @@ const LoginScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    useEffect(() => {
-        const unSubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) navigation.replace("Home");
-        });
-
-        return unSubscribe;
-    }, []);
+    useEffect(
+        () =>
+            auth.onAuthStateChanged((authUser) => {
+                if (authUser) navigation.replace("Home");
+            }),
+        []
+    );
 
     const loginEmail = async () => {
         if (email === "" || password === "") {
