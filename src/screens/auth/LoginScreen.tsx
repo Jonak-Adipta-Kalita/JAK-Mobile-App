@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-    Text,
-    View,
-    TouchableOpacity,
-    ScrollView,
-    Platform,
-} from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
@@ -14,7 +8,6 @@ import {
     setShowPassword,
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
-import LoginButton from "../../components/LoginButton";
 import pushPrivateNotification from "../../notify/privateNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
@@ -25,12 +18,10 @@ import { serverTimestamp } from "firebase/firestore";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
-import { useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Login">>();
-    const colorScheme = useColorScheme();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
 
@@ -72,28 +63,6 @@ const LoginScreen = () => {
             } catch (error) {
                 errorAlertShower(error);
             }
-        }
-    };
-
-    const signInMethods = () => {
-        if (Platform.OS === "android" || Platform.OS === "ios") {
-            return (
-                <View>
-                    <Text
-                        className={`mb-[30px] mt-[50px] self-center text-[20px] ${
-                            colorScheme === "dark"
-                                ? "text-gray-300"
-                                : "text-gray-800"
-                        }`}
-                    >
-                        OR
-                    </Text>
-                    <ScrollView className="flex flex-row">
-                        <LoginButton brand="google" />
-                        {Platform.OS === "ios" && <LoginButton brand="apple" />}
-                    </ScrollView>
-                </View>
-            );
         }
     };
 
@@ -183,8 +152,6 @@ const LoginScreen = () => {
                         onPress={() => navigation.navigate("Register")}
                     />
                 </View>
-
-                {signInMethods()}
             </View>
         </SafeAreaView>
     );
