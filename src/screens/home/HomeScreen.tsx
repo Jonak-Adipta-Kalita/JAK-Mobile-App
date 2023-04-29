@@ -101,7 +101,7 @@ const HomeScreen = () => {
                     <Text
                         className={`self-center rounded-2xl bg-gray-300 p-5 text-center text-2xl text-black`}
                     >
-                        Login or Register to use the Features.
+                        Become a Member to use the Features.
                     </Text>
                 </View>
             )}

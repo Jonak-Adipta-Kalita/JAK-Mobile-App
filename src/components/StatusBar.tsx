@@ -9,6 +9,7 @@ const StatusBar = () => {
         <StatusBarExpo
             style={colorScheme === "dark" ? "light" : "dark"}
             animated={true}
+            translucent={true}
         />
     );
 };
