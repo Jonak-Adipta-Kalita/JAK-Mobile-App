@@ -5,7 +5,12 @@ import { useColorScheme } from "react-native";
 const StatusBar = () => {
     const colorScheme = useColorScheme();
 
-    return <StatusBarExpo style={colorScheme === "dark" ? "light" : "dark"} />;
+    return (
+        <StatusBarExpo
+            style={colorScheme === "dark" ? "light" : "dark"}
+            animated={true}
+        />
+    );
 };
 
 export default StatusBar;
