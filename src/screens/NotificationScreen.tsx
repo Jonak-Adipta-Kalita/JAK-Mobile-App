@@ -11,7 +11,7 @@ import { editMessage } from "@xxjonakadiptaxx/jak_javascript_package";
 import { Entypo } from "@expo/vector-icons";
 import { deleteDoc, doc } from "firebase/firestore";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useIdToken } from "react-firebase-hooks/auth";
 import { collection, orderBy, query } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -28,7 +28,7 @@ const Notification = ({
     timestamp: any;
     canDelete?: boolean;
 }) => {
-    const [user] = useAuthState(auth);
+    const [user] = useIdToken(auth);
 
     const removeNotification = async () => {
         await deleteDoc(doc(db, "users", user?.uid!, "notifications", id));
@@ -75,7 +75,7 @@ const Notification = ({
 };
 
 const NotificationScreen = () => {
-    const [user, userLoading, userError] = useAuthState(auth);
+    const [user, userLoading, userError] = useIdToken(auth);
 
     const [notifications, firestoreLoading, firestoreError] = useCollection(
         query(

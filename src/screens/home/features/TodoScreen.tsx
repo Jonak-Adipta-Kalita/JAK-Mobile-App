@@ -10,7 +10,7 @@ import {
     setDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useIdToken } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
     View,
@@ -34,7 +34,7 @@ import StatusBar from "../../../components/StatusBar";
 
 const TodoScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Todo">>();
-    const [user, userLoading, userError] = useAuthState(auth);
+    const [user, userLoading, userError] = useIdToken(auth);
     const [todosFetched, firestoreLoading, firestoreError] = useCollection(
         query(
             collection(db, "users", user?.uid!, "todos"),
