@@ -5,7 +5,7 @@ import globalStyles from "../globalStyles";
 import { Button, Input } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../@types/navigation";
-import { useIdToken } from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import LoadingIndicator from "./Loading";
 import messageAlertShower from "../utils/alertShowers/messageAlertShower";
@@ -53,7 +53,7 @@ const ChangeSettings = ({
 const ChangeNameScreen = () => {
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"ChangeName">>();
-    const [user, userLoading, userError] = useIdToken(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const [previousName, setPreviousName] = useState(user?.displayName);
     const [name, setName] = useState("");
 
@@ -146,7 +146,7 @@ const ChangeNameScreen = () => {
 const ChangeEmailScreen = () => {
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"ChangeEmail">>();
-    const [user, userLoading, userError] = useIdToken(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const [previousEmail, setPreviousEmail] = useState(user?.email);
     const [email, setEmail] = useState("");
 
@@ -237,7 +237,7 @@ const ChangeEmailScreen = () => {
 const ChangePhoneNumberScreen = () => {
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"ChangePhoneNumber">>();
-    const [user, userLoading, userError] = useIdToken(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const [userData, userDataLoading, userDataError] = useDocument(
         doc(db, "users", user?.uid!)
     );

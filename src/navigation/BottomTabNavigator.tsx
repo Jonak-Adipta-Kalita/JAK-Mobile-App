@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useIdToken } from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import { AntDesign } from "@expo/vector-icons";
@@ -43,7 +43,7 @@ const TabBarIcon = ({
 };
 
 const BottomTabNavigator = () => {
-    const [user, , userError] = useIdToken(auth);
+    const [user, , userError] = useAuthState(auth);
     const colorScheme = useColorScheme();
 
     if (userError) errorAlertShower(userError);

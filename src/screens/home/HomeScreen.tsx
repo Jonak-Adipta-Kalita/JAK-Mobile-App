@@ -11,7 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 // import { Card, Button } from "@rneui/themed";
 import { auth } from "../../firebase";
-import { useIdToken } from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
 import globalStyles from "../../globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
@@ -23,7 +23,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
-    const [user, userLoading, userError] = useIdToken(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
     const scheme = useColorScheme();
 
     useEffect(() => {

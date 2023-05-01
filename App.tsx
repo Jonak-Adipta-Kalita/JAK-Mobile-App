@@ -9,7 +9,7 @@ import DarkTheme from "./src/themes/DarkTheme";
 import reduxStore from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
 import { auth } from "./src/firebase";
-import { useIdToken } from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import registerForPushNotifications from "./src/utils/pushNotification/registerForPushNotification";
 import * as Notifications from "expo-notifications";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
@@ -32,7 +32,7 @@ Notifications.setNotificationHandler({
 });
 
 const AppChildren = () => {
-    const [user] = useIdToken(auth);
+    const [user] = useAuthState(auth);
     const dispatch = useAppDispatch();
     const scheme = useColorScheme();
 
@@ -50,7 +50,7 @@ const AppChildren = () => {
 };
 
 const App = () => {
-    const [, userLoading, userError] = useIdToken(auth);
+    const [, userLoading, userError] = useAuthState(auth);
     const [fontsLoaded, fontsError] = useFonts({
         OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
     });
