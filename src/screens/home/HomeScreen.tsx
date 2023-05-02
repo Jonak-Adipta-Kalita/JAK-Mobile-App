@@ -1,7 +1,6 @@
-import React, { useLayoutEffect, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
     View,
-    SafeAreaView,
     TouchableOpacity,
     ScrollView,
     Platform,
@@ -9,8 +8,7 @@ import {
     Text,
     useColorScheme,
 } from "react-native";
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
-import { Card, Button } from "@rneui/themed";
+import { Ionicons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
@@ -18,11 +16,12 @@ import globalStyles from "../../globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
-import { DrawerStackNavigationProps } from "../../../@types/navigation";
+import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
+    const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const scheme = useColorScheme();
 
@@ -53,42 +52,6 @@ const HomeScreen = () => {
         }
     }, []);
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Welcome!!",
-            headerLeft: () => (
-                <SafeAreaView className="flex-1">
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.openDrawer}
-                    >
-                        <FontAwesome5
-                            name="bars"
-                            size={24}
-                            color={scheme === "dark" ? "#fff" : "#000000"}
-                        />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            ),
-            headerRight: () => (
-                <SafeAreaView className="flex-1">
-                    {user && (
-                        <TouchableOpacity
-                            style={globalStyles.headerIcon}
-                            onPress={() => navigation.navigate("Notification")}
-                        >
-                            <Ionicons
-                                name="notifications-outline"
-                                size={24}
-                                color={scheme === "dark" ? "#fff" : "#000000"}
-                            />
-                        </TouchableOpacity>
-                    )}
-                </SafeAreaView>
-            ),
-        });
-    }, [navigation, user]);
-
     if (userError) errorAlertShower(userError);
 
     if (userLoading) {
@@ -101,29 +64,47 @@ const HomeScreen = () => {
     }
 
     return (
-        <View className="mb-[10px]">
+        <SafeAreaView className="flex-1">
             <StatusBar />
             {user ? (
-                <ScrollView>
-                    <Card>
-                        <Card.Title>Todo</Card.Title>
-                        <Card.Divider />
-                        <Button
-                            onPress={() => navigation.navigate("Todo")}
-                            title="Go to Todo Screen"
-                        />
-                    </Card>
-                </ScrollView>
+                <View>
+                    <View className="flex flex-row items-center justify-between">
+                        <Text className="m-5 mx-10 flex-1 rounded-2xl bg-gray-300 p-2 text-center text-lg">
+                            Tools
+                        </Text>
+                        <TouchableOpacity
+                            style={globalStyles.headerIcon}
+                            onPress={() => navigation.navigate("Notification")}
+                            className="-mt-[0.5px]"
+                        >
+                            <Ionicons
+                                name="notifications-outline"
+                                size={24}
+                                color={scheme === "dark" ? "#fff" : "#000000"}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView>
+                        {/* <Card>
+                            <Card.Title>Todo</Card.Title>
+                            <Card.Divider />
+                            <Button
+                                onPress={() => navigation.navigate("Todo")}
+                                title="Go to Todo Screen"
+                            />
+                        </Card> */}
+                    </ScrollView>
+                </View>
             ) : (
-                <Text
-                    className={`text-bold mt-5 self-center text-lg ${
-                        scheme === "dark" ? "text-white" : "text-black"
-                    }`}
-                >
-                    Login or Register to use the Features!!
-                </Text>
+                <View className="flex-1 items-center justify-center">
+                    <Text
+                        className={`self-center rounded-2xl bg-gray-300 p-5 text-center text-2xl text-black`}
+                    >
+                        Become a Member to use the Features.
+                    </Text>
+                </View>
             )}
-        </View>
+        </SafeAreaView>
     );
 };
 

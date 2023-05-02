@@ -47,7 +47,7 @@ export default StyleSheet.create<{
         color: colorScheme === "dark" ? "#fff" : "#000000",
     },
     headerIcon: {
-        alignItems: "flex-start",
+        alignItems: "flex-end",
         margin: 20,
         marginBottom: 5,
     },

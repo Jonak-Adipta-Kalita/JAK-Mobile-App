@@ -1,52 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Appearance } from "react-native";
-import {
-    createStackNavigator,
-    StackNavigationOptions,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StackScreenParamList } from "../../@types/navigation";
 
 import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
-import NotificationScreen from "../screens/home/notification/NotificationScreen";
+import NotificationScreen from "../screens/NotificationScreen";
 import TodoScreen from "../screens/home/features/TodoScreen";
-import SettingsScreen from "../screens/settings/SettingsScreen";
-import ChangeEmailScreen from "../screens/settings/changeProfile/ChangeEmailScreen";
-import ChangeNameScreen from "../screens/settings/changeProfile/ChangeNameScreen";
-import ChangePhoneNumberScreen from "../screens/settings/changeProfile/ChangePhoneNumberScreen";
+import SettingsScreen from "../screens/SettingsScreen";
+import {
+    ChangeEmailScreen,
+    ChangeNameScreen,
+    ChangePhoneNumberScreen,
+} from "../components/ChangeSettings";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
-import { StackScreenParamList } from "../../@types/navigation";
 
 const Stack = createStackNavigator<StackScreenParamList>();
-const colorScheme = Appearance.getColorScheme();
-
-const globalStackScreenOptions: StackNavigationOptions = {
-    headerBackTitle: "Back",
-    headerTitleAlign: "center",
-};
-
-const stackScreenOption1: StackNavigationOptions = {
-    ...globalStackScreenOptions,
-    headerStyle: {
-        backgroundColor: colorScheme === "dark" ? "#000000" : "#fff",
-    },
-    headerTitleStyle: {
-        color: colorScheme === "dark" ? "#fff" : "#000000",
-        fontFamily: "OtomanopeeOne",
-    },
-    headerTintColor: colorScheme === "dark" ? "#fff" : "#000000",
-};
-
-const stackScreenOption2: StackNavigationOptions = {
-    ...globalStackScreenOptions,
-    headerStyle: { backgroundColor: "#3f7de0" },
-    headerTitleStyle: { color: "white", fontFamily: "OtomanopeeOne" },
-    headerTintColor: "white",
-};
 
 const HomeStack = () => {
     const [isFirstLaunch, setIsFirstLaunch] = useState<boolean | null>(null);
+
     useEffect(() => {
         AsyncStorage.getItem("alreadyLaunched").then((value) => {
             if (value === null) {
@@ -57,13 +31,15 @@ const HomeStack = () => {
             }
         });
     }, []);
+
     if (isFirstLaunch === null) {
         return null;
     }
+
     return (
         <Stack.Navigator
-            screenOptions={stackScreenOption1}
             initialRouteName={isFirstLaunch ? "GetStarted" : "Home"}
+            screenOptions={{ headerShown: false }}
         >
             {isFirstLaunch && (
                 <Stack.Screen name="GetStarted" component={GetStartedScreen} />
@@ -80,8 +56,8 @@ const HomeStack = () => {
 const AuthenticationStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={stackScreenOption2}
             initialRouteName="Login"
+            screenOptions={{ headerShown: false }}
         >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
@@ -92,8 +68,8 @@ const AuthenticationStack = () => {
 const SettingsStack = () => {
     return (
         <Stack.Navigator
-            screenOptions={stackScreenOption1}
             initialRouteName="Settings"
+            screenOptions={{ headerShown: false }}
         >
             <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Group>

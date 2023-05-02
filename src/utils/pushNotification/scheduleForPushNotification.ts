@@ -1,10 +1,11 @@
 import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
+import { Notification } from "../../../@types/data";
 
 const schedulePushNotification = async (
     title: string,
     body: string,
-    data: any,
+    data: Notification,
     userUID: string | null
 ) => {
     if (Platform.OS === "android" || Platform.OS === "ios") {

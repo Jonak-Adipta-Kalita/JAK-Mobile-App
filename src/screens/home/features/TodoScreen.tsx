@@ -9,7 +9,7 @@ import {
     serverTimestamp,
     setDoc,
 } from "firebase/firestore";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
@@ -21,8 +21,7 @@ import {
     useColorScheme,
     ScrollView,
 } from "react-native";
-import { DrawerStackNavigationProps } from "../../../../@types/navigation";
-import ArrowGoBack from "../../../components/ArrowGoBack";
+import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import LoadingIndicator from "../../../components/Loading";
 import { auth, db } from "../../../firebase";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
@@ -34,7 +33,7 @@ import { Entypo } from "@expo/vector-icons";
 import StatusBar from "../../../components/StatusBar";
 
 const TodoScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
+    const navigation = useNavigation<BottomTabStackNavigationProps<"Todo">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [todosFetched, firestoreLoading, firestoreError] = useCollection(
         query(
@@ -48,13 +47,6 @@ const TodoScreen = () => {
         []
     );
     const scheme = useColorScheme();
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Todo(s)!!",
-            headerLeft: () => <ArrowGoBack />,
-        });
-    }, [navigation]);
 
     useEffect(() => {
         setTodos(
@@ -198,11 +190,12 @@ const TodoScreen = () => {
                         />
                         <View className="flex flex-row space-x-10">
                             <TouchableOpacity
-                                className="rounded-[20px] bg-[#2196F3] p-[10px]"
+                                className="rounded-[20px] bg-[#2196F3] p-[10px] disabled:bg-gray-400"
                                 style={{
                                     elevation: 2,
                                 }}
                                 onPress={createTodo}
+                                disabled={!todoText}
                             >
                                 <Text className="items-center font-bold text-white">
                                     Create

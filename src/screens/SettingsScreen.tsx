@@ -1,23 +1,21 @@
 import React, { useLayoutEffect, useState } from "react";
 import { View, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { auth, db, storage } from "../../firebase";
+import { auth, db, storage } from "../firebase";
 import { Avatar, Button, ListItem } from "@rneui/themed";
-import globalStyles from "../../globalStyles";
+import globalStyles from "../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
-import pushPublicNotification from "../../notify/publicNotification";
-import LoadingIndicator from "../../components/Loading";
-import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
-import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
+import LoadingIndicator from "../components/Loading";
+import errorAlertShower from "../utils/alertShowers/errorAlertShower";
+import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
-import { deleteDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
-import { DrawerStackNavigationProps } from "../../../@types/navigation";
-import ArrowGoBack from "../../components/ArrowGoBack";
+import { BottomTabStackNavigationProps } from "../../@types/navigation";
 import { useDocument } from "react-firebase-hooks/firestore";
-import StatusBar from "../../components/StatusBar";
+import StatusBar from "../components/StatusBar";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -43,7 +41,8 @@ const uploadImageAsync = async (uri: string, userUID: string) => {
 };
 
 const SettingsScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
+    const navigation =
+        useNavigation<BottomTabStackNavigationProps<"Settings">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
     const [userData, userDataLoading, userDataError] = useDocument(
@@ -53,14 +52,14 @@ const SettingsScreen = () => {
         user?.phoneNumber || userData?.data()?.phoneNumber;
 
     const updatePic = async () => {
-        const pickerResult: any = await ImagePicker.launchImageLibraryAsync({
+        const pickerResult = await ImagePicker.launchImageLibraryAsync({
             allowsEditing: true,
             aspect: [4, 3],
         });
         try {
-            if (!pickerResult.cancelled) {
+            if (!pickerResult.canceled) {
                 const uploadURL = await uploadImageAsync(
-                    pickerResult.uri,
+                    pickerResult.assets[0].uri,
                     user?.uid!
                 );
                 updateProfile(user!, { photoURL: uploadURL });
@@ -72,18 +71,9 @@ const SettingsScreen = () => {
     };
 
     const signOut = () => {
-        auth.signOut()
-            .then(() =>
-                pushPublicNotification({
-                    title: "Member left the Ligtning Family!!",
-                    message:
-                        "Someone left the Ligtning Family!! But I am sure He/She will return for sure!!",
-                    timestamp: serverTimestamp(),
-                })
-            )
-            .catch((error) => {
-                errorAlertShower(error);
-            });
+        auth.signOut().catch((error) => {
+            errorAlertShower(error);
+        });
     };
 
     const deleteAccount = () => {
@@ -91,13 +81,6 @@ const SettingsScreen = () => {
         user?.delete()
             .then(() => {
                 deleteDoc(doc(db, "users", userUID!));
-            })
-            .then(() => {
-                pushPublicNotification({
-                    title: "Someone left us Forever!!",
-                    message: "Someone left the Family forever!! Noooooooo!!",
-                    timestamp: serverTimestamp(),
-                });
             })
             .catch((error) => {
                 errorAlertShower(error);
@@ -139,8 +122,6 @@ const SettingsScreen = () => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Your Profile!!",
-            headerLeft: () => <ArrowGoBack />,
             headerRight: () => (
                 <SafeAreaView style={{ flex: 1 }}>
                     {!user?.emailVerified && (
@@ -254,14 +235,44 @@ const SettingsScreen = () => {
             <View className="absolute bottom-[20px] flex-row self-start pl-[20px]">
                 <Button
                     containerStyle={globalStyles.button}
-                    onPress={signOut}
+                    onPress={() => {
+                        messageAlertShower(
+                            "Are you sure?",
+                            "Do want to Logout?",
+                            [
+                                {
+                                    text: "Yes",
+                                    onPress: signOut,
+                                },
+                                {
+                                    text: "No",
+                                    onPress: () => {},
+                                },
+                            ]
+                        );
+                    }}
                     title="Logout"
                 />
             </View>
             <View className="absolute bottom-[20px] flex-row self-end pr-[20px]">
                 <Button
                     containerStyle={globalStyles.button}
-                    onPress={deleteAccount}
+                    onPress={() => {
+                        messageAlertShower(
+                            "Are you sure?",
+                            "Do want to Delete your Account?",
+                            [
+                                {
+                                    text: "Yes",
+                                    onPress: deleteAccount,
+                                },
+                                {
+                                    text: "No",
+                                    onPress: () => {},
+                                },
+                            ]
+                        );
+                    }}
                     title="Delete Account"
                 />
             </View>

@@ -1,11 +1,5 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import {
-    Text,
-    View,
-    TouchableOpacity,
-    ScrollView,
-    Platform,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, TouchableOpacity } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
@@ -14,157 +8,152 @@ import {
     setShowPassword,
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
-import LoginButton from "../../components/LoginButton";
 import pushPrivateNotification from "../../notify/privateNotification";
-import pushPublicNotification from "../../notify/publicNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
-import { DrawerStackNavigationProps } from "../../../@types/navigation";
-import ArrowGoBack from "../../components/ArrowGoBack";
+import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
+import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
+    const navigation = useNavigation<BottomTabStackNavigationProps<"Login">>();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    useEffect(() => {
-        const unSubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) navigation.replace("Home");
-        });
+    useEffect(
+        () =>
+            auth.onAuthStateChanged((authUser) => {
+                if (authUser) navigation.replace("Home");
+            }),
+        []
+    );
 
-        return unSubscribe;
-    }, []);
-
-    const loginEmail = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((authUser) => {
-                pushPublicNotification({
-                    title: "Member came back to the Ligtning Family!!",
-                    message: `${email} came back to the Ligtning Family!! Yippie!!`,
-                    timestamp: serverTimestamp(),
-                }).then(() => {
-                    pushPrivateNotification(authUser.user.uid!, {
-                        title: "Welcome Back!!",
-                        message: `Welcome back ${email}. Nice to meet you again!!`,
-                        timestamp: serverTimestamp(),
-                    });
-                });
-            })
-            .catch((error) => {
-                errorAlertShower(error);
-            });
-    };
-
-    const signInMethods = () => {
-        if (Platform.OS === "android" || Platform.OS === "ios") {
-            return (
-                <View>
-                    <Text className="my-[10px] self-center text-[20px] text-[#594d4c]">
-                        Or
-                    </Text>
-                    <ScrollView className="flex flex-row">
-                        <LoginButton brand="google" />
-                        {Platform.OS === "ios" && <LoginButton brand="apple" />}
-                    </ScrollView>
-                </View>
+    const loginEmail = async () => {
+        if (email === "" || password === "") {
+            messageAlertShower(
+                "Value not Filled!!",
+                "Please Enter all the Values in the Form!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
             );
+        } else {
+            try {
+                const authUser = await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+                await pushPrivateNotification(authUser.user.uid!, {
+                    title: "Welcome Back!!",
+                    message: `Welcome back ${email}. Nice to meet you again!!`,
+                    timestamp: serverTimestamp(),
+                });
+            } catch (error) {
+                errorAlertShower(error);
+            }
         }
     };
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Login!!",
-            headerLeft: () => <ArrowGoBack color="white" />,
-        });
-    }, [navigation]);
-
     return (
-        <View className="flex-1 items-center p-[10px]">
+        <SafeAreaView className="mt-[30px] flex-1">
             <StatusBar />
-            <View
-                style={{
-                    width: 300,
-                    marginTop: 10,
-                }}
-            >
-                <Input
-                    placeholder="Email"
-                    autoFocus
-                    value={email}
-                    inputStyle={globalStyles.inputBar}
-                    onChangeText={(text) => setEmail(text)}
-                    leftIcon={
-                        <MaterialIcons
-                            name="email"
-                            size={24}
-                            style={globalStyles.inputBarIcon}
-                        />
-                    }
-                    autoComplete={"email"}
-                />
-                <View className="relative">
+            <View className="items-center">
+                <View
+                    style={{
+                        width: 350,
+                        marginTop: 10,
+                    }}
+                >
                     <Input
-                        placeholder="Password"
-                        secureTextEntry={!showPassword}
-                        value={password}
+                        placeholder="Email"
+                        autoFocus
+                        value={email}
                         inputStyle={globalStyles.inputBar}
-                        onChangeText={(text) => setPassword(text)}
+                        onChangeText={(text) => setEmail(text)}
                         leftIcon={
                             <MaterialIcons
-                                name="lock"
+                                name="email"
                                 size={24}
                                 style={globalStyles.inputBarIcon}
                             />
                         }
-                        autoComplete={"password"}
+                        autoComplete={"email"}
                     />
-                    <TouchableOpacity
-                        style={globalStyles.showPasswordContainer}
-                        onPress={() => dispatch(setShowPassword())}
-                    >
-                        {showPassword ? (
-                            <Feather
-                                name="eye"
-                                size={20}
-                                style={globalStyles.showPasswordIcon}
-                            />
-                        ) : (
-                            <Feather
-                                name="eye-off"
-                                size={20}
-                                style={globalStyles.showPasswordIcon}
-                            />
-                        )}
-                    </TouchableOpacity>
+                    <View className="relative">
+                        <Input
+                            placeholder="Password"
+                            secureTextEntry={!showPassword}
+                            value={password}
+                            inputStyle={globalStyles.inputBar}
+                            onChangeText={(text) => setPassword(text)}
+                            leftIcon={
+                                <MaterialIcons
+                                    name="lock"
+                                    size={24}
+                                    style={globalStyles.inputBarIcon}
+                                />
+                            }
+                            autoComplete={"password"}
+                        />
+                        <TouchableOpacity
+                            style={globalStyles.showPasswordContainer}
+                            onPress={() => dispatch(setShowPassword())}
+                        >
+                            {showPassword ? (
+                                <Feather
+                                    name="eye"
+                                    size={20}
+                                    style={globalStyles.showPasswordIcon}
+                                />
+                            ) : (
+                                <Feather
+                                    name="eye-off"
+                                    size={20}
+                                    style={globalStyles.showPasswordIcon}
+                                />
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View className="mt-[50px] w-[350px]">
+                    <Button
+                        onPress={loginEmail}
+                        containerStyle={{
+                            borderRadius: 50,
+                        }}
+                        buttonStyle={{
+                            padding: 20,
+                            backgroundColor: "#609fe6",
+                        }}
+                        title="LOGIN"
+                    />
+                    <Button
+                        containerStyle={{
+                            borderRadius: 50,
+                            marginTop: 40,
+                        }}
+                        buttonStyle={{
+                            padding: 20,
+                            backgroundColor: "#e3ad3e",
+                        }}
+                        title="REGISTER"
+                        onPress={() => navigation.navigate("Register")}
+                    />
                 </View>
             </View>
-            <Button
-                onPress={loginEmail}
-                containerStyle={{
-                    width: 200,
-                    marginTop: 10,
-                }}
-                title="Login"
-            />
-            <Button
-                containerStyle={{
-                    width: 200,
-                    marginTop: 10,
-                }}
-                title="Register"
-                type="outline"
-                onPress={() => navigation.navigate("Register")}
-            />
-
-            {signInMethods()}
-        </View>
+        </SafeAreaView>
     );
 };
 

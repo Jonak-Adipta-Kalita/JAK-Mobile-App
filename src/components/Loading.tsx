@@ -21,7 +21,7 @@ const LoadingIndicator = ({ containerStyle, dimensions }: Props) => {
                 containerStyle,
                 {
                     backgroundColor:
-                        colorScheme === "dark" ? "#202124" : "#fff",
+                        colorScheme === "dark" ? "#413f44" : "#fff",
                     justifyContent: "center",
                     alignItems: "center",
                 },

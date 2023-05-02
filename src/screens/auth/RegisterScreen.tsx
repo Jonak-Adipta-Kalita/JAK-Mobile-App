@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Button, Input, Text } from "@rneui/themed";
 import {
@@ -14,21 +14,16 @@ import {
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
 import pushPrivateNotification from "../../notify/privateNotification";
-import pushPublicNotification from "../../notify/publicNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import images from "../../images";
-import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { DrawerStackNavigationProps } from "../../../@types/navigation";
-import ArrowGoBack from "../../components/ArrowGoBack";
 import StatusBar from "../../components/StatusBar";
 
 const RegisterScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
 
@@ -39,14 +34,7 @@ const RegisterScreen = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const avatar: string = images.avatar;
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Register!!",
-            headerLeft: () => <ArrowGoBack color="white" />,
-        });
-    }, [navigation]);
-
-    const registerEmail = () => {
+    const registerEmail = async () => {
         if (
             name === "" ||
             email === "" ||
@@ -76,40 +64,32 @@ const RegisterScreen = () => {
                 ]
             );
         } else {
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((authUser) => {
-                    updateProfile(authUser?.user, {
-                        displayName: name,
-                        photoURL: avatar,
-                    })
-                        .then(() => {
-                            pushPrivateNotification(authUser.user.uid!, {
-                                title: "Welcome!!",
-                                message: `Welcome ${email}. Nice to meet you!!`,
-                                timestamp: serverTimestamp(),
-                            });
-                        })
-                        .then(() => {
-                            setDoc(doc(db, "users", authUser.user.uid!), {
-                                uid: authUser.user.uid!,
-                                email: email,
-                                displayName: name,
-                                photoURL: avatar,
-                                phoneNumber: phoneNumber,
-                                emailVerified: authUser?.user?.emailVerified,
-                            });
-                        })
-                        .then(() => {
-                            pushPublicNotification({
-                                title: "New member in the Ligtning Family!!",
-                                message: `${email} Joined the Ligtning Family!! Yippie!!`,
-                                timestamp: serverTimestamp(),
-                            });
-                        });
-                })
-                .catch((error) => {
-                    errorAlertShower(error);
+            try {
+                const authUser = await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+                await updateProfile(authUser?.user, {
+                    displayName: name,
+                    photoURL: avatar,
                 });
+                pushPrivateNotification(authUser.user.uid!, {
+                    title: "Welcome!!",
+                    message: `Welcome ${email}. Nice to meet you!!`,
+                    timestamp: serverTimestamp(),
+                });
+                setDoc(doc(db, "users", authUser.user.uid!), {
+                    uid: authUser.user.uid!,
+                    email: email,
+                    displayName: name,
+                    photoURL: avatar,
+                    phoneNumber: phoneNumber,
+                    emailVerified: authUser?.user?.emailVerified,
+                });
+            } catch (error) {
+                errorAlertShower(error);
+            }
         }
     };
 
@@ -121,7 +101,7 @@ const RegisterScreen = () => {
             </Text>
             <View
                 style={{
-                    width: 300,
+                    width: 350,
                 }}
             >
                 <Input
@@ -248,9 +228,10 @@ const RegisterScreen = () => {
             </View>
             <Button
                 containerStyle={{
-                    width: 200,
-                    marginTop: 10,
+                    marginTop: 40,
+                    width: 350,
                 }}
+                buttonStyle={{ padding: 20, backgroundColor: "#e3ad3e" }}
                 title="Register"
                 onPress={registerEmail}
                 raised

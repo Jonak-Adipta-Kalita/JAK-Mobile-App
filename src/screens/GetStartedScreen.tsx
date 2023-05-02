@@ -1,51 +1,124 @@
-import React, { useLayoutEffect } from "react";
-import { View, Image } from "react-native";
-import { Button } from "@rneui/themed";
-import globalStyles from "../globalStyles";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { DrawerStackNavigationProps } from "../../@types/navigation";
-import images from "../images";
+import { BottomTabStackNavigationProps } from "../../@types/navigation";
 import StatusBar from "../components/StatusBar";
+import PagerView from "react-native-pager-view";
+import { Feather } from "@expo/vector-icons";
+import globalStyles from "../globalStyles";
+import { useColorScheme } from "react-native";
 
 const GetStartedScreen = () => {
-    const navigation = useNavigation<DrawerStackNavigationProps>();
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Get Started!!",
-            headerStyle: {
-                backgroundColor: "#3f7de0",
-            },
-            headerTitleStyle: {
-                color: "white",
-            },
-            headerTintColor: "white",
-            headerTitleAlign: "center",
-        });
-    }, [navigation]);
+    const navigation =
+        useNavigation<BottomTabStackNavigationProps<"GetStarted">>();
+    const colorScheme = useColorScheme();
+    const [pageNumber, setPageNumber] = useState<number>(1);
 
     return (
-        <View>
+        <View className="relative flex-1">
             <StatusBar />
-            <View className="relative h-screen p-[10px] px-[20px]">
-                <View className="mt-[20px] flex items-center justify-center">
-                    <Image
-                        source={images.welcomeText}
-                        className="h-[350px] w-[350px]"
+            <PagerView
+                initialPage={0}
+                style={{ flex: 1 }}
+                onPageSelected={(e) => {
+                    setPageNumber(e.nativeEvent.position + 1);
+                }}
+            >
+                <View key="1" className="items-center justify-center">
+                    <View className="space-y-5 rounded-lg bg-orange-500 p-3 py-20">
+                        <Text
+                            className={`px-10 text-center text-2xl text-gray-50`}
+                            style={[globalStyles.font]}
+                        >
+                            Welcome
+                        </Text>
+                        <Text
+                            className={`px-10 text-center text-xs text-gray-50`}
+                            style={[globalStyles.font]}
+                        >
+                            Welcome to JAK Mobile App.
+                        </Text>
+                    </View>
+                </View>
+                <View key="2" className="items-center justify-center">
+                    <View className="space-y-5 rounded-lg bg-purple-500 p-3 py-10">
+                        <Text
+                            className={`px-10 text-center text-2xl text-gray-50`}
+                            style={[globalStyles.font]}
+                        >
+                            Takes care of all your daily needs
+                        </Text>
+                        <Text
+                            className={`px-10 text-center text-xs text-gray-50`}
+                            style={[globalStyles.font]}
+                        >
+                            Get ready to explore a world of convenience with
+                            tons of essential features at your fingertips.
+                        </Text>
+                    </View>
+                </View>
+                <View key="3" className="relative items-center justify-center">
+                    <View className="m-5 space-y-5 rounded-lg bg-cyan-500 p-3 py-10">
+                        <Text
+                            className={`px-10 text-center text-2xl text-gray-50`}
+                            style={[globalStyles.font]}
+                        >
+                            Made by your Trusted Developer
+                        </Text>
+                        <Text
+                            className={`px-10 text-center text-xs text-gray-50`}
+                            style={[globalStyles.font]}
+                        >
+                            The App has been made and published by JAK (Jonak
+                            Adipta Kalita)
+                        </Text>
+                    </View>
+                    <TouchableOpacity
+                        className="absolute bottom-52"
+                        onPress={() => navigation.replace("Home")}
+                    >
+                        <Feather
+                            name="arrow-right-circle"
+                            size={70}
+                            color={colorScheme === "dark" ? "white" : "black"}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </PagerView>
+            <View className="absolute bottom-32 left-[38.5%] flex flex-row space-x-4">
+                <View
+                    className={`rounded-xl ${
+                        pageNumber === 1 ? "bg-white" : ""
+                    }`}
+                >
+                    <Feather
+                        name="circle"
+                        size={20}
+                        color={colorScheme === "dark" ? "white" : "black"}
                     />
                 </View>
-                <Button
-                    containerStyle={[
-                        globalStyles.button,
-                        {
-                            marginTop: 650,
-                            alignSelf: "center",
-                            position: "absolute",
-                        },
-                    ]}
-                    title="Lets Goooo!!"
-                    onPress={() => navigation.replace("Home")}
-                />
+                <View
+                    className={`rounded-xl ${
+                        pageNumber === 2 ? "bg-white" : ""
+                    }`}
+                >
+                    <Feather
+                        name="circle"
+                        size={20}
+                        color={colorScheme === "dark" ? "white" : "black"}
+                    />
+                </View>
+                <View
+                    className={`rounded-xl ${
+                        pageNumber === 3 ? "bg-white" : ""
+                    }`}
+                >
+                    <Feather
+                        name="circle"
+                        size={20}
+                        color={colorScheme === "dark" ? "white" : "black"}
+                    />
+                </View>
             </View>
         </View>
     );
