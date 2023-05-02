@@ -9,7 +9,6 @@ import {
     useColorScheme,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-// import { Card, Button } from "@rneui/themed";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
