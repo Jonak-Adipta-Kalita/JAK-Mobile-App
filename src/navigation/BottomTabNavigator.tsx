@@ -57,8 +57,14 @@ const BottomTabNavigator = () => {
                 tabBarHideOnKeyboard: true,
                 tabBarStyle: {
                     display: "flex",
+                    position: "absolute",
+                    bottom: 20,
+                    left: 25,
+                    right: 25,
+                    elevation: 10,
                     backgroundColor:
                         colorScheme === "dark" ? "#272934" : "#fff",
+                    borderRadius: 30,
                     height: 90,
                 },
                 tabBarActiveTintColor:
