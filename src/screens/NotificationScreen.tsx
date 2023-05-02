@@ -115,7 +115,7 @@ const NotificationScreen = () => {
                     </View>
                 ) : (
                     <ScrollView>
-                        {notifications?.docs?.map((notification) => (
+                        {/* {notifications?.docs?.map((notification) => (
                             <Notification
                                 key={notification.id}
                                 id={notification.id}
@@ -124,7 +124,7 @@ const NotificationScreen = () => {
                                 timestamp={notification.data().timestamp}
                                 canDelete={true}
                             />
-                        ))}
+                        ))} */}
                     </ScrollView>
                 )}
             </View>
