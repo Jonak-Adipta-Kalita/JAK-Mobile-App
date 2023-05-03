@@ -19,6 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Card from "../../components/Card";
 
 const HomeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
@@ -85,14 +86,13 @@ const HomeScreen = () => {
                         </TouchableOpacity>
                     </View>
                     <ScrollView>
-                        {/* <Card>
-                            <Card.Title>Todo</Card.Title>
-                            <Card.Divider />
-                            <Button
-                                onPress={() => navigation.navigate("Todo")}
-                                title="Go to Todo Screen"
-                            />
-                        </Card> */}
+                        <Card
+                            title="Todo"
+                            button={{
+                                title: "Go Now",
+                                onPress: () => navigation.navigate("Todo"),
+                            }}
+                        />
                     </ScrollView>
                 </View>
             ) : (
