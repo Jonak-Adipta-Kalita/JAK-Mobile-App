@@ -7,6 +7,7 @@ import {
     BackHandler,
     Text,
     useColorScheme,
+    ButtonProps,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
@@ -19,7 +20,16 @@ import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Card from "../../components/Card";
+
+const Feature = ({
+    title,
+}: {
+    title: string;
+    description?: string;
+    button: ButtonProps;
+}) => {
+    return <View></View>;
+};
 
 const HomeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
@@ -86,7 +96,7 @@ const HomeScreen = () => {
                         </TouchableOpacity>
                     </View>
                     <ScrollView>
-                        <Card
+                        <Feature
                             title="Todo"
                             button={{
                                 title: "Go Now",
