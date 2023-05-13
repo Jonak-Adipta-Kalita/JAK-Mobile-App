@@ -7,7 +7,6 @@ import {
     BackHandler,
     Text,
     useColorScheme,
-    ButtonProps,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { auth } from "../../firebase";
@@ -23,12 +22,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const Feature = ({
     title,
+    buttonOnPress,
 }: {
     title: string;
     description?: string;
-    button: ButtonProps;
+    buttonOnPress: () => void;
 }) => {
-    return <View></View>;
+    const colorScheme = useColorScheme();
+
+    return (
+        <View className="px-7">
+            <TouchableOpacity onPress={buttonOnPress}></TouchableOpacity>
+        </View>
+    );
 };
 
 const HomeScreen = () => {
@@ -95,13 +101,10 @@ const HomeScreen = () => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <ScrollView>
+                    <ScrollView className="mt-10">
                         <Feature
                             title="Todo"
-                            button={{
-                                title: "Go Now",
-                                onPress: () => navigation.navigate("Todo"),
-                            }}
+                            buttonOnPress={() => navigation.navigate("Todo")}
                         />
                     </ScrollView>
                 </View>
