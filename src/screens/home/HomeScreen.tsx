@@ -8,7 +8,7 @@ import {
     Text,
     useColorScheme,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Entypo } from "@expo/vector-icons";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
@@ -25,14 +25,24 @@ const Feature = ({
     buttonOnPress,
 }: {
     title: string;
-    description?: string;
+    description: string;
+    icon: keyof typeof Entypo.glyphMap;
     buttonOnPress: () => void;
 }) => {
     const colorScheme = useColorScheme();
 
     return (
         <View className="px-7">
-            <TouchableOpacity onPress={buttonOnPress}></TouchableOpacity>
+            <TouchableOpacity
+                onPress={buttonOnPress}
+                className={`${
+                    colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
+                } rounded-lg p-5 shadow-md`}
+            >
+                <View>
+                    <Text>{title}</Text>
+                </View>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -104,6 +114,8 @@ const HomeScreen = () => {
                     <ScrollView className="mt-10">
                         <Feature
                             title="Todo"
+                            description="Create a Todo List"
+                            icon="list"
                             buttonOnPress={() => navigation.navigate("Todo")}
                         />
                     </ScrollView>
