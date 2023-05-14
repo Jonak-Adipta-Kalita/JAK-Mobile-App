@@ -34,7 +34,7 @@ const Feature = ({
     const colorScheme = useColorScheme();
 
     return (
-        <View className="px-7">
+        <View className="mb-5 px-7">
             <TouchableOpacity
                 onPress={buttonOnPress}
                 className={`${
@@ -144,7 +144,7 @@ const HomeScreen = () => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <ScrollView className="mt-10">
+                    <ScrollView className="mb-64 mt-10">
                         <Feature
                             title="Todo"
                             description="Create a Todo List"
