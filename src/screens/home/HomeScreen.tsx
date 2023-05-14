@@ -46,8 +46,13 @@ const Feature = ({
                         name={icon}
                         size={24}
                         color={colorScheme === "dark" ? "#fff" : "#000000"}
+                        style={{
+                            paddingRight: 10,
+                            borderRightWidth: 2,
+                            borderRightColor: "#ccc",
+                        }}
                     />
-                    <View>
+                    <View className="">
                         <Text
                             className={`${
                                 colorScheme === "dark"
