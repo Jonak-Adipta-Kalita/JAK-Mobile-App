@@ -22,6 +22,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const Feature = ({
     title,
+    description,
+    icon,
     buttonOnPress,
 }: {
     title: string;
@@ -39,8 +41,26 @@ const Feature = ({
                     colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
                 } rounded-lg p-5 shadow-md`}
             >
-                <View>
-                    <Text>{title}</Text>
+                <View className="flex flex-row items-center">
+                    <Entypo
+                        name={icon}
+                        size={24}
+                        color={colorScheme === "dark" ? "#fff" : "#000000"}
+                    />
+                    <View>
+                        <Text
+                            className={`${
+                                colorScheme === "dark"
+                                    ? "text-[#fff]"
+                                    : "text-[#000000]"
+                            } ml-5 text-lg font-bold`}
+                        >
+                            {title}
+                        </Text>
+                        <Text className="ml-5 text-sm text-gray-400">
+                            {description}
+                        </Text>
+                    </View>
                 </View>
             </TouchableOpacity>
         </View>
@@ -50,7 +70,7 @@ const Feature = ({
 const HomeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
     const [user, userLoading, userError] = useAuthState(auth);
-    const scheme = useColorScheme();
+    const colorScheme = useColorScheme();
 
     useEffect(() => {
         if (Platform.OS === "android" && navigation.getId() === "Home") {
@@ -96,7 +116,13 @@ const HomeScreen = () => {
             {user ? (
                 <View>
                     <View className="flex flex-row items-center justify-between">
-                        <Text className="m-5 mx-10 flex-1 rounded-2xl bg-gray-300 p-2 text-center text-lg">
+                        <Text
+                            className={`m-5 mx-10 flex-1 rounded-2xl ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934] text-gray-200"
+                                    : "bg-white text-gray-900"
+                            } p-2 text-center text-lg`}
+                        >
                             Tools
                         </Text>
                         <TouchableOpacity
@@ -107,7 +133,9 @@ const HomeScreen = () => {
                             <Ionicons
                                 name="notifications-outline"
                                 size={24}
-                                color={scheme === "dark" ? "#fff" : "#000000"}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
                             />
                         </TouchableOpacity>
                     </View>
@@ -123,7 +151,11 @@ const HomeScreen = () => {
             ) : (
                 <View className="flex-1 items-center justify-center">
                     <Text
-                        className={`self-center rounded-2xl bg-gray-300 p-5 text-center text-2xl text-black`}
+                        className={`self-center rounded-2xl ${
+                            colorScheme == "dark"
+                                ? "bg-[#272934] text-gray-200"
+                                : "bg-white text-gray-900"
+                        } p-5 text-center text-2xl`}
                     >
                         Become a Member to use the Features.
                     </Text>
