@@ -59,10 +59,14 @@ const Feature = ({
                                     ? "text-[#fff]"
                                     : "text-[#000000]"
                             } ml-5 text-lg font-bold`}
+                            style={globalStyles.font}
                         >
                             {title}
                         </Text>
-                        <Text className="ml-5 text-sm text-gray-400">
+                        <Text
+                            className="ml-5 text-sm text-gray-400"
+                            style={globalStyles.font}
+                        >
                             {description}
                         </Text>
                     </View>
@@ -127,6 +131,7 @@ const HomeScreen = () => {
                                     ? "bg-[#272934] text-gray-200"
                                     : "bg-white text-gray-900"
                             } p-2 text-center text-lg`}
+                            style={globalStyles.font}
                         >
                             Tools
                         </Text>
@@ -161,6 +166,7 @@ const HomeScreen = () => {
                                 ? "bg-[#272934] text-gray-200"
                                 : "bg-white text-gray-900"
                         } p-5 text-center text-2xl`}
+                        style={globalStyles.font}
                     >
                         Become a Member to use the Features.
                     </Text>

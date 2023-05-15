@@ -23,7 +23,7 @@ export default StyleSheet.create<{
         borderRadius: 20,
     },
     font: {
-        fontFamily: "OtomanopeeOne",
+        fontFamily: "Lato",
     },
     inputBar: {
         padding: 10,

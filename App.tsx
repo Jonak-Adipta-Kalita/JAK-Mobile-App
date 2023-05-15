@@ -52,7 +52,7 @@ const AppChildren = () => {
 const App = () => {
     const [, userLoading, userError] = useAuthState(auth);
     const [fontsLoaded, fontsError] = useFonts({
-        OtomanopeeOne: require("./assets/fonts/OtomanopeeOne-Regular.ttf"),
+        Lato: require("./assets/fonts/Lato-Regular.ttf"),
     });
 
     if (fontsError || userError) errorAlertShower(fontsError || userError);
