@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import {
+    View,
+    Text,
+    ScrollView,
+    TouchableOpacity,
+    useColorScheme,
+} from "react-native";
 import StatusBar from "../components/StatusBar";
 import { db, auth } from "../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -8,12 +14,13 @@ import { Card } from "@rneui/themed";
 import moment from "moment";
 import globalStyles from "../globalStyles";
 import { editMessage } from "@xxjonakadiptaxx/jak_javascript_package";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, AntDesign } from "@expo/vector-icons";
 import { deleteDoc, doc } from "firebase/firestore";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, orderBy, query } from "firebase/firestore";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 const Notification = ({
     id,
@@ -76,6 +83,8 @@ const Notification = ({
 
 const NotificationScreen = () => {
     const [user, userLoading, userError] = useAuthState(auth);
+    const colorScheme = useColorScheme();
+    const navigation = useNavigation();
 
     const [notifications, firestoreLoading, firestoreError] = useCollection(
         query(
@@ -101,21 +110,28 @@ const NotificationScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <View>
-                    <View className="flex flex-row items-center justify-between p-5">
-                        <Text
-                            style={[
-                                globalStyles.font,
-                                {
-                                    fontSize: 20,
-                                    fontWeight: "bold",
-                                    color: "#594d4c",
-                                },
-                            ]}
-                        >
-                            Notifications
-                        </Text>
-                    </View>
+                <View className="flex flex-row items-center justify-between">
+                    <TouchableOpacity
+                        style={globalStyles.headerIcon}
+                        onPress={navigation.goBack}
+                        className="-mt-[0.5px] ml-10"
+                    >
+                        <AntDesign
+                            name="back"
+                            size={24}
+                            color={colorScheme === "dark" ? "#fff" : "#000000"}
+                        />
+                    </TouchableOpacity>
+                    <Text
+                        className={`m-5 mx-10 ml-6 flex-1 rounded-2xl ${
+                            colorScheme == "dark"
+                                ? "bg-[#272934] text-gray-200"
+                                : "bg-white text-gray-900"
+                        } p-2 px-0 text-center text-lg`}
+                        style={globalStyles.font}
+                    >
+                        Notifications
+                    </Text>
                 </View>
                 {notifications?.docs.length === 0 ? (
                     <View className="flex-1 items-center justify-center">
