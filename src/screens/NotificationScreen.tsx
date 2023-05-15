@@ -136,7 +136,12 @@ const NotificationScreen = () => {
                 {notifications?.docs.length === 0 ? (
                     <View className="flex-1 items-center justify-center">
                         <Text
-                            className={`self-center rounded-2xl bg-gray-300 p-5 text-center text-2xl text-black`}
+                            className={`self-center rounded-2xl ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934] text-gray-200"
+                                    : "bg-white text-gray-900"
+                            } p-5 text-center text-2xl`}
+                            style={globalStyles.font}
                         >
                             No Notification(s)!!
                         </Text>
