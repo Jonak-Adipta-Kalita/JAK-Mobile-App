@@ -102,8 +102,20 @@ const NotificationScreen = () => {
             <StatusBar />
             <View className="flex-1">
                 <View>
-                    {/* BackButton */}
-                    <Text>Notifications</Text>
+                    <View className="flex flex-row items-center justify-between p-5">
+                        <Text
+                            style={[
+                                globalStyles.font,
+                                {
+                                    fontSize: 20,
+                                    fontWeight: "bold",
+                                    color: "#594d4c",
+                                },
+                            ]}
+                        >
+                            Notifications
+                        </Text>
+                    </View>
                 </View>
                 {notifications?.docs.length === 0 ? (
                     <View className="flex-1 items-center justify-center">

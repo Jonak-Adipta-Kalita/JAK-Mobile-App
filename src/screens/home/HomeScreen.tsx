@@ -58,7 +58,7 @@ const Feature = ({
                                 colorScheme === "dark"
                                     ? "text-[#fff]"
                                     : "text-[#000000]"
-                            } ml-5 text-lg font-bold`}
+                            } ml-5 text-lg`}
                             style={globalStyles.font}
                         >
                             {title}
