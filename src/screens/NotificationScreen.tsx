@@ -42,7 +42,7 @@ const Notification = ({
         ? new editMessage(moment(timestamp.toDate()).fromNow()).toTitleCase()
         : "...";
 
-    return <View className="pb-[5px]"></View>;
+    return <View className=""></View>;
 };
 
 const NotificationScreen = () => {
