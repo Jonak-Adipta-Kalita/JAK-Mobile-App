@@ -10,8 +10,7 @@ import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import LoadingIndicator from "./Loading";
 import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 import { updateEmail, updateProfile } from "firebase/auth";
-import pushPrivateNotification from "../notify/privateNotification";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useDocument } from "react-firebase-hooks/firestore";
 
@@ -84,13 +83,6 @@ const ChangeNameScreen = () => {
             updateProfile(user!, {
                 displayName: name,
             })
-                .then(() => {
-                    pushPrivateNotification(user?.uid!, {
-                        title: "Name Changed Successfully!!",
-                        message: `Your Name has been Successfully Changed to ${name} from ${previousName}!!`,
-                        timestamp: serverTimestamp(),
-                    });
-                })
                 .then(() => {
                     setDoc(
                         doc(db, "users", user?.uid!),
@@ -175,13 +167,6 @@ const ChangeEmailScreen = () => {
             );
         } else {
             updateEmail(user!, email)
-                .then(() => {
-                    pushPrivateNotification(user?.uid!, {
-                        title: "Email Changed Successfully!!",
-                        message: `Your Email has been Successfully Changed to ${email} from ${previousEmail}!!`,
-                        timestamp: serverTimestamp(),
-                    });
-                })
                 .then(() => {
                     setDoc(
                         doc(db, "users", user?.uid!),
@@ -270,24 +255,15 @@ const ChangePhoneNumberScreen = () => {
                 ]
             );
         } else {
-            pushPrivateNotification(user?.uid!, {
-                title: "Phone Number Changed Successfully!!",
-                message: `Your Phone Number has been Successfully Changed to ${phoneNumber} ${
-                    previousPhoneNumber ? `from ${previousPhoneNumber}!!` : ""
-                }`,
-                timestamp: serverTimestamp(),
-            })
-                .then(() => {
-                    setDoc(
-                        doc(db, "users", user?.uid!),
-                        {
-                            phoneNumber: phoneNumber,
-                        },
-                        {
-                            merge: true,
-                        }
-                    );
-                })
+            setDoc(
+                doc(db, "users", user?.uid!),
+                {
+                    phoneNumber: phoneNumber,
+                },
+                {
+                    merge: true,
+                }
+            )
                 .then(() => {
                     setPhoneNumber("");
                     setPreviousPhoneNumber(phoneNumber);

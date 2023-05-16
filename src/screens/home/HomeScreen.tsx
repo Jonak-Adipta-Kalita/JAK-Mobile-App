@@ -8,7 +8,7 @@ import {
     Text,
     useColorScheme,
 } from "react-native";
-import { Ionicons, Entypo } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
@@ -135,19 +135,6 @@ const HomeScreen = () => {
                         >
                             Tools
                         </Text>
-                        <TouchableOpacity
-                            style={globalStyles.headerIcon}
-                            onPress={() => navigation.navigate("Notification")}
-                            className="-mt-[0.5px]"
-                        >
-                            <Ionicons
-                                name="notifications-outline"
-                                size={24}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        </TouchableOpacity>
                     </View>
                     <ScrollView className="mb-64 mt-10">
                         <Feature

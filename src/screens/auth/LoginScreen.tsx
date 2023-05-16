@@ -8,13 +8,11 @@ import {
     setShowPassword,
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
-import pushPrivateNotification from "../../notify/privateNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { serverTimestamp } from "firebase/firestore";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
@@ -50,16 +48,7 @@ const LoginScreen = () => {
             );
         } else {
             try {
-                const authUser = await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-                await pushPrivateNotification(authUser.user.uid!, {
-                    title: "Welcome Back!!",
-                    message: `Welcome back ${email}. Nice to meet you again!!`,
-                    timestamp: serverTimestamp(),
-                });
+                await signInWithEmailAndPassword(auth, email, password);
             } catch (error) {
                 errorAlertShower(error);
             }

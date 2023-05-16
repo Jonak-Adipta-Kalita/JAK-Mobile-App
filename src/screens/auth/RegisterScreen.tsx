@@ -13,14 +13,13 @@ import {
     setShowPassword,
     selectShowPassword,
 } from "../../redux/slices/showPasswordSlice";
-import pushPrivateNotification from "../../notify/privateNotification";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import images from "../../images";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "../../components/StatusBar";
 
 const RegisterScreen = () => {
@@ -73,11 +72,6 @@ const RegisterScreen = () => {
                 await updateProfile(authUser?.user, {
                     displayName: name,
                     photoURL: avatar,
-                });
-                pushPrivateNotification(authUser.user.uid!, {
-                    title: "Welcome!!",
-                    message: `Welcome ${email}. Nice to meet you!!`,
-                    timestamp: serverTimestamp(),
                 });
                 setDoc(doc(db, "users", authUser.user.uid!), {
                     uid: authUser.user.uid!,

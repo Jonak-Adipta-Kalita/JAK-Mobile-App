@@ -23,14 +23,6 @@ export default {
     privacy: "public",
     githubUrl: "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App",
     assetBundlePatterns: ["**/*"],
-    notification: {
-        icon: "./assets/images/icon.png",
-        color: "#C14580",
-        androidMode: "collapse",
-        iosDisplayInForeground: false,
-        androidCollapsedTitle:
-            "{unread_notifications} new Notifications from JAK Mobile App!!",
-    },
     ios: {
         usesAppleSignIn: true,
         supportsTablet: true,

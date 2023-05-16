@@ -28,7 +28,6 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import { AntDesign } from "@expo/vector-icons";
 import { Card, Input } from "@rneui/themed";
 import globalStyles from "../../../globalStyles";
-import pushPrivateNotification from "../../../notify/privateNotification";
 import { Entypo } from "@expo/vector-icons";
 import StatusBar from "../../../components/StatusBar";
 
@@ -87,22 +86,8 @@ const TodoScreen = () => {
                 timestamp: serverTimestamp(),
             }
         );
-        await pushPrivateNotification(user?.uid!, {
-            title: "Added Todo!!",
-            message: `Added your Todo: ${todoText}`,
-            timestamp: serverTimestamp(),
-        });
         setModalVisible(false);
         setTodoText("");
-    };
-
-    const deleteTodo = async (id: string, value: string) => {
-        await deleteDoc(doc(db, "users", user?.uid!, "todos", id));
-        await pushPrivateNotification(user?.uid!, {
-            title: "Deleted Todo!!",
-            message: `Deleted your Todo: ${value}`,
-            timestamp: serverTimestamp(),
-        });
     };
 
     return (
@@ -138,7 +123,15 @@ const TodoScreen = () => {
                                 </Text>
                                 <TouchableOpacity
                                     onPress={() =>
-                                        deleteTodo(data.id, data.value)
+                                        deleteDoc(
+                                            doc(
+                                                db,
+                                                "users",
+                                                user?.uid!,
+                                                "todos",
+                                                id
+                                            )
+                                        )
                                     }
                                 >
                                     <Entypo

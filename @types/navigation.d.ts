@@ -7,7 +7,6 @@ export type StackScreenParamList = {
     Register: undefined;
     Home: undefined;
     GetStarted: undefined;
-    Notification: undefined;
     Settings: undefined;
     ChangeEmail: undefined;
     ChangeName: undefined;

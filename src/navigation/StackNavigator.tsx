@@ -5,7 +5,6 @@ import { StackScreenParamList } from "../../@types/navigation";
 
 import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
-import NotificationScreen from "../screens/NotificationScreen";
 import TodoScreen from "../screens/home/features/TodoScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import {
@@ -45,7 +44,6 @@ const HomeStack = () => {
                 <Stack.Screen name="GetStarted" component={GetStartedScreen} />
             )}
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Notification" component={NotificationScreen} />
             <Stack.Group>
                 <Stack.Screen name="Todo" component={TodoScreen} />
             </Stack.Group>
