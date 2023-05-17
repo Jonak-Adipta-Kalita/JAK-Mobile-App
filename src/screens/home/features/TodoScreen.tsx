@@ -178,7 +178,7 @@ const TodoScreen = () => {
                         </Text>
                     </View>
                 ) : (
-                    <ScrollView>
+                    <ScrollView className="mb-32 mt-10">
                         {todos?.map(({ id, data }) => (
                             <Todo id={id} key={id} data={data} />
                         ))}
