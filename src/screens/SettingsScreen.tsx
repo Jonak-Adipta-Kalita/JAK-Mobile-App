@@ -1,8 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
-import { View, TouchableOpacity, ScrollView } from "react-native";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../firebase";
-import { Avatar, Button, ListItem } from "@rneui/themed";
 import globalStyles from "../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../components/Loading";
@@ -51,6 +50,7 @@ const SettingsScreen = () => {
     );
     const phoneNumberFromUserData =
         user?.phoneNumber || userData?.data()?.phoneNumber;
+    const colorScheme = useColorScheme();
 
     const updatePic = async () => {
         const pickerResult = await ImagePicker.launchImageLibraryAsync({
@@ -155,127 +155,36 @@ const SettingsScreen = () => {
     }
 
     return (
-        <SafeAreaView className="mb-[10px] flex-1 flex-col">
+        <SafeAreaView className="flex-1">
             <StatusBar />
-            <ScrollView>
-                <View className="mt-[30px] items-center">
-                    {user?.photoURL ? (
+            <View className="flex-1">
+                <View className="flex flex-row items-center justify-between">
+                    <Text
+                        className={`m-5 mx-10 ml-6 flex-1 rounded-2xl ${
+                            colorScheme == "dark"
+                                ? "bg-[#272934] text-gray-200"
+                                : "bg-white text-gray-900"
+                        } p-2 px-0 text-center text-lg`}
+                        style={globalStyles.font}
+                    >
+                        User Settings
+                    </Text>
+                    {!user?.emailVerified && (
                         <TouchableOpacity
-                            activeOpacity={0.5}
-                            onPress={updatePic}
+                            style={globalStyles.headerIcon}
+                            onPress={verifyEmail}
+                            className="-mt-[0.5px] mr-10"
                         >
-                            <Avatar
-                                rounded
-                                size="large"
-                                source={{
-                                    uri: image || user?.photoURL,
-                                }}
+                            <MaterialCommunityIcons
+                                name="account-cancel-outline"
+                                size={30}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
                             />
                         </TouchableOpacity>
-                    ) : (
-                        <LoadingIndicator
-                            dimensions={{ width: 70, height: 70 }}
-                        />
                     )}
                 </View>
-                <View style={{ marginTop: 30, padding: 20 }}>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("ChangeName")}
-                    >
-                        <ListItem
-                            bottomDivider
-                            hasTVPreferredFocus={undefined}
-                            tvParallaxProperties={undefined}
-                        >
-                            <AntDesign name="edit" style={{ fontSize: 30 }} />
-                            <ListItem.Content>
-                                <ListItem.Title>
-                                    {user?.displayName}
-                                </ListItem.Title>
-                                <ListItem.Subtitle>Name</ListItem.Subtitle>
-                            </ListItem.Content>
-                        </ListItem>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("ChangeEmail")}
-                    >
-                        <ListItem
-                            bottomDivider
-                            hasTVPreferredFocus={undefined}
-                            tvParallaxProperties={undefined}
-                        >
-                            <AntDesign name="edit" style={{ fontSize: 30 }} />
-                            <ListItem.Content>
-                                <ListItem.Title>{user?.email}</ListItem.Title>
-                                <ListItem.Subtitle>Email</ListItem.Subtitle>
-                            </ListItem.Content>
-                        </ListItem>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("ChangePhoneNumber")}
-                    >
-                        <ListItem
-                            bottomDivider
-                            hasTVPreferredFocus={undefined}
-                            tvParallaxProperties={undefined}
-                        >
-                            <AntDesign name="edit" style={{ fontSize: 30 }} />
-                            <ListItem.Content>
-                                <ListItem.Title>
-                                    {phoneNumberFromUserData ||
-                                        "Provide your Phone Number!!"}
-                                </ListItem.Title>
-                                <ListItem.Subtitle>
-                                    Phone Number
-                                </ListItem.Subtitle>
-                            </ListItem.Content>
-                        </ListItem>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-            <View className="absolute bottom-[20px] flex-row self-start pl-[20px]">
-                <Button
-                    containerStyle={globalStyles.button}
-                    onPress={() => {
-                        messageAlertShower(
-                            "Are you sure?",
-                            "Do want to Logout?",
-                            [
-                                {
-                                    text: "Yes",
-                                    onPress: signOut,
-                                },
-                                {
-                                    text: "No",
-                                    onPress: () => {},
-                                },
-                            ]
-                        );
-                    }}
-                    title="Logout"
-                />
-            </View>
-            <View className="absolute bottom-[20px] flex-row self-end pr-[20px]">
-                <Button
-                    containerStyle={globalStyles.button}
-                    onPress={() => {
-                        messageAlertShower(
-                            "Are you sure?",
-                            "Do want to Delete your Account?",
-                            [
-                                {
-                                    text: "Yes",
-                                    onPress: deleteAccount,
-                                },
-                                {
-                                    text: "No",
-                                    onPress: () => {},
-                                },
-                            ]
-                        );
-                    }}
-                    title="Delete Account"
-                />
             </View>
         </SafeAreaView>
     );
