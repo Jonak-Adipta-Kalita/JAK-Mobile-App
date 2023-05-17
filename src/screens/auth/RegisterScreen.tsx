@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, useColorScheme } from "react-native";
+import React, { useState } from "react";
+import { View, TouchableOpacity } from "react-native";
 import { Button, Input, Text } from "@rneui/themed";
 import {
     Feather,
@@ -21,14 +21,9 @@ import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "../../components/StatusBar";
-import { useNavigation } from "@react-navigation/native";
-import { BottomTabStackNavigationProps } from "../../../@types/navigation";
-import { bottomTabScreenOptions } from "../../utils/bottomTabScreenOptions";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 const RegisterScreen = () => {
-    const navigation =
-        useNavigation<BottomTabStackNavigationProps<"Register">>();
-    const colorScheme = useColorScheme();
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
 
@@ -39,17 +34,7 @@ const RegisterScreen = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const avatar: string = images.avatar;
 
-    useEffect(() => {
-        navigation.getParent()!.setOptions({
-            tabBarStyle: { display: "none" },
-            tabBarVisible: false,
-        });
-
-        return () =>
-            navigation
-                .getParent()
-                ?.setOptions(bottomTabScreenOptions(colorScheme));
-    }, [navigation]);
+    useBottomTabBarHeight();
 
     const registerEmail = async () => {
         if (

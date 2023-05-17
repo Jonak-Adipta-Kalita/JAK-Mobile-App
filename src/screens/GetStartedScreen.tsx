@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../@types/navigation";
@@ -7,7 +7,7 @@ import PagerView from "react-native-pager-view";
 import { Feather } from "@expo/vector-icons";
 import globalStyles from "../globalStyles";
 import { useColorScheme } from "react-native";
-import { bottomTabScreenOptions } from "../utils/bottomTabScreenOptions";
+import { useHideBottomTab } from "../hooks/useHideBottomTab";
 
 const GetStartedScreen = () => {
     const navigation =
@@ -15,17 +15,7 @@ const GetStartedScreen = () => {
     const colorScheme = useColorScheme();
     const [pageNumber, setPageNumber] = useState<number>(1);
 
-    useEffect(() => {
-        navigation.getParent()!.setOptions({
-            tabBarStyle: { display: "none" },
-            tabBarVisible: false,
-        });
-
-        return () =>
-            navigation
-                .getParent()
-                ?.setOptions(bottomTabScreenOptions(colorScheme));
-    }, [navigation]);
+    useHideBottomTab();
 
     return (
         <View className="relative flex-1">

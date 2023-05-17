@@ -28,8 +28,8 @@ import { AntDesign, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import globalStyles from "../../../globalStyles";
 import StatusBar from "../../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { bottomTabScreenOptions } from "../../../utils/bottomTabScreenOptions";
 import { TextInput } from "react-native-gesture-handler";
+import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
@@ -163,17 +163,7 @@ const TodoScreen = () => {
         );
     }, [user, navigation, todosFetched]);
 
-    useEffect(() => {
-        navigation.getParent()!.setOptions({
-            tabBarStyle: { display: "none" },
-            tabBarVisible: false,
-        });
-
-        return () =>
-            navigation
-                .getParent()
-                ?.setOptions(bottomTabScreenOptions(colorScheme));
-    }, [navigation]);
+    useHideBottomTab();
 
     if (firestoreError || userError) {
         errorAlertShower(firestoreError || userError);
