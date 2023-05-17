@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     View,
     TouchableOpacity,
@@ -127,26 +127,6 @@ const SettingsScreen = () => {
         }
     };
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <SafeAreaView style={{ flex: 1 }}>
-                    {!user?.emailVerified && (
-                        <TouchableOpacity
-                            style={globalStyles.headerIcon}
-                            onPress={verifyEmail}
-                        >
-                            <MaterialCommunityIcons
-                                name="account-cancel-outline"
-                                style={{ fontSize: 30 }}
-                            />
-                        </TouchableOpacity>
-                    )}
-                </SafeAreaView>
-            ),
-        });
-    }, [navigation]);
-
     if (userError) errorAlertShower(userError);
 
     if (userDataError) errorAlertShower(userDataError);
@@ -213,24 +193,6 @@ const SettingsScreen = () => {
                                     borderRadius: 50,
                                 }}
                             />
-
-                            <View
-                                className={`absolute bottom-0 right-0 rounded-full ${
-                                    colorScheme == "dark"
-                                        ? "bg-[#272934]"
-                                        : "bg-white"
-                                } p-1`}
-                            >
-                                <MaterialCommunityIcons
-                                    name="camera"
-                                    size={20}
-                                    color={
-                                        colorScheme === "dark"
-                                            ? "#fff"
-                                            : "#000000"
-                                    }
-                                />
-                            </View>
                         </View>
                     </TouchableOpacity>
                 </View>
