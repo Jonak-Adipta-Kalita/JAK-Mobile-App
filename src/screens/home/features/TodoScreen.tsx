@@ -24,9 +24,7 @@ import LoadingIndicator from "../../../components/Loading";
 import { auth, db } from "../../../firebase";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import { AntDesign } from "@expo/vector-icons";
-import { Card } from "@rneui/themed";
 import globalStyles from "../../../globalStyles";
-import { Entypo } from "@expo/vector-icons";
 import StatusBar from "../../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { bottomTabScreenOptions } from "../../../utils/bottomTabScreenOptions";
@@ -35,35 +33,7 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
     const [user] = useAuthState(auth);
 
-    return (
-        <Card
-            key={id}
-            containerStyle={{
-                backgroundColor: colorScheme === "dark" ? "#000000" : "#fff",
-            }}
-        >
-            <View className="flex flex-row items-center justify-between">
-                <Text
-                    style={{
-                        color: colorScheme === "dark" ? "#fff" : "#000000",
-                    }}
-                >
-                    {data.value}
-                </Text>
-                <TouchableOpacity
-                    onPress={() =>
-                        deleteDoc(doc(db, "users", user?.uid!, "todos", id))
-                    }
-                >
-                    <Entypo
-                        name="cross"
-                        size={24}
-                        color={colorScheme === "dark" ? "#fff" : "#000000"}
-                    />
-                </TouchableOpacity>
-            </View>
-        </Card>
-    );
+    return <View></View>;
 };
 
 const TodoScreen = () => {
