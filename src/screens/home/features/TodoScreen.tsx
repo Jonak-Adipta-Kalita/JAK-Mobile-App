@@ -77,7 +77,6 @@ const TodoScreen = () => {
             orderBy("timestamp", "desc")
         )
     );
-    const [modalVisible, setModalVisible] = useState(false);
     const [todoText, setTodoText] = useState("");
     const [todos, setTodos] = useState<{ id: string; data: DocumentData }[]>(
         []
@@ -135,7 +134,6 @@ const TodoScreen = () => {
                 timestamp: serverTimestamp(),
             }
         );
-        setModalVisible(false);
         setTodoText("");
     };
 
@@ -193,7 +191,7 @@ const TodoScreen = () => {
                                 ? "border-white"
                                 : "border-black"
                         }`}
-                        onPress={() => setModalVisible(true)}
+                        onPress={() => {}}
                     >
                         <AntDesign
                             name="plus"
