@@ -7,7 +7,7 @@ import PagerView from "react-native-pager-view";
 import { Feather } from "@expo/vector-icons";
 import globalStyles from "../globalStyles";
 import { useColorScheme } from "react-native";
-import { bottomTabScreenOptions } from "../navigation/BottomTabNavigator";
+import { bottomTabScreenOptions } from "../utils/bottomTabScreenOptions";
 
 const GetStartedScreen = () => {
     const navigation =

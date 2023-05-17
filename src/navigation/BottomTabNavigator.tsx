@@ -1,8 +1,5 @@
 import React from "react";
-import {
-    BottomTabNavigationOptions,
-    createBottomTabNavigator,
-} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
@@ -15,28 +12,9 @@ import {
     SettingsStack,
     AuthenticationStack,
 } from "./StackNavigator";
+import { bottomTabScreenOptions } from "../utils/bottomTabScreenOptions";
 
 const Tab = createBottomTabNavigator<BottomTabScreensParamList>();
-
-export const bottomTabScreenOptions = (
-    colorScheme: ColorSchemeName
-): BottomTabNavigationOptions => ({
-    headerShown: false,
-    tabBarShowLabel: false,
-    tabBarHideOnKeyboard: true,
-    tabBarStyle: {
-        display: "flex",
-        position: "absolute",
-        bottom: 20,
-        left: 25,
-        right: 25,
-        elevation: 10,
-        backgroundColor: colorScheme === "dark" ? "#272934" : "#fff",
-        borderRadius: 30,
-        height: 90,
-    },
-    tabBarActiveTintColor: colorScheme === "dark" ? "skyblue" : "#02c8fa",
-});
 
 const TabBarIcon = ({
     children,

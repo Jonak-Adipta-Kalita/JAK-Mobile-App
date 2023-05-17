@@ -29,7 +29,7 @@ import globalStyles from "../../../globalStyles";
 import { Entypo } from "@expo/vector-icons";
 import StatusBar from "../../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { bottomTabScreenOptions } from "../../../navigation/BottomTabNavigator";
+import { bottomTabScreenOptions } from "../../../utils/bottomTabScreenOptions";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();

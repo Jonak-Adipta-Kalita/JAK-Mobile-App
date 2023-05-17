@@ -21,9 +21,9 @@ import { useAppSelector } from "../../hooks/useSelector";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "../../components/StatusBar";
-import { bottomTabScreenOptions } from "../../navigation/BottomTabNavigator";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
+import { bottomTabScreenOptions } from "../../utils/bottomTabScreenOptions";
 
 const RegisterScreen = () => {
     const navigation =
