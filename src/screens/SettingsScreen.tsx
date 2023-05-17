@@ -1,5 +1,11 @@
 import React, { useLayoutEffect, useState } from "react";
-import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
+import {
+    View,
+    TouchableOpacity,
+    Text,
+    useColorScheme,
+    Image,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../firebase";
 import globalStyles from "../globalStyles";
@@ -184,6 +190,49 @@ const SettingsScreen = () => {
                             />
                         </TouchableOpacity>
                     )}
+                </View>
+                <View className="mt-8 flex flex-col items-center justify-center">
+                    <TouchableOpacity
+                        onPress={updatePic}
+                        className="flex flex-col items-center justify-center"
+                    >
+                        <View
+                            className={`rounded-full ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } p-2`}
+                        >
+                            <Image
+                                source={{
+                                    uri: image || user?.photoURL!,
+                                }}
+                                style={{
+                                    width: 100,
+                                    height: 100,
+                                    borderRadius: 50,
+                                }}
+                            />
+
+                            <View
+                                className={`absolute bottom-0 right-0 rounded-full ${
+                                    colorScheme == "dark"
+                                        ? "bg-[#272934]"
+                                        : "bg-white"
+                                } p-1`}
+                            >
+                                <MaterialCommunityIcons
+                                    name="camera"
+                                    size={20}
+                                    color={
+                                        colorScheme === "dark"
+                                            ? "#fff"
+                                            : "#000000"
+                                    }
+                                />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>
