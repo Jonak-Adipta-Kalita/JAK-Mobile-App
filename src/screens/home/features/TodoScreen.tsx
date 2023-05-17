@@ -6,6 +6,7 @@ import {
     DocumentData,
     orderBy,
     query,
+    QuerySnapshot,
     serverTimestamp,
     setDoc,
 } from "firebase/firestore";
@@ -68,6 +69,38 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     );
 };
 
+const CreateNewTodo = ({
+    todosFetched,
+    setCreatingNewTodo,
+}: {
+    todosFetched: QuerySnapshot<DocumentData> | undefined;
+    setCreatingNewTodo: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    const [todoText, setTodoText] = useState("");
+    const [user] = useAuthState(auth);
+
+    const createTodo = () => {
+        setDoc(
+            doc(
+                db,
+                "users",
+                user?.uid!,
+                "todos",
+                `todo_${todosFetched?.docs?.length! + 1}`
+            ),
+            {
+                value: todoText,
+                id: `todo_${todosFetched?.docs?.length! + 1}`,
+                timestamp: serverTimestamp(),
+            }
+        );
+        setCreatingNewTodo(false);
+        setTodoText("");
+    };
+
+    return <View></View>;
+};
+
 const TodoScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Todo">>();
     const [user, userLoading, userError] = useAuthState(auth);
@@ -77,10 +110,10 @@ const TodoScreen = () => {
             orderBy("timestamp", "desc")
         )
     );
-    const [todoText, setTodoText] = useState("");
     const [todos, setTodos] = useState<{ id: string; data: DocumentData }[]>(
         []
     );
+    const [creatingNewTodo, setCreatingNewTodo] = useState<boolean>(false);
     const colorScheme = useColorScheme();
 
     useEffect(() => {
@@ -119,24 +152,6 @@ const TodoScreen = () => {
         );
     }
 
-    const createTodo = async () => {
-        await setDoc(
-            doc(
-                db,
-                "users",
-                user?.uid!,
-                "todos",
-                `todo_${todosFetched?.docs?.length! + 1}`
-            ),
-            {
-                value: todoText,
-                id: `todo_${todosFetched?.docs?.length! + 1}`,
-                timestamp: serverTimestamp(),
-            }
-        );
-        setTodoText("");
-    };
-
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
@@ -164,7 +179,7 @@ const TodoScreen = () => {
                         Todo
                     </Text>
                 </View>
-                {todosFetched?.docs.length === 0 ? (
+                {todosFetched?.docs.length === 0 && !creatingNewTodo ? (
                     <View className="mt-[50%] flex-1 items-center">
                         <Text
                             className={`self-center rounded-2xl ${
@@ -182,6 +197,12 @@ const TodoScreen = () => {
                         {todos?.map(({ id, data }) => (
                             <Todo id={id} key={id} data={data} />
                         ))}
+                        {creatingNewTodo && (
+                            <CreateNewTodo
+                                todosFetched={todosFetched}
+                                setCreatingNewTodo={setCreatingNewTodo}
+                            />
+                        )}
                     </ScrollView>
                 )}
                 <View className="absolute bottom-10 right-10">
@@ -191,7 +212,7 @@ const TodoScreen = () => {
                                 ? "border-white"
                                 : "border-black"
                         }`}
-                        onPress={() => {}}
+                        onPress={() => setCreatingNewTodo(true)}
                     >
                         <AntDesign
                             name="plus"
