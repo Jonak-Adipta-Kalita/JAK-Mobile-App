@@ -195,14 +195,14 @@ const TodoScreen = () => {
                     </ScrollView>
                 )}
                 <Modal
-                    animationType="slide"
+                    animationType="fade"
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => {
                         setModalVisible(!modalVisible);
                     }}
                 >
-                    <View className="z-50 flex-1 items-center justify-center bg-gray-700/75">
+                    <View className="z-50 flex-1 items-center justify-center bg-gray-800/75">
                         <View
                             className={`items-center rounded-lg ${
                                 colorScheme === "dark" ? "bg-black" : "bg-white"
