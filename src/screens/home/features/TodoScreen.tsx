@@ -24,11 +24,12 @@ import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import LoadingIndicator from "../../../components/Loading";
 import { auth, db } from "../../../firebase";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import globalStyles from "../../../globalStyles";
 import StatusBar from "../../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { bottomTabScreenOptions } from "../../../utils/bottomTabScreenOptions";
+import { TextInput } from "react-native-gesture-handler";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
@@ -58,7 +59,7 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
                         );
                     }}
                 >
-                    <AntDesign
+                    <MaterialCommunityIcons
                         name="delete"
                         size={24}
                         color={colorScheme === "dark" ? "#fff" : "#000000"}
@@ -78,6 +79,7 @@ const CreateNewTodo = ({
 }) => {
     const [todoText, setTodoText] = useState("");
     const [user] = useAuthState(auth);
+    const colorScheme = useColorScheme();
 
     const createTodo = () => {
         setDoc(
@@ -98,7 +100,41 @@ const CreateNewTodo = ({
         setTodoText("");
     };
 
-    return <View></View>;
+    return (
+        <View
+            className={`mb-5 px-7 ${
+                colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
+            } mx-5 rounded-lg p-5 shadow-md`}
+        >
+            <View className="flex flex-row items-center justify-between">
+                <TextInput
+                    placeholder="Enter Todo"
+                    className={`${
+                        colorScheme === "dark"
+                            ? "text-[#fff]"
+                            : "text-[#000000]"
+                    } flex-1 text-sm`}
+                    placeholderTextColor={"#9CA3AF"}
+                    style={globalStyles.font}
+                    onChangeText={(e) => setTodoText(e)}
+                />
+                <TouchableOpacity onPress={() => createTodo()} className="mr-5">
+                    <Entypo
+                        name="check"
+                        size={24}
+                        color={colorScheme === "dark" ? "#fff" : "#000000"}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setCreatingNewTodo(false)}>
+                    <Entypo
+                        name="cross"
+                        size={24}
+                        color={colorScheme === "dark" ? "#fff" : "#000000"}
+                    />
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
 };
 
 const TodoScreen = () => {
