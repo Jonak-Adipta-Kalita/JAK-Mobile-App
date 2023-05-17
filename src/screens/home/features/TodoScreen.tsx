@@ -202,9 +202,9 @@ const TodoScreen = () => {
                         setModalVisible(!modalVisible);
                     }}
                 >
-                    <View className="mt-[22px] flex-1 items-center justify-center">
+                    <View className="z-50 flex-1 items-center justify-center bg-gray-700/75">
                         <View
-                            className={`m-[20px] items-center rounded-[20px] ${
+                            className={`items-center rounded-lg ${
                                 colorScheme === "dark" ? "bg-black" : "bg-white"
                             } p-[35px] pt-[-20px]`}
                             style={{
