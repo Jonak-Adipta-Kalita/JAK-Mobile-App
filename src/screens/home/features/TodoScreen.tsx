@@ -30,6 +30,7 @@ import globalStyles from "../../../globalStyles";
 import { Entypo } from "@expo/vector-icons";
 import StatusBar from "../../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { bottomTabScreenOptions } from "../../../navigation/BottomTabNavigator";
 
 const TodoScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Todo">>();
@@ -57,6 +58,18 @@ const TodoScreen = () => {
                 : []
         );
     }, [user, navigation, todosFetched]);
+
+    useEffect(() => {
+        navigation.getParent()!.setOptions({
+            tabBarStyle: { display: "none" },
+            tabBarVisible: false,
+        });
+
+        return () =>
+            navigation
+                .getParent()
+                ?.setOptions(bottomTabScreenOptions(colorScheme));
+    }, [navigation]);
 
     if (firestoreError || userError) {
         errorAlertShower(firestoreError || userError);
@@ -243,7 +256,7 @@ const TodoScreen = () => {
                         </View>
                     </View>
                 </Modal>
-                <View className="absolute bottom-36 right-10">
+                <View className="absolute bottom-10 right-10">
                     <TouchableOpacity
                         className={`rounded-full border-8 ${
                             colorScheme === "dark"

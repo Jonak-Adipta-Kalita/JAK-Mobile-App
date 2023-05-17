@@ -1,5 +1,8 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+    BottomTabNavigationOptions,
+    createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
@@ -14,6 +17,26 @@ import {
 } from "./StackNavigator";
 
 const Tab = createBottomTabNavigator<BottomTabScreensParamList>();
+
+export const bottomTabScreenOptions = (
+    colorScheme: ColorSchemeName
+): BottomTabNavigationOptions => ({
+    headerShown: false,
+    tabBarShowLabel: false,
+    tabBarHideOnKeyboard: true,
+    tabBarStyle: {
+        display: "flex",
+        position: "absolute",
+        bottom: 20,
+        left: 25,
+        right: 25,
+        elevation: 10,
+        backgroundColor: colorScheme === "dark" ? "#272934" : "#fff",
+        borderRadius: 30,
+        height: 90,
+    },
+    tabBarActiveTintColor: colorScheme === "dark" ? "skyblue" : "#02c8fa",
+});
 
 const TabBarIcon = ({
     children,
@@ -51,25 +74,7 @@ const BottomTabNavigator = () => {
     return (
         <Tab.Navigator
             initialRouteName="HomeTab"
-            screenOptions={{
-                headerShown: false,
-                tabBarShowLabel: false,
-                tabBarHideOnKeyboard: true,
-                tabBarStyle: {
-                    display: "flex",
-                    position: "absolute",
-                    bottom: 20,
-                    left: 25,
-                    right: 25,
-                    elevation: 10,
-                    backgroundColor:
-                        colorScheme === "dark" ? "#272934" : "#fff",
-                    borderRadius: 30,
-                    height: 90,
-                },
-                tabBarActiveTintColor:
-                    colorScheme === "dark" ? "skyblue" : "#02c8fa",
-            }}
+            screenOptions={bottomTabScreenOptions(colorScheme)}
         >
             <Tab.Screen
                 name="HomeTab"
