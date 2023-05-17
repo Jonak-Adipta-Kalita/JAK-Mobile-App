@@ -33,7 +33,39 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
     const [user] = useAuthState(auth);
 
-    return <View></View>;
+    return (
+        <View
+            className={`mb-5 px-7 ${
+                colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
+            } mx-5 rounded-lg p-5 shadow-md`}
+        >
+            <View className="flex flex-row items-center justify-between">
+                <Text
+                    className={`${
+                        colorScheme === "dark"
+                            ? "text-[#fff]"
+                            : "text-[#000000]"
+                    } text-sm`}
+                    style={globalStyles.font}
+                >
+                    {data.value}
+                </Text>
+                <TouchableOpacity
+                    onPress={async () => {
+                        await deleteDoc(
+                            doc(db, "users", user?.uid!, "todos", id)
+                        );
+                    }}
+                >
+                    <AntDesign
+                        name="delete"
+                        size={24}
+                        color={colorScheme === "dark" ? "#fff" : "#000000"}
+                    />
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
 };
 
 const TodoScreen = () => {
