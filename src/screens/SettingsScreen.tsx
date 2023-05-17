@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import { View, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../firebase";
 import { Avatar, Button, ListItem } from "@rneui/themed";
@@ -16,6 +16,7 @@ import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { BottomTabStackNavigationProps } from "../../@types/navigation";
 import { useDocument } from "react-firebase-hooks/firestore";
 import StatusBar from "../components/StatusBar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const uploadImageAsync = async (uri: string, userUID: string) => {
     const blob: any = await new Promise((resolve, reject) => {
@@ -154,7 +155,7 @@ const SettingsScreen = () => {
     }
 
     return (
-        <View className="mb-[10px] flex-1 flex-col">
+        <SafeAreaView className="mb-[10px] flex-1 flex-col">
             <StatusBar />
             <ScrollView>
                 <View className="mt-[30px] items-center">
@@ -276,7 +277,7 @@ const SettingsScreen = () => {
                     title="Delete Account"
                 />
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
