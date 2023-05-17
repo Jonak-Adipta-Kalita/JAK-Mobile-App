@@ -127,7 +127,7 @@ const TodoScreen = () => {
                             } mx-10 p-5 text-center text-lg`}
                             style={globalStyles.font}
                         >
-                            No Todo(s)!! Press the Plus to create!!
+                            No Todo!! Press the Plus to create.
                         </Text>
                     </View>
                 ) : (
@@ -243,7 +243,7 @@ const TodoScreen = () => {
                         </View>
                     </View>
                 </Modal>
-                <View className="absolute bottom-10 right-10">
+                <View className="absolute bottom-36 right-10">
                     <TouchableOpacity
                         className={`rounded-full border-8 ${
                             colorScheme === "dark"
@@ -254,7 +254,7 @@ const TodoScreen = () => {
                     >
                         <AntDesign
                             name="plus"
-                            size={60}
+                            size={50}
                             color={colorScheme === "dark" ? "#fff" : "#000000"}
                         />
                     </TouchableOpacity>
