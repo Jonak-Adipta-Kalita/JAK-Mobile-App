@@ -15,7 +15,6 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import {
     View,
     TouchableOpacity,
-    SafeAreaView,
     Text,
     Modal,
     useColorScheme,
@@ -30,6 +29,7 @@ import { Card, Input } from "@rneui/themed";
 import globalStyles from "../../../globalStyles";
 import { Entypo } from "@expo/vector-icons";
 import StatusBar from "../../../components/StatusBar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const TodoScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Todo">>();
@@ -45,7 +45,7 @@ const TodoScreen = () => {
     const [todos, setTodos] = useState<{ id: string; data: DocumentData }[]>(
         []
     );
-    const scheme = useColorScheme();
+    const colorScheme = useColorScheme();
 
     useEffect(() => {
         setTodos(
@@ -93,135 +93,166 @@ const TodoScreen = () => {
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
-            {todosFetched?.docs.length === 0 ? (
-                <Text
-                    className="text-bold mt-5 self-center text-lg"
-                    style={globalStyles.text}
+            <View className="flex-1">
+                <View className="flex flex-row items-center justify-between">
+                    <TouchableOpacity
+                        style={globalStyles.headerIcon}
+                        onPress={navigation.goBack}
+                        className="-mt-[0.5px] ml-10"
+                    >
+                        <AntDesign
+                            name="back"
+                            size={24}
+                            color={colorScheme === "dark" ? "#fff" : "#000000"}
+                        />
+                    </TouchableOpacity>
+                    <Text
+                        className={`m-5 mx-10 ml-6 flex-1 rounded-2xl ${
+                            colorScheme == "dark"
+                                ? "bg-[#272934] text-gray-200"
+                                : "bg-white text-gray-900"
+                        } p-2 px-0 text-center text-lg`}
+                        style={globalStyles.font}
+                    >
+                        Todo
+                    </Text>
+                </View>
+                {todosFetched?.docs.length === 0 ? (
+                    <Text
+                        className="text-bold mt-5 self-center text-lg"
+                        style={globalStyles.text}
+                    >
+                        No Todo(s)!! Press the Plus to create!!
+                    </Text>
+                ) : (
+                    <ScrollView>
+                        {todos?.map(({ id, data }) => (
+                            <Card
+                                key={id}
+                                containerStyle={{
+                                    backgroundColor:
+                                        colorScheme === "dark"
+                                            ? "#000000"
+                                            : "#fff",
+                                }}
+                            >
+                                <View className="flex flex-row items-center justify-between">
+                                    <Text
+                                        style={{
+                                            color:
+                                                colorScheme === "dark"
+                                                    ? "#fff"
+                                                    : "#000000",
+                                        }}
+                                    >
+                                        {data.value}
+                                    </Text>
+                                    <TouchableOpacity
+                                        onPress={() =>
+                                            deleteDoc(
+                                                doc(
+                                                    db,
+                                                    "users",
+                                                    user?.uid!,
+                                                    "todos",
+                                                    id
+                                                )
+                                            )
+                                        }
+                                    >
+                                        <Entypo
+                                            name="cross"
+                                            size={24}
+                                            color={
+                                                colorScheme === "dark"
+                                                    ? "#fff"
+                                                    : "#000000"
+                                            }
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </Card>
+                        ))}
+                    </ScrollView>
+                )}
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}
                 >
-                    No Todo(s)!! Press the Plus to create!!
-                </Text>
-            ) : (
-                <ScrollView>
-                    {todos?.map(({ id, data }) => (
-                        <Card
-                            key={id}
-                            containerStyle={{
-                                backgroundColor:
-                                    scheme === "dark" ? "#000000" : "#fff",
+                    <View className="mt-[22px] flex-1 items-center justify-center">
+                        <View
+                            className={`m-[20px] items-center rounded-[20px] ${
+                                colorScheme === "dark" ? "bg-black" : "bg-white"
+                            } p-[35px] pt-[-20px]`}
+                            style={{
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                },
+                                shadowOpacity: 0.25,
+                                shadowRadius: 4,
+                                elevation: 5,
                             }}
                         >
-                            <View className="flex flex-row items-center justify-between">
-                                <Text
-                                    style={{
-                                        color:
-                                            scheme === "dark"
-                                                ? "#fff"
-                                                : "#000000",
-                                    }}
-                                >
-                                    {data.value}
-                                </Text>
+                            <Input
+                                placeholder="Text"
+                                autoFocus
+                                inputStyle={globalStyles.inputBar}
+                                value={todoText}
+                                onChangeText={(text) => setTodoText(text)}
+                                inputContainerStyle={{ width: 300 }}
+                            />
+                            <View className="flex flex-row space-x-10">
                                 <TouchableOpacity
+                                    className="rounded-[20px] bg-[#2196F3] p-[10px] disabled:bg-gray-400"
+                                    style={{
+                                        elevation: 2,
+                                    }}
+                                    onPress={createTodo}
+                                    disabled={!todoText}
+                                >
+                                    <Text className="items-center font-bold text-white">
+                                        Create
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    className="rounded-[20px] bg-red-500 p-[10px]"
+                                    style={{
+                                        elevation: 2,
+                                    }}
                                     onPress={() =>
-                                        deleteDoc(
-                                            doc(
-                                                db,
-                                                "users",
-                                                user?.uid!,
-                                                "todos",
-                                                id
-                                            )
-                                        )
+                                        setModalVisible(!modalVisible)
                                     }
                                 >
-                                    <Entypo
-                                        name="cross"
-                                        size={24}
-                                        color={
-                                            scheme === "dark"
-                                                ? "#fff"
-                                                : "#000000"
-                                        }
-                                    />
+                                    <Text className="items-center font-bold text-white">
+                                        Hide
+                                    </Text>
                                 </TouchableOpacity>
                             </View>
-                        </Card>
-                    ))}
-                </ScrollView>
-            )}
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                }}
-            >
-                <View className="mt-[22px] flex-1 items-center justify-center">
-                    <View
-                        className={`m-[20px] items-center rounded-[20px] ${
-                            scheme === "dark" ? "bg-black" : "bg-white"
-                        } p-[35px] pt-[-20px]`}
-                        style={{
-                            shadowColor: "#000",
-                            shadowOffset: {
-                                width: 0,
-                                height: 2,
-                            },
-                            shadowOpacity: 0.25,
-                            shadowRadius: 4,
-                            elevation: 5,
-                        }}
-                    >
-                        <Input
-                            placeholder="Text"
-                            autoFocus
-                            inputStyle={globalStyles.inputBar}
-                            value={todoText}
-                            onChangeText={(text) => setTodoText(text)}
-                            inputContainerStyle={{ width: 300 }}
-                        />
-                        <View className="flex flex-row space-x-10">
-                            <TouchableOpacity
-                                className="rounded-[20px] bg-[#2196F3] p-[10px] disabled:bg-gray-400"
-                                style={{
-                                    elevation: 2,
-                                }}
-                                onPress={createTodo}
-                                disabled={!todoText}
-                            >
-                                <Text className="items-center font-bold text-white">
-                                    Create
-                                </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                className="rounded-[20px] bg-red-500 p-[10px]"
-                                style={{
-                                    elevation: 2,
-                                }}
-                                onPress={() => setModalVisible(!modalVisible)}
-                            >
-                                <Text className="items-center font-bold text-white">
-                                    Hide
-                                </Text>
-                            </TouchableOpacity>
                         </View>
                     </View>
+                </Modal>
+                <View className="absolute bottom-10 right-10">
+                    <TouchableOpacity
+                        className={`rounded-full border-8 ${
+                            colorScheme === "dark"
+                                ? "border-white"
+                                : "border-black"
+                        }`}
+                        onPress={() => setModalVisible(true)}
+                    >
+                        <AntDesign
+                            name="plus"
+                            size={60}
+                            color={colorScheme === "dark" ? "#fff" : "#000000"}
+                        />
+                    </TouchableOpacity>
                 </View>
-            </Modal>
-            <View className="absolute bottom-10 right-10">
-                <TouchableOpacity
-                    className={`rounded-full border-8 ${
-                        scheme === "dark" ? "border-white" : "border-black"
-                    }`}
-                    onPress={() => setModalVisible(true)}
-                >
-                    <AntDesign
-                        name="plus"
-                        size={60}
-                        color={scheme === "dark" ? "#fff" : "#000000"}
-                    />
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
