@@ -152,7 +152,7 @@ const HomeScreen = () => {
                             colorScheme == "dark"
                                 ? "bg-[#272934] text-gray-200"
                                 : "bg-white text-gray-900"
-                        } p-5 text-center text-2xl`}
+                        } mx-5 p-5 text-center text-lg`}
                         style={globalStyles.font}
                     >
                         Become a Member to use the Features.

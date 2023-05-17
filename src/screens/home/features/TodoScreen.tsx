@@ -118,12 +118,18 @@ const TodoScreen = () => {
                     </Text>
                 </View>
                 {todosFetched?.docs.length === 0 ? (
-                    <Text
-                        className="text-bold mt-5 self-center text-lg"
-                        style={globalStyles.text}
-                    >
-                        No Todo(s)!! Press the Plus to create!!
-                    </Text>
+                    <View className="mt-[50%] flex-1 items-center">
+                        <Text
+                            className={`self-center rounded-2xl ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934] text-gray-200"
+                                    : "bg-white text-gray-900"
+                            } mx-10 p-5 text-center text-lg`}
+                            style={globalStyles.font}
+                        >
+                            No Todo(s)!! Press the Plus to create!!
+                        </Text>
+                    </View>
                 ) : (
                     <ScrollView>
                         {todos?.map(({ id, data }) => (
