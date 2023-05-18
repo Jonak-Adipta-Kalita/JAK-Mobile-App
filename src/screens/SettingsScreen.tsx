@@ -147,7 +147,7 @@ const SettingsScreen = () => {
             <View className="flex-1">
                 <View className="flex flex-row items-center justify-between">
                     <Text
-                        className={`m-5 mx-10 ml-6 flex-1 rounded-2xl ${
+                        className={`m-5 mx-10 flex-1 rounded-2xl ${
                             colorScheme == "dark"
                                 ? "bg-[#272934] text-gray-200"
                                 : "bg-white text-gray-900"
@@ -195,6 +195,43 @@ const SettingsScreen = () => {
                                 }}
                             />
                         </View>
+                    </TouchableOpacity>
+                </View>
+                {/* Other Profile Details */}
+                <View className="absolute bottom-36 mx-10 flex flex-row items-center">
+                    <TouchableOpacity
+                        onPress={signOut}
+                        className={`rounded-lg ${
+                            colorScheme == "dark" ? "bg-[#272934]" : "bg-white"
+                        } p-5 shadow-md`}
+                    >
+                        <Text
+                            className={`${
+                                colorScheme === "dark"
+                                    ? "text-[#fff]"
+                                    : "text-[#000000]"
+                            } text-sm`}
+                            style={globalStyles.font}
+                        >
+                            Sign Out
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={deleteAccount}
+                        className={`rounded-lg ${
+                            colorScheme == "dark" ? "bg-[#272934]" : "bg-white"
+                        } ml-5 p-5 shadow-md`}
+                    >
+                        <Text
+                            className={`${
+                                colorScheme === "dark"
+                                    ? "text-[#fff]"
+                                    : "text-[#000000]"
+                            } text-sm`}
+                            style={globalStyles.font}
+                        >
+                            Delete Account
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>
