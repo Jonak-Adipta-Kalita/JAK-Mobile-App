@@ -198,41 +198,47 @@ const SettingsScreen = () => {
                     </TouchableOpacity>
                 </View>
                 {/* Other Profile Details */}
-                <View className="absolute bottom-36 mx-10 flex flex-row items-center justify-between">
-                    <TouchableOpacity
-                        onPress={signOut}
-                        className={`rounded-lg ${
-                            colorScheme == "dark" ? "bg-[#272934]" : "bg-white"
-                        } p-5 shadow-md`}
-                    >
-                        <Text
-                            className={`${
-                                colorScheme === "dark"
-                                    ? "text-[#fff]"
-                                    : "text-[#000000]"
-                            } text-sm`}
-                            style={globalStyles.font}
+                <View className="absolute bottom-36 w-full">
+                    <View className="flex flex-row items-center justify-center space-x-20">
+                        <TouchableOpacity
+                            onPress={signOut}
+                            className={`rounded-lg ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } p-5 shadow-md`}
                         >
-                            Sign Out
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={deleteAccount}
-                        className={`rounded-lg ${
-                            colorScheme == "dark" ? "bg-[#272934]" : "bg-white"
-                        } ml-5 p-5 shadow-md`}
-                    >
-                        <Text
-                            className={`${
-                                colorScheme === "dark"
-                                    ? "text-[#fff]"
-                                    : "text-[#000000]"
-                            } text-sm`}
-                            style={globalStyles.font}
+                            <Text
+                                className={`${
+                                    colorScheme === "dark"
+                                        ? "text-[#fff]"
+                                        : "text-[#000000]"
+                                } text-sm`}
+                                style={globalStyles.font}
+                            >
+                                Sign Out
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={deleteAccount}
+                            className={`rounded-lg ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } p-5 shadow-md`}
                         >
-                            Delete Account
-                        </Text>
-                    </TouchableOpacity>
+                            <Text
+                                className={`${
+                                    colorScheme === "dark"
+                                        ? "text-[#fff]"
+                                        : "text-[#000000]"
+                                } text-sm`}
+                                style={globalStyles.font}
+                            >
+                                Delete Account
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
