@@ -198,7 +198,7 @@ const SettingsScreen = () => {
                     </TouchableOpacity>
                 </View>
                 {/* Other Profile Details */}
-                <View className="absolute bottom-36 mx-10 flex flex-row items-center">
+                <View className="absolute bottom-36 mx-10 flex flex-row items-center justify-between">
                     <TouchableOpacity
                         onPress={signOut}
                         className={`rounded-lg ${
