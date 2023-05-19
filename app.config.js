@@ -5,6 +5,7 @@ require("dotenv").config();
 const PACKAGE_NAME = process.env.PACKAGE_NAME;
 const PROJECT_ID = process.env.PROJECT_ID;
 const VERSION = "0.0.1";
+const THEME = "dark";
 
 export default {
     name: "JAK Mobile App",
@@ -18,7 +19,7 @@ export default {
     splash: {
         image: "./assets/images/splash.png",
         resizeMode: "contain",
-        backgroundColor: "#ffffff",
+        backgroundColor: THEME == "dark" ? "#413f44" : "#ffffff",
     },
     privacy: "public",
     githubUrl: "https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App",
