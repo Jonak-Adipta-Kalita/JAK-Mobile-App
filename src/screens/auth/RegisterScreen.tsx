@@ -5,7 +5,6 @@ import {
     Feather,
     MaterialIcons,
     FontAwesome5,
-    Entypo,
     AntDesign,
 } from "@expo/vector-icons";
 import globalStyles from "../../globalStyles";
@@ -36,7 +35,6 @@ const RegisterScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
     const avatar: string = images.avatar;
 
     useBottomTabBarHeight();
@@ -46,8 +44,7 @@ const RegisterScreen = () => {
             name === "" ||
             email === "" ||
             password === "" ||
-            confirmPassword === "" ||
-            phoneNumber === ""
+            confirmPassword === ""
         ) {
             messageAlertShower(
                 "Value not Filled!!",
@@ -86,7 +83,6 @@ const RegisterScreen = () => {
                     email: email,
                     displayName: name,
                     photoURL: avatar,
-                    phoneNumber: phoneNumber,
                     emailVerified: authUser?.user?.emailVerified,
                 });
             } catch (error) {
@@ -234,21 +230,6 @@ const RegisterScreen = () => {
                                 )}
                             </TouchableOpacity>
                         </View>
-
-                        <Input
-                            placeholder="Phone Number"
-                            autoComplete={"tel"}
-                            value={phoneNumber}
-                            inputStyle={globalStyles.inputBar}
-                            leftIcon={
-                                <Entypo
-                                    name="phone"
-                                    size={24}
-                                    style={globalStyles.inputBarIcon}
-                                />
-                            }
-                            onChangeText={(text) => setPhoneNumber(text)}
-                        />
                     </View>
                     <Button
                         containerStyle={{

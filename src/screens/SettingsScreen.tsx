@@ -16,10 +16,14 @@ import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+    deleteObject,
+    getDownloadURL,
+    ref,
+    uploadBytes,
+} from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { BottomTabStackNavigationProps } from "../../@types/navigation";
-import { useDocument } from "react-firebase-hooks/firestore";
 import StatusBar from "../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -46,16 +50,42 @@ const uploadImageAsync = async (uri: string, userUID: string) => {
     return await getDownloadURL(fileRef);
 };
 
+const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
+    const colorScheme = useColorScheme();
+
+    return (
+        <View className="mb-5">
+            <TouchableOpacity
+                className={`${
+                    colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
+                } flex flex-row items-center rounded-lg p-4 shadow-md`}
+            >
+                <Text
+                    className={`${
+                        colorScheme === "dark"
+                            ? "text-[#fff]"
+                            : "text-[#000000]"
+                    } ml-5 text-lg`}
+                    style={globalStyles.font}
+                >
+                    {title}
+                </Text>
+                <Text
+                    className="ml-5 text-sm text-gray-400"
+                    style={globalStyles.font}
+                >
+                    {value}
+                </Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
+
 const SettingsScreen = () => {
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"Settings">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
-    const [userData, userDataLoading, userDataError] = useDocument(
-        doc(db, "users", user?.uid!)
-    );
-    const phoneNumberFromUserData =
-        user?.phoneNumber || userData?.data()?.phoneNumber;
     const colorScheme = useColorScheme();
 
     const updatePic = async () => {
@@ -79,20 +109,50 @@ const SettingsScreen = () => {
     };
 
     const signOut = () => {
-        auth.signOut().catch((error) => {
-            errorAlertShower(error);
-        });
+        messageAlertShower(
+            "Are you sure you want to sign out?",
+            "You can always sign back in",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => {},
+                },
+                {
+                    text: "Sign Out",
+                    onPress: () => {
+                        auth.signOut().catch((error) => {
+                            errorAlertShower(error);
+                        });
+                    },
+                },
+            ]
+        );
     };
 
     const deleteAccount = () => {
-        const userUID = user?.uid;
-        user?.delete()
-            .then(() => {
-                deleteDoc(doc(db, "users", userUID!));
-            })
-            .catch((error) => {
-                errorAlertShower(error);
-            });
+        messageAlertShower(
+            "Are you sure you want to delete your account?",
+            "This action is irreversible!!",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => {},
+                },
+                {
+                    text: "Delete",
+                    onPress: async () => {
+                        try {
+                            const userUID = user?.uid;
+                            await user?.delete();
+                            deleteDoc(doc(db, "users", userUID!));
+                            deleteObject(ref(storage, `users/${userUID}`));
+                        } catch (error) {
+                            errorAlertShower(error);
+                        }
+                    },
+                },
+            ]
+        );
     };
 
     const verifyEmail = () => {
@@ -130,9 +190,7 @@ const SettingsScreen = () => {
 
     if (userError) errorAlertShower(userError);
 
-    if (userDataError) errorAlertShower(userDataError);
-
-    if (userLoading || userDataLoading) {
+    if (userLoading) {
         return (
             <LoadingIndicator
                 dimensions={{ width: 70, height: 70 }}
@@ -197,7 +255,10 @@ const SettingsScreen = () => {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View className="mt-10"></View>
+                <View className="p-10 pt-16">
+                    <ProfileDetail title="Name" value={user?.displayName!} />
+                    <ProfileDetail title="Email" value={user?.email!} />
+                </View>
                 <View className="absolute bottom-36 w-full">
                     <View className="flex flex-row items-center justify-center space-x-20">
                         <TouchableOpacity

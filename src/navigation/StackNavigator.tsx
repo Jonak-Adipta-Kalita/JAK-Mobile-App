@@ -7,11 +7,6 @@ import GetStartedScreen from "../screens/GetStartedScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import TodoScreen from "../screens/home/features/TodoScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import {
-    ChangeEmailScreen,
-    ChangeNameScreen,
-    ChangePhoneNumberScreen,
-} from "../components/ChangeSettings";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 
@@ -70,17 +65,6 @@ const SettingsStack = () => {
             screenOptions={{ headerShown: false }}
         >
             <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Group>
-                <Stack.Screen name="ChangeName" component={ChangeNameScreen} />
-                <Stack.Screen
-                    name="ChangeEmail"
-                    component={ChangeEmailScreen}
-                />
-                <Stack.Screen
-                    name="ChangePhoneNumber"
-                    component={ChangePhoneNumberScreen}
-                />
-            </Stack.Group>
         </Stack.Navigator>
     );
 };
