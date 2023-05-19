@@ -197,7 +197,7 @@ const SettingsScreen = () => {
                         </View>
                     </TouchableOpacity>
                 </View>
-                {/* Other Profile Details */}
+                <View className="mt-10"></View>
                 <View className="absolute bottom-36 w-full">
                     <View className="flex flex-row items-center justify-center space-x-20">
                         <TouchableOpacity
