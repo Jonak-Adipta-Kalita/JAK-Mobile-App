@@ -34,7 +34,7 @@ export default {
         permissions: [],
         adaptiveIcon: {
             foregroundImage: "./assets/images/adaptive-icon.png",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#ffffff",
         },
         package: PACKAGE_NAME,
         googleServicesFile: "./google_services_android.json",
