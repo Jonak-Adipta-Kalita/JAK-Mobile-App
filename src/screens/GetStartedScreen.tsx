@@ -44,7 +44,7 @@ const GetStartedScreen = () => {
                     </View>
                 </View>
                 <View key="2" className="items-center justify-center">
-                    <View className="space-y-5 rounded-lg bg-purple-500 p-3 py-10">
+                    <View className="mx-4 space-y-5 rounded-lg bg-purple-500 p-3 py-10">
                         <Text
                             className={`px-10 text-center text-2xl text-gray-50`}
                             style={[globalStyles.font]}
