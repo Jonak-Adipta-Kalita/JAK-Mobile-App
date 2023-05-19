@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity } from "react-native";
-import { Button, Input, Text } from "@rneui/themed";
+import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
+import { Button, Input } from "@rneui/themed";
 import {
     Feather,
     MaterialIcons,
     FontAwesome5,
     Entypo,
+    AntDesign,
 } from "@expo/vector-icons";
 import globalStyles from "../../globalStyles";
 import { auth, db } from "../../firebase";
@@ -22,10 +23,14 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "../../components/StatusBar";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 const RegisterScreen = () => {
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
+    const colorScheme = useColorScheme();
+    const navigation = useNavigation();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -91,149 +96,176 @@ const RegisterScreen = () => {
     };
 
     return (
-        <View className="flex-1 items-center justify-center p-[10px]">
+        <SafeAreaView className="flex-1">
             <StatusBar />
-            <Text h3 style={[globalStyles.text, { marginBottom: 50 }]}>
-                Create an Account
-            </Text>
-            <View
-                style={{
-                    width: 350,
-                }}
-            >
-                <Input
-                    placeholder="Full Name"
-                    autoFocus
-                    value={name}
-                    inputStyle={globalStyles.inputBar}
-                    onChangeText={(text) => setName(text)}
-                    leftIcon={
-                        <FontAwesome5
-                            name="user-alt"
-                            size={24}
-                            style={globalStyles.inputBarIcon}
-                        />
-                    }
-                    autoComplete={"name"}
-                />
-
-                <Input
-                    placeholder="Email"
-                    value={email}
-                    inputStyle={globalStyles.inputBar}
-                    leftIcon={
-                        <MaterialIcons
-                            name="email"
-                            size={24}
-                            style={globalStyles.inputBarIcon}
-                        />
-                    }
-                    onChangeText={(text) => setEmail(text)}
-                    autoComplete={"email"}
-                />
-
-                <View className="relative">
-                    <Input
-                        placeholder="Password"
-                        secureTextEntry={!showPassword}
-                        value={password}
-                        inputStyle={globalStyles.inputBar}
-                        onChangeText={(text) => setPassword(text)}
-                        leftIcon={
-                            <MaterialIcons
-                                name="lock"
-                                size={24}
-                                style={globalStyles.inputBarIcon}
-                            />
-                        }
-                        autoComplete={"password"}
+            <View className="relative flex-1 p-[10px]">
+                <TouchableOpacity
+                    style={globalStyles.headerIcon}
+                    onPress={navigation.goBack}
+                    className="absolute left-5 top-4"
+                >
+                    <AntDesign
+                        name="back"
+                        size={24}
+                        color={colorScheme === "dark" ? "#fff" : "#000000"}
                     />
-
-                    <TouchableOpacity
-                        style={globalStyles.showPasswordContainer}
-                        onPress={() => dispatch(setShowPassword())}
+                </TouchableOpacity>
+                <Text
+                    className={`${
+                        colorScheme == "dark"
+                            ? "text-gray-100"
+                            : "text-gray-900"
+                    } my-[20px] ml-10 text-center text-2xl font-bold`}
+                    style={globalStyles.font}
+                >
+                    Create an Account
+                </Text>
+                <View className="mt-5 flex-1 items-center">
+                    <View
+                        style={{
+                            width: 350,
+                        }}
                     >
-                        {showPassword ? (
-                            <Feather
-                                name="eye"
-                                size={20}
-                                color="black"
-                                style={globalStyles.showPasswordIcon}
-                            />
-                        ) : (
-                            <Feather
-                                name="eye-off"
-                                size={20}
-                                color="black"
-                                style={globalStyles.showPasswordIcon}
-                            />
-                        )}
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <Input
-                        placeholder="Confirm Password"
-                        secureTextEntry={!showPassword}
-                        autoComplete={"password"}
-                        value={confirmPassword}
-                        inputStyle={globalStyles.inputBar}
-                        onChangeText={(text) => setConfirmPassword(text)}
-                        leftIcon={
-                            <MaterialIcons
-                                name="lock"
-                                size={24}
-                                style={globalStyles.inputBarIcon}
-                            />
-                        }
-                    />
-
-                    <TouchableOpacity
-                        style={globalStyles.showPasswordContainer}
-                        onPress={() => dispatch(setShowPassword())}
-                    >
-                        {showPassword ? (
-                            <Feather
-                                name="eye"
-                                size={20}
-                                style={globalStyles.showPasswordIcon}
-                            />
-                        ) : (
-                            <Feather
-                                name="eye-off"
-                                size={20}
-                                style={globalStyles.showPasswordIcon}
-                            />
-                        )}
-                    </TouchableOpacity>
-                </View>
-
-                <Input
-                    placeholder="Phone Number"
-                    autoComplete={"tel"}
-                    value={phoneNumber}
-                    inputStyle={globalStyles.inputBar}
-                    leftIcon={
-                        <Entypo
-                            name="phone"
-                            size={24}
-                            style={globalStyles.inputBarIcon}
+                        <Input
+                            placeholder="Full Name"
+                            autoFocus
+                            value={name}
+                            inputStyle={globalStyles.inputBar}
+                            onChangeText={(text) => setName(text)}
+                            leftIcon={
+                                <FontAwesome5
+                                    name="user-alt"
+                                    size={24}
+                                    style={globalStyles.inputBarIcon}
+                                />
+                            }
+                            autoComplete={"name"}
                         />
-                    }
-                    onChangeText={(text) => setPhoneNumber(text)}
-                />
+
+                        <Input
+                            placeholder="Email"
+                            value={email}
+                            inputStyle={globalStyles.inputBar}
+                            leftIcon={
+                                <MaterialIcons
+                                    name="email"
+                                    size={24}
+                                    style={globalStyles.inputBarIcon}
+                                />
+                            }
+                            onChangeText={(text) => setEmail(text)}
+                            autoComplete={"email"}
+                        />
+
+                        <View className="relative">
+                            <Input
+                                placeholder="Password"
+                                secureTextEntry={!showPassword}
+                                value={password}
+                                inputStyle={globalStyles.inputBar}
+                                onChangeText={(text) => setPassword(text)}
+                                leftIcon={
+                                    <MaterialIcons
+                                        name="lock"
+                                        size={24}
+                                        style={globalStyles.inputBarIcon}
+                                    />
+                                }
+                                autoComplete={"password"}
+                            />
+
+                            <TouchableOpacity
+                                style={globalStyles.showPasswordContainer}
+                                onPress={() => dispatch(setShowPassword())}
+                            >
+                                {showPassword ? (
+                                    <Feather
+                                        name="eye"
+                                        size={20}
+                                        color="black"
+                                        style={globalStyles.showPasswordIcon}
+                                    />
+                                ) : (
+                                    <Feather
+                                        name="eye-off"
+                                        size={20}
+                                        color="black"
+                                        style={globalStyles.showPasswordIcon}
+                                    />
+                                )}
+                            </TouchableOpacity>
+                        </View>
+
+                        <View>
+                            <Input
+                                placeholder="Confirm Password"
+                                secureTextEntry={!showPassword}
+                                autoComplete={"password"}
+                                value={confirmPassword}
+                                inputStyle={globalStyles.inputBar}
+                                onChangeText={(text) =>
+                                    setConfirmPassword(text)
+                                }
+                                leftIcon={
+                                    <MaterialIcons
+                                        name="lock"
+                                        size={24}
+                                        style={globalStyles.inputBarIcon}
+                                    />
+                                }
+                            />
+
+                            <TouchableOpacity
+                                style={globalStyles.showPasswordContainer}
+                                onPress={() => dispatch(setShowPassword())}
+                            >
+                                {showPassword ? (
+                                    <Feather
+                                        name="eye"
+                                        size={20}
+                                        style={globalStyles.showPasswordIcon}
+                                    />
+                                ) : (
+                                    <Feather
+                                        name="eye-off"
+                                        size={20}
+                                        style={globalStyles.showPasswordIcon}
+                                    />
+                                )}
+                            </TouchableOpacity>
+                        </View>
+
+                        <Input
+                            placeholder="Phone Number"
+                            autoComplete={"tel"}
+                            value={phoneNumber}
+                            inputStyle={globalStyles.inputBar}
+                            leftIcon={
+                                <Entypo
+                                    name="phone"
+                                    size={24}
+                                    style={globalStyles.inputBarIcon}
+                                />
+                            }
+                            onChangeText={(text) => setPhoneNumber(text)}
+                        />
+                    </View>
+                    <Button
+                        containerStyle={{
+                            marginTop: 40,
+                            width: 350,
+                        }}
+                        buttonStyle={{
+                            padding: 20,
+                            backgroundColor: "#e3ad3e",
+                        }}
+                        title="Register"
+                        onPress={registerEmail}
+                        raised
+                    />
+                </View>
             </View>
-            <Button
-                containerStyle={{
-                    marginTop: 40,
-                    width: 350,
-                }}
-                buttonStyle={{ padding: 20, backgroundColor: "#e3ad3e" }}
-                title="Register"
-                onPress={registerEmail}
-                raised
-            />
-        </View>
+        </SafeAreaView>
     );
 };
 

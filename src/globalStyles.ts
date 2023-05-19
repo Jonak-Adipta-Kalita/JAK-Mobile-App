@@ -13,7 +13,6 @@ export default StyleSheet.create<{
     font: TextStyle;
     inputBar: TextStyle;
     inputBarIcon: TextStyle;
-    text: TextStyle;
     showPasswordContainer: ViewStyle;
     showPasswordIcon: TextStyle;
     headerIcon: ViewStyle;
@@ -30,9 +29,6 @@ export default StyleSheet.create<{
         color: colorScheme === "dark" ? "#fff" : "#000000",
     },
     inputBarIcon: {
-        color: colorScheme === "dark" ? "#fff" : "#000000",
-    },
-    text: {
         color: colorScheme === "dark" ? "#fff" : "#000000",
     },
     showPasswordContainer: {
