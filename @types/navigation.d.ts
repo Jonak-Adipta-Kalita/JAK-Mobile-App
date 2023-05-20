@@ -3,14 +3,12 @@ import type { CompositeNavigationProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 export type StackScreenParamList = {
+    GetStarted: undefined;
+    Home: undefined;
+    Settings: undefined;
     Login: undefined;
     Register: undefined;
-    Home: undefined;
-    GetStarted: undefined;
-    Settings: undefined;
-    ChangeEmail: undefined;
-    ChangeName: undefined;
-    ChangePhoneNumber: undefined;
+
     Todo: undefined;
 };
 
