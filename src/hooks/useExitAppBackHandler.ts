@@ -30,14 +30,10 @@ const useExitAppBackHandler = (navigationID: string) => {
             return true;
         };
 
-        const backHandler = BackHandler.addEventListener(
-            "hardwareBackPress",
-            backAction
-        );
+        BackHandler.addEventListener("hardwareBackPress", backAction);
 
-        return () => {
-            backHandler.remove();
-        };
+        return () =>
+            BackHandler.removeEventListener("hardwareBackPress", backAction);
     }, []);
 };
 
