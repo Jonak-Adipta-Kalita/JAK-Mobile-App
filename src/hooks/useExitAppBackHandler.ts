@@ -9,8 +9,8 @@ const useExitAppBackHandler = (navigationID: string) => {
     useEffect(() => {
         const backAction = () => {
             if (
-                Platform.OS === "android" &&
-                navigation.getId() !== navigationID
+                Platform.OS !== "android" &&
+                navigation.getState().routes[0].name !== navigationID
             ) {
                 return false;
             }
@@ -35,7 +35,9 @@ const useExitAppBackHandler = (navigationID: string) => {
             backAction
         );
 
-        return () => backHandler.remove();
+        return () => {
+            backHandler.remove();
+        };
     }, []);
 };
 
