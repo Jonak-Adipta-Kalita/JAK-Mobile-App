@@ -1,13 +1,10 @@
 import { useEffect } from "react";
 import { BackHandler, Platform } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 
 const useExitAppBackHandler = () => {
-    const navigation = useNavigation();
-
     useEffect(() => {
-        if (Platform.OS === "android" && navigation.getId() === "Home") {
+        if (Platform.OS === "android") {
             const backAction = () => {
                 messageAlertShower(
                     "Exit App!!",

@@ -24,12 +24,14 @@ import StatusBar from "../../components/StatusBar";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 
 const RegisterScreen = () => {
     const dispatch = useAppDispatch();
     const showPassword = useAppSelector(selectShowPassword);
     const colorScheme = useColorScheme();
-    const navigation = useNavigation();
+    const navigation =
+        useNavigation<BottomTabStackNavigationProps<"Register">>();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
