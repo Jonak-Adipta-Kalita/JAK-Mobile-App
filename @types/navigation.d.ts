@@ -10,8 +10,8 @@ export type StackScreenParamList = {
     Register: undefined;
 
     Todo: undefined;
-    QRCode: undefined;
     WeatherForecast: undefined;
+    QRCode: undefined;
 };
 
 export type BottomTabScreensParamList = {

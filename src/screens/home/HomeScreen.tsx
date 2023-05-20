@@ -143,6 +143,14 @@ const HomeScreen = () => {
                             icon="list"
                             buttonOnPress={() => navigation.navigate("Todo")}
                         />
+                        <Feature
+                            title="Weather Forecast"
+                            description="Get the Weather Forecast"
+                            icon="cloud"
+                            buttonOnPress={() =>
+                                navigation.navigate("WeatherForecast")
+                            }
+                        />
                     </ScrollView>
                 </View>
             ) : (

@@ -9,6 +9,7 @@ import TodoScreen from "../screens/home/features/TodoScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
+import WeatherForecast from "../screens/home/features/WeatherForecast";
 
 const Stack = createStackNavigator<StackScreenParamList>();
 
@@ -41,6 +42,10 @@ const HomeStack = () => {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Group>
                 <Stack.Screen name="Todo" component={TodoScreen} />
+                <Stack.Screen
+                    name="WeatherForecast"
+                    component={WeatherForecast}
+                />
             </Stack.Group>
         </Stack.Navigator>
     );
