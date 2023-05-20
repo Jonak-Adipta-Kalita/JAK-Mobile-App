@@ -10,8 +10,20 @@ import SettingsScreen from "../screens/SettingsScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 import WeatherForecast from "../screens/home/features/WeatherForecast";
+import NoNetworkScreen from "../screens/NoNetworkScreen";
 
 const Stack = createStackNavigator<StackScreenParamList>();
+
+const NoNetworkStack = () => {
+    return (
+        <Stack.Navigator
+            initialRouteName="NoNetwork"
+            screenOptions={{ headerShown: false }}
+        >
+            <Stack.Screen name="NoNetwork" component={NoNetworkScreen} />
+        </Stack.Navigator>
+    );
+};
 
 const HomeStack = () => {
     const [isFirstLaunch, setIsFirstLaunch] = useState<boolean | null>(null);
@@ -74,4 +86,4 @@ const SettingsStack = () => {
     );
 };
 
-export { HomeStack, SettingsStack, AuthenticationStack };
+export { HomeStack, SettingsStack, AuthenticationStack, NoNetworkStack };

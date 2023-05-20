@@ -4,6 +4,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 
 export type StackScreenParamList = {
     GetStarted: undefined;
+    NoNetwork: undefined;
     Home: undefined;
     Settings: undefined;
     Login: undefined;

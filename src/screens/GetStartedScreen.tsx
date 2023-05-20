@@ -8,6 +8,7 @@ import { Feather } from "@expo/vector-icons";
 import globalStyles from "../globalStyles";
 import { useColorScheme } from "react-native";
 import { useHideBottomTab } from "../hooks/useHideBottomTab";
+import { useExitAppBackHandler } from "../hooks/useExitAppBackHandler";
 
 const GetStartedScreen = () => {
     const navigation =
@@ -16,6 +17,7 @@ const GetStartedScreen = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
 
     useHideBottomTab();
+    useExitAppBackHandler();
 
     return (
         <View className="relative flex-1">

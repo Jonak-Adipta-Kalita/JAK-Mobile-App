@@ -1,5 +1,5 @@
 import "expo-dev-client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme, LogBox } from "react-native";
 import { useFonts } from "expo-font";
@@ -12,6 +12,8 @@ import { auth } from "./src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
 import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
+import { NetworkState, getNetworkStateAsync } from "expo-network";
+import { NoNetworkStack } from "./src/navigation/StackNavigator";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -21,10 +23,27 @@ LogBox.ignoreLogs([
 
 const AppChildren = () => {
     const scheme = useColorScheme();
+    const [networkState, setNetworkState] = useState<NetworkState | null>(null);
+
+    useEffect(() => {
+        getNetworkStateAsync().then((state) => setNetworkState(state));
+    }, []);
+
+    if (networkState === null)
+        return (
+            <LoadingIndicator
+                dimensions={{ width: 70, height: 70 }}
+                containerStyle={{ flex: 1 }}
+            />
+        );
 
     return (
         <NavigationContainer theme={scheme === "dark" ? DarkTheme : LightTheme}>
-            <BottomTabNavigator />
+            {networkState.isConnected && networkState.isInternetReachable ? (
+                <BottomTabNavigator />
+            ) : (
+                <NoNetworkStack />
+            )}
         </NavigationContainer>
     );
 };

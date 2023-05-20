@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
     View,
     TouchableOpacity,
     ScrollView,
-    Platform,
-    BackHandler,
     Text,
     useColorScheme,
 } from "react-native";
@@ -14,11 +12,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
 import globalStyles from "../../globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
-import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useExitAppBackHandler } from "../../hooks/useExitAppBackHandler";
 
 const Feature = ({
     title,
@@ -32,6 +30,8 @@ const Feature = ({
     buttonOnPress: () => void;
 }) => {
     const colorScheme = useColorScheme();
+
+    useExitAppBackHandler();
 
     return (
         <View className="mb-5 px-7">
@@ -80,33 +80,6 @@ const HomeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const colorScheme = useColorScheme();
-
-    useEffect(() => {
-        if (Platform.OS === "android" && navigation.getId() === "Home") {
-            const backAction = () => {
-                messageAlertShower(
-                    "Exit App!!",
-                    "Hold on. Are you sure you want to Exit?",
-                    [
-                        {
-                            text: "Cancel",
-                            onPress: () => {},
-                            style: "cancel",
-                        },
-                        { text: "Yes", onPress: () => BackHandler.exitApp() },
-                    ]
-                );
-                return true;
-            };
-
-            const backHandler = BackHandler.addEventListener(
-                "hardwareBackPress",
-                backAction
-            );
-
-            return () => backHandler.remove();
-        }
-    }, []);
 
     if (userError) errorAlertShower(userError);
 
