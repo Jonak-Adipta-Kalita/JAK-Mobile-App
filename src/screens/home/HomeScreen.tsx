@@ -31,7 +31,7 @@ const Feature = ({
 }) => {
     const colorScheme = useColorScheme();
 
-    useExitAppBackHandler();
+    useExitAppBackHandler("Home");
 
     return (
         <View className="mb-5 px-7">

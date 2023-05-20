@@ -9,7 +9,7 @@ import { useExitAppBackHandler } from "../hooks/useExitAppBackHandler";
 const NoNetworkScreen = () => {
     const colorScheme = useColorScheme();
 
-    useExitAppBackHandler();
+    useExitAppBackHandler("NoNetwork");
 
     return (
         <SafeAreaView className="flex-1">
