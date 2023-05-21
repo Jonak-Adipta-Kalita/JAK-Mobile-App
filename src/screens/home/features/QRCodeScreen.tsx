@@ -177,24 +177,3 @@ const QRCodeScreen = () => {
 };
 
 export default QRCodeScreen;
-
-const styles = StyleSheet.create({
-    overlay: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-    },
-    unfocusedContainer: {
-        flex: 1,
-        backgroundColor: "rgba(0,0,0,0.7)",
-    },
-    middleContainer: {
-        flexDirection: "row",
-        flex: 1.5,
-    },
-    focusedContainer: {
-        flex: 6,
-    },
-});
