@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
@@ -11,6 +11,7 @@ const QRCodeScreen = () => {
     const navigation = useNavigation();
     const colorScheme = useColorScheme();
     useHideBottomTab();
+    const [mode, setMode] = useState<"scan" | "create" | null>(null);
 
     return (
         <SafeAreaView className="flex-1">
@@ -47,6 +48,7 @@ const QRCodeScreen = () => {
                                     ? "bg-[#272934]"
                                     : "bg-white"
                             } p-5 px-16 shadow-md`}
+                            onPress={() => setMode("scan")}
                         >
                             <Text
                                 className={`${
@@ -65,6 +67,7 @@ const QRCodeScreen = () => {
                                     ? "bg-[#272934]"
                                     : "bg-white"
                             } p-5 px-16 shadow-md`}
+                            onPress={() => setMode("create")}
                         >
                             <Text
                                 className={`${
@@ -74,10 +77,11 @@ const QRCodeScreen = () => {
                                 } text-center text-sm`}
                                 style={globalStyles.font}
                             >
-                                Read
+                                Create
                             </Text>
                         </TouchableOpacity>
                     </View>
+                    <View></View>
                 </View>
             </View>
         </SafeAreaView>
