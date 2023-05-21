@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
@@ -6,12 +6,28 @@ import StatusBar from "../../../components/StatusBar";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 
 const QRCodeScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<BottomTabStackNavigationProps<"QRCode">>();
     const colorScheme = useColorScheme();
     useHideBottomTab();
     const [mode, setMode] = useState<"scan" | "create" | null>(null);
+    const [hasPermission, setHasPermission] = useState<boolean>(false);
+
+    useEffect(() => {
+        const getBarCodeScannerPermissions = async () => {
+            const { status } = await BarCodeScanner.requestPermissionsAsync();
+            if (status === "granted") {
+                setHasPermission(true);
+            } else {
+                navigation.replace("Home");
+            }
+        };
+
+        getBarCodeScannerPermissions();
+    }, []);
 
     return (
         <SafeAreaView className="flex-1">
@@ -81,7 +97,9 @@ const QRCodeScreen = () => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View></View>
+                    <View className="mt-10">
+                        {mode === "scan" && <View></View>}
+                    </View>
                 </View>
             </View>
         </SafeAreaView>

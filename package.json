@@ -47,6 +47,7 @@
         "@xxjonakadiptaxx/jak_javascript_package": "^3.3.3",
         "expo": "~48.0.9",
         "expo-asset": "~8.9.1",
+        "expo-barcode-scanner": "~12.3.2",
         "expo-constants": "~14.2.1",
         "expo-dev-client": "~2.2.1",
         "expo-font": "~11.1.1",

@@ -40,6 +40,14 @@ export default {
         package: PACKAGE_NAME,
         googleServicesFile: "./google_services_android.json",
     },
+    plugins: [
+        [
+            "expo-barcode-scanner",
+            {
+                cameraPermission: "Allow $(PRODUCT_NAME) to access camera.",
+            },
+        ],
+    ],
     extra: {
         eas: {
             projectId: PROJECT_ID,
