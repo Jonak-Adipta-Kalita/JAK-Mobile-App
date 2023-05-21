@@ -87,6 +87,10 @@ const Scan = () => {
     );
 };
 
+const Create = () => {
+    return <View></View>;
+};
+
 const QRCodeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"QRCode">>();
     const colorScheme = useColorScheme();
@@ -172,7 +176,10 @@ const QRCodeScreen = () => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View className="mt-16">{mode === "scan" && <Scan />}</View>
+                    <View className="mt-16">
+                        {mode === "scan" && <Scan />}
+                        {mode === "create" && <Create />}
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
