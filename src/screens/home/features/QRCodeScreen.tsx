@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
 import {
-    Button,
+    StyleSheet,
     Text,
     TouchableOpacity,
     View,
@@ -106,9 +106,9 @@ const QRCodeScreen = () => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View className="mt-10">
+                    <View className="mt-16">
                         {mode === "scan" && (
-                            <View>
+                            <View className="flex items-center">
                                 <BarCodeScanner
                                     onBarCodeScanned={
                                         scanned
@@ -116,11 +116,38 @@ const QRCodeScreen = () => {
                                             : handleBarCodeScanned
                                     }
                                     style={{
-                                        height: 300,
-                                        width: 300,
-                                        alignSelf: "center",
+                                        height: 350,
+                                        width: 350,
+                                        alignItems: "center",
                                     }}
-                                />
+                                    barCodeTypes={[
+                                        BarCodeScanner.Constants.BarCodeType.qr,
+                                    ]}
+                                >
+                                    <View style={styles.overlay}>
+                                        <View
+                                            style={styles.unfocusedContainer}
+                                        ></View>
+                                        <View style={styles.middleContainer}>
+                                            <View
+                                                style={
+                                                    styles.unfocusedContainer
+                                                }
+                                            ></View>
+                                            <View
+                                                style={styles.focusedContainer}
+                                            ></View>
+                                            <View
+                                                style={
+                                                    styles.unfocusedContainer
+                                                }
+                                            ></View>
+                                        </View>
+                                        <View
+                                            style={styles.unfocusedContainer}
+                                        ></View>
+                                    </View>
+                                </BarCodeScanner>
                             </View>
                         )}
                     </View>
@@ -131,3 +158,24 @@ const QRCodeScreen = () => {
 };
 
 export default QRCodeScreen;
+
+const styles = StyleSheet.create({
+    overlay: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    },
+    unfocusedContainer: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.7)",
+    },
+    middleContainer: {
+        flexDirection: "row",
+        flex: 1.5,
+    },
+    focusedContainer: {
+        flex: 6,
+    },
+});
