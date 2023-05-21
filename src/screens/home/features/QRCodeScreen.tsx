@@ -39,7 +39,46 @@ const QRCodeScreen = () => {
                         QRCode
                     </Text>
                 </View>
-                <View></View>
+                <View className="mt-10">
+                    <View className="flex w-full flex-row items-center justify-center space-x-5">
+                        <TouchableOpacity
+                            className={`rounded-lg ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } p-5 px-16 shadow-md`}
+                        >
+                            <Text
+                                className={`${
+                                    colorScheme === "dark"
+                                        ? "text-[#fff]"
+                                        : "text-[#000000]"
+                                } text-center text-sm`}
+                                style={globalStyles.font}
+                            >
+                                Scan
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            className={`rounded-lg ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } p-5 px-16 shadow-md`}
+                        >
+                            <Text
+                                className={`${
+                                    colorScheme === "dark"
+                                        ? "text-[#fff]"
+                                        : "text-[#000000]"
+                                } text-center text-sm`}
+                                style={globalStyles.font}
+                            >
+                                Read
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
         </SafeAreaView>
     );
