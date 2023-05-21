@@ -17,7 +17,7 @@ const GetStartedScreen = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
 
     useHideBottomTab();
-    useExitAppBackHandler("GetStarted");
+    useExitAppBackHandler();
 
     return (
         <View className="relative flex-1">

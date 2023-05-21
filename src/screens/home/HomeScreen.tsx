@@ -31,8 +31,6 @@ const Feature = ({
 }) => {
     const colorScheme = useColorScheme();
 
-    useExitAppBackHandler("Home");
-
     return (
         <View className="mb-5 px-7">
             <TouchableOpacity
@@ -80,6 +78,7 @@ const HomeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Home">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const colorScheme = useColorScheme();
+    useExitAppBackHandler();
 
     if (userError) errorAlertShower(userError);
 
