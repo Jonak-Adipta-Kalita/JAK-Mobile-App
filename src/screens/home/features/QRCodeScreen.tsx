@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
-import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-    useColorScheme,
-} from "react-native";
+import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import StatusBar from "../../../components/StatusBar";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
