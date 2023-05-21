@@ -9,8 +9,9 @@ import TodoScreen from "../screens/home/features/TodoScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
-import WeatherForecast from "../screens/home/features/WeatherForecast";
+import WeatherForecastScreen from "../screens/home/features/WeatherForecastScreen";
 import NoNetworkScreen from "../screens/NoNetworkScreen";
+import QRCodeScreen from "../screens/home/features/QRCodeScreen";
 
 const Stack = createStackNavigator<StackScreenParamList>();
 
@@ -54,9 +55,10 @@ const HomeStack = () => {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Group>
                 <Stack.Screen name="Todo" component={TodoScreen} />
+                <Stack.Screen name="QRCode" component={QRCodeScreen} />
                 <Stack.Screen
                     name="WeatherForecast"
-                    component={WeatherForecast}
+                    component={WeatherForecastScreen}
                 />
             </Stack.Group>
         </Stack.Navigator>

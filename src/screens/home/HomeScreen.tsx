@@ -6,7 +6,7 @@ import {
     Text,
     useColorScheme,
 } from "react-native";
-import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
@@ -26,7 +26,7 @@ const Feature = ({
 }: {
     title: string;
     description: string;
-    icon: keyof typeof Entypo.glyphMap;
+    icon: keyof typeof AntDesign.glyphMap;
     buttonOnPress: () => void;
 }) => {
     const colorScheme = useColorScheme();
@@ -40,7 +40,7 @@ const Feature = ({
                 } rounded-lg p-5 shadow-md`}
             >
                 <View className="flex flex-row items-center">
-                    <Entypo
+                    <AntDesign
                         name={icon}
                         size={24}
                         color={colorScheme === "dark" ? "#fff" : "#000000"}
@@ -112,8 +112,14 @@ const HomeScreen = () => {
                         <Feature
                             title="Todo"
                             description="Create a Todo List"
-                            icon="list"
+                            icon="bars"
                             buttonOnPress={() => navigation.navigate("Todo")}
+                        />
+                        <Feature
+                            title="QRCode"
+                            description="Create/Scan QRCode"
+                            icon="qrcode"
+                            buttonOnPress={() => navigation.navigate("QRCode")}
                         />
                         <Feature
                             title="Weather Forecast"
