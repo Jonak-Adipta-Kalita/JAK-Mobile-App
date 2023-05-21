@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
-import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
+import {
+    Button,
+    Text,
+    TouchableOpacity,
+    View,
+    useColorScheme,
+} from "react-native";
 import StatusBar from "../../../components/StatusBar";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
-import { BarCodeScanner } from "expo-barcode-scanner";
+import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 
 const QRCodeScreen = () => {
@@ -14,20 +20,23 @@ const QRCodeScreen = () => {
     const colorScheme = useColorScheme();
     useHideBottomTab();
     const [mode, setMode] = useState<"scan" | "create" | null>(null);
-    const [hasPermission, setHasPermission] = useState<boolean>(false);
+    const [scanned, setScanned] = useState(true);
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
-            if (status === "granted") {
-                setHasPermission(true);
-            } else {
+            if (status !== "granted") {
                 navigation.replace("Home");
             }
         };
 
         getBarCodeScannerPermissions();
     }, []);
+
+    const handleBarCodeScanned = ({ type, data }: BarCodeEvent) => {
+        setScanned(true);
+        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    };
 
     return (
         <SafeAreaView className="flex-1">
@@ -98,7 +107,22 @@ const QRCodeScreen = () => {
                         </TouchableOpacity>
                     </View>
                     <View className="mt-10">
-                        {mode === "scan" && <View></View>}
+                        {mode === "scan" && (
+                            <View>
+                                <BarCodeScanner
+                                    onBarCodeScanned={
+                                        scanned
+                                            ? undefined
+                                            : handleBarCodeScanned
+                                    }
+                                    style={{
+                                        height: 300,
+                                        width: 300,
+                                        alignSelf: "center",
+                                    }}
+                                />
+                            </View>
+                        )}
                     </View>
                 </View>
             </View>
