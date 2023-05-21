@@ -21,6 +21,7 @@ const QRCodeScreen = () => {
     useHideBottomTab();
     const [mode, setMode] = useState<"scan" | "create" | null>(null);
     const [scanned, setScanned] = useState(true);
+    const [scannedData, setScannedData] = useState<any | null>(null);
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -33,9 +34,9 @@ const QRCodeScreen = () => {
         getBarCodeScannerPermissions();
     }, []);
 
-    const handleBarCodeScanned = ({ type, data }: BarCodeEvent) => {
+    const handleBarCodeScanned = ({ data }: BarCodeEvent) => {
         setScanned(true);
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+        setScannedData(data);
     };
 
     return (
@@ -109,45 +110,88 @@ const QRCodeScreen = () => {
                     <View className="mt-16">
                         {mode === "scan" && (
                             <View className="flex items-center">
-                                <BarCodeScanner
-                                    onBarCodeScanned={
-                                        scanned
-                                            ? undefined
-                                            : handleBarCodeScanned
-                                    }
-                                    style={{
-                                        height: 350,
-                                        width: 350,
-                                        alignItems: "center",
-                                    }}
-                                    barCodeTypes={[
-                                        BarCodeScanner.Constants.BarCodeType.qr,
-                                    ]}
-                                >
-                                    <View style={styles.overlay}>
-                                        <View
-                                            style={styles.unfocusedContainer}
-                                        ></View>
-                                        <View style={styles.middleContainer}>
+                                {!scanned && (
+                                    <BarCodeScanner
+                                        onBarCodeScanned={
+                                            scanned
+                                                ? undefined
+                                                : handleBarCodeScanned
+                                        }
+                                        style={{
+                                            height: 350,
+                                            width: 350,
+                                            alignItems: "center",
+                                        }}
+                                    >
+                                        <View style={styles.overlay}>
                                             <View
                                                 style={
                                                     styles.unfocusedContainer
                                                 }
                                             ></View>
                                             <View
-                                                style={styles.focusedContainer}
-                                            ></View>
+                                                style={styles.middleContainer}
+                                            >
+                                                <View
+                                                    style={
+                                                        styles.unfocusedContainer
+                                                    }
+                                                ></View>
+                                                <View
+                                                    style={
+                                                        styles.focusedContainer
+                                                    }
+                                                ></View>
+                                                <View
+                                                    style={
+                                                        styles.unfocusedContainer
+                                                    }
+                                                ></View>
+                                            </View>
                                             <View
                                                 style={
                                                     styles.unfocusedContainer
                                                 }
                                             ></View>
                                         </View>
-                                        <View
-                                            style={styles.unfocusedContainer}
-                                        ></View>
+                                    </BarCodeScanner>
+                                )}
+                                {scanned && (
+                                    <View className="flex flex-col items-center justify-center space-y-10">
+                                        <Text
+                                            className={`${
+                                                colorScheme === "dark"
+                                                    ? "text-[#fff]"
+                                                    : "text-[#000000]"
+                                            } text-center text-sm`}
+                                            style={globalStyles.font}
+                                        >
+                                            {scannedData}
+                                        </Text>
+                                        <TouchableOpacity
+                                            className={`rounded-lg ${
+                                                colorScheme == "dark"
+                                                    ? "bg-[#272934]"
+                                                    : "bg-white"
+                                            } p-5 px-16 shadow-md`}
+                                            onPress={() => {
+                                                setScanned(false);
+                                                setScannedData(null);
+                                            }}
+                                        >
+                                            <Text
+                                                className={`${
+                                                    colorScheme === "dark"
+                                                        ? "text-[#fff]"
+                                                        : "text-[#000000]"
+                                                } text-center text-sm`}
+                                                style={globalStyles.font}
+                                            >
+                                                Scan Again
+                                            </Text>
+                                        </TouchableOpacity>
                                     </View>
-                                </BarCodeScanner>
+                                )}
                             </View>
                         )}
                     </View>
