@@ -36,7 +36,6 @@ const Scan = () => {
                         height: "100%",
                         width: "100%",
                         alignItems: "center",
-                        marginTop: -10,
                     }}
                 />
             )}
@@ -127,7 +126,7 @@ const QRCodeScreen = () => {
                     </Text>
                 </View>
                 <View className="mt-10">
-                    <View className="flex w-full flex-row items-center justify-center space-x-5">
+                    <View className="-mb-[10px] flex w-full flex-row items-center justify-center space-x-5">
                         <TouchableOpacity
                             className={`rounded-lg ${
                                 colorScheme == "dark"
@@ -167,7 +166,7 @@ const QRCodeScreen = () => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View className="mt-16">
+                    <View className="">
                         {mode === "scan" && <Scan />}
                         {mode === "create" && <Create />}
                     </View>
