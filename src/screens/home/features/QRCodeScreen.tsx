@@ -33,21 +33,12 @@ const Scan = () => {
                         scanned ? undefined : handleBarCodeScanned
                     }
                     style={{
-                        height: 350,
-                        width: 350,
+                        height: "100%",
+                        width: "100%",
                         alignItems: "center",
+                        marginTop: -10,
                     }}
-                >
-                    <View style={styles.overlay}>
-                        <View style={styles.unfocusedContainer}></View>
-                        <View style={styles.middleContainer}>
-                            <View style={styles.unfocusedContainer}></View>
-                            <View style={styles.focusedContainer}></View>
-                            <View style={styles.unfocusedContainer}></View>
-                        </View>
-                        <View style={styles.unfocusedContainer}></View>
-                    </View>
-                </BarCodeScanner>
+                />
             )}
             {scanned && (
                 <View className="flex flex-col items-center justify-center space-y-10">
