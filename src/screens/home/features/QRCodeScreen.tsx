@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
+import BarcodeMask from "react-native-barcode-mask";
 
 const Scan = () => {
     const [scanned, setScanned] = useState(false);
@@ -31,7 +32,9 @@ const Scan = () => {
                         width: "100%",
                         alignItems: "center",
                     }}
-                />
+                >
+                    <BarcodeMask edgeColor="#62B1F6" showAnimatedLine />
+                </BarCodeScanner>
             )}
             {scanned && (
                 <View className="flex flex-col items-center justify-center space-y-10">
@@ -120,7 +123,7 @@ const QRCodeScreen = () => {
                     </Text>
                 </View>
                 <View className="mt-10">
-                    <View className="-mb-[10px] flex w-full flex-row items-center justify-center space-x-5">
+                    <View className="flex w-full flex-row items-center justify-center space-x-5">
                         <TouchableOpacity
                             className={`rounded-lg ${
                                 colorScheme == "dark"
@@ -160,7 +163,7 @@ const QRCodeScreen = () => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View className="">
+                    <View className="mt-12">
                         {mode === "scan" && <Scan />}
                         {mode === "create" && <Create />}
                     </View>
