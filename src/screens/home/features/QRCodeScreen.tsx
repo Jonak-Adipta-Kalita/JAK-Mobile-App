@@ -33,7 +33,12 @@ const Scan = () => {
                         alignItems: "center",
                     }}
                 >
-                    <BarcodeMask edgeColor="#62B1F6" showAnimatedLine />
+                    <BarcodeMask
+                        edgeColor="#62B1F6"
+                        height={300}
+                        width={300}
+                        showAnimatedLine
+                    />
                 </BarCodeScanner>
             )}
             {scanned && (
@@ -163,7 +168,7 @@ const QRCodeScreen = () => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View className="mt-12">
+                    <View className="mt-10">
                         {mode === "scan" && <Scan />}
                         {mode === "create" && <Create />}
                     </View>
