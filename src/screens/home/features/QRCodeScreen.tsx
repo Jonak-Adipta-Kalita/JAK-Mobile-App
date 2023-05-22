@@ -24,9 +24,7 @@ const Scan = () => {
         <View className="flex items-center">
             {!scanned && (
                 <BarCodeScanner
-                    onBarCodeScanned={
-                        scanned ? undefined : handleBarCodeScanned
-                    }
+                    onBarCodeScanned={handleBarCodeScanned}
                     style={{
                         height: "100%",
                         width: "100%",
