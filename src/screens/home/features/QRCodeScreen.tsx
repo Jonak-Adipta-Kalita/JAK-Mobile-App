@@ -40,21 +40,33 @@ const QRCodeScreen = () => {
 
     if (mode === "scan" && !scanned)
         return (
-            <BarCodeScanner
-                onBarCodeScanned={handleBarCodeScanned}
-                style={{
-                    height: "100%",
-                    width: "100%",
-                    alignItems: "center",
-                }}
-            >
-                <BarcodeMask
-                    edgeColor="#62B1F6"
-                    height={300}
-                    width={300}
-                    showAnimatedLine
-                />
-            </BarCodeScanner>
+            <View className="relative">
+                <TouchableOpacity
+                    onPress={() => setMode(null)}
+                    className="absolute bottom-[15%] left-1/2 z-50 rounded-full bg-[#fff] p-5"
+                >
+                    <AntDesign
+                        name="close"
+                        size={24}
+                        color={colorScheme === "dark" ? "#000000" : "#fff"}
+                    />
+                </TouchableOpacity>
+                <BarCodeScanner
+                    onBarCodeScanned={handleBarCodeScanned}
+                    style={{
+                        height: "100%",
+                        width: "100%",
+                        alignItems: "center",
+                    }}
+                >
+                    <BarcodeMask
+                        edgeColor="#62B1F6"
+                        height={300}
+                        width={300}
+                        showAnimatedLine
+                    />
+                </BarCodeScanner>
+            </View>
         );
 
     return (
