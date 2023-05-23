@@ -41,16 +41,18 @@ const QRCodeScreen = () => {
     if (mode === "scan" && !scanned)
         return (
             <View className="relative">
-                <TouchableOpacity
-                    onPress={() => setMode(null)}
-                    className="absolute bottom-[15%] left-1/2 z-50 rounded-full bg-[#fff] p-5"
-                >
-                    <AntDesign
-                        name="close"
-                        size={24}
-                        color={colorScheme === "dark" ? "#000000" : "#fff"}
-                    />
-                </TouchableOpacity>
+                <View className="absolute bottom-[15%] left-1/2 z-40 -ml-8 -translate-x-1/2 transform">
+                    <TouchableOpacity
+                        onPress={() => setMode(null)}
+                        className="z-50 rounded-full bg-[#fff] p-5"
+                    >
+                        <AntDesign
+                            name="close"
+                            size={24}
+                            color={colorScheme === "dark" ? "#000000" : "#fff"}
+                        />
+                    </TouchableOpacity>
+                </View>
                 <BarCodeScanner
                     onBarCodeScanned={handleBarCodeScanned}
                     style={{
