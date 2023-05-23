@@ -38,7 +38,7 @@ const QRCodeScreen = () => {
         getBarCodeScannerPermissions();
     }, []);
 
-    if (mode === "scan" && !scanned)
+    if (mode === "scan" && !scanned) {
         return (
             <View className="relative">
                 <View className="absolute bottom-[15%] left-1/2 z-40 -ml-8 -translate-x-1/2 transform">
@@ -70,6 +70,7 @@ const QRCodeScreen = () => {
                 </BarCodeScanner>
             </View>
         );
+    }
 
     return (
         <SafeAreaView className="flex-1">
