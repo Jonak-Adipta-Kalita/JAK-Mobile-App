@@ -39,7 +39,7 @@ const QRCodeScreen = () => {
         }Download/qrcode-${uuid()}.png`;
 
         await FileSystem.writeAsStringAsync(fileName, dataURL, {
-            encoding: FileSystem.EncodingType.Base64,
+            encoding: "base64",
         });
 
         messageAlertShower(
