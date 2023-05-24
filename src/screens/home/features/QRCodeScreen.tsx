@@ -10,6 +10,7 @@ import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
+import SVGQRCode from "react-native-qrcode-svg";
 
 const QRCodeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"QRCode">>();
@@ -19,13 +20,12 @@ const QRCodeScreen = () => {
     const [scanned, setScanned] = useState(false);
     const [scannedData, setScannedData] = useState<any | null>(null);
     const [QRCodeData, setQRCodeData] = useState("");
+    const [displayQRCode, setDisplayQRCode] = useState(false);
 
     const handleBarCodeScanned = ({ data }: BarCodeEvent) => {
         setScanned(true);
         setScannedData(data);
     };
-
-    const createQRCode = () => {};
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -227,8 +227,10 @@ const QRCodeScreen = () => {
                                         colorScheme == "dark"
                                             ? "bg-[#272934]"
                                             : "bg-white"
-                                    } p-5 px-16 shadow-md`}
-                                    onPress={createQRCode}
+                                    } mb-10 p-5 px-16 shadow-md`}
+                                    onPress={() => {
+                                        setDisplayQRCode(true);
+                                    }}
                                 >
                                     <Text
                                         className={`${
@@ -241,6 +243,24 @@ const QRCodeScreen = () => {
                                         Create
                                     </Text>
                                 </TouchableOpacity>
+                                {displayQRCode && (
+                                    <View className="mx-10">
+                                        <SVGQRCode
+                                            value={QRCodeData}
+                                            size={300}
+                                            backgroundColor={
+                                                colorScheme == "dark"
+                                                    ? "#413f44"
+                                                    : "white"
+                                            }
+                                            color={
+                                                colorScheme == "dark"
+                                                    ? "#fff"
+                                                    : "#000"
+                                            }
+                                        />
+                                    </View>
+                                )}
                             </View>
                         )}
                     </View>
