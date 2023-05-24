@@ -9,6 +9,7 @@ import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
+import { TextInput } from "react-native-gesture-handler";
 
 const QRCodeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"QRCode">>();
@@ -17,6 +18,7 @@ const QRCodeScreen = () => {
     const [mode, setMode] = useState<"scan" | "create" | null>(null);
     const [scanned, setScanned] = useState(false);
     const [scannedData, setScannedData] = useState<any | null>(null);
+    const [QRCodeData, setQRCodeData] = useState("");
 
     const handleBarCodeScanned = ({ data }: BarCodeEvent) => {
         setScanned(true);
@@ -51,6 +53,7 @@ const QRCodeScreen = () => {
                 </View>
                 <BarCodeScanner
                     onBarCodeScanned={handleBarCodeScanned}
+                    barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                     style={{
                         height: "100%",
                         width: "100%",
@@ -191,7 +194,51 @@ const QRCodeScreen = () => {
                                 )}
                             </View>
                         )}
-                        {mode === "create" && <View></View>}
+                        {mode === "create" && (
+                            <View className="mx-10 mt-10 flex items-center justify-center space-y-5">
+                                <View
+                                    className={`mb-5 px-7 ${
+                                        colorScheme == "dark"
+                                            ? "bg-[#272934]"
+                                            : "bg-[#fff]"
+                                    } mx-5 w-full rounded-lg p-5 shadow-md`}
+                                >
+                                    <TextInput
+                                        placeholder="Enter Text"
+                                        placeholderTextColor={"#9CA3AF"}
+                                        className={`${
+                                            colorScheme === "dark"
+                                                ? "text-[#fff]"
+                                                : "text-[#000000]"
+                                        } text-sm`}
+                                        style={globalStyles.font}
+                                        onChangeText={(text) =>
+                                            setQRCodeData(text)
+                                        }
+                                        value={QRCodeData}
+                                    />
+                                </View>
+                                <TouchableOpacity
+                                    className={`rounded-lg ${
+                                        colorScheme == "dark"
+                                            ? "bg-[#272934]"
+                                            : "bg-white"
+                                    } p-5 px-16 shadow-md`}
+                                    onPress={() => {}}
+                                >
+                                    <Text
+                                        className={`${
+                                            colorScheme === "dark"
+                                                ? "text-[#fff]"
+                                                : "text-[#000000]"
+                                        } text-center text-sm`}
+                                        style={globalStyles.font}
+                                    >
+                                        Create
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
                     </View>
                 </View>
             </View>
