@@ -34,12 +34,10 @@ const QRCodeScreen = () => {
 
     const downloadQRCode = async () => {
         const dataURL: string = await qrCodeSVG.toDataURL();
-        const fileName = `${
-            FileSystem.documentDirectory
-        }Download/qrcode-${uuid()}.png`;
+        const fileName = `${FileSystem.documentDirectory}qrcode-${uuid()}.png`;
 
         await FileSystem.writeAsStringAsync(fileName, dataURL, {
-            encoding: "base64",
+            encoding: FileSystem.EncodingType.Base64,
         });
 
         messageAlertShower(
@@ -55,14 +53,16 @@ const QRCodeScreen = () => {
     };
 
     useEffect(() => {
-        const getBarCodeScannerPermissions = async () => {
-            const { status } = await BarCodeScanner.requestPermissionsAsync();
-            if (status !== "granted") {
+        const requestPermissions = async () => {
+            const { status: barcodeStatus } =
+                await BarCodeScanner.requestPermissionsAsync();
+
+            if (barcodeStatus !== "granted") {
                 navigation.replace("Home");
             }
         };
 
-        getBarCodeScannerPermissions();
+        requestPermissions();
     }, []);
 
     if (mode === "scan" && !scanned) {
