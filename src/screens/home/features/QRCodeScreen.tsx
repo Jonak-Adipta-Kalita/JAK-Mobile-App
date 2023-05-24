@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import StatusBar from "../../../components/StatusBar";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
@@ -26,6 +26,8 @@ const QRCodeScreen = () => {
         setScanned(true);
         setScannedData(data);
     };
+
+    const downloadQRCode = () => {};
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -222,27 +224,49 @@ const QRCodeScreen = () => {
                                         multiline
                                     />
                                 </View>
-                                <TouchableOpacity
-                                    className={`rounded-lg ${
-                                        colorScheme == "dark"
-                                            ? "bg-[#272934]"
-                                            : "bg-white"
-                                    } mb-10 p-5 px-16 shadow-md`}
-                                    onPress={() => {
-                                        setDisplayQRCode(true);
-                                    }}
-                                >
-                                    <Text
-                                        className={`${
-                                            colorScheme === "dark"
-                                                ? "text-[#fff]"
-                                                : "text-[#000000]"
-                                        } text-center text-sm`}
-                                        style={globalStyles.font}
+                                <View className="flex flex-row items-center justify-center space-x-5">
+                                    <TouchableOpacity
+                                        className={`rounded-lg ${
+                                            colorScheme == "dark"
+                                                ? "bg-[#272934]"
+                                                : "bg-white"
+                                        } mb-10 p-5 px-16 shadow-md`}
+                                        onPress={() => {
+                                            setDisplayQRCode(true);
+                                        }}
                                     >
-                                        Create
-                                    </Text>
-                                </TouchableOpacity>
+                                        <Text
+                                            className={`${
+                                                colorScheme === "dark"
+                                                    ? "text-[#fff]"
+                                                    : "text-[#000000]"
+                                            } text-center text-sm`}
+                                            style={globalStyles.font}
+                                        >
+                                            Create
+                                        </Text>
+                                    </TouchableOpacity>
+                                    {displayQRCode && (
+                                        <TouchableOpacity
+                                            className={`rounded-full ${
+                                                colorScheme == "dark"
+                                                    ? "bg-[#272934]"
+                                                    : "bg-white"
+                                            } mb-10 p-5 shadow-md`}
+                                            onPress={downloadQRCode}
+                                        >
+                                            <FontAwesome
+                                                name="cloud-download"
+                                                size={24}
+                                                color={
+                                                    colorScheme === "dark"
+                                                        ? "#fff"
+                                                        : "#000000"
+                                                }
+                                            />
+                                        </TouchableOpacity>
+                                    )}
+                                </View>
                                 {displayQRCode && (
                                     <View className="mx-10">
                                         <SVGQRCode
