@@ -50,7 +50,6 @@
         "expo-barcode-scanner": "~12.3.2",
         "expo-constants": "~14.2.1",
         "expo-dev-client": "~2.2.1",
-        "expo-file-system": "~15.2.2",
         "expo-font": "~11.1.1",
         "expo-image-picker": "~14.1.1",
         "expo-network": "~5.2.1",
@@ -65,7 +64,6 @@
         "react-native-barcode-mask": "^1.2.4",
         "react-native-dotenv": "^3.4.8",
         "react-native-gesture-handler": "~2.9.0",
-        "react-native-get-random-values": "~1.8.0",
         "react-native-pager-view": "6.1.2",
         "react-native-qrcode-svg": "^6.2.0",
         "react-native-reanimated": "~2.14.4",
@@ -73,8 +71,7 @@
         "react-native-screens": "~3.20.0",
         "react-native-svg": "13.4.0",
         "react-native-tab-view": "^3.5.1",
-        "react-redux": "^8.0.5",
-        "uuid": "^9.0.0"
+        "react-redux": "^8.0.5"
     },
     "devDependencies": {
         "@babel/core": "^7.20.0",

@@ -1,4 +1,3 @@
-import "react-native-get-random-values";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
@@ -11,10 +10,7 @@ import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
-import SVGQRCode from "react-native-qrcode-svg";
-import { v4 as uuid } from "uuid";
-import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
-import * as FileSystem from "expo-file-system";
+import QRCode from "react-native-qrcode-svg";
 
 const QRCodeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"QRCode">>();
@@ -23,7 +19,7 @@ const QRCodeScreen = () => {
     const [mode, setMode] = useState<"scan" | "create" | null>(null);
     const [scanned, setScanned] = useState(false);
     const [scannedData, setScannedData] = useState<any | null>(null);
-    const [QRCodeData, setQRCodeData] = useState("");
+    const [qrCodeData, setQRCodeData] = useState("");
     const [displayQRCode, setDisplayQRCode] = useState(false);
     const [qrCodeSVG, setQRCodeSVG] = useState<any | null>(null);
 
@@ -34,20 +30,9 @@ const QRCodeScreen = () => {
 
     const downloadQRCode = async () => {
         const dataURL: string = await qrCodeSVG.toDataURL();
-        const fileName = `${FileSystem.documentDirectory}qrcode-${uuid()}.png`;
+        const fileName = `${qrCodeData}.png`;
 
         // upload to firebase storage and add data to firestore
-
-        messageAlertShower(
-            "QR Code saved to Downloads directory",
-            `Saved to ${fileName}`,
-            [
-                {
-                    text: "OK",
-                    onPress: () => {},
-                },
-            ]
-        );
     };
 
     useEffect(() => {
@@ -243,7 +228,7 @@ const QRCodeScreen = () => {
                                         onChangeText={(text) =>
                                             setQRCodeData(text)
                                         }
-                                        value={QRCodeData}
+                                        value={qrCodeData}
                                         multiline
                                     />
                                 </View>
@@ -316,8 +301,8 @@ const QRCodeScreen = () => {
                                 </View>
                                 {displayQRCode && (
                                     <View className="mx-10">
-                                        <SVGQRCode
-                                            value={QRCodeData}
+                                        <QRCode
+                                            value={qrCodeData}
                                             size={300}
                                             backgroundColor={
                                                 colorScheme == "dark"
