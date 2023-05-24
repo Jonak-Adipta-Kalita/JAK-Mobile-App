@@ -25,6 +25,8 @@ const QRCodeScreen = () => {
         setScannedData(data);
     };
 
+    const createQRCode = () => {};
+
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -139,7 +141,8 @@ const QRCodeScreen = () => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View className="mt-10">
+                    <View className="mb-8 mt-5 border-b-[0.5px] border-black" />
+                    <View className="">
                         {mode === null && (
                             <View className="mt-10">
                                 <Text
@@ -195,7 +198,7 @@ const QRCodeScreen = () => {
                             </View>
                         )}
                         {mode === "create" && (
-                            <View className="mx-10 mt-10 flex items-center justify-center space-y-5">
+                            <View className="mx-10 flex items-center justify-center space-y-5">
                                 <View
                                     className={`mb-5 px-7 ${
                                         colorScheme == "dark"
@@ -225,7 +228,7 @@ const QRCodeScreen = () => {
                                             ? "bg-[#272934]"
                                             : "bg-white"
                                     } p-5 px-16 shadow-md`}
-                                    onPress={() => {}}
+                                    onPress={createQRCode}
                                 >
                                     <Text
                                         className={`${
