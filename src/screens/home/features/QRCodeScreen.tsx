@@ -204,7 +204,7 @@ const QRCodeScreen = () => {
                                     } mx-5 w-full rounded-lg p-5 shadow-md`}
                                 >
                                     <TextInput
-                                        placeholder="Enter Text"
+                                        placeholder="Enter Text - Total Lines: 5"
                                         placeholderTextColor={"#9CA3AF"}
                                         className={`${
                                             colorScheme === "dark"
@@ -216,6 +216,8 @@ const QRCodeScreen = () => {
                                             setQRCodeData(text)
                                         }
                                         value={QRCodeData}
+                                        multiline
+                                        numberOfLines={5}
                                     />
                                 </View>
                                 <TouchableOpacity
