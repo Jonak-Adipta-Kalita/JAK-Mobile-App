@@ -5,4 +5,11 @@ export type User = {
     phoneNumber: string;
     photoURL: number;
     uid: string;
+    todos: Todo[];
+};
+
+export type Todo = {
+    id: string;
+    value: string;
+    timestamp: FieldValue;
 };

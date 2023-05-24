@@ -1,7 +1,10 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    match /users/{uid}/{file} {
+    match /users/{uid}/profile_pic {
+      allow read, write: if request.auth.uid == uid;
+    }
+    match /users/{uid}/qrcodes/{qrcode} {
       allow read, write: if request.auth.uid == uid;
     }
   }

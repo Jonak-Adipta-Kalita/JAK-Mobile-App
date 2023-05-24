@@ -36,6 +36,8 @@ const QRCodeScreen = () => {
         const dataURL: string = await qrCodeSVG.toDataURL();
         const fileName = `${FileSystem.documentDirectory}qrcode-${uuid()}.png`;
 
+        // upload to firebase storage and add data to firestore
+
         messageAlertShower(
             "QR Code saved to Downloads directory",
             `Saved to ${fileName}`,
