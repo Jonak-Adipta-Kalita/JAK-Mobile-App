@@ -10,10 +10,6 @@ import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
 
-const Create = () => {
-    return <View></View>;
-};
-
 const QRCodeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"QRCode">>();
     const colorScheme = useColorScheme();
@@ -195,7 +191,7 @@ const QRCodeScreen = () => {
                                 )}
                             </View>
                         )}
-                        {mode === "create" && <Create />}
+                        {mode === "create" && <View></View>}
                     </View>
                 </View>
             </View>
