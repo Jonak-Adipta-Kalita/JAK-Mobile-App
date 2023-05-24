@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import StatusBar from "../../../components/StatusBar";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
@@ -224,7 +224,7 @@ const QRCodeScreen = () => {
                                         multiline
                                     />
                                 </View>
-                                <View className="flex flex-row items-center justify-center space-x-5">
+                                <View className="flex flex-row items-center justify-center space-x-2">
                                     <TouchableOpacity
                                         className={`rounded-lg ${
                                             colorScheme == "dark"
@@ -257,6 +257,29 @@ const QRCodeScreen = () => {
                                         >
                                             <FontAwesome
                                                 name="cloud-download"
+                                                size={24}
+                                                color={
+                                                    colorScheme === "dark"
+                                                        ? "#fff"
+                                                        : "#000000"
+                                                }
+                                            />
+                                        </TouchableOpacity>
+                                    )}
+                                    {displayQRCode && (
+                                        <TouchableOpacity
+                                            className={`rounded-full ${
+                                                colorScheme == "dark"
+                                                    ? "bg-[#272934]"
+                                                    : "bg-white"
+                                            } mb-10 p-5 shadow-md`}
+                                            onPress={() => {
+                                                setDisplayQRCode(false);
+                                                setQRCodeData("");
+                                            }}
+                                        >
+                                            <Entypo
+                                                name="cross"
                                                 size={24}
                                                 color={
                                                     colorScheme === "dark"
