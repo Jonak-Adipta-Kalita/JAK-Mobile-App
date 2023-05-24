@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
@@ -11,6 +12,9 @@ import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
 import SVGQRCode from "react-native-qrcode-svg";
+import { v4 as uuid } from "uuid";
+import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
+import * as FileSystem from "expo-file-system";
 
 const QRCodeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"QRCode">>();
@@ -21,13 +25,32 @@ const QRCodeScreen = () => {
     const [scannedData, setScannedData] = useState<any | null>(null);
     const [QRCodeData, setQRCodeData] = useState("");
     const [displayQRCode, setDisplayQRCode] = useState(false);
+    const [qrCodeSVG, setQRCodeSVG] = useState<any | null>(null);
 
     const handleBarCodeScanned = ({ data }: BarCodeEvent) => {
         setScanned(true);
         setScannedData(data);
     };
 
-    const downloadQRCode = () => {};
+    const downloadQRCode = async () => {
+        const dataURL: string = await qrCodeSVG.toDataURL();
+        const fileName = FileSystem.documentDirectory + `qrcode-${uuid()}.png`;
+
+        await FileSystem.writeAsStringAsync(fileName, dataURL, {
+            encoding: FileSystem.EncodingType.Base64,
+        });
+
+        messageAlertShower(
+            "QR Code saved to Downloads directory",
+            `Saved to ${fileName}`,
+            [
+                {
+                    text: "OK",
+                    onPress: () => {},
+                },
+            ]
+        );
+    };
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -305,6 +328,7 @@ const QRCodeScreen = () => {
                                                     ? "#fff"
                                                     : "#000"
                                             }
+                                            getRef={(c) => setQRCodeSVG(c)}
                                         />
                                     </View>
                                 )}
