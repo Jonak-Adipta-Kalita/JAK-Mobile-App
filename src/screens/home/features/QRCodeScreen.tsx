@@ -12,6 +12,136 @@ import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
 
+const Create = () => {
+    const colorScheme = useColorScheme();
+    const [qrCodeData, setQRCodeData] = useState("");
+    const [displayQRCode, setDisplayQRCode] = useState(false);
+    const [qrCodeSVG, setQRCodeSVG] = useState<any | null>(null);
+
+    const uploadQRCode = async () => {};
+
+    const downloadQRCode = async () => {
+        const dataURL: string = await qrCodeSVG.toDataURL();
+        const fileName = `${qrCodeData}.png`;
+
+        // upload to firebase storage and add data to firestore
+    };
+
+    return (
+        <View className="mx-10 flex items-center justify-center space-y-5">
+            <View
+                className={`mb-5 px-7 ${
+                    colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
+                } mx-5 w-full rounded-lg p-5 shadow-md`}
+            >
+                <TextInput
+                    placeholder="Enter Text to be Stored"
+                    placeholderTextColor={"#9CA3AF"}
+                    className={`${
+                        colorScheme === "dark"
+                            ? "text-[#fff]"
+                            : "text-[#000000]"
+                    } text-sm`}
+                    style={globalStyles.font}
+                    onChangeText={(text) => setQRCodeData(text)}
+                    value={qrCodeData}
+                    multiline
+                />
+            </View>
+            <View className="">
+                {displayQRCode ? (
+                    <View className="flex flex-row items-center justify-center space-x-2">
+                        <TouchableOpacity
+                            className={`rounded-full ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } mb-10 p-5 shadow-md`}
+                            onPress={uploadQRCode}
+                        >
+                            <FontAwesome
+                                name="cloud-upload"
+                                size={24}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            className={`rounded-full ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } mb-10 p-5 shadow-md`}
+                            onPress={downloadQRCode}
+                        >
+                            <FontAwesome
+                                name="cloud-download"
+                                size={24}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            className={`rounded-full ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } mb-10 p-5 shadow-md`}
+                            onPress={() => {
+                                setDisplayQRCode(false);
+                                setQRCodeData("");
+                            }}
+                        >
+                            <Entypo
+                                name="cross"
+                                size={24}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        </TouchableOpacity>
+                    </View>
+                ) : (
+                    <TouchableOpacity
+                        className={`rounded-lg ${
+                            colorScheme == "dark" ? "bg-[#272934]" : "bg-white"
+                        } mb-10 p-5 px-16 shadow-md`}
+                        onPress={() => {
+                            setDisplayQRCode(true);
+                        }}
+                    >
+                        <Text
+                            className={`${
+                                colorScheme === "dark"
+                                    ? "text-[#fff]"
+                                    : "text-[#000000]"
+                            } text-center text-sm`}
+                            style={globalStyles.font}
+                        >
+                            Create
+                        </Text>
+                    </TouchableOpacity>
+                )}
+            </View>
+            {displayQRCode && (
+                <View className="mx-10">
+                    <QRCode
+                        value={qrCodeData}
+                        size={300}
+                        backgroundColor={
+                            colorScheme == "dark" ? "#413f44" : "white"
+                        }
+                        color={colorScheme == "dark" ? "#fff" : "#000"}
+                        getRef={(c) => setQRCodeSVG(c)}
+                    />
+                </View>
+            )}
+        </View>
+    );
+};
+
 const QRCodeScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"QRCode">>();
     const colorScheme = useColorScheme();
@@ -19,20 +149,10 @@ const QRCodeScreen = () => {
     const [mode, setMode] = useState<"scan" | "create" | null>(null);
     const [scanned, setScanned] = useState(false);
     const [scannedData, setScannedData] = useState<any | null>(null);
-    const [qrCodeData, setQRCodeData] = useState("");
-    const [displayQRCode, setDisplayQRCode] = useState(false);
-    const [qrCodeSVG, setQRCodeSVG] = useState<any | null>(null);
 
     const handleBarCodeScanned = ({ data }: BarCodeEvent) => {
         setScanned(true);
         setScannedData(data);
-    };
-
-    const downloadQRCode = async () => {
-        const dataURL: string = await qrCodeSVG.toDataURL();
-        const fileName = `${qrCodeData}.png`;
-
-        // upload to firebase storage and add data to firestore
     };
 
     useEffect(() => {
@@ -207,119 +327,7 @@ const QRCodeScreen = () => {
                                 )}
                             </View>
                         )}
-                        {mode === "create" && (
-                            <View className="mx-10 flex items-center justify-center space-y-5">
-                                <View
-                                    className={`mb-5 px-7 ${
-                                        colorScheme == "dark"
-                                            ? "bg-[#272934]"
-                                            : "bg-[#fff]"
-                                    } mx-5 w-full rounded-lg p-5 shadow-md`}
-                                >
-                                    <TextInput
-                                        placeholder="Enter Text to be Stored"
-                                        placeholderTextColor={"#9CA3AF"}
-                                        className={`${
-                                            colorScheme === "dark"
-                                                ? "text-[#fff]"
-                                                : "text-[#000000]"
-                                        } text-sm`}
-                                        style={globalStyles.font}
-                                        onChangeText={(text) =>
-                                            setQRCodeData(text)
-                                        }
-                                        value={qrCodeData}
-                                        multiline
-                                    />
-                                </View>
-                                <View className="">
-                                    {displayQRCode ? (
-                                        <View className="flex flex-row items-center justify-center space-x-2">
-                                            <TouchableOpacity
-                                                className={`rounded-full ${
-                                                    colorScheme == "dark"
-                                                        ? "bg-[#272934]"
-                                                        : "bg-white"
-                                                } mb-10 p-5 shadow-md`}
-                                                onPress={downloadQRCode}
-                                            >
-                                                <FontAwesome
-                                                    name="cloud-download"
-                                                    size={24}
-                                                    color={
-                                                        colorScheme === "dark"
-                                                            ? "#fff"
-                                                            : "#000000"
-                                                    }
-                                                />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity
-                                                className={`rounded-full ${
-                                                    colorScheme == "dark"
-                                                        ? "bg-[#272934]"
-                                                        : "bg-white"
-                                                } mb-10 p-5 shadow-md`}
-                                                onPress={() => {
-                                                    setDisplayQRCode(false);
-                                                    setQRCodeData("");
-                                                }}
-                                            >
-                                                <Entypo
-                                                    name="cross"
-                                                    size={24}
-                                                    color={
-                                                        colorScheme === "dark"
-                                                            ? "#fff"
-                                                            : "#000000"
-                                                    }
-                                                />
-                                            </TouchableOpacity>
-                                        </View>
-                                    ) : (
-                                        <TouchableOpacity
-                                            className={`rounded-lg ${
-                                                colorScheme == "dark"
-                                                    ? "bg-[#272934]"
-                                                    : "bg-white"
-                                            } mb-10 p-5 px-16 shadow-md`}
-                                            onPress={() => {
-                                                setDisplayQRCode(true);
-                                            }}
-                                        >
-                                            <Text
-                                                className={`${
-                                                    colorScheme === "dark"
-                                                        ? "text-[#fff]"
-                                                        : "text-[#000000]"
-                                                } text-center text-sm`}
-                                                style={globalStyles.font}
-                                            >
-                                                Create
-                                            </Text>
-                                        </TouchableOpacity>
-                                    )}
-                                </View>
-                                {displayQRCode && (
-                                    <View className="mx-10">
-                                        <QRCode
-                                            value={qrCodeData}
-                                            size={300}
-                                            backgroundColor={
-                                                colorScheme == "dark"
-                                                    ? "#413f44"
-                                                    : "white"
-                                            }
-                                            color={
-                                                colorScheme == "dark"
-                                                    ? "#fff"
-                                                    : "#000"
-                                            }
-                                            getRef={(c) => setQRCodeSVG(c)}
-                                        />
-                                    </View>
-                                )}
-                            </View>
-                        )}
+                        {mode === "create" && <Create />}
                     </View>
                 </View>
             </View>
