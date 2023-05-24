@@ -34,7 +34,8 @@ const QRCodeScreen = () => {
 
     const downloadQRCode = async () => {
         const dataURL: string = await qrCodeSVG.toDataURL();
-        const fileName = FileSystem.documentDirectory + `qrcode-${uuid()}.png`;
+        const directory = FileSystem.documentDirectory;
+        const fileName = directory + `qrcode-${uuid()}.png`;
 
         await FileSystem.writeAsStringAsync(fileName, dataURL, {
             encoding: FileSystem.EncodingType.Base64,
