@@ -11,21 +11,92 @@ import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db, storage } from "../../../firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
+import {
+    collection,
+    orderBy,
+    query,
+    setDoc,
+    doc,
+    serverTimestamp,
+} from "firebase/firestore";
+import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
+import LoadingIndicator from "../../../components/Loading";
+import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
 const Create = () => {
     const colorScheme = useColorScheme();
+    const [user, userLoading, userError] = useAuthState(auth);
+    const [qrCodesFetched, firestoreLoading, firestoreError] = useCollection(
+        query(
+            collection(db, "users", user?.uid!, "qrcodes"),
+            orderBy("timestamp", "desc")
+        )
+    );
+
     const [qrCodeData, setQRCodeData] = useState("");
     const [displayQRCode, setDisplayQRCode] = useState(false);
     const [qrCodeSVG, setQRCodeSVG] = useState<any | null>(null);
 
-    const uploadQRCode = async () => {};
+    const uploadQRCode = async (
+        showMessage: boolean
+    ): Promise<string | null> => {
+        const dataURL: string = await qrCodeSVG.toDataURL();
+        const fileRef = ref(
+            storage,
+            `users/${user?.uid}/qrcodes/${qrCodeData}`
+        );
+
+        if (
+            qrCodesFetched?.docs.some((doc) => doc.data().value === qrCodeData)
+        ) {
+            if (showMessage) {
+                messageAlertShower(
+                    "QRCode already exists!",
+                    "The QRCode is already Uploaded to the Database!!",
+                    [
+                        {
+                            text: "OK",
+                            onPress: () => {},
+                        },
+                    ]
+                );
+                return null;
+            }
+
+            return await getDownloadURL(fileRef);
+        }
+
+        uploadString(fileRef, dataURL, "base64");
+
+        await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeData), {
+            value: qrCodeData,
+            timestamp: serverTimestamp(),
+            image: await getDownloadURL(fileRef),
+        });
+
+        return await getDownloadURL(fileRef);
+    };
 
     const downloadQRCode = async () => {
-        const dataURL: string = await qrCodeSVG.toDataURL();
-        const fileName = `${qrCodeData}.png`;
-
-        // upload to firebase storage and add data to firestore
+        const fileURI = await uploadQRCode(false);
     };
+
+    if (firestoreError || userError) {
+        errorAlertShower(firestoreError || userError);
+    }
+
+    if (firestoreLoading || userLoading) {
+        return (
+            <LoadingIndicator
+                containerStyle={{ flex: 1 }}
+                dimensions={{ width: 70, height: 70 }}
+            />
+        );
+    }
 
     return (
         <View className="mx-10 flex items-center justify-center space-y-5">
@@ -57,7 +128,7 @@ const Create = () => {
                                     ? "bg-[#272934]"
                                     : "bg-white"
                             } mb-10 p-5 shadow-md`}
-                            onPress={uploadQRCode}
+                            onPress={() => uploadQRCode(true)}
                         >
                             <FontAwesome
                                 name="cloud-upload"
@@ -108,6 +179,7 @@ const Create = () => {
                         className={`rounded-lg ${
                             colorScheme == "dark" ? "bg-[#272934]" : "bg-white"
                         } mb-10 p-5 px-16 shadow-md`}
+                        disabled={qrCodeData === ""}
                         onPress={() => {
                             setDisplayQRCode(true);
                         }}
