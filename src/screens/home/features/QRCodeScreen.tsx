@@ -249,69 +249,70 @@ const QRCodeScreen = () => {
                                         multiline
                                     />
                                 </View>
-                                <View className="flex flex-row items-center justify-center space-x-2">
-                                    <TouchableOpacity
-                                        className={`rounded-lg ${
-                                            colorScheme == "dark"
-                                                ? "bg-[#272934]"
-                                                : "bg-white"
-                                        } mb-10 p-5 px-16 shadow-md`}
-                                        onPress={() => {
-                                            setDisplayQRCode(true);
-                                        }}
-                                    >
-                                        <Text
-                                            className={`${
-                                                colorScheme === "dark"
-                                                    ? "text-[#fff]"
-                                                    : "text-[#000000]"
-                                            } text-center text-sm`}
-                                            style={globalStyles.font}
-                                        >
-                                            Create
-                                        </Text>
-                                    </TouchableOpacity>
-                                    {displayQRCode && (
+                                <View className="">
+                                    {displayQRCode ? (
+                                        <View className="flex flex-row items-center justify-center space-x-2">
+                                            <TouchableOpacity
+                                                className={`rounded-full ${
+                                                    colorScheme == "dark"
+                                                        ? "bg-[#272934]"
+                                                        : "bg-white"
+                                                } mb-10 p-5 shadow-md`}
+                                                onPress={downloadQRCode}
+                                            >
+                                                <FontAwesome
+                                                    name="cloud-download"
+                                                    size={24}
+                                                    color={
+                                                        colorScheme === "dark"
+                                                            ? "#fff"
+                                                            : "#000000"
+                                                    }
+                                                />
+                                            </TouchableOpacity>
+                                            <TouchableOpacity
+                                                className={`rounded-full ${
+                                                    colorScheme == "dark"
+                                                        ? "bg-[#272934]"
+                                                        : "bg-white"
+                                                } mb-10 p-5 shadow-md`}
+                                                onPress={() => {
+                                                    setDisplayQRCode(false);
+                                                    setQRCodeData("");
+                                                }}
+                                            >
+                                                <Entypo
+                                                    name="cross"
+                                                    size={24}
+                                                    color={
+                                                        colorScheme === "dark"
+                                                            ? "#fff"
+                                                            : "#000000"
+                                                    }
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
+                                    ) : (
                                         <TouchableOpacity
-                                            className={`rounded-full ${
+                                            className={`rounded-lg ${
                                                 colorScheme == "dark"
                                                     ? "bg-[#272934]"
                                                     : "bg-white"
-                                            } mb-10 p-5 shadow-md`}
-                                            onPress={downloadQRCode}
-                                        >
-                                            <FontAwesome
-                                                name="cloud-download"
-                                                size={24}
-                                                color={
-                                                    colorScheme === "dark"
-                                                        ? "#fff"
-                                                        : "#000000"
-                                                }
-                                            />
-                                        </TouchableOpacity>
-                                    )}
-                                    {displayQRCode && (
-                                        <TouchableOpacity
-                                            className={`rounded-full ${
-                                                colorScheme == "dark"
-                                                    ? "bg-[#272934]"
-                                                    : "bg-white"
-                                            } mb-10 p-5 shadow-md`}
+                                            } mb-10 p-5 px-16 shadow-md`}
                                             onPress={() => {
-                                                setDisplayQRCode(false);
-                                                setQRCodeData("");
+                                                setDisplayQRCode(true);
                                             }}
                                         >
-                                            <Entypo
-                                                name="cross"
-                                                size={24}
-                                                color={
+                                            <Text
+                                                className={`${
                                                     colorScheme === "dark"
-                                                        ? "#fff"
-                                                        : "#000000"
-                                                }
-                                            />
+                                                        ? "text-[#fff]"
+                                                        : "text-[#000000]"
+                                                } text-center text-sm`}
+                                                style={globalStyles.font}
+                                            >
+                                                Create
+                                            </Text>
                                         </TouchableOpacity>
                                     )}
                                 </View>
