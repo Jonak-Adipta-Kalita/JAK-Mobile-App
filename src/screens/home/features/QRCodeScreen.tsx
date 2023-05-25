@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
-import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
+import {
+    Platform,
+    Text,
+    TouchableOpacity,
+    View,
+    useColorScheme,
+} from "react-native";
 import StatusBar from "../../../components/StatusBar";
 import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -33,6 +39,7 @@ import {
     uploadString,
 } from "firebase/storage";
 import * as FileSystem from "expo-file-system";
+import * as MediaLibrary from "expo-media-library";
 
 const Create = () => {
     const colorScheme = useColorScheme();
@@ -87,7 +94,7 @@ const Create = () => {
     const downloadQRCode = async (qrCodeValue: string) => {
         const downloadURI = await uploadQRCode();
         const directoryPath = FileSystem.documentDirectory + "QRCodes/";
-        const filePath = directoryPath + qrCodeValue;
+        const filePath = directoryPath + qrCodeValue + ".png";
 
         if (!(await FileSystem.getInfoAsync(directoryPath)).exists) {
             await FileSystem.makeDirectoryAsync(directoryPath, {
@@ -95,7 +102,23 @@ const Create = () => {
             });
         }
 
-        await FileSystem.downloadAsync(downloadURI!, filePath);
+        const downloadedFile: FileSystem.FileSystemDownloadResult =
+            await FileSystem.downloadAsync(downloadURI!, filePath);
+
+        if (Platform.OS === "android") {
+            const asset = await MediaLibrary.createAssetAsync(
+                downloadedFile.uri
+            );
+            const album = await MediaLibrary.getAlbumAsync("QRCodes");
+            if (album == null) {
+                await MediaLibrary.createAlbumAsync("QRCodes", asset, false);
+            } else {
+                await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
+            }
+        } else if (Platform.OS === "ios") {
+            // TODO: Save using `expo-sharing`
+        }
+
         messageAlertShower(
             "QRCode Downloaded!",
             "The QRCode has been downloaded to your device!!",
@@ -247,8 +270,13 @@ const QRCodeScreen = () => {
         const requestPermissions = async () => {
             const { status: barcodeStatus } =
                 await BarCodeScanner.requestPermissionsAsync();
+            const { status: mediaLibraryStatus } =
+                await MediaLibrary.requestPermissionsAsync();
 
-            if (barcodeStatus !== "granted") {
+            if (
+                barcodeStatus !== "granted" &&
+                mediaLibraryStatus !== "granted"
+            ) {
                 navigation.replace("Home");
             }
         };
