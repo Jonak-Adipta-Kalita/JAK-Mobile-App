@@ -21,11 +21,17 @@ import {
     setDoc,
     doc,
     serverTimestamp,
+    deleteDoc,
 } from "firebase/firestore";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import LoadingIndicator from "../../../components/Loading";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import {
+    deleteObject,
+    getDownloadURL,
+    ref,
+    uploadString,
+} from "firebase/storage";
 import * as FileSystem from "expo-file-system";
 
 const Create = () => {
@@ -39,36 +45,23 @@ const Create = () => {
     );
 
     const [qrCodeData, setQRCodeData] = useState("");
-    const [displayQRCode, setDisplayQRCode] = useState(false);
     const qrCodeSVGDataURL = useRef<any>(null);
 
-    const uploadQRCode = async (
-        showMessage: boolean
-    ): Promise<string | null> => {
+    const qrCodeAlreadyExists = () => {
+        return (
+            qrCodesFetched?.docs?.length! > 0 &&
+            qrCodesFetched?.docs.some((doc) => doc.data().value === qrCodeData)
+        );
+    };
+
+    const uploadQRCode = async (): Promise<string | null> => {
         setQRCodeData(qrCodeData.trim());
         const fileRef = ref(
             storage,
             `users/${user?.uid}/qrcodes/${qrCodeData}`
         );
 
-        if (
-            qrCodesFetched?.docs?.length! > 0 &&
-            qrCodesFetched?.docs.some((doc) => doc.data().value === qrCodeData)
-        ) {
-            if (showMessage) {
-                messageAlertShower(
-                    "QRCode already exists!",
-                    "The QRCode is already Uploaded to the Database!!",
-                    [
-                        {
-                            text: "OK",
-                            onPress: () => {},
-                        },
-                    ]
-                );
-                return null;
-            }
-
+        if (qrCodeAlreadyExists()) {
             return await getDownloadURL(fileRef);
         }
 
@@ -83,8 +76,16 @@ const Create = () => {
         return await getDownloadURL(fileRef);
     };
 
+    const deleteQRCode = async () => {
+        await deleteDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeData));
+
+        await deleteObject(
+            ref(storage, `users/${user?.uid}/qrcodes/${qrCodeData}`)
+        );
+    };
+
     const downloadQRCode = async (qrCodeValue: string) => {
-        const downloadURI = await uploadQRCode(false);
+        const downloadURI = await uploadQRCode();
         const directoryPath = FileSystem.documentDirectory + "QRCodes/";
         const filePath = directoryPath + qrCodeValue;
 
@@ -142,7 +143,7 @@ const Create = () => {
                 />
             </View>
             <View className="">
-                {displayQRCode ? (
+                {qrCodeData != "" && (
                     <View className="flex flex-row items-center justify-center space-x-2">
                         <TouchableOpacity
                             className={`rounded-full ${
@@ -150,10 +151,18 @@ const Create = () => {
                                     ? "bg-[#272934]"
                                     : "bg-white"
                             } mb-10 p-5 shadow-md`}
-                            onPress={() => uploadQRCode(true)}
+                            onPress={
+                                qrCodeAlreadyExists()
+                                    ? deleteQRCode
+                                    : uploadQRCode
+                            }
                         >
                             <FontAwesome
-                                name="cloud-upload"
+                                name={
+                                    qrCodeAlreadyExists()
+                                        ? "trash"
+                                        : "cloud-upload"
+                                }
                                 size={24}
                                 color={
                                     colorScheme === "dark" ? "#fff" : "#000000"
@@ -183,7 +192,6 @@ const Create = () => {
                                     : "bg-white"
                             } mb-10 p-5 shadow-md`}
                             onPress={() => {
-                                setDisplayQRCode(false);
                                 setQRCodeData("");
                             }}
                         >
@@ -196,30 +204,9 @@ const Create = () => {
                             />
                         </TouchableOpacity>
                     </View>
-                ) : (
-                    <TouchableOpacity
-                        className={`rounded-lg ${
-                            colorScheme == "dark" ? "bg-[#272934]" : "bg-white"
-                        } mb-10 p-5 px-16 shadow-md`}
-                        disabled={qrCodeData === ""}
-                        onPress={() => {
-                            setDisplayQRCode(true);
-                        }}
-                    >
-                        <Text
-                            className={`${
-                                colorScheme === "dark"
-                                    ? "text-[#fff]"
-                                    : "text-[#000000]"
-                            } text-center text-sm`}
-                            style={globalStyles.font}
-                        >
-                            Create
-                        </Text>
-                    </TouchableOpacity>
                 )}
             </View>
-            {displayQRCode && (
+            {qrCodeData != "" && (
                 <View className="mx-10">
                     <QRCode
                         value={qrCodeData}
