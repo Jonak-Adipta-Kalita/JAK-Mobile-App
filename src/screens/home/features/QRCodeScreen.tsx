@@ -26,6 +26,7 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import LoadingIndicator from "../../../components/Loading";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import * as FileSystem from "expo-file-system";
 
 const Create = () => {
     const colorScheme = useColorScheme();
@@ -44,6 +45,7 @@ const Create = () => {
     const uploadQRCode = async (
         showMessage: boolean
     ): Promise<string | null> => {
+        setQRCodeData(qrCodeData.trim());
         const fileRef = ref(
             storage,
             `users/${user?.uid}/qrcodes/${qrCodeData}`
@@ -81,8 +83,28 @@ const Create = () => {
         return await getDownloadURL(fileRef);
     };
 
-    const downloadQRCode = async () => {
-        const fileURI = await uploadQRCode(false);
+    const downloadQRCode = async (qrCodeValue: string) => {
+        const downloadURI = await uploadQRCode(false);
+        const directoryPath = FileSystem.documentDirectory + "QRCodes/";
+        const filePath = directoryPath + qrCodeValue;
+
+        if (!(await FileSystem.getInfoAsync(directoryPath)).exists) {
+            await FileSystem.makeDirectoryAsync(directoryPath, {
+                intermediates: true,
+            });
+        }
+
+        await FileSystem.downloadAsync(downloadURI!, filePath);
+        messageAlertShower(
+            "QRCode Downloaded!",
+            "The QRCode has been downloaded to your device!!",
+            [
+                {
+                    text: "OK",
+                    onPress: () => {},
+                },
+            ]
+        );
     };
 
     if (firestoreError || userError) {
@@ -144,7 +166,7 @@ const Create = () => {
                                     ? "bg-[#272934]"
                                     : "bg-white"
                             } mb-10 p-5 shadow-md`}
-                            onPress={downloadQRCode}
+                            onPress={() => downloadQRCode(qrCodeData)}
                         >
                             <FontAwesome
                                 name="cloud-download"
