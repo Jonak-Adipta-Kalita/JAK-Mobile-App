@@ -39,12 +39,11 @@ const Create = () => {
 
     const [qrCodeData, setQRCodeData] = useState("");
     const [displayQRCode, setDisplayQRCode] = useState(false);
-    const qrCodeSVG = useRef<any>(null);
+    const qrCodeSVGDataURL = useRef<any>(null);
 
     const uploadQRCode = async (
         showMessage: boolean
     ): Promise<string | null> => {
-        const dataURL: string = await qrCodeSVG.current?.toDataURL();
         const fileRef = ref(
             storage,
             `users/${user?.uid}/qrcodes/${qrCodeData.replaceAll(" ", "_")}`
@@ -71,7 +70,7 @@ const Create = () => {
             return await getDownloadURL(fileRef);
         }
 
-        uploadString(fileRef, dataURL, "base64");
+        uploadString(fileRef, qrCodeSVGDataURL.current, "base64");
 
         await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeData), {
             value: qrCodeData,
@@ -207,7 +206,13 @@ const Create = () => {
                             colorScheme == "dark" ? "#413f44" : "white"
                         }
                         color={colorScheme == "dark" ? "#fff" : "#000"}
-                        getRef={(c) => (qrCodeSVG.current = c)}
+                        getRef={(c) => {
+                            if (!c.toDataURL) return;
+
+                            c?.toDataURL((base64Image: string) => {
+                                qrCodeSVGDataURL.current = base64Image;
+                            });
+                        }}
                     />
                 </View>
             )}
