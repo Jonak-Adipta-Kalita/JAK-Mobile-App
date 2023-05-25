@@ -101,6 +101,13 @@ const SettingsScreen = () => {
                     user?.uid!
                 );
                 updateProfile(user!, { photoURL: uploadURL });
+                setDoc(
+                    doc(db, "users", user?.uid!),
+                    {
+                        photoURL: uploadURL,
+                    },
+                    { merge: true }
+                );
                 setImage(uploadURL);
             }
         } catch (error) {

@@ -84,7 +84,6 @@ const RegisterScreen = () => {
                     uid: authUser.user.uid!,
                     email: email,
                     displayName: name,
-                    photoURL: avatar,
                     emailVerified: authUser?.user?.emailVerified,
                 });
             } catch (error) {
