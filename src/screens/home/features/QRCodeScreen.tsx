@@ -207,7 +207,7 @@ const Create = () => {
                         }
                         color={colorScheme == "dark" ? "#fff" : "#000"}
                         getRef={(c) => {
-                            if (!c.toDataURL) return;
+                            if (!c || !c.toDataURL) return;
 
                             c?.toDataURL((base64Image: string) => {
                                 qrCodeSVGDataURL.current = base64Image;
