@@ -144,7 +144,7 @@ const TodoScreen = () => {
     const [todosFetched, firestoreLoading, firestoreError] = useCollection(
         query(
             collection(db, "users", user?.uid!, "todos"),
-            orderBy("timestamp", "desc")
+            orderBy("timestamp", "asc")
         )
     );
     const [todos, setTodos] = useState<{ id: string; data: DocumentData }[]>(
