@@ -16,39 +16,12 @@ import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
-import {
-    deleteObject,
-    getDownloadURL,
-    ref,
-    uploadBytes,
-} from "firebase/storage";
+import { deleteObject, ref } from "firebase/storage";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { BottomTabStackNavigationProps } from "../../@types/navigation";
 import StatusBar from "../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const uploadImageAsync = async (uri: string, userUID: string) => {
-    const blob: any = await new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.onload = () => {
-            resolve(xhr.response);
-        };
-        xhr.onerror = (error) => {
-            alert(error);
-            reject(new TypeError("Network request failed"));
-        };
-        xhr.responseType = "blob";
-        xhr.open("GET", uri, true);
-        xhr.send(null);
-    });
-
-    const fileRef = ref(storage, `users/${userUID}/profile_pic`);
-    await uploadBytes(fileRef, blob);
-
-    blob.close();
-
-    return await getDownloadURL(fileRef);
-};
+import { uploadImageAsync } from "../utils/uploadImageAsync";
 
 const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
     const colorScheme = useColorScheme();
@@ -98,7 +71,7 @@ const SettingsScreen = () => {
             if (!pickerResult.canceled) {
                 const uploadURL = await uploadImageAsync(
                     pickerResult.assets[0].uri,
-                    user?.uid!
+                    ref(storage, `users/${user?.uid}/profile_pic`)
                 );
                 updateProfile(user!, { photoURL: uploadURL });
                 setDoc(

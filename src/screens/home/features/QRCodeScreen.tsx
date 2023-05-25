@@ -32,14 +32,10 @@ import {
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import LoadingIndicator from "../../../components/Loading";
 import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
-import {
-    deleteObject,
-    getDownloadURL,
-    ref,
-    uploadString,
-} from "firebase/storage";
+import { deleteObject, getDownloadURL, ref } from "firebase/storage";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
+import { uploadImageAsync } from "../../../utils/uploadImageAsync";
 
 const Create = () => {
     const colorScheme = useColorScheme();
@@ -71,15 +67,19 @@ const Create = () => {
             return await getDownloadURL(fileRef);
         }
 
-        await uploadString(fileRef, qrCodeSVGDataURL.current, "base64");
+        const downloadURL = await uploadImageAsync(
+            qrCodeSVGDataURL.current,
+            fileRef,
+            true
+        );
 
         await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID), {
             value: qrCodeData,
             timestamp: serverTimestamp(),
-            image: await getDownloadURL(fileRef),
+            image: downloadURL,
         });
 
-        return await getDownloadURL(fileRef);
+        return downloadURL;
     };
 
     const deleteQRCode = async () => {
@@ -243,7 +243,8 @@ const Create = () => {
                             if (!c || !c.toDataURL) return;
 
                             c?.toDataURL((base64Image: string) => {
-                                qrCodeSVGDataURL.current = base64Image;
+                                qrCodeSVGDataURL.current =
+                                    "data:image/png;base64," + base64Image;
                             });
                         }}
                     />
