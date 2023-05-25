@@ -117,6 +117,7 @@ const CreateNewTodo = ({
                     placeholderTextColor={"#9CA3AF"}
                     style={globalStyles.font}
                     onChangeText={(e) => setTodoText(e)}
+                    autoFocus
                 />
                 <TouchableOpacity onPress={() => createTodo()} className="mr-5">
                     <Entypo

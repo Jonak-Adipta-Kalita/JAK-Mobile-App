@@ -140,6 +140,7 @@ const Create = () => {
                     onChangeText={(text) => setQRCodeData(text)}
                     value={qrCodeData}
                     multiline
+                    autoFocus
                 />
             </View>
             <View className="">
