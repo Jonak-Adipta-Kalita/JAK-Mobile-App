@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
@@ -39,18 +39,19 @@ const Create = () => {
 
     const [qrCodeData, setQRCodeData] = useState("");
     const [displayQRCode, setDisplayQRCode] = useState(false);
-    const [qrCodeSVG, setQRCodeSVG] = useState<any | null>(null);
+    const qrCodeSVG = useRef<any>(null);
 
     const uploadQRCode = async (
         showMessage: boolean
     ): Promise<string | null> => {
-        const dataURL: string = await qrCodeSVG.toDataURL();
+        const dataURL: string = await qrCodeSVG.current?.toDataURL();
         const fileRef = ref(
             storage,
-            `users/${user?.uid}/qrcodes/${qrCodeData}`
+            `users/${user?.uid}/qrcodes/${qrCodeData.replaceAll(" ", "_")}`
         );
 
         if (
+            qrCodesFetched?.docs?.length! > 0 &&
             qrCodesFetched?.docs.some((doc) => doc.data().value === qrCodeData)
         ) {
             if (showMessage) {
@@ -206,7 +207,7 @@ const Create = () => {
                             colorScheme == "dark" ? "#413f44" : "white"
                         }
                         color={colorScheme == "dark" ? "#fff" : "#000"}
-                        getRef={(c) => setQRCodeSVG(c)}
+                        getRef={(c) => (qrCodeSVG.current = c)}
                     />
                 </View>
             )}
