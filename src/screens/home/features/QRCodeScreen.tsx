@@ -46,7 +46,7 @@ const Create = () => {
     ): Promise<string | null> => {
         const fileRef = ref(
             storage,
-            `users/${user?.uid}/qrcodes/${qrCodeData.replaceAll(" ", "_")}`
+            `users/${user?.uid}/qrcodes/${qrCodeData}`
         );
 
         if (
@@ -70,7 +70,7 @@ const Create = () => {
             return await getDownloadURL(fileRef);
         }
 
-        uploadString(fileRef, qrCodeSVGDataURL.current, "base64");
+        await uploadString(fileRef, qrCodeSVGDataURL.current, "base64");
 
         await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeData), {
             value: qrCodeData,

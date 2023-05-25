@@ -45,6 +45,7 @@
         "@rneui/base": "^4.0.0-rc.7",
         "@rneui/themed": "^4.0.0-rc.7",
         "@xxjonakadiptaxx/jak_javascript_package": "^3.3.3",
+        "base-64": "^1.0.0",
         "expo": "~48.0.9",
         "expo-asset": "~8.9.1",
         "expo-barcode-scanner": "~12.3.2",
@@ -75,6 +76,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.20.0",
+        "@types/base-64": "^1.0.0",
         "@types/jest": "^29.5.0",
         "@types/react": "~18.0.14",
         "@types/react-native": "^0.71.5",
