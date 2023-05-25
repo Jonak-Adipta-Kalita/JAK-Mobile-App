@@ -63,10 +63,9 @@ const Create = () => {
 
     const uploadQRCode = async (): Promise<string | null> => {
         setQRCodeData(qrCodeData.trim());
-        const fileRef = ref(
-            storage,
-            `users/${user?.uid}/qrcodes/${qrCodeData}`
-        );
+        const qrCodeID = qrCodeData.replaceAll("\n", ";").replaceAll(" ", "_");
+
+        const fileRef = ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`);
 
         if (qrCodeAlreadyExists()) {
             return await getDownloadURL(fileRef);
@@ -74,7 +73,7 @@ const Create = () => {
 
         await uploadString(fileRef, qrCodeSVGDataURL.current, "base64");
 
-        await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeData), {
+        await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID), {
             value: qrCodeData,
             timestamp: serverTimestamp(),
             image: await getDownloadURL(fileRef),
@@ -84,10 +83,11 @@ const Create = () => {
     };
 
     const deleteQRCode = async () => {
-        await deleteDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeData));
+        const qrCodeID = qrCodeData.replaceAll("\n", ";").replaceAll(" ", "_");
 
+        await deleteDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID));
         await deleteObject(
-            ref(storage, `users/${user?.uid}/qrcodes/${qrCodeData}`)
+            ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`)
         );
     };
 
