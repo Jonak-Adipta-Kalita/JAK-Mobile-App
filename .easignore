@@ -15,3 +15,4 @@ firestore.indexes.json
 firestore.rules
 storage.rules
 assets/images/downloadButtons
+assets/images/banner.png
