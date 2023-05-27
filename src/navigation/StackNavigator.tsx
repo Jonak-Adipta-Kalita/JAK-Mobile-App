@@ -9,7 +9,6 @@ import TodoScreen from "../screens/home/features/TodoScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
-import WeatherForecastScreen from "../screens/home/features/WeatherForecastScreen";
 import NoNetworkScreen from "../screens/NoNetworkScreen";
 import QRCodeScreen from "../screens/home/features/QRCodeScreen";
 
@@ -56,10 +55,6 @@ const HomeStack = () => {
             <Stack.Group>
                 <Stack.Screen name="Todo" component={TodoScreen} />
                 <Stack.Screen name="QRCode" component={QRCodeScreen} />
-                <Stack.Screen
-                    name="WeatherForecast"
-                    component={WeatherForecastScreen}
-                />
             </Stack.Group>
         </Stack.Navigator>
     );
