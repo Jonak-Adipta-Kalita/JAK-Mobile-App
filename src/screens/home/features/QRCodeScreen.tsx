@@ -243,8 +243,7 @@ const Create = () => {
                             if (!c || !c.toDataURL) return;
 
                             c?.toDataURL((base64Image: string) => {
-                                qrCodeSVGDataURL.current =
-                                    "data:image/png;base64," + base64Image;
+                                qrCodeSVGDataURL.current = base64Image;
                             });
                         }}
                     />

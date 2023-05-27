@@ -11,7 +11,7 @@ const uploadImageAsync = async (
     base64?: boolean
 ) => {
     if (base64) {
-        await uploadString(fileRef, uri, "data_url");
+        await uploadString(fileRef, uri, "base64");
     } else {
         const blob = await fetch(uri).then((response) => response.blob());
         await uploadBytes(fileRef, blob);
