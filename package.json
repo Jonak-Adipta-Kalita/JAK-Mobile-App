@@ -21,7 +21,8 @@
         "build:ios": "eas build -p ios",
         "publish": "firebase deploy && eas update",
         "publish:firebase": "firebase deploy",
-        "publish:expo": "eas update",
+        "publish:expo": "eas build --profile production",
+        "publish:expo:preview": "eas build --profile preview",
         "check:version": "ncu",
         "prepare": "husky install"
     },
