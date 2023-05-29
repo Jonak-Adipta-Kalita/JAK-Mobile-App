@@ -237,7 +237,14 @@ const TodoScreen = () => {
                                 {todosFetched?.docs?.length}/10
                             </Text>
                         </View>
-                        <ScrollView className="mb-32 mt-10">
+                        <ScrollView
+                            className={`${
+                                todosFetched?.docs.length! < 10 &&
+                                !creatingNewTodo
+                                    ? "mb-32"
+                                    : "mb-10"
+                            } mt-10`}
+                        >
                             {todos?.map(({ id, data }) => (
                                 <Todo id={id} key={id} data={data} />
                             ))}
@@ -253,22 +260,26 @@ const TodoScreen = () => {
                         </ScrollView>
                     </>
                 )}
-                <View className="absolute bottom-10 right-10">
-                    <TouchableOpacity
-                        className={`rounded-full border-8 ${
-                            colorScheme === "dark"
-                                ? "border-white"
-                                : "border-black"
-                        }`}
-                        onPress={() => setCreatingNewTodo(true)}
-                    >
-                        <AntDesign
-                            name="plus"
-                            size={50}
-                            color={colorScheme === "dark" ? "#fff" : "#000000"}
-                        />
-                    </TouchableOpacity>
-                </View>
+                {todosFetched?.docs.length! < 10 && !creatingNewTodo && (
+                    <View className="absolute bottom-10 right-10">
+                        <TouchableOpacity
+                            className={`rounded-full border-8 ${
+                                colorScheme === "dark"
+                                    ? "border-white"
+                                    : "border-black"
+                            }`}
+                            onPress={() => setCreatingNewTodo(true)}
+                        >
+                            <AntDesign
+                                name="plus"
+                                size={50}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        </TouchableOpacity>
+                    </View>
+                )}
             </View>
         </SafeAreaView>
     );
