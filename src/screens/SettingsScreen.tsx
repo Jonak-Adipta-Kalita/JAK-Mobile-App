@@ -6,6 +6,7 @@ import {
     useColorScheme,
     Image,
 } from "react-native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { auth, db, storage } from "../firebase";
 import globalStyles from "../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -19,6 +20,9 @@ import { updateProfile } from "firebase/auth";
 import StatusBar from "../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { uploadImageAsync } from "../utils/uploadImageAsync";
+import { verifyEmail } from "../utils/verifyEmail";
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabStackNavigationProps } from "../../@types/navigation";
 
 const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
     const colorScheme = useColorScheme();
@@ -55,6 +59,8 @@ const SettingsScreen = () => {
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
     const colorScheme = useColorScheme();
+    const navigation =
+        useNavigation<BottomTabStackNavigationProps<"Settings">>();
 
     const updatePic = async () => {
         const pickerResult = await ImagePicker.launchImageLibraryAsync({
@@ -156,6 +162,21 @@ const SettingsScreen = () => {
                     >
                         User Settings
                     </Text>
+                    {user?.emailVerified && (
+                        <TouchableOpacity
+                            style={globalStyles.headerIcon}
+                            onPress={() => verifyEmail(navigation, user)}
+                            className="-mt-[0.5px] mr-10"
+                        >
+                            <MaterialCommunityIcons
+                                name="account-cancel-outline"
+                                size={30}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        </TouchableOpacity>
+                    )}
                 </View>
                 <View className="mt-8 flex flex-col items-center justify-center">
                     <TouchableOpacity
