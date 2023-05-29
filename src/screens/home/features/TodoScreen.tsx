@@ -225,10 +225,10 @@ const TodoScreen = () => {
                     </View>
                 ) : (
                     <>
-                        <View className="mt-5 w-full">
+                        <View className="w-full">
                             <Text
                                 style={globalStyles.font}
-                                className={`text-md mr-10 text-right ${
+                                className={`mr-10 text-right text-lg ${
                                     colorScheme == "dark"
                                         ? "text-gray-200"
                                         : "text-gray-900"
@@ -243,7 +243,7 @@ const TodoScreen = () => {
                                 !creatingNewTodo
                                     ? "mb-32"
                                     : "mb-10"
-                            } mt-10`}
+                            } mt-5`}
                         >
                             {todos?.map(({ id, data }) => (
                                 <Todo id={id} key={id} data={data} />
