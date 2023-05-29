@@ -1,11 +1,6 @@
 import React from "react";
-import {
-    View,
-    TouchableOpacity,
-    ScrollView,
-    Text,
-    useColorScheme,
-} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";

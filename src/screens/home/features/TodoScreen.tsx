@@ -13,13 +13,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import {
-    View,
-    TouchableOpacity,
-    Text,
-    useColorScheme,
-    ScrollView,
-} from "react-native";
+import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import LoadingIndicator from "../../../components/Loading";
 import { auth, db } from "../../../firebase";
@@ -30,7 +24,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalStyles from "../../../globalStyles";
 import StatusBar from "../../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, ScrollView } from "react-native-gesture-handler";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {

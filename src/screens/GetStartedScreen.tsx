@@ -33,13 +33,13 @@ const GetStartedScreen = () => {
                     <View className="space-y-5 rounded-lg bg-orange-500 p-3 py-20">
                         <Text
                             className={`px-10 text-center text-2xl text-gray-50`}
-                            style={[globalStyles.font]}
+                            style={globalStyles.font}
                         >
                             Welcome
                         </Text>
                         <Text
                             className={`px-10 text-center text-xs text-gray-50`}
-                            style={[globalStyles.font]}
+                            style={globalStyles.font}
                         >
                             Welcome to JAK Mobile App.
                         </Text>
@@ -49,13 +49,13 @@ const GetStartedScreen = () => {
                     <View className="mx-4 space-y-5 rounded-lg bg-purple-500 p-3 py-10">
                         <Text
                             className={`px-10 text-center text-2xl text-gray-50`}
-                            style={[globalStyles.font]}
+                            style={globalStyles.font}
                         >
                             Takes care of all your daily needs
                         </Text>
                         <Text
                             className={`px-10 text-center text-xs text-gray-50`}
-                            style={[globalStyles.font]}
+                            style={globalStyles.font}
                         >
                             Get ready to explore a world of convenience with
                             tons of essential features at your fingertips.
@@ -66,13 +66,13 @@ const GetStartedScreen = () => {
                     <View className="m-5 space-y-5 rounded-lg bg-cyan-500 p-3 py-10">
                         <Text
                             className={`px-10 text-center text-2xl text-gray-50`}
-                            style={[globalStyles.font]}
+                            style={globalStyles.font}
                         >
                             Made by your Trusted Developer
                         </Text>
                         <Text
                             className={`px-10 text-center text-xs text-gray-50`}
-                            style={[globalStyles.font]}
+                            style={globalStyles.font}
                         >
                             The App has been made and published by JAK (Jonak
                             Adipta Kalita)

@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-    View,
-    TouchableOpacity,
-    Text,
-    useColorScheme,
-    Image,
-} from "react-native";
+import { Image } from "expo-image";
+import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { auth, db, storage } from "../firebase";
 import globalStyles from "../globalStyles";
@@ -162,10 +157,10 @@ const SettingsScreen = () => {
                     >
                         User Settings
                     </Text>
-                    {user?.emailVerified && (
+                    {!user?.emailVerified && (
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
-                            onPress={() => verifyEmail(navigation, user)}
+                            onPress={() => verifyEmail(navigation, user!)}
                             className="-mt-[0.5px] mr-10"
                         >
                             <MaterialCommunityIcons
