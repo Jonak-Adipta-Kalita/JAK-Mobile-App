@@ -136,10 +136,12 @@ const HomeScreen = () => {
                                     colorScheme == "dark"
                                         ? "bg-[#272934] text-gray-200"
                                         : "bg-white text-gray-900"
-                                } mx-10 p-5 text-center text-lg`}
+                                } mx-5 p-5 text-center text-lg`}
                                 style={globalStyles.font}
                             >
-                                Verify your Email to use the Features.
+                                Verify your Email by Clicking the Cog Icon in
+                                the Bottom Menu and clicking on Verify to use
+                                the Features
                             </Text>
                         </View>
                     )}

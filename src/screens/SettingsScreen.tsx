@@ -135,36 +135,29 @@ const SettingsScreen = () => {
         );
     };
 
-    const verifyEmail = () => {
-        if (!user?.emailVerified) {
-            sendEmailVerification(user!)
-                .then(() => {
-                    messageAlertShower(
-                        "Verification Email Successfully Sent!!",
-                        "Please check your Email for the Verification Link!!",
-                        [
-                            {
-                                text: "OK",
-                                onPress: () => {},
-                            },
-                        ]
-                    );
-                })
-                .then(() => {
-                    setDoc(
-                        doc(db, "users", user?.uid!),
-                        {
-                            emailVerified: true,
-                        },
-                        { merge: true }
-                    );
-                })
-                .then(() => {
-                    navigation.navigate("Home");
-                })
-                .catch((error) => {
-                    errorAlertShower(error);
-                });
+    const verifyEmail = async () => {
+        try {
+            await sendEmailVerification(user!);
+            messageAlertShower(
+                "Verification Email Successfully Sent!!",
+                "Please check your Email for the Verification Link!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
+            await setDoc(
+                doc(db, "users", user?.uid!),
+                {
+                    emailVerified: true,
+                },
+                { merge: true }
+            );
+            navigation.navigate("Home");
+        } catch (error) {
+            errorAlertShower(error);
         }
     };
 
@@ -194,7 +187,7 @@ const SettingsScreen = () => {
                     >
                         User Settings
                     </Text>
-                    {!user?.emailVerified && (
+                    {user?.emailVerified && (
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
                             onPress={verifyEmail}
@@ -239,8 +232,8 @@ const SettingsScreen = () => {
                     <ProfileDetail title="Name" value={user?.displayName!} />
                     <ProfileDetail title="Email" value={user?.email!} />
                 </View>
-                <View className="absolute bottom-36 w-full">
-                    <View className="flex flex-row items-center justify-center space-x-20">
+                <View className="absolute bottom-36 w-full space-y-5">
+                    <View className="flex flex-row items-center justify-evenly">
                         <TouchableOpacity
                             onPress={signOut}
                             className={`rounded-lg ${
