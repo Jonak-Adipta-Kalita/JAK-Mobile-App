@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-import {
-    View,
-    TouchableOpacity,
-    Text,
-    useColorScheme,
-    Image,
-} from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Image } from "expo-image";
+import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { auth, db, storage } from "../firebase";
 import globalStyles from "../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -14,14 +9,15 @@ import LoadingIndicator from "../components/Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 import * as ImagePicker from "expo-image-picker";
-import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
-import { sendEmailVerification, updateProfile } from "firebase/auth";
-import { BottomTabStackNavigationProps } from "../../@types/navigation";
+import { updateProfile } from "firebase/auth";
 import StatusBar from "../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { uploadImageAsync } from "../utils/uploadImageAsync";
+import { verifyEmail } from "../utils/verifyEmail";
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabStackNavigationProps } from "../../@types/navigation";
 
 const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
     const colorScheme = useColorScheme();
@@ -55,11 +51,11 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
 };
 
 const SettingsScreen = () => {
-    const navigation =
-        useNavigation<BottomTabStackNavigationProps<"Settings">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
     const colorScheme = useColorScheme();
+    const navigation =
+        useNavigation<BottomTabStackNavigationProps<"Settings">>();
 
     const updatePic = async () => {
         const pickerResult = await ImagePicker.launchImageLibraryAsync({
@@ -135,39 +131,6 @@ const SettingsScreen = () => {
         );
     };
 
-    const verifyEmail = () => {
-        if (!user?.emailVerified) {
-            sendEmailVerification(user!)
-                .then(() => {
-                    messageAlertShower(
-                        "Verification Email Successfully Sent!!",
-                        "Please check your Email for the Verification Link!!",
-                        [
-                            {
-                                text: "OK",
-                                onPress: () => {},
-                            },
-                        ]
-                    );
-                })
-                .then(() => {
-                    setDoc(
-                        doc(db, "users", user?.uid!),
-                        {
-                            emailVerified: true,
-                        },
-                        { merge: true }
-                    );
-                })
-                .then(() => {
-                    navigation.navigate("Home");
-                })
-                .catch((error) => {
-                    errorAlertShower(error);
-                });
-        }
-    };
-
     if (userError) errorAlertShower(userError);
 
     if (userLoading) {
@@ -197,7 +160,7 @@ const SettingsScreen = () => {
                     {!user?.emailVerified && (
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
-                            onPress={verifyEmail}
+                            onPress={() => verifyEmail(navigation, user!)}
                             className="-mt-[0.5px] mr-10"
                         >
                             <MaterialCommunityIcons
@@ -239,8 +202,8 @@ const SettingsScreen = () => {
                     <ProfileDetail title="Name" value={user?.displayName!} />
                     <ProfileDetail title="Email" value={user?.email!} />
                 </View>
-                <View className="absolute bottom-36 w-full">
-                    <View className="flex flex-row items-center justify-center space-x-20">
+                <View className="absolute bottom-36 w-full space-y-5">
+                    <View className="flex flex-row items-center justify-evenly">
                         <TouchableOpacity
                             onPress={signOut}
                             className={`rounded-lg ${

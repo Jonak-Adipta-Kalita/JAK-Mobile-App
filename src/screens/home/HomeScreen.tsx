@@ -1,12 +1,7 @@
 import React from "react";
-import {
-    View,
-    TouchableOpacity,
-    ScrollView,
-    Text,
-    useColorScheme,
-} from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { ScrollView } from "react-native-gesture-handler";
+import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "../../components/Loading";
@@ -95,33 +90,54 @@ const HomeScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             {user ? (
-                <View>
-                    <View className="flex flex-row items-center justify-between">
-                        <Text
-                            className={`m-5 mx-10 flex-1 rounded-2xl ${
-                                colorScheme == "dark"
-                                    ? "bg-[#272934] text-gray-200"
-                                    : "bg-white text-gray-900"
-                            } p-2 text-center text-lg`}
-                            style={globalStyles.font}
-                        >
-                            Tools
-                        </Text>
-                    </View>
-                    <ScrollView className="mb-64 mt-10">
-                        <Feature
-                            title="Todo"
-                            description="Create a Todo List"
-                            icon="bars"
-                            buttonOnPress={() => navigation.navigate("Todo")}
-                        />
-                        <Feature
-                            title="QRCode"
-                            description="Create/Scan QRCode"
-                            icon="qrcode"
-                            buttonOnPress={() => navigation.navigate("QRCode")}
-                        />
-                    </ScrollView>
+                <View className="flex-1">
+                    {user.emailVerified ? (
+                        <View>
+                            <View className="flex flex-row items-center justify-between">
+                                <Text
+                                    className={`m-5 mx-10 flex-1 rounded-2xl ${
+                                        colorScheme == "dark"
+                                            ? "bg-[#272934] text-gray-200"
+                                            : "bg-white text-gray-900"
+                                    } p-2 text-center text-lg`}
+                                    style={globalStyles.font}
+                                >
+                                    Tools
+                                </Text>
+                            </View>
+                            <ScrollView className="mb-64 mt-10">
+                                <Feature
+                                    title="Todo"
+                                    description="Create a Todo List"
+                                    icon="bars"
+                                    buttonOnPress={() =>
+                                        navigation.navigate("Todo")
+                                    }
+                                />
+                                <Feature
+                                    title="QRCode"
+                                    description="Create/Scan QRCode"
+                                    icon="qrcode"
+                                    buttonOnPress={() =>
+                                        navigation.navigate("QRCode")
+                                    }
+                                />
+                            </ScrollView>
+                        </View>
+                    ) : (
+                        <View className="flex-1 items-center justify-center">
+                            <Text
+                                className={`self-center rounded-2xl ${
+                                    colorScheme == "dark"
+                                        ? "bg-[#272934] text-gray-200"
+                                        : "bg-white text-gray-900"
+                                } mx-5 p-5 text-center text-lg`}
+                                style={globalStyles.font}
+                            >
+                                Check your Email to Verify to use the Features
+                            </Text>
+                        </View>
+                    )}
                 </View>
             ) : (
                 <View className="flex-1 items-center justify-center">

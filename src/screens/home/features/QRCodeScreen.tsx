@@ -1,15 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
-import {
-    Platform,
-    Text,
-    TouchableOpacity,
-    View,
-    useColorScheme,
-} from "react-native";
+import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import StatusBar from "../../../components/StatusBar";
-import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Entypo from "@expo/vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
@@ -61,6 +57,20 @@ const Create = () => {
         setQRCodeData(qrCodeData.trim());
         const qrCodeID = qrCodeData.replaceAll("\n", ";").replaceAll(" ", "_");
 
+        if (qrCodesFetched?.docs?.length! >= 5) {
+            messageAlertShower(
+                "Max QRCodes Reached!",
+                "Total amount of QRCodes stored cannot be more than 5. Delete some from the Stored QRCode",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
+            return null;
+        }
+
         const fileRef = ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`);
 
         if (qrCodeAlreadyExists()) {
@@ -93,6 +103,9 @@ const Create = () => {
 
     const downloadQRCode = async (qrCodeValue: string) => {
         const downloadURI = await uploadQRCode();
+
+        if (!downloadURI) return;
+
         const directoryPath = FileSystem.documentDirectory + "QRCodes/";
         const filePath = directoryPath + qrCodeValue + ".png";
 
@@ -105,18 +118,12 @@ const Create = () => {
         const downloadedFile: FileSystem.FileSystemDownloadResult =
             await FileSystem.downloadAsync(downloadURI!, filePath);
 
-        if (Platform.OS === "android") {
-            const asset = await MediaLibrary.createAssetAsync(
-                downloadedFile.uri
-            );
-            const album = await MediaLibrary.getAlbumAsync("QRCodes");
-            if (album == null) {
-                await MediaLibrary.createAlbumAsync("QRCodes", asset, false);
-            } else {
-                await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
-            }
-        } else if (Platform.OS === "ios") {
-            // TODO: Save using `expo-sharing`
+        const asset = await MediaLibrary.createAssetAsync(downloadedFile.uri);
+        const album = await MediaLibrary.getAlbumAsync("QRCodes");
+        if (album == null) {
+            await MediaLibrary.createAlbumAsync("QRCodes", asset, false);
+        } else {
+            await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
         }
 
         messageAlertShower(

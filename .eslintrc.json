@@ -29,6 +29,9 @@
         "@typescript-eslint/no-explicit-any": 0,
         "@typescript-eslint/no-non-null-assertion": 0,
         "@typescript-eslint/no-non-null-asserted-optional-chain": 0,
-        "@typescript-eslint/ban-ts-comment": 0
+        "@typescript-eslint/ban-ts-comment": 0,
+        "bacon/no-vector-icon-barrel": 1,
+        "bacon/no-empty-styles": 1,
+        "bacon/modern-react-native": 1
     }
 }

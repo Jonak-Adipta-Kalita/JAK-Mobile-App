@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import { Button, Input } from "@rneui/themed";
-import {
-    Feather,
-    MaterialIcons,
-    FontAwesome5,
-    AntDesign,
-} from "@expo/vector-icons";
+import Feather from "@expo/vector-icons/Feather";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import globalStyles from "../../globalStyles";
 import { auth, db } from "../../firebase";
 import {
@@ -25,6 +23,7 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
+import { verifyEmail } from "../../utils/verifyEmail";
 
 const RegisterScreen = () => {
     const dispatch = useAppDispatch();
@@ -80,6 +79,7 @@ const RegisterScreen = () => {
                     displayName: name,
                     photoURL: avatar,
                 });
+                await verifyEmail(navigation, authUser?.user);
                 setDoc(doc(db, "users", authUser.user.uid!), {
                     uid: authUser.user.uid!,
                     email: email,

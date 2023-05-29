@@ -13,22 +13,18 @@ import {
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import {
-    View,
-    TouchableOpacity,
-    Text,
-    useColorScheme,
-    ScrollView,
-} from "react-native";
+import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import LoadingIndicator from "../../../components/Loading";
 import { auth, db } from "../../../firebase";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
-import { AntDesign, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Entypo from "@expo/vector-icons/Entypo";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalStyles from "../../../globalStyles";
 import StatusBar from "../../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, ScrollView } from "react-native-gesture-handler";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
@@ -119,7 +115,11 @@ const CreateNewTodo = ({
                     onChangeText={(e) => setTodoText(e)}
                     autoFocus
                 />
-                <TouchableOpacity onPress={() => createTodo()} className="mr-5">
+                <TouchableOpacity
+                    onPress={createTodo}
+                    disabled={todoText === ""}
+                    className="mr-5"
+                >
                     <Entypo
                         name="check"
                         size={24}
@@ -220,34 +220,62 @@ const TodoScreen = () => {
                         </Text>
                     </View>
                 ) : (
-                    <ScrollView className="mb-32 mt-10">
-                        {todos?.map(({ id, data }) => (
-                            <Todo id={id} key={id} data={data} />
-                        ))}
-                        {creatingNewTodo && (
-                            <CreateNewTodo
-                                todosFetched={todosFetched}
-                                setCreatingNewTodo={setCreatingNewTodo}
-                            />
-                        )}
-                    </ScrollView>
+                    <>
+                        <View className="w-full">
+                            <Text
+                                style={globalStyles.font}
+                                className={`mr-10 text-right text-lg ${
+                                    colorScheme == "dark"
+                                        ? "text-gray-200"
+                                        : "text-gray-900"
+                                }`}
+                            >
+                                {todosFetched?.docs?.length}/10
+                            </Text>
+                        </View>
+                        <ScrollView
+                            className={`${
+                                todosFetched?.docs.length! < 10 &&
+                                !creatingNewTodo
+                                    ? "mb-32"
+                                    : "mb-10"
+                            } mt-5`}
+                        >
+                            {todos?.map(({ id, data }) => (
+                                <Todo id={id} key={id} data={data} />
+                            ))}
+                            {creatingNewTodo && (
+                                <>
+                                    <CreateNewTodo
+                                        todosFetched={todosFetched}
+                                        setCreatingNewTodo={setCreatingNewTodo}
+                                    />
+                                    <View className="mb-32" />
+                                </>
+                            )}
+                        </ScrollView>
+                    </>
                 )}
-                <View className="absolute bottom-10 right-10">
-                    <TouchableOpacity
-                        className={`rounded-full border-8 ${
-                            colorScheme === "dark"
-                                ? "border-white"
-                                : "border-black"
-                        }`}
-                        onPress={() => setCreatingNewTodo(true)}
-                    >
-                        <AntDesign
-                            name="plus"
-                            size={50}
-                            color={colorScheme === "dark" ? "#fff" : "#000000"}
-                        />
-                    </TouchableOpacity>
-                </View>
+                {todosFetched?.docs.length! < 10 && !creatingNewTodo && (
+                    <View className="absolute bottom-10 right-10">
+                        <TouchableOpacity
+                            className={`rounded-full border-8 ${
+                                colorScheme === "dark"
+                                    ? "border-white"
+                                    : "border-black"
+                            }`}
+                            onPress={() => setCreatingNewTodo(true)}
+                        >
+                            <AntDesign
+                                name="plus"
+                                size={50}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        </TouchableOpacity>
+                    </View>
+                )}
             </View>
         </SafeAreaView>
     );

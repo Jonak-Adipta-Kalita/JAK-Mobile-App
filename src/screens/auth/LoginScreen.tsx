@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Button, Input } from "@rneui/themed";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
+import Feather from "@expo/vector-icons/Feather";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { auth } from "../../firebase";
 import globalStyles from "../../globalStyles";
 import {
