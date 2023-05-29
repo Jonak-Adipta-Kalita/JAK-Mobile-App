@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import { Button, Input } from "@rneui/themed";
-import {
-    Feather,
-    MaterialIcons,
-    FontAwesome5,
-    AntDesign,
-} from "@expo/vector-icons";
+import Feather from "@expo/vector-icons/Feather";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import globalStyles from "../../globalStyles";
 import { auth, db } from "../../firebase";
 import {
@@ -18,10 +16,7 @@ import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import images from "../../images";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
-import {
-    createUserWithEmailAndPassword,
-    updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "../../components/StatusBar";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
@@ -96,8 +91,6 @@ const RegisterScreen = () => {
             }
         }
     };
-
-    
 
     return (
         <SafeAreaView className="flex-1">

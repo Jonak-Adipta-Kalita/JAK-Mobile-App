@@ -9,7 +9,9 @@ import {
     useColorScheme,
 } from "react-native";
 import StatusBar from "../../../components/StatusBar";
-import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Entypo from "@expo/vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
