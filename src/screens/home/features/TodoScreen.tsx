@@ -119,7 +119,11 @@ const CreateNewTodo = ({
                     onChangeText={(e) => setTodoText(e)}
                     autoFocus
                 />
-                <TouchableOpacity onPress={() => createTodo()} className="mr-5">
+                <TouchableOpacity
+                    onPress={createTodo}
+                    disabled={todoText === ""}
+                    className="mr-5"
+                >
                     <Entypo
                         name="check"
                         size={24}
@@ -220,17 +224,34 @@ const TodoScreen = () => {
                         </Text>
                     </View>
                 ) : (
-                    <ScrollView className="mb-32 mt-10">
-                        {todos?.map(({ id, data }) => (
-                            <Todo id={id} key={id} data={data} />
-                        ))}
-                        {creatingNewTodo && (
-                            <CreateNewTodo
-                                todosFetched={todosFetched}
-                                setCreatingNewTodo={setCreatingNewTodo}
-                            />
-                        )}
-                    </ScrollView>
+                    <>
+                        <View className="mt-5 w-full">
+                            <Text
+                                style={globalStyles.font}
+                                className={`text-md mr-10 text-right ${
+                                    colorScheme == "dark"
+                                        ? "text-gray-200"
+                                        : "text-gray-900"
+                                }`}
+                            >
+                                {todosFetched?.docs?.length}/10
+                            </Text>
+                        </View>
+                        <ScrollView className="mb-32 mt-10">
+                            {todos?.map(({ id, data }) => (
+                                <Todo id={id} key={id} data={data} />
+                            ))}
+                            {creatingNewTodo && (
+                                <>
+                                    <CreateNewTodo
+                                        todosFetched={todosFetched}
+                                        setCreatingNewTodo={setCreatingNewTodo}
+                                    />
+                                    <View className="mb-32" />
+                                </>
+                            )}
+                        </ScrollView>
+                    </>
                 )}
                 <View className="absolute bottom-10 right-10">
                     <TouchableOpacity
