@@ -63,6 +63,20 @@ const Create = () => {
         setQRCodeData(qrCodeData.trim());
         const qrCodeID = qrCodeData.replaceAll("\n", ";").replaceAll(" ", "_");
 
+        if (qrCodesFetched?.docs?.length! >= 5) {
+            messageAlertShower(
+                "Max QRCodes Reached!",
+                "Total amount of QRCodes stored cannot be more than 5. Delete some from the Stored QRCode",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
+            return null;
+        }
+
         const fileRef = ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`);
 
         if (qrCodeAlreadyExists()) {
@@ -95,6 +109,9 @@ const Create = () => {
 
     const downloadQRCode = async (qrCodeValue: string) => {
         const downloadURI = await uploadQRCode();
+
+        if (!downloadURI) return;
+
         const directoryPath = FileSystem.documentDirectory + "QRCodes/";
         const filePath = directoryPath + qrCodeValue + ".png";
 
