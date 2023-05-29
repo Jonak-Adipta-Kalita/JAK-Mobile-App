@@ -18,7 +18,12 @@ import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
 import images from "../../images";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { useAppSelector } from "../../hooks/useSelector";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+    User,
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    updateProfile,
+} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "../../components/StatusBar";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
@@ -80,6 +85,7 @@ const RegisterScreen = () => {
                     displayName: name,
                     photoURL: avatar,
                 });
+                await verifyEmail(authUser.user);
                 setDoc(doc(db, "users", authUser.user.uid!), {
                     uid: authUser.user.uid!,
                     email: email,
@@ -89,6 +95,32 @@ const RegisterScreen = () => {
             } catch (error) {
                 errorAlertShower(error);
             }
+        }
+    };
+
+    const verifyEmail = async (user: User) => {
+        try {
+            await sendEmailVerification(user);
+            messageAlertShower(
+                "Verification Email Successfully Sent!!",
+                "Please check your Email for the Verification Link!!",
+                [
+                    {
+                        text: "OK",
+                        onPress: () => {},
+                    },
+                ]
+            );
+            await setDoc(
+                doc(db, "users", user?.uid!),
+                {
+                    emailVerified: true,
+                },
+                { merge: true }
+            );
+            navigation.navigate("Home");
+        } catch (error) {
+            errorAlertShower(error);
         }
     };
 

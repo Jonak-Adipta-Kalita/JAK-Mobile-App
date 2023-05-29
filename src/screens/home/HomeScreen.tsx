@@ -139,9 +139,7 @@ const HomeScreen = () => {
                                 } mx-5 p-5 text-center text-lg`}
                                 style={globalStyles.font}
                             >
-                                Verify your Email by Clicking the Cog Icon in
-                                the Bottom Menu and clicking on Verify to use
-                                the Features
+                                Check your Email to Verify to use the Features
                             </Text>
                         </View>
                     )}

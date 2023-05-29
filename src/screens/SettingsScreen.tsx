@@ -6,7 +6,6 @@ import {
     useColorScheme,
     Image,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { auth, db, storage } from "../firebase";
 import globalStyles from "../globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -14,11 +13,9 @@ import LoadingIndicator from "../components/Loading";
 import errorAlertShower from "../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../utils/alertShowers/messageAlertShower";
 import * as ImagePicker from "expo-image-picker";
-import { useNavigation } from "@react-navigation/native";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
-import { sendEmailVerification, updateProfile } from "firebase/auth";
-import { BottomTabStackNavigationProps } from "../../@types/navigation";
+import { updateProfile } from "firebase/auth";
 import StatusBar from "../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { uploadImageAsync } from "../utils/uploadImageAsync";
@@ -55,8 +52,6 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
 };
 
 const SettingsScreen = () => {
-    const navigation =
-        useNavigation<BottomTabStackNavigationProps<"Settings">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [image, setImage] = useState<null | string>(null);
     const colorScheme = useColorScheme();
@@ -135,32 +130,6 @@ const SettingsScreen = () => {
         );
     };
 
-    const verifyEmail = async () => {
-        try {
-            await sendEmailVerification(user!);
-            messageAlertShower(
-                "Verification Email Successfully Sent!!",
-                "Please check your Email for the Verification Link!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
-            );
-            await setDoc(
-                doc(db, "users", user?.uid!),
-                {
-                    emailVerified: true,
-                },
-                { merge: true }
-            );
-            navigation.navigate("Home");
-        } catch (error) {
-            errorAlertShower(error);
-        }
-    };
-
     if (userError) errorAlertShower(userError);
 
     if (userLoading) {
@@ -187,21 +156,6 @@ const SettingsScreen = () => {
                     >
                         User Settings
                     </Text>
-                    {user?.emailVerified && (
-                        <TouchableOpacity
-                            style={globalStyles.headerIcon}
-                            onPress={verifyEmail}
-                            className="-mt-[0.5px] mr-10"
-                        >
-                            <MaterialCommunityIcons
-                                name="account-cancel-outline"
-                                size={30}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        </TouchableOpacity>
-                    )}
                 </View>
                 <View className="mt-8 flex flex-col items-center justify-center">
                     <TouchableOpacity
