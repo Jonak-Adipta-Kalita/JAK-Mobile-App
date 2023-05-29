@@ -1,13 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "../../../globalStyles";
-import {
-    Platform,
-    Text,
-    TouchableOpacity,
-    View,
-    useColorScheme,
-} from "react-native";
+import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import StatusBar from "../../../components/StatusBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -124,18 +118,12 @@ const Create = () => {
         const downloadedFile: FileSystem.FileSystemDownloadResult =
             await FileSystem.downloadAsync(downloadURI!, filePath);
 
-        if (Platform.OS === "android") {
-            const asset = await MediaLibrary.createAssetAsync(
-                downloadedFile.uri
-            );
-            const album = await MediaLibrary.getAlbumAsync("QRCodes");
-            if (album == null) {
-                await MediaLibrary.createAlbumAsync("QRCodes", asset, false);
-            } else {
-                await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
-            }
-        } else if (Platform.OS === "ios") {
-            // TODO: Save using `expo-sharing`
+        const asset = await MediaLibrary.createAssetAsync(downloadedFile.uri);
+        const album = await MediaLibrary.getAlbumAsync("QRCodes");
+        if (album == null) {
+            await MediaLibrary.createAlbumAsync("QRCodes", asset, false);
+        } else {
+            await MediaLibrary.addAssetsToAlbumAsync([asset], album, false);
         }
 
         messageAlertShower(
