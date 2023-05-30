@@ -16,7 +16,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import { BottomTabStackNavigationProps } from "../../../../@types/navigation";
 import LoadingIndicator from "../../../components/Loading";
-import { auth, db } from "../../../firebase";
+import { auth, db } from "../../../utils/firebase";
 import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
