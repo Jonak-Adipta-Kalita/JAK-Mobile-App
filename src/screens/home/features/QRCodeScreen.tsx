@@ -57,6 +57,12 @@ const Create = () => {
         setQRCodeData(qrCodeData.trim());
         const qrCodeID = qrCodeData.replaceAll("\n", ";").replaceAll(" ", "_");
 
+        const fileRef = ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`);
+
+        if (qrCodeAlreadyExists()) {
+            return await getDownloadURL(fileRef);
+        }
+
         if (qrCodesFetched?.docs?.length! >= 5) {
             messageAlertShower(
                 "Max QRCodes Reached!",
@@ -69,12 +75,6 @@ const Create = () => {
                 ]
             );
             return null;
-        }
-
-        const fileRef = ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`);
-
-        if (qrCodeAlreadyExists()) {
-            return await getDownloadURL(fileRef);
         }
 
         const downloadURL = await uploadImageAsync(
