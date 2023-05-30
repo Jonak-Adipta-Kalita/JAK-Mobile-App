@@ -13,7 +13,6 @@ import images from "../../utils/images";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "../../components/StatusBar";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
@@ -31,8 +30,6 @@ const RegisterScreen = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const avatar: string = images.avatar;
-
-    useBottomTabBarHeight();
 
     const registerEmail = async () => {
         if (
