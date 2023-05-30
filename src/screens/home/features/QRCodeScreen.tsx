@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalStyles from "../../../globalStyles";
+import globalStyles from "../../../utils/globalStyles";
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import StatusBar from "../../../components/StatusBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -14,7 +14,7 @@ import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, storage } from "../../../firebase";
+import { auth, db, storage } from "../../../utils/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
     collection,

@@ -3,12 +3,10 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme, LogBox } from "react-native";
 import { useFonts } from "expo-font";
-import { Provider as ReduxProvider } from "react-redux";
 import LightTheme from "./src/themes/LightTheme";
 import DarkTheme from "./src/themes/DarkTheme";
-import reduxStore from "./src/redux/store";
 import LoadingIndicator from "./src/components/Loading";
-import { auth } from "./src/firebase";
+import { auth } from "./src/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
 import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
@@ -67,9 +65,7 @@ const App = () => {
                     containerStyle={{ flex: 1 }}
                 />
             ) : (
-                <ReduxProvider store={reduxStore}>
-                    <AppChildren />
-                </ReduxProvider>
+                <AppChildren />
             )}
         </>
     );

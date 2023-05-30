@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatusBar from "../components/StatusBar";
 import { Text, View, useColorScheme } from "react-native";
-import globalStyles from "../globalStyles";
+import globalStyles from "../utils/globalStyles";
 import Feather from "@expo/vector-icons/Feather";
 import { useExitAppBackHandler } from "../hooks/useExitAppBackHandler";
 

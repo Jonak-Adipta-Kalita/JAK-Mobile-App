@@ -5,7 +5,7 @@ import { BottomTabStackNavigationProps } from "../../@types/navigation";
 import StatusBar from "../components/StatusBar";
 import PagerView from "react-native-pager-view";
 import Feather from "@expo/vector-icons/Feather";
-import globalStyles from "../globalStyles";
+import globalStyles from "../utils/globalStyles";
 import { useColorScheme } from "react-native";
 import { useHideBottomTab } from "../hooks/useHideBottomTab";
 import { useExitAppBackHandler } from "../hooks/useExitAppBackHandler";

@@ -21,7 +21,7 @@ import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import globalStyles from "../../../globalStyles";
+import globalStyles from "../../../utils/globalStyles";
 import StatusBar from "../../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, ScrollView } from "react-native-gesture-handler";
