@@ -5,40 +5,31 @@ import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import globalStyles from "../../globalStyles";
-import { auth, db } from "../../firebase";
-import {
-    setShowPassword,
-    selectShowPassword,
-} from "../../redux/slices/showPasswordSlice";
+import globalStyles from "../../utils/globalStyles";
+import { auth, db } from "../../utils/firebase";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
-import images from "../../images";
-import { useAppDispatch } from "../../hooks/useDispatch";
-import { useAppSelector } from "../../hooks/useSelector";
+import images from "../../utils/images";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "../../components/StatusBar";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import { verifyEmail } from "../../utils/verifyEmail";
 
 const RegisterScreen = () => {
-    const dispatch = useAppDispatch();
-    const showPassword = useAppSelector(selectShowPassword);
     const colorScheme = useColorScheme();
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"Register">>();
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const avatar: string = images.avatar;
-
-    useBottomTabBarHeight();
 
     const registerEmail = async () => {
         if (
@@ -173,7 +164,7 @@ const RegisterScreen = () => {
 
                             <TouchableOpacity
                                 style={globalStyles.showPasswordContainer}
-                                onPress={() => dispatch(setShowPassword())}
+                                onPress={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? (
                                     <Feather
@@ -214,7 +205,7 @@ const RegisterScreen = () => {
 
                             <TouchableOpacity
                                 style={globalStyles.showPasswordContainer}
-                                onPress={() => dispatch(setShowPassword())}
+                                onPress={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? (
                                     <Feather

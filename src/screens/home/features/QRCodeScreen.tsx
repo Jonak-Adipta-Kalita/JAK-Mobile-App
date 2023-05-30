@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalStyles from "../../../globalStyles";
+import globalStyles from "../../../utils/globalStyles";
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import StatusBar from "../../../components/StatusBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -14,7 +14,7 @@ import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, storage } from "../../../firebase";
+import { auth, db, storage } from "../../../utils/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
     collection,
@@ -57,6 +57,12 @@ const Create = () => {
         setQRCodeData(qrCodeData.trim());
         const qrCodeID = qrCodeData.replaceAll("\n", ";").replaceAll(" ", "_");
 
+        const fileRef = ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`);
+
+        if (qrCodeAlreadyExists()) {
+            return await getDownloadURL(fileRef);
+        }
+
         if (qrCodesFetched?.docs?.length! >= 5) {
             messageAlertShower(
                 "Max QRCodes Reached!",
@@ -69,12 +75,6 @@ const Create = () => {
                 ]
             );
             return null;
-        }
-
-        const fileRef = ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`);
-
-        if (qrCodeAlreadyExists()) {
-            return await getDownloadURL(fileRef);
         }
 
         const downloadURL = await uploadImageAsync(

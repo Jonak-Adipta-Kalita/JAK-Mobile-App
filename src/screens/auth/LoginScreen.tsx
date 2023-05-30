@@ -3,16 +3,10 @@ import { View, TouchableOpacity } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { auth } from "../../firebase";
-import globalStyles from "../../globalStyles";
-import {
-    setShowPassword,
-    selectShowPassword,
-} from "../../redux/slices/showPasswordSlice";
+import { auth } from "../../utils/firebase";
+import globalStyles from "../../utils/globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
-import { useAppDispatch } from "../../hooks/useDispatch";
-import { useAppSelector } from "../../hooks/useSelector";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { BottomTabStackNavigationProps } from "../../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
@@ -21,8 +15,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Login">>();
-    const dispatch = useAppDispatch();
-    const showPassword = useAppSelector(selectShowPassword);
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -99,7 +93,7 @@ const LoginScreen = () => {
                         />
                         <TouchableOpacity
                             style={globalStyles.showPasswordContainer}
-                            onPress={() => dispatch(setShowPassword())}
+                            onPress={() => setShowPassword(!showPassword)}
                         >
                             {showPassword ? (
                                 <Feather
