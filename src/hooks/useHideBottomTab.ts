@@ -9,7 +9,6 @@ const useHideBottomTab = () => {
 
     useEffect(() => {
         navigation.getParent()!.setOptions({
-            tabBarStyle: { display: "none" },
             tabBarVisible: false,
         });
 
