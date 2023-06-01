@@ -71,12 +71,7 @@ const RegisterScreen = () => {
                     photoURL: avatar,
                 });
                 await verifyEmail(navigation, authUser?.user);
-                setDoc(doc(db, "users", authUser.user.uid!), {
-                    uid: authUser.user.uid!,
-                    email: email,
-                    displayName: name,
-                    emailVerified: authUser?.user?.emailVerified,
-                });
+                setDoc(doc(db, "users", authUser.user.uid!), {});
             } catch (error) {
                 errorAlertShower(error);
             }

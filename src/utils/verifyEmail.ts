@@ -1,7 +1,5 @@
 import { User, sendEmailVerification } from "firebase/auth";
 import messageAlertShower from "./alertShowers/messageAlertShower";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "./firebase";
 import errorAlertShower from "./alertShowers/errorAlertShower";
 
 export const verifyEmail = async (navigation: any, user: User) => {
@@ -16,13 +14,6 @@ export const verifyEmail = async (navigation: any, user: User) => {
                     onPress: () => {},
                 },
             ]
-        );
-        await setDoc(
-            doc(db, "users", user?.uid!),
-            {
-                emailVerified: true,
-            },
-            { merge: true }
         );
         navigation.navigate("Home");
     } catch (error) {

@@ -2,16 +2,16 @@ import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { auth } from "../../utils/firebase";
+import { auth } from "@utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import LoadingIndicator from "../../components/Loading";
-import globalStyles from "../../utils/globalStyles";
-import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
+import LoadingIndicator from "@components/Loading";
+import globalStyles from "@utils/globalStyles";
+import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
-import { BottomTabStackNavigationProps } from "../../@types/navigation";
-import StatusBar from "../../components/StatusBar";
+import { BottomTabStackNavigationProps } from "@/@types/navigation";
+import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useExitAppBackHandler } from "../../hooks/useExitAppBackHandler";
+import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 
 const Feature = ({
     title,
