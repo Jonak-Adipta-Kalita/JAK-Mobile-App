@@ -6,12 +6,10 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import globalStyles from "@utils/globalStyles";
-import { auth, db } from "@utils/firebase";
+import { auth } from "@utils/firebase";
 import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import messageAlertShower from "@utils/alertShowers/messageAlertShower";
-import images from "@utils/images";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -29,7 +27,6 @@ const RegisterScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const avatar: string = images.avatar;
 
     const registerEmail = async () => {
         if (
@@ -68,10 +65,8 @@ const RegisterScreen = () => {
                 );
                 await updateProfile(authUser?.user, {
                     displayName: name,
-                    photoURL: avatar,
                 });
                 await verifyEmail(navigation, authUser?.user);
-                setDoc(doc(db, "users", authUser.user.uid!), {});
             } catch (error) {
                 errorAlertShower(error);
             }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image } from "expo-image";
 import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -8,13 +8,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "@components/Loading";
 import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import messageAlertShower from "@utils/alertShowers/messageAlertShower";
-import * as ImagePicker from "expo-image-picker";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
-import { deleteObject, ref } from "firebase/storage";
-import { updateProfile } from "firebase/auth";
+import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import { deleteObject, getMetadata, ref } from "firebase/storage";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { uploadImageAsync } from "@utils/uploadImageAsync";
 import { verifyEmail } from "@utils/verifyEmail";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
@@ -52,37 +49,9 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
 
 const SettingsScreen = () => {
     const [user, userLoading, userError] = useAuthState(auth);
-    const [image, setImage] = useState<null | string>(null);
     const colorScheme = useColorScheme();
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"Settings">>();
-
-    const updatePic = async () => {
-        const pickerResult = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
-            aspect: [1, 1],
-            quality: 1,
-        });
-        try {
-            if (!pickerResult.canceled) {
-                const uploadURL = await uploadImageAsync(
-                    pickerResult.assets[0].uri,
-                    ref(storage, `users/${user?.uid}/profile_pic`)
-                );
-                updateProfile(user!, { photoURL: uploadURL });
-                setDoc(
-                    doc(db, "users", user?.uid!),
-                    {
-                        photoURL: uploadURL,
-                    },
-                    { merge: true }
-                );
-                setImage(uploadURL);
-            }
-        } catch (error) {
-            errorAlertShower(error);
-        }
-    };
 
     const signOut = () => {
         messageAlertShower(
@@ -118,10 +87,21 @@ const SettingsScreen = () => {
                     text: "Delete",
                     onPress: async () => {
                         try {
-                            const userUID = user?.uid;
+                            const userUID = user?.uid!;
+                            const dbDoc = doc(db, "users", userUID);
+                            const storageRef = ref(storage, `users/${userUID}`);
+
                             await user?.delete();
-                            deleteDoc(doc(db, "users", userUID!));
-                            deleteObject(ref(storage, `users/${userUID}`));
+
+                            if ((await getDoc(dbDoc)).exists()) {
+                                await deleteDoc(dbDoc);
+                            }
+
+                            getMetadata(storageRef)
+                                .then(() => {
+                                    deleteObject(storageRef);
+                                })
+                                .catch(() => {});
                         } catch (error) {
                             errorAlertShower(error);
                         }
@@ -174,10 +154,7 @@ const SettingsScreen = () => {
                     )}
                 </View>
                 <View className="mt-8 flex flex-col items-center justify-center">
-                    <TouchableOpacity
-                        onPress={updatePic}
-                        className="flex flex-col items-center justify-center"
-                    >
+                    <TouchableOpacity className="flex flex-col items-center justify-center">
                         <View
                             className={`rounded-full ${
                                 colorScheme == "dark"
@@ -187,7 +164,7 @@ const SettingsScreen = () => {
                         >
                             <Image
                                 source={{
-                                    uri: image || user?.photoURL!,
+                                    uri: user?.photoURL!,
                                 }}
                                 style={{
                                     width: 100,
