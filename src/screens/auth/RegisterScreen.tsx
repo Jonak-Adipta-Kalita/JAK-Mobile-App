@@ -5,18 +5,18 @@ import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import globalStyles from "../../utils/globalStyles";
-import { auth, db } from "../../utils/firebase";
-import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
-import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
-import images from "../../utils/images";
+import globalStyles from "@utils/globalStyles";
+import { auth, db } from "@utils/firebase";
+import errorAlertShower from "@utils/alertShowers/errorAlertShower";
+import messageAlertShower from "@utils/alertShowers/messageAlertShower";
+import images from "@utils/images";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import StatusBar from "../../components/StatusBar";
+import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { BottomTabStackNavigationProps } from "../../../@types/navigation";
-import { verifyEmail } from "../../utils/verifyEmail";
+import { BottomTabStackNavigationProps } from "@/@types/navigation";
+import { verifyEmail } from "@utils/verifyEmail";
 
 const RegisterScreen = () => {
     const colorScheme = useColorScheme();

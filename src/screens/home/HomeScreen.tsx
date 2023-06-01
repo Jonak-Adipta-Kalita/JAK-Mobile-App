@@ -8,7 +8,7 @@ import LoadingIndicator from "../../components/Loading";
 import globalStyles from "../../utils/globalStyles";
 import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
-import { BottomTabStackNavigationProps } from "../../../@types/navigation";
+import { BottomTabStackNavigationProps } from "../../@types/navigation";
 import StatusBar from "../../components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useExitAppBackHandler } from "../../hooks/useExitAppBackHandler";

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
-import { bottomTabScreenOptions } from "../utils/bottomTabScreenOptions";
+import { bottomTabScreenOptions } from "@utils/bottomTabScreenOptions";
 import { useColorScheme } from "react-native";
 
 const useHideBottomTab = () => {

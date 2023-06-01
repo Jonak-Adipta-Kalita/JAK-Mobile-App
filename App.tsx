@@ -3,15 +3,15 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme, LogBox } from "react-native";
 import { useFonts } from "expo-font";
-import LightTheme from "./src/themes/LightTheme";
-import DarkTheme from "./src/themes/DarkTheme";
-import LoadingIndicator from "./src/components/Loading";
-import { auth } from "./src/utils/firebase";
+import LightTheme from "@themes/LightTheme";
+import DarkTheme from "@themes/DarkTheme";
+import LoadingIndicator from "@components/Loading";
+import { auth } from "@utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import errorAlertShower from "./src/utils/alertShowers/errorAlertShower";
-import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
+import errorAlertShower from "@utils/alertShowers/errorAlertShower";
+import BottomTabNavigator from "@navigation/BottomTabNavigator";
 import { NetworkState, getNetworkStateAsync } from "expo-network";
-import { NoNetworkStack } from "./src/navigation/StackNavigator";
+import { NoNetworkStack } from "@navigation/StackNavigator";
 import { decode } from "base-64";
 
 LogBox.ignoreLogs([

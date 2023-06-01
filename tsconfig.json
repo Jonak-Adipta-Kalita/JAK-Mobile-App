@@ -8,7 +8,17 @@
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "allowJs": true,
-        "strict": true
+        "strict": true,
+        "paths": {
+            "@/*": ["./*"],
+            "@components/*": ["./src/components/*"],
+            "@hooks/*": ["./src/hooks/*"],
+            "@navigation/*": ["./src/navigation/*"],
+            "@screens/*": ["./src/screens/*"],
+            "@themes/*": ["./src/themes/*"],
+            "@utils/*": ["./src/utils/*"],
+            "@assets/*": ["./assets/*"]
+        }
     },
     "include": ["**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules"],

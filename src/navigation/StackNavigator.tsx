@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StackScreenParamList } from "../../@types/navigation";
+import { StackScreenParamList } from "@/@types/navigation";
 
-import GetStartedScreen from "../screens/GetStartedScreen";
-import HomeScreen from "../screens/home/HomeScreen";
-import TodoScreen from "../screens/home/features/TodoScreen";
-import SettingsScreen from "../screens/SettingsScreen";
-import LoginScreen from "../screens/auth/LoginScreen";
-import RegisterScreen from "../screens/auth/RegisterScreen";
-import NoNetworkScreen from "../screens/NoNetworkScreen";
-import QRCodeScreen from "../screens/home/features/QRCodeScreen";
+import GetStartedScreen from "@screens/GetStartedScreen";
+import HomeScreen from "@screens/home/HomeScreen";
+import TodoScreen from "@screens/home/features/TodoScreen";
+import SettingsScreen from "@screens/SettingsScreen";
+import LoginScreen from "@screens/auth/LoginScreen";
+import RegisterScreen from "@screens/auth/RegisterScreen";
+import NoNetworkScreen from "@screens/NoNetworkScreen";
+import QRCodeScreen from "@screens/home/features/QRCodeScreen";
 
 const Stack = createStackNavigator<StackScreenParamList>();
 

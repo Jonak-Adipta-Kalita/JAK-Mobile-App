@@ -1,6 +1,6 @@
 import React from "react";
 import { BackHandler, Platform } from "react-native";
-import messageAlertShower from "../utils/alertShowers/messageAlertShower";
+import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { useFocusEffect } from "@react-navigation/native";
 
 const useExitAppBackHandler = () => {

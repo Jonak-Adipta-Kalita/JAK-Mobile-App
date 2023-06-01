@@ -3,14 +3,14 @@ import { View, TouchableOpacity } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { auth } from "../../utils/firebase";
-import globalStyles from "../../utils/globalStyles";
-import errorAlertShower from "../../utils/alertShowers/errorAlertShower";
+import { auth } from "@utils/firebase";
+import globalStyles from "@utils/globalStyles";
+import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { BottomTabStackNavigationProps } from "../../../@types/navigation";
-import StatusBar from "../../components/StatusBar";
-import messageAlertShower from "../../utils/alertShowers/messageAlertShower";
+import { BottomTabStackNavigationProps } from "@/@types/navigation";
+import StatusBar from "@components/StatusBar";
+import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = () => {

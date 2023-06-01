@@ -1,18 +1,18 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../utils/firebase";
-import errorAlertShower from "../utils/alertShowers/errorAlertShower";
+import { auth } from "@utils/firebase";
+import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { BottomTabScreensParamList } from "../../@types/navigation";
+import { BottomTabScreensParamList } from "@/@types/navigation";
 import { Platform, View, useColorScheme, ColorSchemeName } from "react-native";
+import { bottomTabScreenOptions } from "@utils/bottomTabScreenOptions";
 
 import {
     HomeStack,
     SettingsStack,
     AuthenticationStack,
 } from "./StackNavigator";
-import { bottomTabScreenOptions } from "../utils/bottomTabScreenOptions";
 
 const Tab = createBottomTabNavigator<BottomTabScreensParamList>();
 
