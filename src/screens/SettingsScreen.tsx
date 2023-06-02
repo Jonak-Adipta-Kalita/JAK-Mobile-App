@@ -57,6 +57,8 @@ const SettingsScreen = () => {
 
     const avatar = createAvatar(adventurer, {
         seed: user?.displayName!,
+        glasses: ["variant01"],
+        glassesProbability: 100,
     }).toString();
 
     const signOut = () => {
