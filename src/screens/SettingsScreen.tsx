@@ -1,5 +1,4 @@
 import React from "react";
-import { Image } from "expo-image";
 import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { auth, db, storage } from "@utils/firebase";
@@ -15,6 +14,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { verifyEmail } from "@utils/verifyEmail";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
+import { createAvatar } from "@dicebear/core";
+import { adventurer } from "@dicebear/collection";
+import { SvgXml } from "react-native-svg";
 
 const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
     const colorScheme = useColorScheme();
@@ -52,6 +54,10 @@ const SettingsScreen = () => {
     const colorScheme = useColorScheme();
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"Settings">>();
+
+    const avatar = createAvatar(adventurer, {
+        seed: user?.displayName!,
+    }).toString();
 
     const signOut = () => {
         messageAlertShower(
@@ -160,18 +166,9 @@ const SettingsScreen = () => {
                                 colorScheme == "dark"
                                     ? "bg-[#272934]"
                                     : "bg-white"
-                            } p-2`}
+                            } h-[120px] w-[120px]`}
                         >
-                            <Image
-                                source={{
-                                    uri: user?.photoURL!,
-                                }}
-                                style={{
-                                    width: 100,
-                                    height: 100,
-                                    borderRadius: 50,
-                                }}
-                            />
+                            <SvgXml xml={avatar} style={{ marginTop: 7 }} />
                         </View>
                     </TouchableOpacity>
                 </View>
