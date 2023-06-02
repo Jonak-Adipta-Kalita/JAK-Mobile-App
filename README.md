@@ -2,9 +2,13 @@
 
 ![Title](https://raw.githubusercontent.com/Jonak-Adipta-Kalita/JAK-Mobile-App/main/assets/images/readme/title.png)
 
+</div>
+
 JAK Mobile App is an open-source mobile application that simplifies your digital experience by consolidating multiple features into a single platform. Say goodbye to switching between various apps and websites. With JAK Mobile App, you can access a range of functionalities, reducing the need for multiple app downloads and saving storage space on your device. Enjoy a seamless user experience and discover a more efficient way to navigate your digital lifestyle.
 <br />
 <br />
+
+<div align=center>
 
 ![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?style=for-the-badge&logo=EXPO&labelColor=f3f3f3&logoColor=000)
 ![License](https://img.shields.io/github/license/Jonak-Adipta-Kalita/JAK-Mobile-App?style=for-the-badge)
