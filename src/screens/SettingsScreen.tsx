@@ -56,10 +56,11 @@ const SettingsScreen = () => {
         useNavigation<BottomTabStackNavigationProps<"Settings">>();
 
     const avatar = createAvatar(adventurer, {
-        seed: user?.displayName!,
+        seed: user?.uid!,
         glasses: ["variant01"],
         skinColor: ["ecad80"],
         glassesProbability: 100,
+        hair: ["long04", "short06"],
         hairColor: ["85c2c6"],
         hairProbability: 100,
     }).toString();
