@@ -12,6 +12,7 @@ import {
     FIREBASE_STORAGE_BUCKET,
     FIREBASE_MESSAGING_SENDER_ID,
     FIREBASE_APP_ID,
+    FIREBASE_MEASUREMENT_ID,
 } from "@env";
 
 const app = !getApps().length
@@ -22,6 +23,7 @@ const app = !getApps().length
           storageBucket: FIREBASE_STORAGE_BUCKET,
           messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
           appId: FIREBASE_APP_ID,
+          measurementId: FIREBASE_MEASUREMENT_ID,
       })
     : getApp();
 const auth = initializeAuth(app, {
