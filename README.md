@@ -6,6 +6,7 @@
 
 JAK Mobile App is an open-source mobile application that simplifies your digital experience by consolidating multiple features into a single platform. Say goodbye to switching between various apps and websites. With JAK Mobile App, you can access a range of functionalities, reducing the need for multiple app downloads and saving storage space on your device. Enjoy a seamless user experience and discover a more efficient way to navigate your digital lifestyle.
 <br />
+<br />
 
 <div align=center>
 
@@ -17,6 +18,8 @@ JAK Mobile App is an open-source mobile application that simplifies your digital
 ![GitHub Forks](https://img.shields.io/github/forks/Jonak-Adipta-Kalita/JAK-Mobile-App?style=for-the-badge)
 ![GitHub Watchers](https://img.shields.io/github/watchers/Jonak-Adipta-Kalita/JAK-Mobile-App?style=for-the-badge)
 ![Made by JAK](https://img.shields.io/badge/BeastNight%20TV-Made%20by%20JAK-blue?style=for-the-badge)
+
+<br />
 
 [![Get it on Google Play](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/blob/main/assets/images/readme/downloadButtons/google-play.png?raw=true, "Get it on Google Play")]()
 [![Download on the App Store](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/raw/main/assets/images/readme/downloadButtons/app-store.png?raw=true, "Download on the App Store")]()
