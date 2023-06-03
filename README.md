@@ -36,8 +36,8 @@
 
 For additional help, you can use one of these channels to ask a question:
 
--   [Discord](https://discord.gg/S3UfGkW) - Discussions with the community and the team.
--   [GitHub](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/issues) - For bug reports and feature requests.
+-   [Github Discussions](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/discussions) - Discussions with the community and the team.
+-   [Github Issues](https://github.com/Jonak-Adipta-Kalita/JAK-Mobile-App/issues) - For bug reports and feature requests.
 -   [Twitter](https://twitter.com/AdiptaJonak) - Get the product updates easily.
 
 ## Roadmap
