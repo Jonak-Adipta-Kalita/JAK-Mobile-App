@@ -1,9 +1,8 @@
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { BottomTabBar, BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import React from "react";
-import Animated from "react-native-reanimated";
 
 const TabBar = (props: BottomTabBarProps) => {
-    return <Animated.View></Animated.View>;
+    return <BottomTabBar {...props} />;
 };
 
 export default TabBar;
