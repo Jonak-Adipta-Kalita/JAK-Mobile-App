@@ -27,6 +27,11 @@ JAK Mobile App is an open-source mobile application that simplifies your digital
 
 </div>
 
+## All Features
+
+-   **Todo**: Create a Todo List
+-   **QRCode**: Create/Scan QRCode
+
 ## Contributing
 
 Kindly read our [Contributing Guide](CONTRIBUTING.md) to learn and understand about our development process, how to propose bug fixes and improvements, and how to build and test your changes to JAK Mobile App.
