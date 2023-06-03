@@ -1,0 +1,59 @@
+name: Bug Report
+descrption: File a Bug Report
+title: "[Bug]: "
+labels: ["bug"]
+assignees:
+    - JAK-Adipta-Kalita
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to fill out this bug report!
+    - type: textarea
+      id: what-happened
+      attributes:
+          label: What happened?
+          description: Also tell us, what did you expect to happen?
+          placeholder: Tell us what you see!
+          value: "A bug happened!"
+      validations:
+          required: true
+    - type: input
+      attributes:
+          label: Reproduction
+          description: |
+              You must provide a way to reproduce the problem. If you don't provide a repro, the issue will be closed automatically after a specific period.
+
+              - [Snack](https://snack.expo.dev) is the easiest way to share a repro.
+              - If you can't reproduce the bug on Snack, provide a link to a GitHub repository under your username that reproduces the bug.
+              - For TypeScript related issues, use [TypeScript Playground](https://www.typescriptlang.org/play) to reproduce the issue.
+
+              Keep the repro code as simple as possible, with the minimum amount of code required to repro the issue.
+          placeholder: Link to repro
+      validations:
+          required: true
+    - type: checkboxes
+      id: platform
+      attributes:
+          label: Platform
+          description: |
+              What are the platforms where you see the issue?
+          options:
+              - label: Android
+              - label: iOS
+    - type: input
+      id: device
+      attributes:
+          label: Device Name
+          description: Which Device are you using?
+          placeholder: ex. Samsung Galaxy M30
+      validations:
+          required: true
+    - type: input
+      id: version
+      attributes:
+          label: Version
+          description: Which Version of our App are you using?
+          placeholder: ex. latest, 1.1.0
+      validations:
+          required: false
