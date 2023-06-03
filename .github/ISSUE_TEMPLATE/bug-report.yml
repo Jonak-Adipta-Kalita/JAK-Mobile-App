@@ -1,5 +1,5 @@
 name: Bug Report
-descrption: File a Bug Report
+description: File a Bug Report
 title: "[Bug]: "
 labels: ["bug"]
 assignees:
