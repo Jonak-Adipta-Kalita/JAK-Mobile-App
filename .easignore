@@ -5,8 +5,10 @@
 .eslintrc.json
 .prettierignore
 .prettierrc.json
+.firebaserc
 .gitignore
-.git
+.git/
+.idea/
 .github/
 .husky/
 __tests__/
@@ -15,3 +17,4 @@ firestore.indexes.json
 firestore.rules
 storage.rules
 assets/images/readme
+*.md
