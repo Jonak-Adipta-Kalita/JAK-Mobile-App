@@ -13,6 +13,7 @@ import {
     SettingsStack,
     AuthenticationStack,
 } from "./StackNavigator";
+import TabBar from "../components/TabBar";
 
 const Tab = createBottomTabNavigator<BottomTabScreensParamList>();
 
@@ -53,6 +54,7 @@ const BottomTabNavigator = () => {
         <Tab.Navigator
             initialRouteName="HomeTab"
             screenOptions={bottomTabScreenOptions(colorScheme)}
+            tabBar={(props) => <TabBar {...props} />}
         >
             <Tab.Screen
                 name="HomeTab"
