@@ -1,0 +1,40 @@
+name: Feature Request
+description: Submit a Feature Request
+title: "[Feature Request]: "
+labels: ["enhancement"]
+assignees:
+    - Jonak-Adipta-Kalita
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thank you for submitting a feature request! Your input is valuable to us.
+    - type: textarea
+      id: description
+      attributes:
+          label: Feature Description
+          description: Please provide a detailed description of the feature you would like to see implemented.
+          placeholder: Describe the feature request here.
+          value: ""
+      validations:
+          required: true
+    - type: textarea
+      id: use-case
+      attributes:
+          label: Use Case
+          description: Please explain the specific use case or scenario where this feature would be beneficial.
+          options:
+              - High
+              - Medium
+              - Low
+      validations:
+          required: true
+    - type: dropdown
+      id: priority
+      attributes:
+          label: Priority
+          description: Please specify the priority level for this feature request (e.g., High, Medium, Low).
+          placeholder: Enter the priority level.
+          value: ""
+      validations:
+          required: true
