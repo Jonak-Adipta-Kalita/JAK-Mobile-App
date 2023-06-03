@@ -13,8 +13,6 @@ ios/
 build/
 dist/
 .env
-!assets/loginButtons/android
-!assets/loginButtons/ios
 
 google_services*
 
