@@ -91,7 +91,7 @@
         "babel-plugin-module-resolver": "^5.0.0",
         "dotenv": "^16.0.3",
         "eas-cli": "^3.8.1",
-        "eslint": "^8.37.0",
+        "eslint": "^8.42.0",
         "eslint-plugin-bacon": "^0.0.3",
         "eslint-plugin-react": "^7.32.2",
         "firebase-tools": "^12.2.0",
