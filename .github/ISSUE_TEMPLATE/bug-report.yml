@@ -3,7 +3,7 @@ description: File a Bug Report
 title: "[Bug]: "
 labels: ["bug"]
 assignees:
-    - JAK-Adipta-Kalita
+    - Jonak-Adipta-Kalita
 body:
     - type: markdown
       attributes:
