@@ -28,7 +28,7 @@ JAK Mobile App is an open-source mobile application that simplifies your digital
 
 ## Contributing
 
-Kindly read our Contributing Guide to learn and understand about our development process, how to propose bug fixes and improvements, and how to build and test your changes to JAK Mobile App.
+Kindly read our [Contributing Guide](CONTRIBUTING.md) to learn and understand about our development process, how to propose bug fixes and improvements, and how to build and test your changes to JAK Mobile App.
 
 ## Technology(s) Used
 
