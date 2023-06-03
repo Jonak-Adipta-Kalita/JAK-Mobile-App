@@ -1,3 +1,4 @@
+<br />
 <div align=center>
 
 ![Title](https://raw.githubusercontent.com/Jonak-Adipta-Kalita/JAK-Mobile-App/main/assets/images/readme/title.png)
