@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { tabBarHideState } from "../atoms/tabBarAtom";
+import { tabBarHideState } from "@atoms/tabBarAtom";
 
 const useHideBottomTab = () => {
     const setTabBarHide = useSetRecoilState(tabBarHideState);

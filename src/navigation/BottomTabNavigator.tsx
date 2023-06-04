@@ -13,7 +13,7 @@ import {
     SettingsStack,
     AuthenticationStack,
 } from "./StackNavigator";
-import TabBar from "../components/TabBar";
+import TabBar from "@components/TabBar";
 
 const Tab = createBottomTabNavigator<BottomTabScreensParamList>();
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BottomTabBar, BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { Animated, Easing } from "react-native";
 import { useRecoilValue } from "recoil";
-import { tabBarHideState } from "../atoms/tabBarAtom";
+import { tabBarHideState } from "@atoms/tabBarAtom";
 
 const TabBar = (props: BottomTabBarProps) => {
     const hide = useRecoilValue(tabBarHideState);

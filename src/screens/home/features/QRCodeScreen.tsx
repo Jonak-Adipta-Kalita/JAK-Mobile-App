@@ -1,20 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalStyles from "../../../utils/globalStyles";
+import globalStyles from "@utils/globalStyles";
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
-import StatusBar from "../../../components/StatusBar";
+import StatusBar from "@components/StatusBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
-import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
+import { useHideBottomTab } from "@hooks/useHideBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, storage } from "../../../utils/firebase";
+import { auth, db, storage } from "@utils/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
     collection,
@@ -25,13 +25,13 @@ import {
     serverTimestamp,
     deleteDoc,
 } from "firebase/firestore";
-import errorAlertShower from "../../../utils/alertShowers/errorAlertShower";
-import LoadingIndicator from "../../../components/Loading";
-import messageAlertShower from "../../../utils/alertShowers/messageAlertShower";
+import errorAlertShower from "@utils/alertShowers/errorAlertShower";
+import LoadingIndicator from "@components/Loading";
+import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { deleteObject, getDownloadURL, ref } from "firebase/storage";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
-import { uploadImageAsync } from "../../../utils/uploadImageAsync";
+import { uploadImageAsync } from "@utils/uploadImageAsync";
 
 const Create = () => {
     const colorScheme = useColorScheme();
