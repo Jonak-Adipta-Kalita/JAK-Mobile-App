@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import {
     BottomTabBar,
     BottomTabBarHeightCallbackContext,
@@ -8,17 +8,23 @@ import {
     Animated,
     LayoutChangeEvent,
     Platform,
+    StyleProp,
     StyleSheet,
     useWindowDimensions,
 } from "react-native";
+import { ViewStyle } from "react-native";
 
-const TabBar = (props: BottomTabBarProps) => {
+const TabBar = (
+    props: BottomTabBarProps & {
+        style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+    }
+) => {
     const focusedRoute = props.state.routes[props.state.index];
     const focusedDescriptor = props.descriptors[focusedRoute.key];
     const { tabBarVisibilityAnimationConfig } = focusedDescriptor.options;
 
     const dimensions = useWindowDimensions();
-    const onHeightChange = React.useContext(BottomTabBarHeightCallbackContext);
+    const onHeightChange = useContext(BottomTabBarHeightCallbackContext);
 
     const visibilityAnimationConfigRef = useRef(
         tabBarVisibilityAnimationConfig
@@ -117,6 +123,7 @@ const TabBar = (props: BottomTabBarProps) => {
                         }),
                     },
                 ],
+
                 position: isTabBarHidden ? "absolute" : (null as any),
             }}
             pointerEvents={isTabBarHidden ? "none" : "auto"}
