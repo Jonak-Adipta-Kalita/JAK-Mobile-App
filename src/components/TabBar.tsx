@@ -1,17 +1,35 @@
 import React, { useRef, useEffect, useState } from "react";
-import { BottomTabBar, BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { Animated } from "react-native";
+import {
+    BottomTabBar,
+    BottomTabBarHeightCallbackContext,
+    BottomTabBarProps,
+} from "@react-navigation/bottom-tabs";
+import {
+    Animated,
+    LayoutChangeEvent,
+    Platform,
+    StyleSheet,
+    useWindowDimensions,
+} from "react-native";
+import { EdgeInsets } from "react-native-safe-area-context";
 
 const TabBar = (props: BottomTabBarProps) => {
     const focusedRoute = props.state.routes[props.state.index];
     const focusedDescriptor = props.descriptors[focusedRoute.key];
     const { tabBarVisibilityAnimationConfig } = focusedDescriptor.options;
 
+    const onHeightChange = React.useContext(BottomTabBarHeightCallbackContext);
+
     const shouldShowTabBar = true;
 
     const visibilityAnimationConfigRef = useRef(
         tabBarVisibilityAnimationConfig
     );
+
+    const dimensions = useWindowDimensions();
+
+    const getPaddingBottom = (insets: EdgeInsets) =>
+        Math.max(insets.bottom - Platform.select({ ios: 4, default: 0 }), 0);
 
     useEffect(() => {
         visibilityAnimationConfigRef.current = tabBarVisibilityAnimationConfig;
@@ -61,8 +79,49 @@ const TabBar = (props: BottomTabBarProps) => {
         return () => visible.stopAnimation();
     }, [visible, shouldShowTabBar]);
 
+    const [layout, setLayout] = React.useState({
+        height: 0,
+        width: dimensions.width,
+    });
+
+    const handleLayout = (e: LayoutChangeEvent) => {
+        const { height, width } = e.nativeEvent.layout;
+
+        onHeightChange?.(height);
+
+        setLayout((layout) => {
+            if (height === layout.height && width === layout.width) {
+                return layout;
+            } else {
+                return {
+                    height,
+                    width,
+                };
+            }
+        });
+    };
+
     return (
-        <Animated.View>
+        <Animated.View
+            style={{
+                transform: [
+                    {
+                        translateY: visible.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [
+                                layout.height +
+                                    getPaddingBottom(props.insets) +
+                                    StyleSheet.hairlineWidth,
+                                0,
+                            ],
+                        }),
+                    },
+                ],
+                position: isTabBarHidden ? "absolute" : (null as any),
+            }}
+            pointerEvents={isTabBarHidden ? "none" : "auto"}
+            onLayout={handleLayout}
+        >
             <BottomTabBar {...props} />
         </Animated.View>
     );
