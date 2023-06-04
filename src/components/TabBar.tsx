@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BottomTabBar, BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { Animated, Button, Easing } from "react-native";
+import { Animated, Easing } from "react-native";
+import { useRecoilValue } from "recoil";
+import { tabBarHideState } from "../atoms/tabBarAtom";
 
 const TabBar = (props: BottomTabBarProps) => {
-    const [isHidden, setIsHidden] = useState(false);
+    const hide = useRecoilValue(tabBarHideState);
     const translateY = useState(new Animated.Value(0))[0];
 
-    const toggleTabBar = () => {
-        setIsHidden(!isHidden);
+    useEffect(() => {
         Animated.timing(translateY, {
-            toValue: isHidden ? 0 : 100,
+            toValue: !hide ? 0 : 100,
             duration: 300,
             easing: Easing.linear,
             useNativeDriver: true,
         }).start();
-    };
+    }, [hide]);
 
     return (
         <Animated.View

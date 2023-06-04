@@ -17,6 +17,7 @@
             "@screens/*": ["./src/screens/*"],
             "@themes/*": ["./src/themes/*"],
             "@utils/*": ["./src/utils/*"],
+            "@atoms": ["./src/atoms/*"],
             "@assets/*": ["./assets/*"]
         }
     },

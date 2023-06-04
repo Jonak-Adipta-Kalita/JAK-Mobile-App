@@ -13,6 +13,7 @@ import BottomTabNavigator from "@navigation/BottomTabNavigator";
 import { NetworkState, getNetworkStateAsync } from "expo-network";
 import { NoNetworkStack } from "@navigation/StackNavigator";
 import { decode } from "base-64";
+import { RecoilRoot } from "recoil";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -65,7 +66,9 @@ const App = () => {
                     containerStyle={{ flex: 1 }}
                 />
             ) : (
-                <AppChildren />
+                <RecoilRoot>
+                    <AppChildren />
+                </RecoilRoot>
             )}
         </>
     );

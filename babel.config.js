@@ -15,6 +15,7 @@ module.exports = function (api) {
                         "@screens": "./src/screens",
                         "@themes": "./src/themes",
                         "@utils": "./src/utils",
+                        "@atoms": "./src/atoms",
                         "@assets": "./assets",
                     },
                     extensions: [".js", ".ts", ".tsx"],

@@ -1,23 +1,15 @@
-import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
-import { bottomTabScreenOptions } from "@utils/bottomTabScreenOptions";
-import { useColorScheme } from "react-native";
+import { useSetRecoilState } from "recoil";
+import { tabBarHideState } from "../atoms/tabBarAtom";
 
 const useHideBottomTab = () => {
-    const navigation = useNavigation();
-    const colorScheme = useColorScheme();
+    const setTabBarHide = useSetRecoilState(tabBarHideState);
 
     useEffect(() => {
-        navigation.getParent()!.setOptions({
-            tabBarStyle: { display: "none" },
-            tabBarVisible: false,
-        });
+        setTabBarHide(true);
 
-        return () =>
-            navigation
-                .getParent()
-                ?.setOptions(bottomTabScreenOptions(colorScheme));
-    }, [navigation]);
+        return () => setTabBarHide(false);
+    }, []);
 };
 
 export { useHideBottomTab };
