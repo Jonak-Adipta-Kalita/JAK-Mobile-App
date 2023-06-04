@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BottomTabBar, BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { Animated, Easing } from "react-native";
+import { Animated, Button, Easing } from "react-native";
 
 const TabBar = (props: BottomTabBarProps) => {
     const [isHidden, setIsHidden] = useState(false);
@@ -23,7 +23,7 @@ const TabBar = (props: BottomTabBarProps) => {
                 { position: "absolute", bottom: 0, left: 0, right: 0 },
             ]}
         >
-            {!isHidden && <BottomTabBar {...props} />}
+            <BottomTabBar {...props} />
         </Animated.View>
     );
 };
