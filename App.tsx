@@ -19,6 +19,7 @@ LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
     "Remote debugger is in a background tab which may cause apps to perform slowly. Fix this by foregrounding the tab (or opening it in a separate window)",
     "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage",
+    '[Expectation Violation: Duplicate atom key "tabBarHideState". This is a FATAL ERROR in production. But it is safe to ignore this warning if occurred because of hot module replacement.]',
 ]);
 
 global.atob = global.atob || decode;
