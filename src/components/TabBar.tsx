@@ -11,35 +11,28 @@ import {
     StyleSheet,
     useWindowDimensions,
 } from "react-native";
-import { EdgeInsets } from "react-native-safe-area-context";
 
 const TabBar = (props: BottomTabBarProps) => {
     const focusedRoute = props.state.routes[props.state.index];
     const focusedDescriptor = props.descriptors[focusedRoute.key];
     const { tabBarVisibilityAnimationConfig } = focusedDescriptor.options;
 
+    const dimensions = useWindowDimensions();
     const onHeightChange = React.useContext(BottomTabBarHeightCallbackContext);
-
-    const shouldShowTabBar = true;
 
     const visibilityAnimationConfigRef = useRef(
         tabBarVisibilityAnimationConfig
     );
 
-    const dimensions = useWindowDimensions();
-
-    const getPaddingBottom = (insets: EdgeInsets) =>
-        Math.max(insets.bottom - Platform.select({ ios: 4, default: 0 }), 0);
-
-    useEffect(() => {
-        visibilityAnimationConfigRef.current = tabBarVisibilityAnimationConfig;
-    });
-
+    const [shouldShowTabBar] = useState(true);
+    const [isTabBarHidden, setIsTabBarHidden] = useState(!shouldShowTabBar);
     const [visible] = useState(
         () => new Animated.Value(shouldShowTabBar ? 1 : 0)
     );
 
-    const [isTabBarHidden, setIsTabBarHidden] = useState(!shouldShowTabBar);
+    useEffect(() => {
+        visibilityAnimationConfigRef.current = tabBarVisibilityAnimationConfig;
+    });
 
     useEffect(() => {
         const visibilityAnimationConfig = visibilityAnimationConfigRef.current;
@@ -110,7 +103,14 @@ const TabBar = (props: BottomTabBarProps) => {
                             inputRange: [0, 1],
                             outputRange: [
                                 layout.height +
-                                    getPaddingBottom(props.insets) +
+                                    Math.max(
+                                        props.insets.bottom -
+                                            Platform.select({
+                                                ios: 4,
+                                                default: 0,
+                                            }),
+                                        0
+                                    ) +
                                     StyleSheet.hairlineWidth,
                                 0,
                             ],
