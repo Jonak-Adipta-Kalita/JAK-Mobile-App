@@ -23,6 +23,7 @@ const TabBar = (props: BottomTabBarProps) => {
                 { transform: [{ translateY }] },
                 { position: "absolute", bottom: 0, left: 0, right: 0 },
             ]}
+            pointerEvents={hide ? "none" : "auto"}
         >
             <BottomTabBar {...props} />
         </Animated.View>
