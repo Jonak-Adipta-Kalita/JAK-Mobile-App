@@ -182,27 +182,29 @@ const Create = () => {
                     </View>
                     <ScrollView className="mt-[40px] space-y-2">
                         {qrCodesFetched?.docs?.map((qrCode) => (
-                            <View
+                            <TouchableOpacity
                                 key={qrCode.id}
                                 className={`mb-5 px-7 ${
                                     colorScheme == "dark"
                                         ? "bg-[#272934]"
                                         : "bg-[#fff]"
                                 } mx-5 rounded-lg p-5 shadow-md`}
+                                onPress={() => {
+                                    setQRCodeData(qrCode.data().value);
+                                    setShowStoredQRCodes(false);
+                                }}
                             >
-                                <View className="flex flex-row items-center justify-between">
-                                    <Text
-                                        className={`${
-                                            colorScheme === "dark"
-                                                ? "text-[#fff]"
-                                                : "text-[#000000]"
-                                        } text-sm`}
-                                        style={globalStyles.font}
-                                    >
-                                        {qrCode.data().value}
-                                    </Text>
-                                </View>
-                            </View>
+                                <Text
+                                    className={`${
+                                        colorScheme === "dark"
+                                            ? "text-[#fff]"
+                                            : "text-[#000000]"
+                                    } text-sm`}
+                                    style={globalStyles.font}
+                                >
+                                    {qrCode.data().value}
+                                </Text>
+                            </TouchableOpacity>
                         ))}
                     </ScrollView>
                 </View>
