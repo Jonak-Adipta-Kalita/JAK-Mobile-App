@@ -6,7 +6,6 @@ import {
     useColorScheme,
     Platform,
 } from "react-native";
-import { Input } from "@rneui/themed";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -22,6 +21,7 @@ import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { verifyEmail } from "@utils/verifyEmail";
 import { useShowBottomTab } from "@/src/hooks/useBottomTab";
+import { TextInput } from "react-native-gesture-handler";
 
 const RegisterScreen = () => {
     const colorScheme = useColorScheme();
@@ -107,115 +107,109 @@ const RegisterScreen = () => {
                     Create an Account
                 </Text>
                 <View className="mt-5 flex-1 items-center">
-                    <View
-                        style={{
-                            width: 350,
-                        }}
-                    >
-                        <Input
-                            placeholder="Full Name"
-                            autoFocus
-                            value={name}
-                            inputStyle={globalStyles.inputBar}
-                            onChangeText={(text) => setName(text)}
-                            leftIcon={
+                    <View className="w-[350px] space-y-[35px]">
+                        <View style={globalStyles.inputBarContainer}>
+                            <View style={globalStyles.inputIconContainer}>
                                 <FontAwesome5
                                     name="user-alt"
                                     size={24}
                                     style={globalStyles.inputBarIcon}
                                 />
-                            }
-                            autoComplete={"name"}
-                        />
-
-                        <Input
-                            placeholder="Email"
-                            value={email}
-                            inputStyle={globalStyles.inputBar}
-                            leftIcon={
+                            </View>
+                            <TextInput
+                                placeholder="Full Name"
+                                autoFocus
+                                value={name}
+                                onChangeText={(text) => setName(text)}
+                                style={globalStyles.inputBar}
+                                placeholderTextColor="#86939e"
+                                autoComplete={"name"}
+                            />
+                        </View>
+                        <View style={globalStyles.inputBarContainer}>
+                            <View style={globalStyles.inputIconContainer}>
                                 <MaterialIcons
                                     name="email"
                                     size={24}
                                     style={globalStyles.inputBarIcon}
                                 />
-                            }
-                            onChangeText={(text) => setEmail(text)}
-                            autoComplete={"email"}
-                        />
-
-                        <View className="relative">
-                            <Input
+                            </View>
+                            <TextInput
+                                placeholder="Email"
+                                autoFocus
+                                value={email}
+                                onChangeText={(text) => setEmail(text)}
+                                style={globalStyles.inputBar}
+                                placeholderTextColor="#86939e"
+                                autoComplete={"email"}
+                            />
+                        </View>
+                        <View style={globalStyles.inputBarContainer}>
+                            <MaterialIcons
+                                name="lock"
+                                size={24}
+                                style={globalStyles.inputBarIcon}
+                            />
+                            <TextInput
                                 placeholder="Password"
                                 secureTextEntry={!showPassword}
                                 value={password}
-                                inputStyle={globalStyles.inputBar}
+                                style={globalStyles.inputBar}
                                 onChangeText={(text) => setPassword(text)}
-                                leftIcon={
-                                    <MaterialIcons
-                                        name="lock"
-                                        size={24}
-                                        style={globalStyles.inputBarIcon}
-                                    />
-                                }
+                                placeholderTextColor="#86939e"
                                 autoComplete={"password"}
                             />
-
                             <TouchableOpacity
-                                style={globalStyles.showPasswordContainer}
+                                style={globalStyles.inputIconContainer}
                                 onPress={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? (
                                     <Feather
                                         name="eye"
                                         size={20}
-                                        color="black"
-                                        style={globalStyles.showPasswordIcon}
+                                        style={globalStyles.inputBarIcon}
                                     />
                                 ) : (
                                     <Feather
                                         name="eye-off"
                                         size={20}
-                                        color="black"
-                                        style={globalStyles.showPasswordIcon}
+                                        style={globalStyles.inputBarIcon}
                                     />
                                 )}
                             </TouchableOpacity>
                         </View>
-
-                        <View>
-                            <Input
+                        <View style={globalStyles.inputBarContainer}>
+                            <MaterialIcons
+                                name="lock"
+                                size={24}
+                                style={globalStyles.inputBarIcon}
+                            />
+                            <TextInput
                                 placeholder="Confirm Password"
                                 secureTextEntry={!showPassword}
-                                autoComplete={"password"}
                                 value={confirmPassword}
-                                inputStyle={globalStyles.inputBar}
+                                style={globalStyles.inputBar}
                                 onChangeText={(text) =>
                                     setConfirmPassword(text)
                                 }
-                                leftIcon={
-                                    <MaterialIcons
-                                        name="lock"
-                                        size={24}
-                                        style={globalStyles.inputBarIcon}
-                                    />
-                                }
+                                placeholderTextColor="#86939e"
+                                autoComplete={"password"}
                             />
-
                             <TouchableOpacity
-                                style={globalStyles.showPasswordContainer}
+                                style={globalStyles.inputIconContainer}
                                 onPress={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? (
                                     <Feather
                                         name="eye"
                                         size={20}
-                                        style={globalStyles.showPasswordIcon}
+                                        style={globalStyles.inputBarIcon}
                                     />
                                 ) : (
                                     <Feather
                                         name="eye-off"
                                         size={20}
-                                        style={globalStyles.showPasswordIcon}
+                                        style={globalStyles.inputBarIcon}
                                     />
                                 )}
                             </TouchableOpacity>
