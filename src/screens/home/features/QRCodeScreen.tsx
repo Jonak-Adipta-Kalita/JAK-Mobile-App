@@ -33,6 +33,7 @@ import { deleteObject, getDownloadURL, ref } from "firebase/storage";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import { uploadImageAsync } from "@utils/uploadImageAsync";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Create = () => {
     const colorScheme = useColorScheme();
@@ -156,8 +157,8 @@ const Create = () => {
     return (
         <View className="mx-10">
             {showStoredQRCodes ? (
-                <View>
-                    <View className="flex flex-row items-center justify-between">
+                <View className="-mx-7">
+                    <View className="mx-7 flex flex-row items-center justify-between">
                         <TouchableOpacity
                             className={`flex h-10 w-10 items-center justify-center rounded-full ${
                                 colorScheme == "dark"
@@ -170,15 +171,40 @@ const Create = () => {
                         </TouchableOpacity>
                         <Text
                             style={globalStyles.font}
-                            className={`text-2xl ${
+                            className={`text-xl ${
                                 colorScheme === "dark"
                                     ? "text-[#fff]"
                                     : "text-[#000000]"
                             } flex-1 text-center font-bold`}
                         >
-                            Stored QRCodes
+                            Stored QRCodes ({qrCodesFetched?.docs?.length}/5)
                         </Text>
                     </View>
+                    <ScrollView className="mt-[40px] space-y-2">
+                        {qrCodesFetched?.docs?.map((qrCode) => (
+                            <View
+                                key={qrCode.id}
+                                className={`mb-5 px-7 ${
+                                    colorScheme == "dark"
+                                        ? "bg-[#272934]"
+                                        : "bg-[#fff]"
+                                } mx-5 rounded-lg p-5 shadow-md`}
+                            >
+                                <View className="flex flex-row items-center justify-between">
+                                    <Text
+                                        className={`${
+                                            colorScheme === "dark"
+                                                ? "text-[#fff]"
+                                                : "text-[#000000]"
+                                        } text-sm`}
+                                        style={globalStyles.font}
+                                    >
+                                        {qrCode.data().value}
+                                    </Text>
+                                </View>
+                            </View>
+                        ))}
+                    </ScrollView>
                 </View>
             ) : (
                 <View className="flex items-center justify-center space-y-5">
@@ -272,25 +298,29 @@ const Create = () => {
                             </View>
                         ) : (
                             <View>
-                                <TouchableOpacity
-                                    className={`rounded-lg ${
-                                        colorScheme == "dark"
-                                            ? "bg-[#272934]"
-                                            : "bg-white"
-                                    } p-5 px-12 shadow-md`}
-                                    onPress={() => setShowStoredQRCodes(true)}
-                                >
-                                    <Text
-                                        className={`${
-                                            colorScheme === "dark"
-                                                ? "text-[#fff]"
-                                                : "text-[#000000]"
-                                        } text-center text-xs`}
-                                        style={globalStyles.font}
+                                {qrCodesFetched?.docs?.length! > 0 && (
+                                    <TouchableOpacity
+                                        className={`rounded-lg ${
+                                            colorScheme == "dark"
+                                                ? "bg-[#272934]"
+                                                : "bg-white"
+                                        } p-5 px-12 shadow-md`}
+                                        onPress={() =>
+                                            setShowStoredQRCodes(true)
+                                        }
                                     >
-                                        Stored QRCodes
-                                    </Text>
-                                </TouchableOpacity>
+                                        <Text
+                                            className={`${
+                                                colorScheme === "dark"
+                                                    ? "text-[#fff]"
+                                                    : "text-[#000000]"
+                                            } text-center text-xs`}
+                                            style={globalStyles.font}
+                                        >
+                                            Stored QRCodes
+                                        </Text>
+                                    </TouchableOpacity>
+                                )}
                             </View>
                         )}
                     </View>
