@@ -174,7 +174,7 @@ const Create = () => {
                 />
             </View>
             <View className="">
-                {qrCodeData != "" && (
+                {qrCodeData != "" ? (
                     <View className="flex flex-row items-center justify-center space-x-2">
                         <TouchableOpacity
                             className={`rounded-full ${
@@ -233,6 +233,27 @@ const Create = () => {
                                     colorScheme === "dark" ? "#fff" : "#000000"
                                 }
                             />
+                        </TouchableOpacity>
+                    </View>
+                ) : (
+                    <View>
+                        <TouchableOpacity
+                            className={`rounded-lg ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } p-5 px-12 shadow-md`}
+                        >
+                            <Text
+                                className={`${
+                                    colorScheme === "dark"
+                                        ? "text-[#fff]"
+                                        : "text-[#000000]"
+                                } text-center text-xs`}
+                                style={globalStyles.font}
+                            >
+                                Stored QRCodes
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 )}
