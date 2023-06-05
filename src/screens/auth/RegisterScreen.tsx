@@ -1,6 +1,12 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
-import { Button, Input } from "@rneui/themed";
+import {
+    View,
+    TouchableOpacity,
+    Text,
+    useColorScheme,
+    Platform,
+} from "react-native";
+import { Input } from "@rneui/themed";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -215,19 +221,31 @@ const RegisterScreen = () => {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <Button
-                        containerStyle={{
-                            marginTop: 40,
-                            width: 350,
+                    <TouchableOpacity
+                        className="mt-[40px] w-[350px] bg-[#e3ad3e] p-[20px] py-7"
+                        style={{
+                            overflow: "visible",
+                            ...Platform.select({
+                                android: {
+                                    elevation: 4,
+                                },
+                                default: {
+                                    shadowColor: "rgba(0,0,0, .4)",
+                                    shadowOffset: { height: 1, width: 1 },
+                                    shadowOpacity: 1,
+                                    shadowRadius: 1,
+                                },
+                            }),
                         }}
-                        buttonStyle={{
-                            padding: 20,
-                            backgroundColor: "#e3ad3e",
-                        }}
-                        title="Register"
                         onPress={registerEmail}
-                        raised
-                    />
+                    >
+                        <Text
+                            className="text-center text-[15px] text-white"
+                            style={globalStyles.font}
+                        >
+                            Register
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>

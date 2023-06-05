@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity } from "react-native";
-import { Button, Input } from "@rneui/themed";
+import { View, TouchableOpacity, Text } from "react-native";
+import { Input } from "@rneui/themed";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { auth } from "@utils/firebase";
@@ -113,29 +113,28 @@ const LoginScreen = () => {
                     </View>
                 </View>
                 <View className="mt-[50px] w-[350px]">
-                    <Button
+                    <TouchableOpacity
+                        className="rounded-md bg-[#609fe6] p-[20px] py-6"
                         onPress={loginEmail}
-                        containerStyle={{
-                            borderRadius: 50,
-                        }}
-                        buttonStyle={{
-                            padding: 20,
-                            backgroundColor: "#609fe6",
-                        }}
-                        title="LOGIN"
-                    />
-                    <Button
-                        containerStyle={{
-                            borderRadius: 50,
-                            marginTop: 40,
-                        }}
-                        buttonStyle={{
-                            padding: 20,
-                            backgroundColor: "#e3ad3e",
-                        }}
-                        title="REGISTER"
+                    >
+                        <Text
+                            className="text-center text-[15px] text-white"
+                            style={globalStyles.font}
+                        >
+                            Login
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        className="mt-[40px] rounded-md bg-[#e3ad3e] p-[20px] py-6"
                         onPress={() => navigation.navigate("Register")}
-                    />
+                    >
+                        <Text
+                            className="text-center text-[15px] text-white"
+                            style={globalStyles.font}
+                        >
+                            Register
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>
