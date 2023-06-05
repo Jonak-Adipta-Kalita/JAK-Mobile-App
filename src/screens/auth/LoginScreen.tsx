@@ -12,12 +12,13 @@ import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import StatusBar from "@components/StatusBar";
 import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useShowBottomTab } from "@/src/hooks/useBottomTab";
 
 const LoginScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Login">>();
+    useShowBottomTab();
 
     const [showPassword, setShowPassword] = useState(false);
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 

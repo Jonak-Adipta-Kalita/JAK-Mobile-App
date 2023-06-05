@@ -17,6 +17,7 @@ import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { createAvatar } from "@dicebear/core";
 import { adventurer } from "@dicebear/collection";
 import { SvgXml } from "react-native-svg";
+import { useShowBottomTab } from "../hooks/useBottomTab";
 
 const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
     const colorScheme = useColorScheme();
@@ -54,6 +55,7 @@ const SettingsScreen = () => {
     const colorScheme = useColorScheme();
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"Settings">>();
+    useShowBottomTab();
 
     const avatar = createAvatar(adventurer, {
         seed: user?.uid!,

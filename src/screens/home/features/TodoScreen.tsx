@@ -25,7 +25,7 @@ import globalStyles from "@utils/globalStyles";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, ScrollView } from "react-native-gesture-handler";
-import { useHideBottomTab } from "@hooks/useHideBottomTab";
+import { useHideBottomTab } from "@/src/hooks/useBottomTab";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();

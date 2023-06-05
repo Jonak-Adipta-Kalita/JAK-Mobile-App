@@ -12,6 +12,7 @@ import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
+import { useShowBottomTab } from "@/src/hooks/useBottomTab";
 
 const Feature = ({
     title,
@@ -74,6 +75,7 @@ const HomeScreen = () => {
     const [user, userLoading, userError] = useAuthState(auth);
     const colorScheme = useColorScheme();
     useExitAppBackHandler();
+    useShowBottomTab();
 
     if (userError) errorAlertShower(userError);
 

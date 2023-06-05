@@ -15,11 +15,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { verifyEmail } from "@utils/verifyEmail";
+import { useShowBottomTab } from "@/src/hooks/useBottomTab";
 
 const RegisterScreen = () => {
     const colorScheme = useColorScheme();
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"Register">>();
+    useShowBottomTab();
 
     const [showPassword, setShowPassword] = useState(false);
 
