@@ -82,7 +82,7 @@ const RegisterScreen = () => {
                 <TouchableOpacity
                     style={globalStyles.headerIcon}
                     onPress={navigation.goBack}
-                    className="absolute left-5 top-4"
+                    className="absolute left-5 top-2 rounded-full p-2"
                 >
                     <AntDesign
                         name="back"
