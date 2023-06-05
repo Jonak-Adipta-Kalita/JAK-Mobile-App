@@ -44,6 +44,7 @@ const Create = () => {
     );
 
     const [qrCodeData, setQRCodeData] = useState("");
+    const [showStoredQRCodes, setShowStoredQRCodes] = useState(false);
     const qrCodeSVGDataURL = useRef<any>(null);
 
     const qrCodeAlreadyExists = () => {
@@ -152,129 +153,142 @@ const Create = () => {
     }
 
     return (
-        <View className="mx-10 flex items-center justify-center space-y-5">
-            <View
-                className={`mb-5 px-7 ${
-                    colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
-                } mx-5 w-full rounded-lg p-5 shadow-md`}
-            >
-                <TextInput
-                    placeholder="Enter Text to be Stored"
-                    placeholderTextColor={"#9CA3AF"}
-                    className={`${
-                        colorScheme === "dark"
-                            ? "text-[#fff]"
-                            : "text-[#000000]"
-                    } text-sm`}
-                    style={globalStyles.font}
-                    onChangeText={(text) => setQRCodeData(text)}
-                    value={qrCodeData}
-                    multiline
-                    autoFocus
-                />
-            </View>
-            <View className="">
-                {qrCodeData != "" ? (
-                    <View className="flex flex-row items-center justify-center space-x-2">
-                        <TouchableOpacity
-                            className={`rounded-full ${
-                                colorScheme == "dark"
-                                    ? "bg-[#272934]"
-                                    : "bg-white"
-                            } mb-10 p-5 shadow-md`}
-                            onPress={
-                                qrCodeAlreadyExists()
-                                    ? deleteQRCode
-                                    : uploadQRCode
-                            }
-                        >
-                            <FontAwesome
-                                name={
-                                    qrCodeAlreadyExists()
-                                        ? "trash"
-                                        : "cloud-upload"
-                                }
-                                size={24}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            className={`rounded-full ${
-                                colorScheme == "dark"
-                                    ? "bg-[#272934]"
-                                    : "bg-white"
-                            } mb-10 p-5 shadow-md`}
-                            onPress={() => downloadQRCode(qrCodeData)}
-                        >
-                            <FontAwesome
-                                name="cloud-download"
-                                size={24}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            className={`rounded-full ${
-                                colorScheme == "dark"
-                                    ? "bg-[#272934]"
-                                    : "bg-white"
-                            } mb-10 p-5 shadow-md`}
-                            onPress={() => {
-                                setQRCodeData("");
-                            }}
-                        >
-                            <Entypo
-                                name="cross"
-                                size={24}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        </TouchableOpacity>
+        <View className="mx-10">
+            {showStoredQRCodes ? (
+                <View></View>
+            ) : (
+                <View className="flex items-center justify-center space-y-5">
+                    <View
+                        className={`mb-5 px-7 ${
+                            colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
+                        } mx-5 w-full rounded-lg p-5 shadow-md`}
+                    >
+                        <TextInput
+                            placeholder="Enter Text to be Stored"
+                            placeholderTextColor={"#9CA3AF"}
+                            className={`${
+                                colorScheme === "dark"
+                                    ? "text-[#fff]"
+                                    : "text-[#000000]"
+                            } text-sm`}
+                            style={globalStyles.font}
+                            onChangeText={(text) => setQRCodeData(text)}
+                            value={qrCodeData}
+                            multiline
+                            autoFocus
+                        />
                     </View>
-                ) : (
-                    <View>
-                        <TouchableOpacity
-                            className={`rounded-lg ${
-                                colorScheme == "dark"
-                                    ? "bg-[#272934]"
-                                    : "bg-white"
-                            } p-5 px-12 shadow-md`}
-                        >
-                            <Text
-                                className={`${
-                                    colorScheme === "dark"
-                                        ? "text-[#fff]"
-                                        : "text-[#000000]"
-                                } text-center text-xs`}
-                                style={globalStyles.font}
-                            >
-                                Stored QRCodes
-                            </Text>
-                        </TouchableOpacity>
+                    <View className="">
+                        {qrCodeData != "" ? (
+                            <View className="flex flex-row items-center justify-center space-x-2">
+                                <TouchableOpacity
+                                    className={`rounded-full ${
+                                        colorScheme == "dark"
+                                            ? "bg-[#272934]"
+                                            : "bg-white"
+                                    } mb-10 p-5 shadow-md`}
+                                    onPress={
+                                        qrCodeAlreadyExists()
+                                            ? deleteQRCode
+                                            : uploadQRCode
+                                    }
+                                >
+                                    <FontAwesome
+                                        name={
+                                            qrCodeAlreadyExists()
+                                                ? "trash"
+                                                : "cloud-upload"
+                                        }
+                                        size={24}
+                                        color={
+                                            colorScheme === "dark"
+                                                ? "#fff"
+                                                : "#000000"
+                                        }
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    className={`rounded-full ${
+                                        colorScheme == "dark"
+                                            ? "bg-[#272934]"
+                                            : "bg-white"
+                                    } mb-10 p-5 shadow-md`}
+                                    onPress={() => downloadQRCode(qrCodeData)}
+                                >
+                                    <FontAwesome
+                                        name="cloud-download"
+                                        size={24}
+                                        color={
+                                            colorScheme === "dark"
+                                                ? "#fff"
+                                                : "#000000"
+                                        }
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    className={`rounded-full ${
+                                        colorScheme == "dark"
+                                            ? "bg-[#272934]"
+                                            : "bg-white"
+                                    } mb-10 p-5 shadow-md`}
+                                    onPress={() => {
+                                        setQRCodeData("");
+                                    }}
+                                >
+                                    <Entypo
+                                        name="cross"
+                                        size={24}
+                                        color={
+                                            colorScheme === "dark"
+                                                ? "#fff"
+                                                : "#000000"
+                                        }
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        ) : (
+                            <View>
+                                <TouchableOpacity
+                                    className={`rounded-lg ${
+                                        colorScheme == "dark"
+                                            ? "bg-[#272934]"
+                                            : "bg-white"
+                                    } p-5 px-12 shadow-md`}
+                                    onPress={() => setShowStoredQRCodes(true)}
+                                >
+                                    <Text
+                                        className={`${
+                                            colorScheme === "dark"
+                                                ? "text-[#fff]"
+                                                : "text-[#000000]"
+                                        } text-center text-xs`}
+                                        style={globalStyles.font}
+                                    >
+                                        Stored QRCodes
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
                     </View>
-                )}
-            </View>
-            {qrCodeData != "" && (
-                <View className="mx-10">
-                    <QRCode
-                        value={qrCodeData}
-                        size={300}
-                        backgroundColor={
-                            colorScheme == "dark" ? "#413f44" : "white"
-                        }
-                        color={colorScheme == "dark" ? "#fff" : "#000"}
-                        getRef={(c) => {
-                            if (!c || !c.toDataURL) return;
+                    {qrCodeData != "" && (
+                        <View className="mx-10">
+                            <QRCode
+                                value={qrCodeData}
+                                size={300}
+                                backgroundColor={
+                                    colorScheme == "dark" ? "#413f44" : "white"
+                                }
+                                color={colorScheme == "dark" ? "#fff" : "#000"}
+                                getRef={(c) => {
+                                    if (!c || !c.toDataURL) return;
 
-                            c?.toDataURL((base64Image: string) => {
-                                qrCodeSVGDataURL.current = base64Image;
-                            });
-                        }}
-                    />
+                                    c?.toDataURL((base64Image: string) => {
+                                        qrCodeSVGDataURL.current = base64Image;
+                                    });
+                                }}
+                            />
+                        </View>
+                    )}
                 </View>
             )}
         </View>
