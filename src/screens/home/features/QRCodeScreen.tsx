@@ -6,6 +6,7 @@ import StatusBar from "@components/StatusBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "@/src/hooks/useBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
@@ -155,7 +156,30 @@ const Create = () => {
     return (
         <View className="mx-10">
             {showStoredQRCodes ? (
-                <View></View>
+                <View>
+                    <View className="flex flex-row items-center justify-between">
+                        <TouchableOpacity
+                            className={`flex h-10 w-10 items-center justify-center rounded-full ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            }`}
+                            onPress={() => setShowStoredQRCodes(false)}
+                        >
+                            <Ionicons name="close" size={20} color="#fff" />
+                        </TouchableOpacity>
+                        <Text
+                            style={globalStyles.font}
+                            className={`text-2xl ${
+                                colorScheme === "dark"
+                                    ? "text-[#fff]"
+                                    : "text-[#000000]"
+                            } flex-1 text-center font-bold`}
+                        >
+                            Stored QRCodes
+                        </Text>
+                    </View>
+                </View>
             ) : (
                 <View className="flex items-center justify-center space-y-5">
                     <View
