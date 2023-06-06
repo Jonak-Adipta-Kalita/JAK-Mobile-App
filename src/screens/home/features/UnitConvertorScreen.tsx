@@ -8,6 +8,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import globalStyles from "@/src/utils/globalStyles";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { useNavigation } from "@react-navigation/native";
+import { Measure } from "convert-units";
 
 const UnitConvertorScreen = () => {
     const navigation =
@@ -15,7 +16,9 @@ const UnitConvertorScreen = () => {
     const colorScheme = useColorScheme();
     useHideBottomTab();
 
-    const [selectedMeasure, setSelectedMeasure] = useState<string | null>(null);
+    const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
+        null
+    );
 
     return (
         <SafeAreaView className="flex-1">
