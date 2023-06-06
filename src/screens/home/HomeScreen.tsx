@@ -111,7 +111,7 @@ const HomeScreen = () => {
                                 <Feature
                                     title="Todo"
                                     description="Create a Todo List"
-                                    icon="bars"
+                                    icon="th-list"
                                     buttonOnPress={() =>
                                         navigation.navigate("Todo")
                                     }
