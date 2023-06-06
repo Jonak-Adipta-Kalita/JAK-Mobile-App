@@ -41,8 +41,8 @@ const UnitConvertorScreen = () => {
     const colorScheme = useColorScheme();
     useHideBottomTab();
 
-    const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
-        null
+    const [selectedMeasure, setSelectedMeasure] = useState<Measure>(
+        Object.keys(measures)[0] as Measure
     );
 
     return (
@@ -72,7 +72,18 @@ const UnitConvertorScreen = () => {
                         Unit Converter
                     </Text>
                 </View>
-                <View></View>
+                <View className="mt-10 flex flex-row items-center justify-center">
+                    <Text
+                        className={`text-lg ${
+                            colorScheme == "dark"
+                                ? "text-gray-200"
+                                : "text-gray-900"
+                        }`}
+                        style={globalStyles.font}
+                    >
+                        Select a Measure:{" "}
+                    </Text>
+                </View>
                 <View className="flex flex-row items-center justify-center space-x-5">
                     <View></View>
                     <View></View>
