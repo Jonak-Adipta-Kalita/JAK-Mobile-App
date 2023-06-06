@@ -10,6 +10,31 @@ import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { useNavigation } from "@react-navigation/native";
 import { Measure } from "convert-units";
 
+const measures: { [key in Measure]: string } = {
+    length: "Length",
+    mass: "Mass",
+    volume: "Volume",
+    temperature: "Temperature",
+    time: "Time",
+    speed: "Speed",
+    pace: "Pace",
+    pressure: "Pressure",
+    current: "Current",
+    voltage: "Voltage",
+    power: "Power",
+    reactivePower: "Reactive Power",
+    apparentPower: "Apparent Power",
+    energy: "Energy",
+    reactiveEnergy: "Reactive Energy",
+    volumeFlowRate: "Volume Flow Rate",
+    illuminance: "Illuminance",
+    frequency: "Frequency",
+    angle: "Angle",
+    area: "Area",
+    ditgital: "Digital",
+    partsPer: "Parts Per",
+};
+
 const UnitConvertorScreen = () => {
     const navigation =
         useNavigation<BottomTabStackNavigationProps<"UnitConvertor">>();
