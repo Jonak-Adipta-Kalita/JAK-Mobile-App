@@ -9,9 +9,9 @@ import globalStyles from "@/src/utils/globalStyles";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { useNavigation } from "@react-navigation/native";
 
-const TranslatorScreen = () => {
+const UnitConvertorScreen = () => {
     const navigation =
-        useNavigation<BottomTabStackNavigationProps<"Translator">>();
+        useNavigation<BottomTabStackNavigationProps<"UnitConvertor">>();
     const colorScheme = useColorScheme();
     useHideBottomTab();
 
@@ -39,12 +39,13 @@ const TranslatorScreen = () => {
                         } p-2 px-0 text-center text-lg`}
                         style={globalStyles.font}
                     >
-                        Translator
+                        Unit Converter
                     </Text>
                 </View>
+                <View></View>
             </View>
         </SafeAreaView>
     );
 };
 
-export default TranslatorScreen;
+export default UnitConvertorScreen;

@@ -125,11 +125,11 @@ const HomeScreen = () => {
                                     }
                                 />
                                 <Feature
-                                    title="Translator"
-                                    description="Translate Text"
-                                    icon="language"
+                                    title="Unit Convertor"
+                                    description="Convert Units"
+                                    icon="thermometer"
                                     buttonOnPress={() =>
-                                        navigation.navigate("Translator")
+                                        navigation.navigate("UnitConvertor")
                                     }
                                 />
                             </ScrollView>
