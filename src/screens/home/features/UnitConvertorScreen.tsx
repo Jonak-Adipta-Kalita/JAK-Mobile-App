@@ -9,6 +9,7 @@ import globalStyles from "@/src/utils/globalStyles";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { useNavigation } from "@react-navigation/native";
 import { Measure } from "convert-units";
+import { SelectList } from "react-native-dropdown-select-list";
 
 const measures: { [key in Measure]: string } = {
     length: "Length",
@@ -73,16 +74,17 @@ const UnitConvertorScreen = () => {
                     </Text>
                 </View>
                 <View className="mt-10 flex flex-row items-center justify-center">
-                    <Text
-                        className={`text-lg ${
-                            colorScheme == "dark"
-                                ? "text-gray-200"
-                                : "text-gray-900"
-                        }`}
-                        style={globalStyles.font}
-                    >
-                        Select a Measure:{" "}
-                    </Text>
+                    <SelectList
+                        setSelected={(val: Measure) => setSelectedMeasure(val)}
+                        data={Object.values(measures).map((measure, i) => ({
+                            key: i,
+                            value: measure,
+                        }))}
+                        save="value"
+                        placeholder="Select a Measure"
+                        searchPlaceholder="Search a Measure"
+                        notFoundText="No Measure found"
+                    />
                 </View>
                 <View className="flex flex-row items-center justify-center space-x-5">
                     <View></View>
