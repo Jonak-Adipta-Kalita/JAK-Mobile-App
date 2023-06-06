@@ -5,12 +5,13 @@ import { StackScreenParamList } from "@/@types/navigation";
 
 import GetStartedScreen from "@screens/GetStartedScreen";
 import HomeScreen from "@screens/home/HomeScreen";
-import TodoScreen from "@screens/home/features/TodoScreen";
 import SettingsScreen from "@screens/SettingsScreen";
 import LoginScreen from "@screens/auth/LoginScreen";
 import RegisterScreen from "@screens/auth/RegisterScreen";
 import NoNetworkScreen from "@screens/NoNetworkScreen";
+import TodoScreen from "@screens/home/features/TodoScreen";
 import QRCodeScreen from "@screens/home/features/QRCodeScreen";
+import TranslatorScreen from "@screens/home/features/TranslatorScreen";
 
 const Stack = createStackNavigator<StackScreenParamList>();
 
@@ -55,6 +56,7 @@ const HomeStack = () => {
             <Stack.Group>
                 <Stack.Screen name="Todo" component={TodoScreen} />
                 <Stack.Screen name="QRCode" component={QRCodeScreen} />
+                <Stack.Screen name="Translator" component={TranslatorScreen} />
             </Stack.Group>
         </Stack.Navigator>
     );

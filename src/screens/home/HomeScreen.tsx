@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { auth } from "@utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "@components/Loading";
@@ -22,7 +22,7 @@ const Feature = ({
 }: {
     title: string;
     description: string;
-    icon: keyof typeof AntDesign.glyphMap;
+    icon: keyof typeof FontAwesome.glyphMap;
     buttonOnPress: () => void;
 }) => {
     const colorScheme = useColorScheme();
@@ -36,7 +36,7 @@ const Feature = ({
                 } rounded-lg p-5 shadow-md`}
             >
                 <View className="flex flex-row items-center">
-                    <AntDesign
+                    <FontAwesome
                         name={icon}
                         size={24}
                         color={colorScheme === "dark" ? "#fff" : "#000000"}
@@ -122,6 +122,14 @@ const HomeScreen = () => {
                                     icon="qrcode"
                                     buttonOnPress={() =>
                                         navigation.navigate("QRCode")
+                                    }
+                                />
+                                <Feature
+                                    title="Translator"
+                                    description="Translate Text"
+                                    icon="language"
+                                    buttonOnPress={() =>
+                                        navigation.navigate("Translator")
                                     }
                                 />
                             </ScrollView>
