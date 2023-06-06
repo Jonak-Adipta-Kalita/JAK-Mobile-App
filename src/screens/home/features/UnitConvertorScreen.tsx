@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import StatusBar from "@/src/components/StatusBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Text, View, useColorScheme } from "react-native";
@@ -14,6 +14,8 @@ const UnitConvertorScreen = () => {
         useNavigation<BottomTabStackNavigationProps<"UnitConvertor">>();
     const colorScheme = useColorScheme();
     useHideBottomTab();
+
+    const [selectedMeasure, setSelectedMeasure] = useState<string | null>(null);
 
     return (
         <SafeAreaView className="flex-1">
@@ -43,6 +45,10 @@ const UnitConvertorScreen = () => {
                     </Text>
                 </View>
                 <View></View>
+                <View className="flex flex-row items-center justify-center space-x-5">
+                    <View></View>
+                    <View></View>
+                </View>
             </View>
         </SafeAreaView>
     );
