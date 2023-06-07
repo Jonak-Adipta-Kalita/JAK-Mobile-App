@@ -103,6 +103,13 @@ const UnitConvertorScreen = () => {
                                 }
                             />
                         }
+                        dropdownStyles={{
+                            backgroundColor:
+                                colorScheme === "dark" ? "#272934" : "#fff",
+                        }}
+                        dropdownTextStyles={{
+                            color: colorScheme === "dark" ? "#fff" : "#000",
+                        }}
                     />
                 </View>
                 <View className="flex flex-row items-center justify-center space-x-5">
