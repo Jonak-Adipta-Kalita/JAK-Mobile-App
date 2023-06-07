@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import StatusBar from "@/src/components/StatusBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { Text, View, useColorScheme } from "react-native";
+import { Text, View, useColorScheme, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useHideBottomTab } from "@/src/hooks/useBottomTab";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -83,7 +83,7 @@ const UnitConvertorScreen = () => {
                         Unit Converter
                     </Text>
                 </View>
-                <View className="mx-20 mt-10">
+                <View className="relative mx-20 mt-10">
                     <SelectList
                         setSelected={(val: Measure) => setSelectedMeasure(val)}
                         data={Object.keys(measures).map((measure) => ({
@@ -117,6 +117,11 @@ const UnitConvertorScreen = () => {
                         dropdownStyles={{
                             backgroundColor:
                                 colorScheme === "dark" ? "#272934" : "#fff",
+                            position: "absolute",
+                            top: 40,
+                            width: "100%",
+                            zIndex: 50,
+                            elevation: Platform.OS === "android" ? 50 : 0,
                         }}
                         dropdownTextStyles={{
                             color:
