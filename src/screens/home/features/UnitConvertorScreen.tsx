@@ -73,7 +73,7 @@ const UnitConvertorScreen = () => {
                         Unit Converter
                     </Text>
                 </View>
-                <View className="mt-10 flex flex-row items-center justify-center">
+                <View className="mx-10 mt-10">
                     <SelectList
                         setSelected={(val: Measure) => setSelectedMeasure(val)}
                         data={Object.values(measures).map((measure, i) => ({
