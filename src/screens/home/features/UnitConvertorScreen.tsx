@@ -131,7 +131,7 @@ const UnitConvertorScreen = () => {
                 </View>
                 {selectedMeasure !== null && (
                     <View className="mx-5 mt-[40px]">
-                        <View className="relative">
+                        <View className="">
                             <Text
                                 className={`text-lg ${
                                     colorScheme == "dark"
