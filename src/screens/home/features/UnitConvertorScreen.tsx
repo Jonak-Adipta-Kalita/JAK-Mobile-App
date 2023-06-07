@@ -42,8 +42,8 @@ const UnitConvertorScreen = () => {
     const colorScheme = useColorScheme();
     useHideBottomTab();
 
-    const [selectedMeasure, setSelectedMeasure] = useState<Measure>(
-        Object.keys(measures)[0] as Measure
+    const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
+        null
     );
 
     return (
@@ -84,6 +84,16 @@ const UnitConvertorScreen = () => {
                         placeholder="Select a Measure"
                         searchPlaceholder="Search a Measure"
                         notFoundText="No Measure found"
+                        boxStyles={{
+                            borderRadius: 10,
+                            backgroundColor:
+                                colorScheme === "dark" ? "#272934" : "#fff",
+                            borderColor:
+                                colorScheme === "dark" ? "#272934" : "#fff",
+                        }}
+                        inputStyles={{
+                            color: colorScheme === "dark" ? "#fff" : "#000",
+                        }}
                     />
                 </View>
                 <View className="flex flex-row items-center justify-center space-x-5">
