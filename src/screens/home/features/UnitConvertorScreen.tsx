@@ -108,7 +108,8 @@ const UnitConvertorScreen = () => {
                                 colorScheme === "dark" ? "#272934" : "#fff",
                         }}
                         dropdownTextStyles={{
-                            color: colorScheme === "dark" ? "#fff" : "#000",
+                            color:
+                                colorScheme === "dark" ? "#D3D3D3" : "#6B6B6B",
                         }}
                     />
                 </View>

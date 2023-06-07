@@ -167,7 +167,13 @@ const Create = () => {
                             }`}
                             onPress={() => setShowStoredQRCodes(false)}
                         >
-                            <Ionicons name="close" size={20} color="#fff" />
+                            <Ionicons
+                                name="close"
+                                size={20}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
                         </TouchableOpacity>
                         <Text
                             style={globalStyles.font}
