@@ -8,7 +8,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import globalStyles from "@/src/utils/globalStyles";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { useNavigation } from "@react-navigation/native";
-import { Measure } from "convert-units";
+import convert, { Measure } from "convert-units";
 import { SelectList } from "react-native-dropdown-select-list";
 
 const measures: { [key in Measure]: string } = {
@@ -45,6 +45,16 @@ const UnitConvertorScreen = () => {
     const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
         null
     );
+    const [selectedFrom, setSelectedFrom] = useState<string | null>(null);
+    const [selectedTo, setSelectedTo] = useState<string | null>(null);
+
+    const getData = (selectedMeasure: Measure) => {
+        const data = convert().possibilities(selectedMeasure);
+        return data.map((item) => ({
+            key: item,
+            value: item,
+        }));
+    };
 
     return (
         <SafeAreaView className="flex-1">
@@ -76,11 +86,12 @@ const UnitConvertorScreen = () => {
                 <View className="mx-20 mt-10">
                     <SelectList
                         setSelected={(val: Measure) => setSelectedMeasure(val)}
-                        data={Object.values(measures).map((measure, i) => ({
-                            key: i,
-                            value: measure,
+                        data={Object.keys(measures).map((measure) => ({
+                            key: measure,
+                            // @ts-ignore
+                            value: measures[measure] as string,
                         }))}
-                        save="value"
+                        save="key"
                         placeholder="Select a Measure"
                         notFoundText="No Measure found"
                         boxStyles={{
@@ -113,10 +124,73 @@ const UnitConvertorScreen = () => {
                         }}
                     />
                 </View>
-                <View className="flex flex-row items-center justify-center space-x-5">
-                    <View></View>
-                    <View></View>
-                </View>
+                {selectedMeasure !== null && (
+                    <View className="mx-5 mt-[40px]">
+                        <View className="relative">
+                            <Text
+                                className={`text-lg ${
+                                    colorScheme == "dark"
+                                        ? "text-gray-200"
+                                        : "text-gray-900"
+                                }`}
+                                style={globalStyles.font}
+                            >
+                                From
+                            </Text>
+                            <SelectList
+                                setSelected={(val: string) =>
+                                    setSelectedFrom(val)
+                                }
+                                data={getData(selectedMeasure)}
+                                save="value"
+                                placeholder="Select a Unit"
+                                notFoundText="No Unit found"
+                                boxStyles={{
+                                    borderRadius: 10,
+                                    backgroundColor:
+                                        colorScheme === "dark"
+                                            ? "#272934"
+                                            : "#fff",
+                                    borderColor:
+                                        colorScheme === "dark"
+                                            ? "#272934"
+                                            : "#fff",
+                                }}
+                                inputStyles={{
+                                    color:
+                                        colorScheme === "dark"
+                                            ? "#fff"
+                                            : "#000",
+                                }}
+                                search={false}
+                                arrowicon={
+                                    <AntDesign
+                                        name="down"
+                                        size={15}
+                                        color={
+                                            colorScheme === "dark"
+                                                ? "#fff"
+                                                : "#000000"
+                                        }
+                                    />
+                                }
+                                dropdownStyles={{
+                                    backgroundColor:
+                                        colorScheme === "dark"
+                                            ? "#272934"
+                                            : "#fff",
+                                }}
+                                dropdownTextStyles={{
+                                    color:
+                                        colorScheme === "dark"
+                                            ? "#D3D3D3"
+                                            : "#6B6B6B",
+                                }}
+                            />
+                        </View>
+                        <View></View>
+                    </View>
+                )}
             </View>
         </SafeAreaView>
     );
