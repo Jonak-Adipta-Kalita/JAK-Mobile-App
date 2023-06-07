@@ -73,7 +73,7 @@ const UnitConvertorScreen = () => {
                         Unit Converter
                     </Text>
                 </View>
-                <View className="mx-10 mt-10">
+                <View className="mx-20 mt-10">
                     <SelectList
                         setSelected={(val: Measure) => setSelectedMeasure(val)}
                         data={Object.values(measures).map((measure, i) => ({
@@ -82,7 +82,6 @@ const UnitConvertorScreen = () => {
                         }))}
                         save="value"
                         placeholder="Select a Measure"
-                        searchPlaceholder="Search a Measure"
                         notFoundText="No Measure found"
                         boxStyles={{
                             borderRadius: 10,
@@ -94,6 +93,16 @@ const UnitConvertorScreen = () => {
                         inputStyles={{
                             color: colorScheme === "dark" ? "#fff" : "#000",
                         }}
+                        search={false}
+                        arrowicon={
+                            <AntDesign
+                                name="down"
+                                size={15}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        }
                     />
                 </View>
                 <View className="flex flex-row items-center justify-center space-x-5">
