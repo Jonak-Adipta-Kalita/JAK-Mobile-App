@@ -44,6 +44,7 @@ const UnitConvertorScreen = () => {
 
     const [measureDropdownExpanded, setMeasureDropdownExpanded] =
         useState(false);
+    const [fromDropdownExpanded, setFromDropdownExpanded] = useState(false);
 
     const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
         null
@@ -54,7 +55,7 @@ const UnitConvertorScreen = () => {
     const getData = (selectedMeasure: Measure) => {
         const data = convert().possibilities(selectedMeasure);
         return data.map((item) => ({
-            key: item,
+            label: item,
             value: item,
         }));
     };
@@ -97,23 +98,31 @@ const UnitConvertorScreen = () => {
                         setDropdownExpanded={setMeasureDropdownExpanded}
                         selectedValue={selectedMeasure!}
                         setSelectedValue={setSelectedMeasure}
+                        placeholderName="Measure"
                     />
                 </View>
                 {selectedMeasure !== null && (
-                    <View className="mx-5 mt-[40px]">
-                        <View className="">
+                    <View className="mx-16 mt-[40px]">
+                        <View className="flex flex-row items-center justify-center">
                             <Text
-                                className={`text-lg ${
+                                className={`mr-6 text-lg ${
                                     colorScheme == "dark"
                                         ? "text-gray-200"
                                         : "text-gray-900"
                                 }`}
                                 style={globalStyles.font}
                             >
-                                From
+                                From :
                             </Text>
+                            <Dropdown
+                                items={getData(selectedMeasure!)}
+                                dropdownExpanded={fromDropdownExpanded}
+                                setDropdownExpanded={setFromDropdownExpanded}
+                                selectedValue={selectedFrom!}
+                                setSelectedValue={setSelectedFrom}
+                                placeholderName="Unit"
+                            />
                         </View>
-                        <View></View>
                     </View>
                 )}
             </View>

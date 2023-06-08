@@ -4,11 +4,12 @@ import DropDownPicker from "react-native-dropdown-picker";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 interface Props {
-    items: { value: string; label: string }[];
+    items: any[];
     dropdownExpanded: boolean;
     setDropdownExpanded: Dispatch<SetStateAction<boolean>>;
     selectedValue: string;
     setSelectedValue: Dispatch<SetStateAction<any>>;
+    placeholderName: string;
 }
 
 const Dropdown = ({
@@ -17,6 +18,7 @@ const Dropdown = ({
     setDropdownExpanded,
     selectedValue,
     setSelectedValue,
+    placeholderName,
 }: Props) => {
     const colorScheme = useColorScheme();
 
@@ -27,7 +29,7 @@ const Dropdown = ({
             setOpen={setDropdownExpanded}
             value={selectedValue}
             setValue={setSelectedValue}
-            placeholder="Select a Measure"
+            placeholder={`Select a ${placeholderName}`}
             style={{
                 backgroundColor: colorScheme === "dark" ? "#272934" : "#fff",
                 borderColor: colorScheme === "dark" ? "#272934" : "#fff",
