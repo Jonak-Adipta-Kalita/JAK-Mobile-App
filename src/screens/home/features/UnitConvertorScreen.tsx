@@ -121,7 +121,7 @@ const UnitConvertorScreen = () => {
                         }}
                     />
                 </View>
-                {selectedMeasure !== null && (
+                {selectedMeasure !== null && !dropdownExpanded && (
                     <View className="mx-5 mt-[40px]">
                         <View className="">
                             <Text
