@@ -4,7 +4,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Text, View, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useHideBottomTab } from "@/src/hooks/useBottomTab";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity, TextInput } from "react-native-gesture-handler";
 import globalStyles from "@/src/utils/globalStyles";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { useNavigation } from "@react-navigation/native";
@@ -51,6 +51,9 @@ const UnitConvertorScreen = () => {
     );
     const [selectedFrom, setSelectedFrom] = useState<string | null>(null);
     const [selectedTo, setSelectedTo] = useState<string | null>(null);
+
+    const [fromValue, setFromValue] = useState<string>("");
+    const [toValue, setToValue] = useState<string>("");
 
     const getData = (selectedMeasure: Measure) => {
         const data = convert().possibilities(selectedMeasure);
@@ -103,24 +106,34 @@ const UnitConvertorScreen = () => {
                 </View>
                 {selectedMeasure !== null && (
                     <View className="mx-16 mt-[40px]">
-                        <View className="flex flex-row items-center justify-center">
-                            <Text
-                                className={`mr-6 text-lg ${
-                                    colorScheme == "dark"
-                                        ? "text-gray-200"
-                                        : "text-gray-900"
-                                }`}
-                                style={globalStyles.font}
-                            >
-                                From :
-                            </Text>
-                            <Dropdown
-                                items={getData(selectedMeasure!)}
-                                dropdownExpanded={fromDropdownExpanded}
-                                setDropdownExpanded={setFromDropdownExpanded}
-                                selectedValue={selectedFrom!}
-                                setSelectedValue={setSelectedFrom}
-                                placeholderName="Unit"
+                        <View>
+                            <View className="flex flex-row items-center justify-center">
+                                <Text
+                                    className={`mr-6 text-lg ${
+                                        colorScheme == "dark"
+                                            ? "text-gray-200"
+                                            : "text-gray-900"
+                                    }`}
+                                    style={globalStyles.font}
+                                >
+                                    From :
+                                </Text>
+                                <Dropdown
+                                    items={getData(selectedMeasure!)}
+                                    dropdownExpanded={fromDropdownExpanded}
+                                    setDropdownExpanded={
+                                        setFromDropdownExpanded
+                                    }
+                                    selectedValue={selectedFrom!}
+                                    setSelectedValue={setSelectedFrom}
+                                    placeholderName="Unit"
+                                />
+                            </View>
+                            <TextInput
+                                placeholder="From"
+                                keyboardType="numeric"
+                                value={fromValue}
+                                onChangeText={setFromValue}
                             />
                         </View>
                     </View>
