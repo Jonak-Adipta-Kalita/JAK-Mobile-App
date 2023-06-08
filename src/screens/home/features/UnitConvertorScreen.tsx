@@ -9,7 +9,7 @@ import globalStyles from "@/src/utils/globalStyles";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { useNavigation } from "@react-navigation/native";
 import convert, { Measure } from "convert-units";
-import { SelectList } from "react-native-dropdown-select-list";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const measures: { [key in Measure]: string } = {
     length: "Length",
@@ -42,6 +42,8 @@ const UnitConvertorScreen = () => {
     const colorScheme = useColorScheme();
     useHideBottomTab();
 
+    const [dropdownExpanded, setDropdownExpanded] = useState(false);
+
     const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
         null
     );
@@ -55,6 +57,14 @@ const UnitConvertorScreen = () => {
             value: item,
         }));
     };
+
+    // <AntDesign
+    //     name="down"
+    //     size={15}
+    //     color={
+    //         colorScheme === "dark" ? "#fff" : "#000000"
+    //     }
+    // />
 
     return (
         <SafeAreaView className="flex-1">
@@ -84,41 +94,28 @@ const UnitConvertorScreen = () => {
                     </Text>
                 </View>
                 <View className="mx-20 mt-10">
-                    <SelectList
-                        setSelected={(val: Measure) => setSelectedMeasure(val)}
-                        data={Object.keys(measures).map((measure) => ({
-                            key: measure,
+                    <DropDownPicker
+                        items={Object.keys(measures).map((measure) => ({
+                            value: measure,
                             // @ts-ignore
-                            value: measures[measure] as string,
+                            label: measures[measure] as string,
                         }))}
-                        save="key"
+                        open={dropdownExpanded}
+                        setOpen={setDropdownExpanded}
+                        value={selectedMeasure}
+                        setValue={setSelectedMeasure}
                         placeholder="Select a Measure"
-                        notFoundText="No Measure found"
-                        boxStyles={{
-                            borderRadius: 10,
+                        style={{
                             backgroundColor:
                                 colorScheme === "dark" ? "#272934" : "#fff",
                             borderColor:
                                 colorScheme === "dark" ? "#272934" : "#fff",
                         }}
-                        inputStyles={{
-                            color: colorScheme === "dark" ? "#fff" : "#000",
-                        }}
-                        search={false}
-                        arrowicon={
-                            <AntDesign
-                                name="down"
-                                size={15}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        }
-                        dropdownStyles={{
+                        containerStyle={{
                             backgroundColor:
                                 colorScheme === "dark" ? "#272934" : "#fff",
                         }}
-                        dropdownTextStyles={{
+                        textStyle={{
                             color:
                                 colorScheme === "dark" ? "#D3D3D3" : "#6B6B6B",
                         }}
@@ -137,56 +134,6 @@ const UnitConvertorScreen = () => {
                             >
                                 From
                             </Text>
-                            <SelectList
-                                setSelected={(val: string) =>
-                                    setSelectedFrom(val)
-                                }
-                                data={getData(selectedMeasure)}
-                                save="value"
-                                placeholder="Select a Unit"
-                                notFoundText="No Unit found"
-                                boxStyles={{
-                                    borderRadius: 10,
-                                    backgroundColor:
-                                        colorScheme === "dark"
-                                            ? "#272934"
-                                            : "#fff",
-                                    borderColor:
-                                        colorScheme === "dark"
-                                            ? "#272934"
-                                            : "#fff",
-                                }}
-                                inputStyles={{
-                                    color:
-                                        colorScheme === "dark"
-                                            ? "#fff"
-                                            : "#000",
-                                }}
-                                search={false}
-                                arrowicon={
-                                    <AntDesign
-                                        name="down"
-                                        size={15}
-                                        color={
-                                            colorScheme === "dark"
-                                                ? "#fff"
-                                                : "#000000"
-                                        }
-                                    />
-                                }
-                                dropdownStyles={{
-                                    backgroundColor:
-                                        colorScheme === "dark"
-                                            ? "#272934"
-                                            : "#fff",
-                                }}
-                                dropdownTextStyles={{
-                                    color:
-                                        colorScheme === "dark"
-                                            ? "#D3D3D3"
-                                            : "#6B6B6B",
-                                }}
-                            />
                         </View>
                         <View></View>
                     </View>
