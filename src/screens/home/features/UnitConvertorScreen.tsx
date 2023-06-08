@@ -58,14 +58,6 @@ const UnitConvertorScreen = () => {
         }));
     };
 
-    // <AntDesign
-    //     name="down"
-    //     size={15}
-    //     color={
-    //         colorScheme === "dark" ? "#fff" : "#000000"
-    //     }
-    // />
-
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
@@ -119,9 +111,42 @@ const UnitConvertorScreen = () => {
                             color:
                                 colorScheme === "dark" ? "#D3D3D3" : "#6B6B6B",
                         }}
+                        arrowIconContainerStyle={{
+                            marginTop: 5,
+                        }}
+                        ArrowDownIconComponent={({ style }) => (
+                            <AntDesign
+                                style={style}
+                                name="down"
+                                size={15}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        )}
+                        ArrowUpIconComponent={({ style }) => (
+                            <AntDesign
+                                style={style}
+                                name="up"
+                                size={15}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        )}
+                        TickIconComponent={({ style }) => (
+                            <AntDesign
+                                style={style}
+                                name="check"
+                                size={15}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        )}
                     />
                 </View>
-                {selectedMeasure !== null && !dropdownExpanded && (
+                {selectedMeasure !== null && (
                     <View className="mx-5 mt-[40px]">
                         <View className="">
                             <Text
