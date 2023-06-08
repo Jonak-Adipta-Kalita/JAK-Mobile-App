@@ -111,7 +111,7 @@ const UnitConvertorScreen = () => {
                             borderColor:
                                 colorScheme === "dark" ? "#272934" : "#fff",
                         }}
-                        containerStyle={{
+                        dropDownContainerStyle={{
                             backgroundColor:
                                 colorScheme === "dark" ? "#272934" : "#fff",
                         }}
