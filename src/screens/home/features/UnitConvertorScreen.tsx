@@ -42,7 +42,7 @@ const UnitConvertorScreen = () => {
     const colorScheme = useColorScheme();
     useHideBottomTab();
 
-    const [measureDropdownExpanded, setMewasureDropdownExpanded] =
+    const [measureDropdownExpanded, setMeasureDropdownExpanded] =
         useState(false);
 
     const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
@@ -94,7 +94,7 @@ const UnitConvertorScreen = () => {
                             label: measures[measure] as string,
                         }))}
                         dropdownExpanded={measureDropdownExpanded}
-                        setDropdownExpanded={setMewasureDropdownExpanded}
+                        setDropdownExpanded={setMeasureDropdownExpanded}
                         selectedValue={selectedMeasure!}
                         setSelectedValue={setSelectedMeasure}
                     />
