@@ -62,7 +62,7 @@
         "react-native": "0.71.8",
         "react-native-barcode-mask": "^1.2.4",
         "react-native-dotenv": "^3.4.8",
-        "react-native-dropdown-picker": "^5.4.6",
+        "react-native-dropdown-picker": "5.4.7-beta.1",
         "react-native-gesture-handler": "~2.9.0",
         "react-native-pager-view": "6.1.2",
         "react-native-qrcode-svg": "^6.2.0",

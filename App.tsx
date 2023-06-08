@@ -14,6 +14,7 @@ import { NetworkState, getNetworkStateAsync } from "expo-network";
 import { NoNetworkStack } from "@navigation/StackNavigator";
 import { decode } from "base-64";
 import { RecoilRoot } from "recoil";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -60,7 +61,7 @@ const App = () => {
     if (fontsError || userError) errorAlertShower(fontsError || userError);
 
     return (
-        <>
+        <GestureHandlerRootView style={{ flex: 1 }}>
             {!fontsLoaded || userLoading ? (
                 <LoadingIndicator
                     dimensions={{ width: 70, height: 70 }}
@@ -71,7 +72,7 @@ const App = () => {
                     <AppChildren />
                 </RecoilRoot>
             )}
-        </>
+        </GestureHandlerRootView>
     );
 };
 
