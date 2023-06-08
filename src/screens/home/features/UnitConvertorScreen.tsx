@@ -9,7 +9,7 @@ import globalStyles from "@/src/utils/globalStyles";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { useNavigation } from "@react-navigation/native";
 import convert, { Measure } from "convert-units";
-import DropDownPicker from "react-native-dropdown-picker";
+import Dropdown from "@components/Dropdown";
 
 const measures: { [key in Measure]: string } = {
     length: "Length",
@@ -42,7 +42,8 @@ const UnitConvertorScreen = () => {
     const colorScheme = useColorScheme();
     useHideBottomTab();
 
-    const [dropdownExpanded, setDropdownExpanded] = useState(false);
+    const [measureDropdownExpanded, setMewasureDropdownExpanded] =
+        useState(false);
 
     const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
         null
@@ -86,64 +87,16 @@ const UnitConvertorScreen = () => {
                     </Text>
                 </View>
                 <View className="mx-20 mt-10">
-                    <DropDownPicker
+                    <Dropdown
                         items={Object.keys(measures).map((measure) => ({
                             value: measure,
                             // @ts-ignore
                             label: measures[measure] as string,
                         }))}
-                        open={dropdownExpanded}
-                        setOpen={setDropdownExpanded}
-                        value={selectedMeasure}
-                        setValue={setSelectedMeasure}
-                        placeholder="Select a Measure"
-                        style={{
-                            backgroundColor:
-                                colorScheme === "dark" ? "#272934" : "#fff",
-                            borderColor:
-                                colorScheme === "dark" ? "#272934" : "#fff",
-                        }}
-                        dropDownContainerStyle={{
-                            backgroundColor:
-                                colorScheme === "dark" ? "#272934" : "#fff",
-                        }}
-                        textStyle={{
-                            color:
-                                colorScheme === "dark" ? "#D3D3D3" : "#6B6B6B",
-                        }}
-                        arrowIconContainerStyle={{
-                            marginTop: 5,
-                        }}
-                        ArrowDownIconComponent={({ style }) => (
-                            <AntDesign
-                                style={style}
-                                name="down"
-                                size={15}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        )}
-                        ArrowUpIconComponent={({ style }) => (
-                            <AntDesign
-                                style={style}
-                                name="up"
-                                size={15}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        )}
-                        TickIconComponent={({ style }) => (
-                            <AntDesign
-                                style={style}
-                                name="check"
-                                size={15}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        )}
+                        dropdownExpanded={measureDropdownExpanded}
+                        setDropdownExpanded={setMewasureDropdownExpanded}
+                        selectedValue={selectedMeasure!}
+                        setSelectedValue={setSelectedMeasure}
                     />
                 </View>
                 {selectedMeasure !== null && (
