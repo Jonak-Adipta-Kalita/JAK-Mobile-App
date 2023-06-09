@@ -104,7 +104,7 @@ const UnitConvertorScreen = () => {
                         placeholderName="Measure"
                     />
                 </View>
-                {selectedMeasure !== null && (
+                {selectedMeasure !== null && !measureDropdownExpanded && (
                     <View className="mx-16 mt-[40px]">
                         <View>
                             <View className="flex flex-row items-center justify-center">
@@ -129,13 +129,28 @@ const UnitConvertorScreen = () => {
                                     placeholderName="Unit"
                                 />
                             </View>
-                            {selectedFrom && (
-                                <TextInput
-                                    placeholder="From"
-                                    keyboardType="numeric"
-                                    value={fromValue}
-                                    onChangeText={setFromValue}
-                                />
+                            {selectedFrom && !fromDropdownExpanded && (
+                                <View
+                                    className={` ${
+                                        colorScheme == "dark"
+                                            ? "bg-[#272934]"
+                                            : "bg-[#fff]"
+                                    } my-5 rounded-lg px-5 py-4 shadow-md`}
+                                >
+                                    <TextInput
+                                        placeholder="From"
+                                        keyboardType="numeric"
+                                        value={fromValue}
+                                        onChangeText={setFromValue}
+                                        style={globalStyles.font}
+                                        className={`${
+                                            colorScheme === "dark"
+                                                ? "text-[#fff]"
+                                                : "text-[#000000]"
+                                        } text-sm`}
+                                        placeholderTextColor={"#9CA3AF"}
+                                    />
+                                </View>
                             )}
                         </View>
                     </View>
