@@ -106,7 +106,7 @@ const UnitConvertorScreen = () => {
                     />
                 </View>
                 {selectedMeasure !== null && !measureDropdownExpanded && (
-                    <View className="mx-16 mt-[40px] space-y-10">
+                    <View className="mx-16 mt-[40px] space-y-5">
                         <View>
                             <View className="flex flex-row items-center justify-center">
                                 <Text
@@ -187,7 +187,7 @@ const UnitConvertorScreen = () => {
                                         } my-5 rounded-lg px-5 py-4 shadow-md`}
                                     >
                                         <TextInput
-                                            placeholder="From"
+                                            placeholder="To"
                                             keyboardType="numeric"
                                             value={toValue}
                                             onChangeText={setToValue}
