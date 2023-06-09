@@ -45,6 +45,7 @@ const UnitConvertorScreen = () => {
     const [measureDropdownExpanded, setMeasureDropdownExpanded] =
         useState(false);
     const [fromDropdownExpanded, setFromDropdownExpanded] = useState(false);
+    const [toDropdownExpanded, setToDropdownExpanded] = useState(false);
 
     const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
         null
@@ -105,7 +106,7 @@ const UnitConvertorScreen = () => {
                     />
                 </View>
                 {selectedMeasure !== null && !measureDropdownExpanded && (
-                    <View className="mx-16 mt-[40px]">
+                    <View className="mx-16 mt-[40px] space-y-10">
                         <View>
                             <View className="flex flex-row items-center justify-center">
                                 <Text
@@ -153,6 +154,55 @@ const UnitConvertorScreen = () => {
                                 </View>
                             )}
                         </View>
+                        {selectedFrom && !fromDropdownExpanded && (
+                            <View>
+                                <View className="flex flex-row items-center justify-center">
+                                    <Text
+                                        className={`mr-6 text-lg ${
+                                            colorScheme == "dark"
+                                                ? "text-gray-200"
+                                                : "text-gray-900"
+                                        }`}
+                                        style={globalStyles.font}
+                                    >
+                                        To :
+                                    </Text>
+                                    <Dropdown
+                                        items={getData(selectedMeasure!)}
+                                        dropdownExpanded={toDropdownExpanded}
+                                        setDropdownExpanded={
+                                            setToDropdownExpanded
+                                        }
+                                        selectedValue={selectedTo!}
+                                        setSelectedValue={setSelectedTo}
+                                        placeholderName="Unit"
+                                    />
+                                </View>
+                                {selectedTo && !toDropdownExpanded && (
+                                    <View
+                                        className={` ${
+                                            colorScheme == "dark"
+                                                ? "bg-[#272934]"
+                                                : "bg-[#fff]"
+                                        } my-5 rounded-lg px-5 py-4 shadow-md`}
+                                    >
+                                        <TextInput
+                                            placeholder="From"
+                                            keyboardType="numeric"
+                                            value={toValue}
+                                            onChangeText={setToValue}
+                                            style={globalStyles.font}
+                                            className={`${
+                                                colorScheme === "dark"
+                                                    ? "text-[#fff]"
+                                                    : "text-[#000000]"
+                                            } text-sm`}
+                                            placeholderTextColor={"#9CA3AF"}
+                                        />
+                                    </View>
+                                )}
+                            </View>
+                        )}
                     </View>
                 )}
             </View>
