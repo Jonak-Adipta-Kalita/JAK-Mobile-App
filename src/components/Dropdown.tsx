@@ -36,6 +36,8 @@ const Dropdown = ({
             }}
             dropDownContainerStyle={{
                 backgroundColor: colorScheme === "dark" ? "#272934" : "#fff",
+                borderColor: colorScheme === "dark" ? "#272934" : "#fff",
+                borderTopColor: colorScheme === "dark" ? "#fff" : "#272934",
             }}
             textStyle={{
                 color: colorScheme === "dark" ? "#D3D3D3" : "#6B6B6B",
