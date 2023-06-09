@@ -129,12 +129,14 @@ const UnitConvertorScreen = () => {
                                     placeholderName="Unit"
                                 />
                             </View>
-                            <TextInput
-                                placeholder="From"
-                                keyboardType="numeric"
-                                value={fromValue}
-                                onChangeText={setFromValue}
-                            />
+                            {selectedFrom && (
+                                <TextInput
+                                    placeholder="From"
+                                    keyboardType="numeric"
+                                    value={fromValue}
+                                    onChangeText={setFromValue}
+                                />
+                            )}
                         </View>
                     </View>
                 )}
