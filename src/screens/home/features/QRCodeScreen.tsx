@@ -236,7 +236,7 @@ const Create = () => {
                             autoFocus
                         />
                     </View>
-                    <View className="">
+                    <View>
                         {qrCodeData != "" ? (
                             <View className="flex flex-row items-center justify-center space-x-2">
                                 <TouchableOpacity
@@ -492,7 +492,7 @@ const QRCodeScreen = () => {
                         </TouchableOpacity>
                     </View>
                     <View className="mb-8 mt-5 border-b-[0.5px] border-black" />
-                    <View className="">
+                    <View>
                         {mode === null && (
                             <View className="mt-10">
                                 <Text

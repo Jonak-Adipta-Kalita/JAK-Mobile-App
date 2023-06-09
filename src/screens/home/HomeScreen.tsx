@@ -46,7 +46,7 @@ const Feature = ({
                             borderRightColor: "#ccc",
                         }}
                     />
-                    <View className="">
+                    <View>
                         <Text
                             className={`${
                                 colorScheme === "dark"
