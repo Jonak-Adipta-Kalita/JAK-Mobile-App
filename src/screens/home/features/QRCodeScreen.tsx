@@ -428,8 +428,7 @@ const QRCodeScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <Header title="QRCode" goBackButton />
-
+                <Header title="QRCode" />
                 <View className="mt-10">
                     <View className="flex w-full flex-row items-center justify-center space-x-5">
                         <TouchableOpacity

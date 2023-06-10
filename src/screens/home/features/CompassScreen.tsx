@@ -12,7 +12,7 @@ const CompassScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <Header title="Compass" goBackButton />
+                <Header title="Compass" />
                 <View></View>
             </View>
         </SafeAreaView>

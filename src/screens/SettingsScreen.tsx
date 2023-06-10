@@ -18,6 +18,7 @@ import { createAvatar } from "@dicebear/core";
 import { adventurer } from "@dicebear/collection";
 import { SvgXml } from "react-native-svg";
 import { useShowBottomTab } from "../hooks/useBottomTab";
+import Header from "../components/Header";
 
 const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
     const colorScheme = useColorScheme();
@@ -140,18 +141,10 @@ const SettingsScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <View className="flex flex-row items-center justify-between">
-                    <Text
-                        className={`m-5 mx-10 flex-1 rounded-2xl ${
-                            colorScheme == "dark"
-                                ? "bg-[#272934] text-gray-200"
-                                : "bg-white text-gray-900"
-                        } p-2 px-0 text-center text-lg`}
-                        style={globalStyles.font}
-                    >
-                        User Settings
-                    </Text>
-                    {!user?.emailVerified && (
+                <Header
+                    title="User Settings"
+                    goBackButton={false}
+                    rightButton={
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
                             onPress={() => verifyEmail(navigation, user!)}
@@ -165,8 +158,9 @@ const SettingsScreen = () => {
                                 }
                             />
                         </TouchableOpacity>
-                    )}
-                </View>
+                    }
+                    showRightButton={!user?.emailVerified}
+                />
                 <View className="mt-8 flex flex-col items-center justify-center">
                     <TouchableOpacity className="flex flex-col items-center justify-center">
                         <View

@@ -82,7 +82,7 @@ const UnitConvertorScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <Header title="Unit Convertor" goBackButton />
+                <Header title="Unit Convertor" />
                 <View className="mx-20 mt-10">
                     <Dropdown
                         items={Object.keys(measures).map((measure) => ({

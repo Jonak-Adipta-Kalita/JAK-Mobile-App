@@ -7,10 +7,17 @@ import { useNavigation } from "@react-navigation/native";
 
 interface Props {
     title: string;
-    goBackButton: boolean;
+    goBackButton?: boolean;
+    showRightButton?: boolean;
+    rightButton?: JSX.Element;
 }
 
-const Header = ({ title, goBackButton }: Props) => {
+const Header = ({
+    title,
+    goBackButton = true,
+    showRightButton,
+    rightButton,
+}: Props) => {
     const navigation = useNavigation();
     const colorScheme = useColorScheme();
 
@@ -31,6 +38,8 @@ const Header = ({ title, goBackButton }: Props) => {
             )}
             <Text
                 className={`m-5 mx-10 ml-6 flex-1 rounded-2xl ${
+                    !goBackButton ? "ml-10" : ""
+                } ${
                     colorScheme == "dark"
                         ? "bg-[#272934] text-gray-200"
                         : "bg-white text-gray-900"
@@ -39,6 +48,7 @@ const Header = ({ title, goBackButton }: Props) => {
             >
                 {title}
             </Text>
+            {showRightButton && rightButton}
         </View>
     );
 };

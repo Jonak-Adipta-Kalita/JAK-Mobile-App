@@ -13,6 +13,7 @@ import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 import { useShowBottomTab } from "@hooks/useBottomTab";
+import Header from "@/src/components/Header";
 
 const Feature = ({
     title,
@@ -95,18 +96,7 @@ const HomeScreen = () => {
                 <View className="flex-1">
                     {user.emailVerified ? (
                         <View>
-                            <View className="flex flex-row items-center justify-between">
-                                <Text
-                                    className={`m-5 mx-10 flex-1 rounded-2xl ${
-                                        colorScheme == "dark"
-                                            ? "bg-[#272934] text-gray-200"
-                                            : "bg-white text-gray-900"
-                                    } p-2 text-center text-lg`}
-                                    style={globalStyles.font}
-                                >
-                                    Tools
-                                </Text>
-                            </View>
+                            <Header title="Tools" goBackButton={false} />
                             <ScrollView className="mb-64 mt-10">
                                 <Feature
                                     title="Todo"

@@ -184,7 +184,7 @@ const TodoScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <Header title="Todo" goBackButton />
+                <Header title="Todo" />
                 {todosFetched?.docs.length === 0 && !creatingNewTodo ? (
                     <View className="mt-[50%] flex-1 items-center">
                         <Text
