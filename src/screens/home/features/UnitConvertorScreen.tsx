@@ -111,6 +111,12 @@ const UnitConvertorScreen = () => {
                         selectedValue={selectedMeasure!}
                         setSelectedValue={setSelectedMeasure}
                         placeholderName="Measure"
+                        onChange={() => {
+                            setSelectedFrom(null);
+                            setSelectedTo(null);
+                            setFromValue("0");
+                            setToValue("0");
+                        }}
                     />
                 </View>
                 {selectedMeasure !== null && !measureDropdownExpanded && (
@@ -136,6 +142,14 @@ const UnitConvertorScreen = () => {
                                     selectedValue={selectedFrom!}
                                     setSelectedValue={setSelectedFrom}
                                     placeholderName="Unit"
+                                    onChange={() => {
+                                        const converted = convertUnit(
+                                            fromValue,
+                                            selectedFrom!,
+                                            selectedTo!
+                                        );
+                                        setToValue(converted.toString());
+                                    }}
                                 />
                             </View>
                             {selectedFrom && !fromDropdownExpanded && (
@@ -192,6 +206,14 @@ const UnitConvertorScreen = () => {
                                         selectedValue={selectedTo!}
                                         setSelectedValue={setSelectedTo}
                                         placeholderName="Unit"
+                                        onChange={() => {
+                                            const converted = convertUnit(
+                                                fromValue,
+                                                selectedFrom!,
+                                                selectedTo!
+                                            );
+                                            setToValue(converted.toString());
+                                        }}
                                     />
                                 </View>
                                 {selectedTo && !toDropdownExpanded && (
