@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useColorScheme } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
+import DropDownPicker, { ItemType } from "react-native-dropdown-picker";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
     selectedValue: string;
     setSelectedValue: Dispatch<SetStateAction<any>>;
     placeholderName: string;
+    onSelectItem?: (item: ItemType<string>) => void;
 }
 
 const Dropdown = ({
@@ -19,6 +20,7 @@ const Dropdown = ({
     selectedValue,
     setSelectedValue,
     placeholderName,
+    onSelectItem,
 }: Props) => {
     const colorScheme = useColorScheme();
 
@@ -31,6 +33,7 @@ const Dropdown = ({
             setValue={setSelectedValue}
             closeOnBackPressed={true}
             placeholder={`Select a ${placeholderName}`}
+            onSelectItem={onSelectItem}
             style={{
                 backgroundColor: colorScheme === "dark" ? "#272934" : "#fff",
                 borderColor: colorScheme === "dark" ? "#272934" : "#fff",
