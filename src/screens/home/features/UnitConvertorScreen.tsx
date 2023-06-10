@@ -72,6 +72,12 @@ const UnitConvertorScreen = () => {
         return convert(parseInt(value)).from(from).to(to);
     };
 
+    const onSelectedUnit = () => {
+        if (!selectedFrom || !selectedTo) return;
+        const converted = convertUnit(fromValue, selectedFrom!, selectedTo!);
+        setToValue(converted.toString());
+    };
+
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
@@ -142,14 +148,7 @@ const UnitConvertorScreen = () => {
                                     selectedValue={selectedFrom!}
                                     setSelectedValue={setSelectedFrom}
                                     placeholderName="Unit"
-                                    onSelectItem={() => {
-                                        const converted = convertUnit(
-                                            fromValue,
-                                            selectedFrom!,
-                                            selectedTo!
-                                        );
-                                        setToValue(converted.toString());
-                                    }}
+                                    onSelectItem={onSelectedUnit}
                                 />
                             </View>
                             {selectedFrom &&
@@ -210,14 +209,7 @@ const UnitConvertorScreen = () => {
                                         selectedValue={selectedTo!}
                                         setSelectedValue={setSelectedTo}
                                         placeholderName="Unit"
-                                        onSelectItem={() => {
-                                            const converted = convertUnit(
-                                                fromValue,
-                                                selectedFrom!,
-                                                selectedTo!
-                                            );
-                                            setToValue(converted.toString());
-                                        }}
+                                        onSelectItem={onSelectedUnit}
                                     />
                                 </View>
                                 {selectedTo && !toDropdownExpanded && (
