@@ -189,6 +189,7 @@ const UnitConvertorScreen = () => {
                                                     : "text-[#000000]"
                                             } text-sm`}
                                             placeholderTextColor={"#9CA3AF"}
+                                            autoFocus
                                         />
                                     </View>
                                 )}
