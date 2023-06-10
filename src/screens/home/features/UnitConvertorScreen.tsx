@@ -50,11 +50,11 @@ const UnitConvertorScreen = () => {
     const [selectedMeasure, setSelectedMeasure] = useState<Measure | null>(
         null
     );
-    const [selectedFrom, setSelectedFrom] = useState<string | null>(null);
-    const [selectedTo, setSelectedTo] = useState<string | null>(null);
+    const [selectedFrom, setSelectedFrom] = useState<convert.Unit | null>(null);
+    const [selectedTo, setSelectedTo] = useState<convert.Unit | null>(null);
 
-    const [fromValue, setFromValue] = useState<string>("");
-    const [toValue, setToValue] = useState<string>("");
+    const [fromValue, setFromValue] = useState<string>("0");
+    const [toValue, setToValue] = useState<string>("0");
 
     const getData = (selectedMeasure: Measure) => {
         const data = convert().possibilities(selectedMeasure);
@@ -64,12 +64,18 @@ const UnitConvertorScreen = () => {
         }));
     };
 
-    const onFromValueChange = (text: string) => {
-        setFromValue(text);
+    const convertUnit = (
+        value: string,
+        from: convert.Unit,
+        to: convert.Unit
+    ) => {
+        return convert(parseInt(value)).from(from).to(to);
     };
 
-    const onToValueChange = (text: string) => {
-        setToValue(text);
+    const onFromValueChange = (text: string) => {
+        setFromValue(text);
+        const converted = convertUnit(fromValue, selectedFrom!, selectedTo!);
+        setToValue(converted.toString());
     };
 
     return (
@@ -194,19 +200,16 @@ const UnitConvertorScreen = () => {
                                                 : "bg-[#fff]"
                                         } my-5 rounded-lg px-5 py-4 shadow-md`}
                                     >
-                                        <TextInput
-                                            placeholder="To"
-                                            keyboardType="numeric"
-                                            value={toValue}
-                                            onChangeText={onToValueChange}
+                                        <Text
                                             style={globalStyles.font}
                                             className={`${
                                                 colorScheme === "dark"
                                                     ? "text-[#fff]"
                                                     : "text-[#000000]"
                                             } text-sm`}
-                                            placeholderTextColor={"#9CA3AF"}
-                                        />
+                                        >
+                                            {toValue || "To"}
+                                        </Text>
                                     </View>
                                 )}
                             </View>
