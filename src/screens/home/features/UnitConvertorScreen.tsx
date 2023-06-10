@@ -106,9 +106,9 @@ const UnitConvertorScreen = () => {
                     />
                 </View>
                 {selectedMeasure !== null && !measureDropdownExpanded && (
-                    <View className="mx-16 mt-[40px] space-y-5">
+                    <View className="mx-5 mt-[40px] space-y-5">
                         <View>
-                            <View className="flex flex-row items-center justify-center">
+                            <View className="mx-[40px] flex flex-row items-center justify-center">
                                 <Text
                                     className={`mr-6 text-lg ${
                                         colorScheme == "dark"
@@ -156,9 +156,9 @@ const UnitConvertorScreen = () => {
                         </View>
                         {selectedFrom && !fromDropdownExpanded && (
                             <View>
-                                <View className="flex flex-row items-center justify-center">
+                                <View className="mx-[40px] flex flex-row items-center justify-center">
                                     <Text
-                                        className={`mr-6 text-lg ${
+                                        className={`mr-[45px] text-lg ${
                                             colorScheme == "dark"
                                                 ? "text-gray-200"
                                                 : "text-gray-900"
