@@ -12,6 +12,7 @@ import NoNetworkScreen from "@screens/NoNetworkScreen";
 import TodoScreen from "@screens/home/features/TodoScreen";
 import QRCodeScreen from "@screens/home/features/QRCodeScreen";
 import UnitConvertorScreen from "@screens/home/features/UnitConvertorScreen";
+import CompassScreen from "../screens/home/features/CompassScreen";
 
 const Stack = createStackNavigator<StackScreenParamList>();
 
@@ -60,6 +61,7 @@ const HomeStack = () => {
                     name="UnitConvertor"
                     component={UnitConvertorScreen}
                 />
+                <Stack.Screen name="Compass" component={CompassScreen} />
             </Stack.Group>
         </Stack.Navigator>
     );

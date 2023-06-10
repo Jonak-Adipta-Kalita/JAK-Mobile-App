@@ -132,6 +132,14 @@ const HomeScreen = () => {
                                         navigation.navigate("UnitConvertor")
                                     }
                                 />
+                                <Feature
+                                    title="Compass"
+                                    description="Find Directions"
+                                    icon="compass"
+                                    buttonOnPress={() =>
+                                        navigation.navigate("Compass")
+                                    }
+                                />
                             </ScrollView>
                         </View>
                     ) : (
