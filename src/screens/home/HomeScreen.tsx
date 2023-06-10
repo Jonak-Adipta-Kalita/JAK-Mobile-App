@@ -12,7 +12,7 @@ import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
-import { useShowBottomTab } from "@/src/hooks/useBottomTab";
+import { useShowBottomTab } from "@hooks/useBottomTab";
 
 const Feature = ({
     title,

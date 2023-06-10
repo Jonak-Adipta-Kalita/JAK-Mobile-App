@@ -11,7 +11,7 @@ import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import StatusBar from "@components/StatusBar";
 import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useShowBottomTab } from "@/src/hooks/useBottomTab";
+import { useShowBottomTab } from "@hooks/useBottomTab";
 import { TextInput } from "react-native-gesture-handler";
 
 const LoginScreen = () => {

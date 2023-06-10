@@ -8,7 +8,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
-import { useHideBottomTab } from "@/src/hooks/useBottomTab";
+import { useHideBottomTab } from "@hooks/useBottomTab";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
@@ -34,6 +34,7 @@ import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import { uploadImageAsync } from "@utils/uploadImageAsync";
 import { ScrollView } from "react-native-gesture-handler";
+import Header from "@components/Header";
 
 const Create = () => {
     const colorScheme = useColorScheme();
@@ -427,29 +428,8 @@ const QRCodeScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <View className="flex flex-row items-center justify-between">
-                    <TouchableOpacity
-                        style={globalStyles.headerIcon}
-                        onPress={navigation.goBack}
-                        className="-mt-[0.5px] ml-10"
-                    >
-                        <AntDesign
-                            name="back"
-                            size={24}
-                            color={colorScheme === "dark" ? "#fff" : "#000000"}
-                        />
-                    </TouchableOpacity>
-                    <Text
-                        className={`m-5 mx-10 ml-6 flex-1 rounded-2xl ${
-                            colorScheme == "dark"
-                                ? "bg-[#272934] text-gray-200"
-                                : "bg-white text-gray-900"
-                        } p-2 px-0 text-center text-lg`}
-                        style={globalStyles.font}
-                    >
-                        QRCode
-                    </Text>
-                </View>
+                <Header title="QRCode" goBackButton />
+
                 <View className="mt-10">
                     <View className="flex w-full flex-row items-center justify-center space-x-5">
                         <TouchableOpacity

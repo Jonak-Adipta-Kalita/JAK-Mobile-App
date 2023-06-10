@@ -20,7 +20,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { verifyEmail } from "@utils/verifyEmail";
-import { useShowBottomTab } from "@/src/hooks/useBottomTab";
+import { useShowBottomTab } from "@hooks/useBottomTab";
 import { TextInput } from "react-native-gesture-handler";
 
 const RegisterScreen = () => {
