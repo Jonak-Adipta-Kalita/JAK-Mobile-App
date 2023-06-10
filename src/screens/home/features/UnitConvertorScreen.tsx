@@ -111,12 +111,6 @@ const UnitConvertorScreen = () => {
                         selectedValue={selectedMeasure!}
                         setSelectedValue={setSelectedMeasure}
                         placeholderName="Measure"
-                        onChange={() => {
-                            setSelectedFrom(null);
-                            setSelectedTo(null);
-                            setFromValue("0");
-                            setToValue("0");
-                        }}
                     />
                 </View>
                 {selectedMeasure !== null && !measureDropdownExpanded && (
@@ -142,47 +136,43 @@ const UnitConvertorScreen = () => {
                                     selectedValue={selectedFrom!}
                                     setSelectedValue={setSelectedFrom}
                                     placeholderName="Unit"
-                                    onChange={() => {
-                                        const converted = convertUnit(
-                                            fromValue,
-                                            selectedFrom!,
-                                            selectedTo!
-                                        );
-                                        setToValue(converted.toString());
-                                    }}
                                 />
                             </View>
-                            {selectedFrom && !fromDropdownExpanded && (
-                                <View
-                                    className={` ${
-                                        colorScheme == "dark"
-                                            ? "bg-[#272934]"
-                                            : "bg-[#fff]"
-                                    } my-5 rounded-lg px-5 py-4 shadow-md`}
-                                >
-                                    <TextInput
-                                        placeholder="From"
-                                        keyboardType="numeric"
-                                        value={fromValue}
-                                        onChangeText={(text) => {
-                                            setFromValue(text);
-                                            const converted = convertUnit(
-                                                text === "" ? "0" : text,
-                                                selectedFrom!,
-                                                selectedTo!
-                                            );
-                                            setToValue(converted.toString());
-                                        }}
-                                        style={globalStyles.font}
-                                        className={`${
-                                            colorScheme === "dark"
-                                                ? "text-[#fff]"
-                                                : "text-[#000000]"
-                                        } text-sm`}
-                                        placeholderTextColor={"#9CA3AF"}
-                                    />
-                                </View>
-                            )}
+                            {selectedFrom &&
+                                !fromDropdownExpanded &&
+                                selectedTo && (
+                                    <View
+                                        className={` ${
+                                            colorScheme == "dark"
+                                                ? "bg-[#272934]"
+                                                : "bg-[#fff]"
+                                        } my-5 rounded-lg px-5 py-4 shadow-md`}
+                                    >
+                                        <TextInput
+                                            placeholder="From"
+                                            keyboardType="numeric"
+                                            value={fromValue}
+                                            onChangeText={(text) => {
+                                                setFromValue(text);
+                                                const converted = convertUnit(
+                                                    text === "" ? "0" : text,
+                                                    selectedFrom!,
+                                                    selectedTo!
+                                                );
+                                                setToValue(
+                                                    converted.toString()
+                                                );
+                                            }}
+                                            style={globalStyles.font}
+                                            className={`${
+                                                colorScheme === "dark"
+                                                    ? "text-[#fff]"
+                                                    : "text-[#000000]"
+                                            } text-sm`}
+                                            placeholderTextColor={"#9CA3AF"}
+                                        />
+                                    </View>
+                                )}
                         </View>
                         {selectedFrom && !fromDropdownExpanded && (
                             <View>
@@ -206,14 +196,6 @@ const UnitConvertorScreen = () => {
                                         selectedValue={selectedTo!}
                                         setSelectedValue={setSelectedTo}
                                         placeholderName="Unit"
-                                        onChange={() => {
-                                            const converted = convertUnit(
-                                                fromValue,
-                                                selectedFrom!,
-                                                selectedTo!
-                                            );
-                                            setToValue(converted.toString());
-                                        }}
                                     />
                                 </View>
                                 {selectedTo && !toDropdownExpanded && (

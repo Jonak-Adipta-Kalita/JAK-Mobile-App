@@ -10,7 +10,6 @@ interface Props {
     selectedValue: string;
     setSelectedValue: Dispatch<SetStateAction<any>>;
     placeholderName: string;
-    onChange?: (previousValue: string | null) => void;
 }
 
 const Dropdown = ({
@@ -20,7 +19,6 @@ const Dropdown = ({
     selectedValue,
     setSelectedValue,
     placeholderName,
-    onChange,
 }: Props) => {
     const colorScheme = useColorScheme();
 
@@ -31,7 +29,6 @@ const Dropdown = ({
             setOpen={setDropdownExpanded}
             value={selectedValue}
             setValue={setSelectedValue}
-            onChangeValue={onChange}
             closeOnBackPressed={true}
             placeholder={`Select a ${placeholderName}`}
             style={{
