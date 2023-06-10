@@ -139,8 +139,8 @@ const UnitConvertorScreen = () => {
                                 />
                             </View>
                             {selectedFrom &&
-                                !fromDropdownExpanded &&
-                                selectedTo && (
+                                selectedTo &&
+                                !fromDropdownExpanded && (
                                     <View
                                         className={` ${
                                             colorScheme == "dark"
