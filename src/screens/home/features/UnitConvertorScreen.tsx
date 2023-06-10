@@ -153,7 +153,7 @@ const UnitConvertorScreen = () => {
                                         onChangeText={(text) => {
                                             setFromValue(text);
                                             const converted = convertUnit(
-                                                fromValue,
+                                                text === "" ? "0" : text,
                                                 selectedFrom!,
                                                 selectedTo!
                                             );
