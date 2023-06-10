@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useColorScheme } from "react-native";
-import DropDownPicker, { ItemType } from "react-native-dropdown-picker";
+import DropDownPicker from "react-native-dropdown-picker";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
     selectedValue: string;
     setSelectedValue: Dispatch<SetStateAction<any>>;
     placeholderName: string;
-    onSelectItem?: (item: ItemType<string>) => void;
+    onSelectItem?: (item: object) => void;
 }
 
 const Dropdown = ({

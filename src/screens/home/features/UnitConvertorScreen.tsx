@@ -72,9 +72,13 @@ const UnitConvertorScreen = () => {
         return convert(parseInt(value)).from(from).to(to);
     };
 
-    const onSelectedUnit = () => {
+    const onSelectedUnit = (item: any, unitType: "from" | "to") => {
         if (!selectedFrom || !selectedTo) return;
-        const converted = convertUnit(fromValue, selectedFrom!, selectedTo!);
+        const converted = convertUnit(
+            fromValue,
+            unitType === "from" ? item.label : selectedFrom!,
+            unitType === "to" ? item.label : selectedTo!
+        );
         setToValue(converted.toString());
     };
 
@@ -148,7 +152,9 @@ const UnitConvertorScreen = () => {
                                     selectedValue={selectedFrom!}
                                     setSelectedValue={setSelectedFrom}
                                     placeholderName="Unit"
-                                    onSelectItem={onSelectedUnit}
+                                    onSelectItem={(item) =>
+                                        onSelectedUnit(item, "from")
+                                    }
                                 />
                             </View>
                             {selectedFrom &&
@@ -209,7 +215,9 @@ const UnitConvertorScreen = () => {
                                         selectedValue={selectedTo!}
                                         setSelectedValue={setSelectedTo}
                                         placeholderName="Unit"
-                                        onSelectItem={onSelectedUnit}
+                                        onSelectItem={(item) => {
+                                            onSelectedUnit(item, "to");
+                                        }}
                                     />
                                 </View>
                                 {selectedTo && !toDropdownExpanded && (
