@@ -64,6 +64,14 @@ const UnitConvertorScreen = () => {
         }));
     };
 
+    const onFromValueChange = (text: string) => {
+        setFromValue(text);
+    };
+
+    const onToValueChange = (text: string) => {
+        setToValue(text);
+    };
+
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
@@ -142,7 +150,7 @@ const UnitConvertorScreen = () => {
                                         placeholder="From"
                                         keyboardType="numeric"
                                         value={fromValue}
-                                        onChangeText={setFromValue}
+                                        onChangeText={onFromValueChange}
                                         style={globalStyles.font}
                                         className={`${
                                             colorScheme === "dark"
@@ -190,7 +198,7 @@ const UnitConvertorScreen = () => {
                                             placeholder="To"
                                             keyboardType="numeric"
                                             value={toValue}
-                                            onChangeText={setToValue}
+                                            onChangeText={onToValueChange}
                                             style={globalStyles.font}
                                             className={`${
                                                 colorScheme === "dark"
