@@ -72,12 +72,6 @@ const UnitConvertorScreen = () => {
         return convert(parseInt(value)).from(from).to(to);
     };
 
-    const onFromValueChange = (text: string) => {
-        setFromValue(text);
-        const converted = convertUnit(fromValue, selectedFrom!, selectedTo!);
-        setToValue(converted.toString());
-    };
-
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
@@ -156,7 +150,15 @@ const UnitConvertorScreen = () => {
                                         placeholder="From"
                                         keyboardType="numeric"
                                         value={fromValue}
-                                        onChangeText={onFromValueChange}
+                                        onChangeText={(text) => {
+                                            setFromValue(text);
+                                            const converted = convertUnit(
+                                                fromValue,
+                                                selectedFrom!,
+                                                selectedTo!
+                                            );
+                                            setToValue(converted.toString());
+                                        }}
                                         style={globalStyles.font}
                                         className={`${
                                             colorScheme === "dark"
