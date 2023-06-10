@@ -106,7 +106,7 @@ const UnitConvertorScreen = () => {
                     />
                 </View>
                 {selectedMeasure !== null && !measureDropdownExpanded && (
-                    <View className="mx-5 mt-[40px] space-y-5">
+                    <View className="mx-5 mt-[50px] space-y-10">
                         <View>
                             <View className="mx-[40px] flex flex-row items-center justify-center">
                                 <Text
