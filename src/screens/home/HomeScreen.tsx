@@ -122,14 +122,6 @@ const HomeScreen = () => {
                                         navigation.navigate("UnitConvertor")
                                     }
                                 />
-                                <Feature
-                                    title="File Convertor"
-                                    description="Convert Files"
-                                    icon="file"
-                                    buttonOnPress={() =>
-                                        navigation.navigate("FileConvertor")
-                                    }
-                                />
                             </ScrollView>
                         </View>
                     ) : (
