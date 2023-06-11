@@ -123,11 +123,11 @@ const HomeScreen = () => {
                                     }
                                 />
                                 <Feature
-                                    title="Compass"
-                                    description="Find Directions"
-                                    icon="compass"
+                                    title="File Convertor"
+                                    description="Convert Files"
+                                    icon="file"
                                     buttonOnPress={() =>
-                                        navigation.navigate("Compass")
+                                        navigation.navigate("FileConvertor")
                                     }
                                 />
                             </ScrollView>

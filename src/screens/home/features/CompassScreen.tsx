@@ -5,18 +5,18 @@ import { useHideBottomTab } from "@hooks/useBottomTab";
 import { View } from "react-native";
 import Header from "@components/Header";
 
-const CompassScreen = () => {
+const FileConvertorScreen = () => {
     useHideBottomTab();
 
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <Header title="Compass" />
+                <Header title="FileConvertor" />
                 <View></View>
             </View>
         </SafeAreaView>
     );
 };
 
-export default CompassScreen;
+export default FileConvertorScreen;

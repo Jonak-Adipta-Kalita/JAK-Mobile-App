@@ -13,7 +13,7 @@ export type StackScreenParamList = {
     Todo: undefined;
     QRCode: undefined;
     UnitConvertor: undefined;
-    Compass: undefined;
+    FileConvertor: undefined;
 };
 
 export type BottomTabScreensParamList = {

@@ -36,7 +36,7 @@
 -   **Todo**: Create a Todo List
 -   **QRCode**: Create/Scan QRCode
 -   **Unit Convertor**: Convert Units
--   **Compass**: Find Directions
+-   **Compass**: Convert Files
 
 ## Community support
 
