@@ -35,6 +35,7 @@ import * as MediaLibrary from "expo-media-library";
 import { uploadImageAsync } from "@utils/uploadImageAsync";
 import { ScrollView } from "react-native-gesture-handler";
 import Header from "@components/Header";
+import { checkAncestoryDoc } from "@/src/utils/checkAncestoryDoc";
 
 const Create = () => {
     const colorScheme = useColorScheme();
@@ -87,6 +88,7 @@ const Create = () => {
             true
         );
 
+        await checkAncestoryDoc();
         await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID), {
             value: qrCodeData,
             timestamp: serverTimestamp(),

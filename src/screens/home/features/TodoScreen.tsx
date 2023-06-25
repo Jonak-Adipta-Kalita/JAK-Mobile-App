@@ -26,6 +26,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, ScrollView } from "react-native-gesture-handler";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import Header from "@components/Header";
+import { checkAncestoryDoc } from "@/src/utils/checkAncestoryDoc";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
@@ -75,8 +76,9 @@ const CreateNewTodo = ({
     const [user] = useAuthState(auth);
     const colorScheme = useColorScheme();
 
-    const createTodo = () => {
-        setDoc(
+    const createTodo = async () => {
+        await checkAncestoryDoc();
+        await setDoc(
             doc(
                 db,
                 "users",
