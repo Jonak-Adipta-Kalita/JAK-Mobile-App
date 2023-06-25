@@ -86,7 +86,6 @@ const CreateNewTodo = ({
             ),
             {
                 value: todoText,
-                id: todoText.replaceAll("\n", ";").replaceAll(" ", "_"),
                 timestamp: serverTimestamp(),
             }
         );
