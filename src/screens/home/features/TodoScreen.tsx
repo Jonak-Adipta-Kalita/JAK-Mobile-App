@@ -43,7 +43,7 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
                         colorScheme === "dark"
                             ? "text-[#fff]"
                             : "text-[#000000]"
-                    } text-sm`}
+                    } mr-5 flex-1 text-sm`}
                     style={globalStyles.font}
                 >
                     {data.value}
