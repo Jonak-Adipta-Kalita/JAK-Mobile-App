@@ -88,7 +88,7 @@ const Create = () => {
             true
         );
 
-        await checkAncestoryDoc();
+        await checkAncestoryDoc(user!);
         await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID), {
             value: qrCodeData,
             timestamp: serverTimestamp(),

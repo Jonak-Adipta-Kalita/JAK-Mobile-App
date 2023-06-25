@@ -77,7 +77,7 @@ const CreateNewTodo = ({
     const colorScheme = useColorScheme();
 
     const createTodo = async () => {
-        await checkAncestoryDoc();
+        await checkAncestoryDoc(user!);
         await setDoc(
             doc(
                 db,
