@@ -6,7 +6,6 @@ import {
     DocumentData,
     orderBy,
     query,
-    QuerySnapshot,
     serverTimestamp,
     setDoc,
 } from "firebase/firestore";
@@ -68,10 +67,8 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
 };
 
 const CreateNewTodo = ({
-    todosFetched,
     setCreatingNewTodo,
 }: {
-    todosFetched: QuerySnapshot<DocumentData> | undefined;
     setCreatingNewTodo: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const [todoText, setTodoText] = useState("");
@@ -85,11 +82,11 @@ const CreateNewTodo = ({
                 "users",
                 user?.uid!,
                 "todos",
-                `todo_${todosFetched?.docs?.length! + 1}`
+                todoText.replaceAll("\n", ";").replaceAll(" ", "_")
             ),
             {
                 value: todoText,
-                id: `todo_${todosFetched?.docs?.length! + 1}`,
+                id: todoText.replaceAll("\n", ";").replaceAll(" ", "_"),
                 timestamp: serverTimestamp(),
             }
         );
@@ -226,7 +223,6 @@ const TodoScreen = () => {
                             {creatingNewTodo && (
                                 <>
                                     <CreateNewTodo
-                                        todosFetched={todosFetched}
                                         setCreatingNewTodo={setCreatingNewTodo}
                                     />
                                     <View className="mb-32" />
