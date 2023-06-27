@@ -28,41 +28,6 @@ const GetStartedScreen = () => {
                 <View key="2"></View>
                 <View key="3"></View>
             </PagerView>
-            <View className="absolute bottom-32 left-[38.5%] flex flex-row space-x-4">
-                <View
-                    className={`rounded-xl ${
-                        pageNumber === 1 ? "bg-white" : ""
-                    }`}
-                >
-                    <Feather
-                        name="circle"
-                        size={20}
-                        color={colorScheme === "dark" ? "white" : "black"}
-                    />
-                </View>
-                <View
-                    className={`rounded-xl ${
-                        pageNumber === 2 ? "bg-white" : ""
-                    }`}
-                >
-                    <Feather
-                        name="circle"
-                        size={20}
-                        color={colorScheme === "dark" ? "white" : "black"}
-                    />
-                </View>
-                <View
-                    className={`rounded-xl ${
-                        pageNumber === 3 ? "bg-white" : ""
-                    }`}
-                >
-                    <Feather
-                        name="circle"
-                        size={20}
-                        color={colorScheme === "dark" ? "white" : "black"}
-                    />
-                </View>
-            </View>
         </View>
     );
 };
