@@ -51,6 +51,7 @@
         "expo-dev-client": "~2.2.1",
         "expo-file-system": "~15.2.2",
         "expo-font": "~11.1.1",
+        "expo-image": "^1.2.3",
         "expo-media-library": "~15.2.3",
         "expo-network": "~5.2.1",
         "expo-status-bar": "~1.4.4",
