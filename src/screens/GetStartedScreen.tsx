@@ -18,7 +18,10 @@ const GetStartedScreen = () => {
                 {/* Content */}
                 <View></View>
                 {/* Directional */}
-                <View></View>
+                <View className="absoulute bottom-[70px] right-[40px]">
+                    {/* Dots */}
+                    {/* NextButton */}
+                </View>
             </View>
         </View>
     );
