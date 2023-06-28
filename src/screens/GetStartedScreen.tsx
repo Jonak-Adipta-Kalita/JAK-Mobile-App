@@ -14,7 +14,12 @@ const GetStartedScreen = () => {
         <View className="flex-1">
             <StatusBar />
             {/* Screen 1 */}
-            <View className="flex-1"></View>
+            <View className="flex-1">
+                {/* Content */}
+                <View></View>
+                {/* Directional */}
+                <View></View>
+            </View>
         </View>
     );
 };
