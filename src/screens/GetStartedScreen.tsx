@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Text, View, Image } from "react-native";
+import { Image } from "expo-image";
+import { Text, View } from "react-native";
 import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 import { images } from "../utils/image";
-import globalStyles from "../utils/globalStyles";
 
 const GetStartedScreen = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
@@ -21,6 +21,7 @@ const GetStartedScreen = () => {
                     <View>
                         <Image
                             source={images.onboardingIllustration}
+                            className="h-[300px] w-[300px]"
                             alt="illustration"
                         />
                     </View>
