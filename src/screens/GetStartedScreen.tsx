@@ -15,8 +15,8 @@ const GetStartedScreen = () => {
     return (
         <View className="flex-1">
             <StatusBar />
-            {/* Screen 1 */}
             <View className="flex-1">
+                {/* Screen 1 */}
                 <View className="flex flex-1 items-center justify-center gap-y-7">
                     <View>
                         <Image
