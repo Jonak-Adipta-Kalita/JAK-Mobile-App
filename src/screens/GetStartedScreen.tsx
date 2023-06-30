@@ -22,7 +22,6 @@ const GetStartedScreen = () => {
                         <Image
                             source={images.onboardingIllustration}
                             className="h-[300px] w-[300px]"
-                            alt="illustration"
                         />
                     </View>
                     <View className="mx-8 space-y-5">
