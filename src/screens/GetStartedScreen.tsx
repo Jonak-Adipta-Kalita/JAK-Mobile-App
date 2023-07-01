@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Image } from "expo-image";
 import { Text, View } from "react-native";
 import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
-import { images } from "../utils/image";
 import globalStyles from "../utils/globalStyles";
 
 const GetStartedScreen = () => {
@@ -18,22 +16,17 @@ const GetStartedScreen = () => {
             <StatusBar />
             <View className="flex-1">
                 {/* Screen 1 */}
-                <View className="flex flex-1 items-center justify-center gap-y-7">
-                    <View>
-                        <Image
-                            source={images.onboardingIllustration}
-                            className="h-[300px] w-[300px]"
-                        />
-                    </View>
-                    <View className="mx-8 space-y-5">
+                <View className="flex flex-1 items-center justify-center space-y-20">
+                    <View>{/* SVG File */}</View>
+                    <View className="mx-8 space-y-8">
                         <Text
                             className="text-center text-[22px] leading-[34px] tracking-[-0.8px] text-[#DADADA]"
-                            style={globalStyles.font}
+                            style={{ fontFamily: "Medium" }}
                         >
                             Welcome to JAK Mobile App
                         </Text>
                         <Text
-                            className="text-justify text-[14px] leading-[24px] tracking-[-0.3px] text-white"
+                            className="mx-8 text-justify text-[14px] leading-[24px] tracking-[-0.3px] text-[#C8C6C6]"
                             style={globalStyles.font}
                         >
                             Simplifying your digital life with multiple features
