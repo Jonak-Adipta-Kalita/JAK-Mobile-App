@@ -55,7 +55,9 @@ const AppChildren = () => {
 const App = () => {
     const [, userLoading, userError] = useAuthState(auth);
     const [fontsLoaded, fontsError] = useFonts({
-        Lato: require("./assets/fonts/Lato-Regular.ttf"),
+        Regular: require("./assets/fonts/Regular.ttf"),
+        Medium: require("./assets/fonts/Medium.ttf"),
+        Bold: require("./assets/fonts/Bold.ttf"),
     });
 
     if (fontsError || userError) errorAlertShower(fontsError || userError);

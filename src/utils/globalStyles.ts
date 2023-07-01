@@ -16,7 +16,7 @@ export default StyleSheet.create<{
         borderRadius: 20,
     },
     font: {
-        fontFamily: "Lato",
+        fontFamily: "Regular",
     },
     inputIconContainer: {
         height: 40,

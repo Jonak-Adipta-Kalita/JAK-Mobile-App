@@ -5,6 +5,7 @@ import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 import { images } from "../utils/image";
+import globalStyles from "../utils/globalStyles";
 
 const GetStartedScreen = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
@@ -25,10 +26,16 @@ const GetStartedScreen = () => {
                         />
                     </View>
                     <View className="mx-8 space-y-5">
-                        <Text className="text-center text-[22px] leading-[34px] tracking-[-0.8px] text-[#DADADA]">
+                        <Text
+                            className="text-center text-[22px] leading-[34px] tracking-[-0.8px] text-[#DADADA]"
+                            style={globalStyles.font}
+                        >
                             Welcome to JAK Mobile App
                         </Text>
-                        <Text className="text-justify text-[14px] font-medium leading-[24px] tracking-[-0.3px] text-white">
+                        <Text
+                            className="text-justify text-[14px] leading-[24px] tracking-[-0.3px] text-white"
+                            style={globalStyles.font}
+                        >
                             Simplifying your digital life with multiple features
                             in one app, reducing the need for switching and
                             saving storage space.
