@@ -49,9 +49,14 @@ const GetStartedScreen = () => {
                 </View>
                 <View className="flex-[0.15]">
                     <View className="flex flex-row items-center justify-center space-x-2">
-                        <View className="h-2 w-2 rounded-full bg-white" />
-                        <View className="h-2 w-2 rounded-full bg-white opacity-20" />
-                        <View className="h-2 w-2 rounded-full bg-white opacity-20" />
+                        {[1, 2, 3].map((i) => (
+                            <View
+                                key={i}
+                                className={`h-2 w-2 rounded-full bg-white ${
+                                    pageNumber !== i ? "opacity-20" : ""
+                                }`}
+                            />
+                        ))}
                     </View>
                 </View>
             </View>
