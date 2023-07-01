@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
+import { WithLocalSvg } from "react-native-svg";
 import globalStyles from "../utils/globalStyles";
 
 const GetStartedScreen = () => {
@@ -17,7 +18,11 @@ const GetStartedScreen = () => {
             <View className="flex-1">
                 {/* Screen 1 */}
                 <View className="flex flex-1 items-center justify-center space-y-20">
-                    <View>{/* SVG File */}</View>
+                    <View>
+                        <WithLocalSvg
+                            asset={require("../../assets/images/illustration.svg")}
+                        />
+                    </View>
                     <View className="mx-8 space-y-8">
                         <Text
                             className="text-center text-[22px] leading-[34px] tracking-[-0.8px] text-[#DADADA]"
