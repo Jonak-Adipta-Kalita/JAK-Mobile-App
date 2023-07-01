@@ -20,7 +20,7 @@ const GetStartedScreen = () => {
                 <View className="flex flex-1 items-center justify-center space-y-20">
                     <View>
                         <WithLocalSvg
-                            asset={require("../../assets/images/illustration.svg")}
+                            asset={require("../../assets/images/illustrations/1.svg")}
                         />
                     </View>
                     <View className="mx-8 space-y-8">
