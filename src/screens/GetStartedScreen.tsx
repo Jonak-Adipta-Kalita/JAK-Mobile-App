@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, useColorScheme } from "react-native";
 import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
@@ -8,6 +8,7 @@ import globalStyles from "../utils/globalStyles";
 
 const GetStartedScreen = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
+    const colorScheme = useColorScheme();
 
     useHideBottomTab();
     useExitAppBackHandler();
@@ -25,13 +26,21 @@ const GetStartedScreen = () => {
                     </View>
                     <View className="mx-8 space-y-8">
                         <Text
-                            className="text-center text-[22px] leading-[34px] tracking-[-0.8px] text-[#DADADA]"
+                            className={`text-center text-[22px] leading-[34px] tracking-[-0.8px] ${
+                                colorScheme === "dark"
+                                    ? "text-[#DADADA]"
+                                    : "text-[#787878]"
+                            }`}
                             style={{ fontFamily: "Medium" }}
                         >
                             Welcome to JAK Mobile App
                         </Text>
                         <Text
-                            className="mx-8 text-justify text-[14px] leading-[24px] tracking-[-0.3px] text-[#C1C1C1]"
+                            className={`mx-8 text-justify text-[14px] leading-[24px] tracking-[-0.3px] ${
+                                colorScheme === "dark"
+                                    ? "text-[#C1C1C1]"
+                                    : "text-[#545454]"
+                            }`}
                             style={globalStyles.font}
                         >
                             Simplifying your digital life with multiple features
@@ -40,7 +49,10 @@ const GetStartedScreen = () => {
                         </Text>
                     </View>
                 </View>
-                <View></View>
+                <View>
+                    <View></View>
+                    <View></View>
+                </View>
             </View>
         </View>
     );
