@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, useColorScheme, TouchableOpacity } from "react-native";
+import { Text, View, useColorScheme } from "react-native";
 import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
@@ -47,43 +47,15 @@ const GetStartedScreen = () => {
                         </Text>
                     </View>
                 </View>
-                <View className="flex flex-[0.13] items-end justify-start">
-                    <View className="flex flex-row items-center justify-center space-x-24">
-                        <TouchableOpacity>
-                            <Text
-                                className={`text-right text-[18px] font-bold opacity-60 ${
-                                    colorScheme === "dark"
-                                        ? "text-white"
-                                        : "text-[#585858]"
-                                }`}
-                                style={globalStyles.font}
-                            >
-                                Skip
-                            </Text>
-                        </TouchableOpacity>
-                        <View className="flex flex-row items-center justify-center space-x-2">
-                            {[1, 2, 3].map((i) => (
-                                <View
-                                    key={i}
-                                    className={`h-2 w-2 rounded-full bg-white ${
-                                        pageNumber !== i ? "opacity-20" : ""
-                                    }`}
-                                />
-                            ))}
-                        </View>
-                        <TouchableOpacity>
-                            <Text
-                                className={`text-right text-[18px] font-bold ${
-                                    colorScheme === "dark"
-                                        ? "text-white"
-                                        : "text-[#585858]"
-                                }`}
-                                style={globalStyles.font}
-                            >
-                                Next
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                <View className="flex flex-[0.13] flex-row items-start justify-center space-x-2">
+                    {[1, 2, 3].map((i) => (
+                        <View
+                            key={i}
+                            className={`h-2 w-2 rounded-full bg-white ${
+                                pageNumber !== i ? "opacity-20" : ""
+                            }`}
+                        />
+                    ))}
                 </View>
             </View>
         </View>
