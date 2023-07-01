@@ -16,7 +16,7 @@ const GetStartedScreen = () => {
         <View className="flex-1">
             <StatusBar />
             {/* Screen 1 */}
-            <View className="flex-1">
+            <View className="flex-1 space-y-10">
                 <View className="flex flex-1 items-center justify-center space-y-20">
                     <View>
                         <WithLocalSvg
