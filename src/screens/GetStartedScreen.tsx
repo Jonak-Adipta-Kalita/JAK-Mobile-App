@@ -18,7 +18,7 @@ const GetStartedScreen = () => {
             <StatusBar />
             {/* Screen 1 */}
             <View className="flex flex-1 items-center justify-center">
-                <View className="flex flex-[0.85] items-center justify-center space-y-20">
+                <View className="flex flex-[0.87] items-center justify-center space-y-20">
                     <WithLocalSvg
                         asset={require("../../assets/images/illustrations/1.svg")}
                     />
@@ -47,7 +47,7 @@ const GetStartedScreen = () => {
                         </Text>
                     </View>
                 </View>
-                <View className="flex flex-[0.15] items-end justify-start">
+                <View className="flex flex-[0.13] items-end justify-start">
                     <View className="flex flex-row items-center justify-center space-x-24">
                         <TouchableOpacity>
                             <Text
