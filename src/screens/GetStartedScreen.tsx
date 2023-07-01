@@ -48,7 +48,7 @@ const GetStartedScreen = () => {
                     </View>
                 </View>
                 <View className="flex flex-[0.15] items-end justify-start">
-                    <View className="flex flex-row items-center justify-center">
+                    <View className="flex w-full flex-row items-center justify-center space-x-24">
                         <View className="flex flex-row items-center justify-center space-x-2">
                             {[1, 2, 3].map((i) => (
                                 <View
@@ -61,7 +61,7 @@ const GetStartedScreen = () => {
                         </View>
                         <TouchableOpacity>
                             <Text
-                                className={`w-[111px] text-right text-[18px] font-bold ${
+                                className={`text-right text-[18px] font-bold ${
                                     colorScheme === "dark"
                                         ? "text-white"
                                         : "text-[#585858]"
