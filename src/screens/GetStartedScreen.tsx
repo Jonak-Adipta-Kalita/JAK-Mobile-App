@@ -15,8 +15,8 @@ const GetStartedScreen = () => {
     return (
         <View className="flex-1">
             <StatusBar />
+            {/* Screen 1 */}
             <View className="flex-1">
-                {/* Screen 1 */}
                 <View className="flex flex-1 items-center justify-center space-y-20">
                     <View>
                         <WithLocalSvg
@@ -31,7 +31,7 @@ const GetStartedScreen = () => {
                             Welcome to JAK Mobile App
                         </Text>
                         <Text
-                            className="mx-8 text-justify text-[14px] leading-[24px] tracking-[-0.3px] text-[#C8C6C6]"
+                            className="mx-8 text-justify text-[14px] leading-[24px] tracking-[-0.3px] text-[#C1C1C1]"
                             style={globalStyles.font}
                         >
                             Simplifying your digital life with multiple features
