@@ -6,6 +6,7 @@ import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 import { WithLocalSvg } from "react-native-svg";
 import globalStyles from "../utils/globalStyles";
 import { OnboardingData } from "@/@types/data";
+import PagerView from "react-native-pager-view";
 
 const data: OnboardingData[] = [
     {
@@ -38,37 +39,47 @@ const GetStartedScreen = () => {
     return (
         <View className="flex-1">
             <StatusBar />
-            {/* Screen 1 */}
             <View className="flex flex-1 items-center justify-center">
-                <View className="flex flex-[0.87] items-center justify-center space-y-20">
-                    <WithLocalSvg
-                        asset={require("../../assets/images/illustrations/1.svg")}
-                    />
-                    <View className="mx-8 space-y-8">
-                        <Text
-                            className={`text-center text-[22px] leading-[34px] tracking-[-0.8px] ${
-                                colorScheme === "dark"
-                                    ? "text-[#DADADA]"
-                                    : "text-[#787878]"
-                            }`}
-                            style={{ fontFamily: "Medium" }}
+                <PagerView
+                    initialPage={0}
+                    onPageSelected={(e) => {
+                        setPageNumber(e.nativeEvent.position + 1);
+                    }}
+                    className="flex-[0.87]"
+                >
+                    {data.map((screen) => (
+                        <View
+                            key={screen.id.toString()}
+                            className="flex items-center justify-center space-y-20"
                         >
-                            Welcome to JAK Mobile App
-                        </Text>
-                        <Text
-                            className={`mx-8 text-justify text-[14px] leading-[24px] tracking-[-0.3px] ${
-                                colorScheme === "dark"
-                                    ? "text-[#C1C1C1]"
-                                    : "text-[#545454]"
-                            }`}
-                            style={globalStyles.font}
-                        >
-                            Simplifying your digital life with multiple features
-                            in one app, reducing the need for switching and
-                            saving storage space.
-                        </Text>
-                    </View>
-                </View>
+                            <WithLocalSvg
+                                asset={require("../../assets/images/illustrations/1.svg")}
+                            />
+                            <View className="mx-8 space-y-8">
+                                <Text
+                                    className={`text-center text-[22px] leading-[34px] tracking-[-0.8px] ${
+                                        colorScheme === "dark"
+                                            ? "text-[#DADADA]"
+                                            : "text-[#787878]"
+                                    }`}
+                                    style={{ fontFamily: "Medium" }}
+                                >
+                                    {screen.title}
+                                </Text>
+                                <Text
+                                    className={`mx-8 text-justify text-[14px] leading-[24px] tracking-[-0.3px] ${
+                                        colorScheme === "dark"
+                                            ? "text-[#C1C1C1]"
+                                            : "text-[#545454]"
+                                    }`}
+                                    style={globalStyles.font}
+                                >
+                                    {screen.description}
+                                </Text>
+                            </View>
+                        </View>
+                    ))}
+                </PagerView>
                 <View className="flex flex-[0.13] flex-row items-start justify-center space-x-2">
                     {[1, 2, 3].map((i) => (
                         <View
