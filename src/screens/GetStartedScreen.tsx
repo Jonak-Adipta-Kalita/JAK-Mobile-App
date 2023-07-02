@@ -5,6 +5,28 @@ import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 import { WithLocalSvg } from "react-native-svg";
 import globalStyles from "../utils/globalStyles";
+import { OnboardingData } from "@/@types/data";
+
+const data: OnboardingData[] = [
+    {
+        id: 1,
+        title: "Welcome to JAK Mobile App",
+        description:
+            "Simplifying your digital life with multiple features in one app, reducing the need for switching and saving storage space.",
+    },
+    {
+        id: 2,
+        title: "Meets all your daily needs",
+        description:
+            "Embark on a thrilling journey of unparalleled convenience with a myriad of essential features right at your fingertips!",
+    },
+    {
+        id: 3,
+        title: "Access across Devices",
+        description:
+            "You can conveniently access your data from multiple devices using the same account credentials.",
+    },
+];
 
 const GetStartedScreen = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);

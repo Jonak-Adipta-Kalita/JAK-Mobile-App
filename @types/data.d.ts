@@ -15,3 +15,9 @@ export type QRCode = {
     value: string;
     timestamp: FieldValue;
 };
+
+export type OnboardingData = {
+    id: number;
+    title: string;
+    description: string;
+};
