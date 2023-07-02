@@ -39,13 +39,13 @@ const GetStartedScreen = () => {
     return (
         <View className="flex-1">
             <StatusBar />
-            <View className="flex flex-1 items-center justify-center">
+            <View className="flex flex-1 justify-center">
                 <PagerView
                     initialPage={0}
                     onPageSelected={(e) => {
                         setPageNumber(e.nativeEvent.position + 1);
                     }}
-                    className="flex-[0.87]"
+                    style={{ flex: 0.87 }}
                 >
                     {data.map((screen) => (
                         <View
@@ -67,7 +67,9 @@ const GetStartedScreen = () => {
                                     {screen.title}
                                 </Text>
                                 <Text
-                                    className={`mx-8 text-justify text-[14px] leading-[24px] tracking-[-0.3px] ${
+                                    className={`${
+                                        screen.id === 2 ? "mx-7" : "mx-8"
+                                    }  text-justify text-[14px] leading-[24px] tracking-[-0.3px] ${
                                         colorScheme === "dark"
                                             ? "text-[#C1C1C1]"
                                             : "text-[#545454]"
