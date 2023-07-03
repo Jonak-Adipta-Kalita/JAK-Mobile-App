@@ -7,6 +7,7 @@ import { WithLocalSvg } from "react-native-svg";
 import globalStyles from "../utils/globalStyles";
 import { OnboardingData } from "@/@types/data";
 import PagerView from "react-native-pager-view";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const data: OnboardingData[] = [
     {
@@ -53,7 +54,7 @@ const GetStartedScreen = () => {
                             className="flex items-center justify-center space-y-20"
                         >
                             <WithLocalSvg
-                                asset={require(`../../assets/images/illustrations/${screen.id}.svg`)}
+                                asset={require(`../../assets/images/illustrations/1.svg`)}
                             />
                             <View className="mx-8 space-y-8">
                                 <Text
@@ -79,6 +80,26 @@ const GetStartedScreen = () => {
                                     {screen.description}
                                 </Text>
                             </View>
+                            {screen.id === 3 && (
+                                <TouchableOpacity
+                                    className={`rounded-xl ${
+                                        colorScheme === "dark"
+                                            ? "bg-zinc-600"
+                                            : "bg-zinc-300"
+                                    } py-2`}
+                                >
+                                    <Text
+                                        className={`px-[52px] py-[8px] text-center text-[18px] ${
+                                            colorScheme === "dark"
+                                                ? "text-white"
+                                                : "text-zinc-600"
+                                        } opacity-90`}
+                                        style={{ fontFamily: "Medium" }}
+                                    >
+                                        Get Started
+                                    </Text>
+                                </TouchableOpacity>
+                            )}
                         </View>
                     ))}
                 </PagerView>
@@ -86,9 +107,11 @@ const GetStartedScreen = () => {
                     {[1, 2, 3].map((i) => (
                         <View
                             key={i}
-                            className={`h-2 w-2 rounded-full bg-white ${
-                                pageNumber !== i ? "opacity-20" : ""
-                            }`}
+                            className={`h-2 w-2 rounded-full ${
+                                colorScheme === "dark"
+                                    ? "bg-white"
+                                    : "bg-zinc-600"
+                            } ${pageNumber !== i ? "opacity-20" : ""}`}
                         />
                     ))}
                 </View>
