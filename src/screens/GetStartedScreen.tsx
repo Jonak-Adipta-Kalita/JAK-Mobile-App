@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, useColorScheme } from "react-native";
 import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
@@ -8,6 +8,8 @@ import globalStyles from "../utils/globalStyles";
 import { OnboardingData } from "@/@types/data";
 import PagerView from "react-native-pager-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabStackNavigationProps } from "@/@types/navigation";
 
 const data: OnboardingData[] = [
     {
@@ -32,7 +34,16 @@ const data: OnboardingData[] = [
 
 const GetStartedScreen = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
+    const [showButton, setShowButton] = useState<boolean>(false);
     const colorScheme = useColorScheme();
+    const navigation =
+        useNavigation<BottomTabStackNavigationProps<"GetStarted">>();
+
+    useEffect(() => {
+        if (pageNumber === 3 && !showButton) {
+            setShowButton(true);
+        }
+    }, [pageNumber]);
 
     useHideBottomTab();
     useExitAppBackHandler();
@@ -46,7 +57,7 @@ const GetStartedScreen = () => {
                     onPageSelected={(e) => {
                         setPageNumber(e.nativeEvent.position + 1);
                     }}
-                    style={{ flex: 0.87 }}
+                    style={{ flex: showButton ? 0.9 : 0.87 }}
                 >
                     {data.map((screen) => (
                         <View
@@ -80,30 +91,38 @@ const GetStartedScreen = () => {
                                     {screen.description}
                                 </Text>
                             </View>
-                            {screen.id === 3 && (
-                                <TouchableOpacity
-                                    className={`rounded-xl ${
-                                        colorScheme === "dark"
-                                            ? "bg-zinc-600"
-                                            : "bg-zinc-300"
-                                    } py-2`}
-                                >
-                                    <Text
-                                        className={`px-[52px] py-[8px] text-center text-[18px] ${
-                                            colorScheme === "dark"
-                                                ? "text-white"
-                                                : "text-zinc-600"
-                                        } opacity-90`}
-                                        style={{ fontFamily: "Medium" }}
-                                    >
-                                        Get Started
-                                    </Text>
-                                </TouchableOpacity>
-                            )}
                         </View>
                     ))}
                 </PagerView>
-                <View className="flex flex-[0.13] flex-row items-start justify-center space-x-2">
+                {showButton && (
+                    <TouchableOpacity
+                        className={`rounded-xl ${
+                            colorScheme === "dark"
+                                ? "bg-zinc-600"
+                                : "bg-zinc-300"
+                        } mx-[100px] mb-10 py-2 shadow-sm`}
+                        style={{
+                            elevation: 2,
+                        }}
+                        onPress={() => navigation.replace("Home")}
+                    >
+                        <Text
+                            className={`py-[8px] text-center text-[18px] ${
+                                colorScheme === "dark"
+                                    ? "text-white"
+                                    : "text-zinc-600"
+                            } opacity-90`}
+                            style={{ fontFamily: "Medium" }}
+                        >
+                            Get Started
+                        </Text>
+                    </TouchableOpacity>
+                )}
+                <View
+                    className={`flex ${
+                        showButton ? "flex-[0.1]" : "flex-[0.13]"
+                    } flex-row items-start justify-center space-x-2`}
+                >
                     {[1, 2, 3].map((i) => (
                         <View
                             key={i}
