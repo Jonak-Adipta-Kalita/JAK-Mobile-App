@@ -75,10 +75,10 @@ const CreateNewTodo = ({
     const [todoText, setTodoText] = useState("");
     const [user] = useAuthState(auth);
     const colorScheme = useColorScheme();
-    const [creatingTodo, setCreatingTodo] = useState<boolean>(false)
+    const [creatingTodo, setCreatingTodo] = useState<boolean>(false);
 
     const createTodo = async () => {
-        setCreatingTodo(true)
+        setCreatingTodo(true);
         await checkAncestoryDoc(user!);
         await setDoc(
             doc(
@@ -93,48 +93,69 @@ const CreateNewTodo = ({
                 timestamp: serverTimestamp(),
             }
         );
-        setCreatingTodo(false)
+        setCreatingTodo(false);
         setCreatingNewTodo(false);
         setTodoText("");
     };
 
     return (
         <View
-            className={`${creatingTodo ? "hidden" : ""} mb-5 px-7 ${
+            className={`mb-5 px-7 ${
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
             } mx-5 rounded-lg p-5 shadow-md`}
         >
             <View className="flex flex-row items-center justify-between">
-                <TextInput
-                    placeholder="Enter Todo"
-                    className={`${
-                        colorScheme === "dark"
-                            ? "text-[#fff]"
-                            : "text-[#000000]"
-                    } flex-1 text-sm`}
-                    placeholderTextColor={"#9CA3AF"}
-                    style={globalStyles.font}
-                    onChangeText={(e) => setTodoText(e)}
-                    autoFocus
-                />
-                <TouchableOpacity
-                    onPress={createTodo}
-                    disabled={todoText === ""}
-                    className="mr-5"
-                >
-                    <Entypo
-                        name="check"
-                        size={24}
-                        color={colorScheme === "dark" ? "#fff" : "#000000"}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setCreatingNewTodo(false)}>
-                    <Entypo
-                        name="cross"
-                        size={24}
-                        color={colorScheme === "dark" ? "#fff" : "#000000"}
-                    />
-                </TouchableOpacity>
+                {creatingTodo ? (
+                    <Text
+                        className={`${
+                            colorScheme === "dark"
+                                ? "text-[#fff]"
+                                : "text-[#000000]"
+                        } fkex-1 text-sm`}
+                        style={globalStyles.font}
+                    >
+                        Creating Todo...
+                    </Text>
+                ) : (
+                    <>
+                        <TextInput
+                            placeholder="Enter Todo"
+                            className={`${
+                                colorScheme === "dark"
+                                    ? "text-[#fff]"
+                                    : "text-[#000000]"
+                            } flex-1 text-sm`}
+                            placeholderTextColor={"#9CA3AF"}
+                            style={globalStyles.font}
+                            onChangeText={(e) => setTodoText(e)}
+                            autoFocus
+                        />
+                        <TouchableOpacity
+                            onPress={createTodo}
+                            disabled={todoText === ""}
+                            className="mr-5"
+                        >
+                            <Entypo
+                                name="check"
+                                size={24}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => setCreatingNewTodo(false)}
+                        >
+                            <Entypo
+                                name="cross"
+                                size={24}
+                                color={
+                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                }
+                            />
+                        </TouchableOpacity>
+                    </>
+                )}
             </View>
         </View>
     );
