@@ -75,8 +75,10 @@ const CreateNewTodo = ({
     const [todoText, setTodoText] = useState("");
     const [user] = useAuthState(auth);
     const colorScheme = useColorScheme();
+    const [creatingTodo, setCreatingTodo] = useState<boolean>(false)
 
     const createTodo = async () => {
+        setCreatingTodo(true)
         await checkAncestoryDoc(user!);
         await setDoc(
             doc(
@@ -91,13 +93,14 @@ const CreateNewTodo = ({
                 timestamp: serverTimestamp(),
             }
         );
+        setCreatingTodo(false)
         setCreatingNewTodo(false);
         setTodoText("");
     };
 
     return (
         <View
-            className={`mb-5 px-7 ${
+            className={`${creatingTodo ? "hidden" : ""} mb-5 px-7 ${
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
             } mx-5 rounded-lg p-5 shadow-md`}
         >
