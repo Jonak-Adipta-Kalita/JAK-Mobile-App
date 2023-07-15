@@ -93,69 +93,48 @@ const CreateNewTodo = ({
                 timestamp: serverTimestamp(),
             }
         );
-        setCreatingTodo(false);
         setCreatingNewTodo(false);
+        setCreatingTodo(false);
         setTodoText("");
     };
 
     return (
         <View
-            className={`mb-5 px-7 ${
+            className={`${creatingTodo ? "hidden" : ""} mb-5 px-7 ${
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
             } mx-5 rounded-lg p-5 shadow-md`}
         >
             <View className="flex flex-row items-center justify-between">
-                {creatingTodo ? (
-                    <Text
-                        className={`${
-                            colorScheme === "dark"
-                                ? "text-[#fff]"
-                                : "text-[#000000]"
-                        } fkex-1 text-sm`}
-                        style={globalStyles.font}
-                    >
-                        Creating Todo...
-                    </Text>
-                ) : (
-                    <>
-                        <TextInput
-                            placeholder="Enter Todo"
-                            className={`${
-                                colorScheme === "dark"
-                                    ? "text-[#fff]"
-                                    : "text-[#000000]"
-                            } flex-1 text-sm`}
-                            placeholderTextColor={"#9CA3AF"}
-                            style={globalStyles.font}
-                            onChangeText={(e) => setTodoText(e)}
-                            autoFocus
-                        />
-                        <TouchableOpacity
-                            onPress={createTodo}
-                            disabled={todoText === ""}
-                            className="mr-5"
-                        >
-                            <Entypo
-                                name="check"
-                                size={24}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => setCreatingNewTodo(false)}
-                        >
-                            <Entypo
-                                name="cross"
-                                size={24}
-                                color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
-                                }
-                            />
-                        </TouchableOpacity>
-                    </>
-                )}
+                <TextInput
+                    placeholder="Enter Todo"
+                    className={`${
+                        colorScheme === "dark"
+                            ? "text-[#fff]"
+                            : "text-[#000000]"
+                    } flex-1 text-sm`}
+                    placeholderTextColor={"#9CA3AF"}
+                    style={globalStyles.font}
+                    onChangeText={(e) => setTodoText(e)}
+                    autoFocus
+                />
+                <TouchableOpacity
+                    onPress={createTodo}
+                    disabled={todoText === ""}
+                    className="mr-5"
+                >
+                    <Entypo
+                        name="check"
+                        size={24}
+                        color={colorScheme === "dark" ? "#fff" : "#000000"}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setCreatingNewTodo(false)}>
+                    <Entypo
+                        name="cross"
+                        size={24}
+                        color={colorScheme === "dark" ? "#fff" : "#000000"}
+                    />
+                </TouchableOpacity>
             </View>
         </View>
     );

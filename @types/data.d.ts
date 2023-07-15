@@ -5,7 +5,6 @@ export type User = {
 };
 
 export type Todo = {
-    id: string;
     value: string;
     timestamp: FieldValue;
 };
