@@ -9,10 +9,16 @@ import {
     serverTimestamp,
     setDoc,
 } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
+import {
+    View,
+    TouchableOpacity,
+    Text,
+    useColorScheme,
+    Keyboard,
+} from "react-native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import LoadingIndicator from "@components/Loading";
 import { auth, db } from "@utils/firebase";
@@ -23,11 +29,10 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalStyles from "@utils/globalStyles";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import Header from "@components/Header";
 import { checkAncestoryDoc } from "@/src/utils/checkAncestoryDoc";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
@@ -155,6 +160,7 @@ const TodoScreen = () => {
     );
     const [creatingNewTodo, setCreatingNewTodo] = useState<boolean>(false);
     const colorScheme = useColorScheme();
+    const scrollRef = useRef<ScrollView | null>(null);
 
     useEffect(() => {
         setTodos(
@@ -166,6 +172,16 @@ const TodoScreen = () => {
                 : []
         );
     }, [user, navigation, todosFetched]);
+
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+            scrollRef.current?.scrollToEnd();
+        });
+
+        return () => {
+            showSubscription.remove();
+        };
+    }, []);
 
     useHideBottomTab();
 
@@ -214,13 +230,7 @@ const TodoScreen = () => {
                                 {todosFetched?.docs?.length}/10
                             </Text>
                         </View>
-                        <KeyboardAwareScrollView
-                            style={{ backgroundColor: "#413f44" }}
-                            contentContainerStyle={{
-                                marginTop: 20,
-                            }}
-                            resetScrollToCoords={{ x: 0, y: 0 }}
-                        >
+                        <ScrollView className="mt-5" ref={scrollRef}>
                             {todos?.map(({ id, data }) => (
                                 <Todo id={id} key={id} data={data} />
                             ))}
@@ -232,7 +242,7 @@ const TodoScreen = () => {
                                     <View className="mb-2" />
                                 </>
                             )}
-                        </KeyboardAwareScrollView>
+                        </ScrollView>
                     </>
                 )}
                 {todosFetched?.docs.length! < 10 && !creatingNewTodo && (
