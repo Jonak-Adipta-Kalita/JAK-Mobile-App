@@ -1,6 +1,5 @@
 .expo/
 .expo-shared/
-.vscode/
 .vscode-test/
 out/
 dist/

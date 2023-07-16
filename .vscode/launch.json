@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Expo Start",
+            "cwd": "${workspaceFolder}",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm start"
+        }
+    ]
+}
