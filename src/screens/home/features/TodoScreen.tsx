@@ -17,6 +17,7 @@ import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import LoadingIndicator from "@components/Loading";
 import { auth, db } from "@utils/firebase";
 import errorAlertShower from "@utils/alertShowers/errorAlertShower";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalStyles from "@utils/globalStyles";
@@ -233,6 +234,24 @@ const TodoScreen = () => {
                             )}
                         </ScrollView>
                     </>
+                )}
+                {todosFetched?.docs.length! < 10 && !creatingNewTodo && (
+                    <View className="absolute bottom-10 right-10">
+                        <TouchableOpacity
+                            className={`${
+                                colorScheme === "dark"
+                                    ? "bg-[#272934]"
+                                    : "bg-white"
+                            } rounded-full p-2`}
+                            onPress={() => setCreatingNewTodo(true)}
+                        >
+                            <AntDesign
+                                name="plus"
+                                size={50}
+                                color={colorScheme === "dark" ? "#fff" : "#000"}
+                            />
+                        </TouchableOpacity>
+                    </View>
                 )}
             </View>
         </SafeAreaView>
