@@ -65,7 +65,9 @@ const UnitConvertorScreen = () => {
         from: convert.Unit,
         to: convert.Unit
     ) => {
-        return convert(parseInt(value)).from(from).to(to);
+        return convert(parseInt(value === "" ? "0" : value))
+            .from(from)
+            .to(to);
     };
 
     const onSelectedUnit = (item: any, unitType: "from" | "to") => {
@@ -148,7 +150,7 @@ const UnitConvertorScreen = () => {
                                             onChangeText={(text) => {
                                                 setFromValue(text);
                                                 const converted = convertUnit(
-                                                    text === "" ? "0" : text,
+                                                    text,
                                                     selectedFrom!,
                                                     selectedTo!
                                                 );
