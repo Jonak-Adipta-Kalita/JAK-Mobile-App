@@ -23,10 +23,11 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import globalStyles from "@utils/globalStyles";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TextInput, ScrollView } from "react-native-gesture-handler";
+import { TextInput } from "react-native-gesture-handler";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import Header from "@components/Header";
 import { checkAncestoryDoc } from "@/src/utils/checkAncestoryDoc";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
@@ -213,13 +214,12 @@ const TodoScreen = () => {
                                 {todosFetched?.docs?.length}/10
                             </Text>
                         </View>
-                        <ScrollView
-                            className={`${
-                                todosFetched?.docs.length! < 10 &&
-                                !creatingNewTodo
-                                    ? "mb-32"
-                                    : "mb-10"
-                            } mt-5`}
+                        <KeyboardAwareScrollView
+                            style={{ backgroundColor: "#413f44" }}
+                            contentContainerStyle={{
+                                marginTop: 20,
+                            }}
+                            resetScrollToCoords={{ x: 0, y: 0 }}
                         >
                             {todos?.map(({ id, data }) => (
                                 <Todo id={id} key={id} data={data} />
@@ -229,10 +229,10 @@ const TodoScreen = () => {
                                     <CreateNewTodo
                                         setCreatingNewTodo={setCreatingNewTodo}
                                     />
-                                    <View className="mb-32" />
+                                    <View className="mb-2" />
                                 </>
                             )}
-                        </ScrollView>
+                        </KeyboardAwareScrollView>
                     </>
                 )}
                 {todosFetched?.docs.length! < 10 && !creatingNewTodo && (
