@@ -53,4 +53,10 @@ export default {
             projectId: PROJECT_ID,
         },
     },
+    updates: {
+        url: `https://u.expo.dev/${PROJECT_ID}`,
+    },
+    runtimeVersion: {
+        policy: "sdkVersion",
+    },
 };
