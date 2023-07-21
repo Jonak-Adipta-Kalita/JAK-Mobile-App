@@ -35,7 +35,7 @@ import * as MediaLibrary from "expo-media-library";
 import { uploadImageAsync } from "@utils/uploadImageAsync";
 import { ScrollView } from "react-native-gesture-handler";
 import Header from "@components/Header";
-import { checkAncestoryDoc } from "@/src/utils/checkAncestoryDoc";
+import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
 
 const Create = () => {
     const colorScheme = useColorScheme();

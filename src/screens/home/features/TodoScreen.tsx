@@ -32,7 +32,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import Header from "@components/Header";
-import { checkAncestoryDoc } from "@/src/utils/checkAncestoryDoc";
+import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();

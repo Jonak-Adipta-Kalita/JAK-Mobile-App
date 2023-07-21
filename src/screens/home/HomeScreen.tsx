@@ -13,7 +13,7 @@ import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 import { useShowBottomTab } from "@hooks/useBottomTab";
-import Header from "@/src/components/Header";
+import Header from "@components/Header";
 
 const Feature = ({
     title,
