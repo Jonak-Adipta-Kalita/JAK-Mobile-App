@@ -38,67 +38,69 @@ import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
     const [user] = useAuthState(auth);
-    const [longPressed, setLongPressed] = useState<boolean>(false);
 
     return (
-        <TouchableOpacity
+        <View
             className={`mb-5 px-7 ${
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
             } mx-5 rounded-lg p-5 shadow-md`}
-            activeOpacity={0.5}
-            onLongPress={() => setLongPressed(true)}
         >
             <View className="flex flex-row items-center justify-between">
-                {longPressed ? (
-                    <View></View>
-                ) : (
-                    <Text
-                        className={`${
-                            colorScheme === "dark"
-                                ? "text-[#fff]"
-                                : "text-[#000000]"
-                        } mr-5 flex-1 text-justify text-sm`}
-                        style={globalStyles.font}
-                    >
-                        {data.value}
-                    </Text>
-                )}
-                <TouchableOpacity
-                    onPress={() => {
-                        messageAlertShower(
-                            "Are you sure?",
-                            `Value: ${data.value}`,
-                            [
-                                {
-                                    text: "Cancel",
-                                    style: "cancel",
-                                },
-                                {
-                                    text: "Delete",
-                                    onPress: async () => {
-                                        await deleteDoc(
-                                            doc(
-                                                db,
-                                                "users",
-                                                user?.uid!,
-                                                "todos",
-                                                id
-                                            )
-                                        );
-                                    },
-                                },
-                            ]
-                        );
-                    }}
+                <Text
+                    className={`${
+                        colorScheme === "dark"
+                            ? "text-[#fff]"
+                            : "text-[#000000]"
+                    } mr-5 flex-1 text-justify text-sm`}
+                    style={globalStyles.font}
                 >
-                    <MaterialCommunityIcons
-                        name="delete"
-                        size={24}
-                        color={colorScheme === "dark" ? "#fff" : "#000000"}
-                    />
-                </TouchableOpacity>
+                    {data.value}
+                </Text>
+                <View className="flex flex-row items-center justify-center space-x-2">
+                    <TouchableOpacity>
+                        <MaterialCommunityIcons
+                            name="pencil"
+                            size={24}
+                            color={colorScheme === "dark" ? "#fff" : "#000000"}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            messageAlertShower(
+                                "Are you sure?",
+                                `Value: ${data.value}`,
+                                [
+                                    {
+                                        text: "Cancel",
+                                        style: "cancel",
+                                    },
+                                    {
+                                        text: "Delete",
+                                        onPress: async () => {
+                                            await deleteDoc(
+                                                doc(
+                                                    db,
+                                                    "users",
+                                                    user?.uid!,
+                                                    "todos",
+                                                    id
+                                                )
+                                            );
+                                        },
+                                    },
+                                ]
+                            );
+                        }}
+                    >
+                        <MaterialCommunityIcons
+                            name="delete"
+                            size={24}
+                            color={colorScheme === "dark" ? "#fff" : "#000000"}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
-        </TouchableOpacity>
+        </View>
     );
 };
 
