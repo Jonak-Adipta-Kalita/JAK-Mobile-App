@@ -38,6 +38,7 @@ import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
     const [user] = useAuthState(auth);
+    const [longPressed, setLongPressed] = useState<boolean>(false);
 
     return (
         <TouchableOpacity
@@ -45,19 +46,23 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
             } mx-5 rounded-lg p-5 shadow-md`}
             activeOpacity={0.5}
-            onLongPress={() => {}}
+            onLongPress={() => setLongPressed(true)}
         >
             <View className="flex flex-row items-center justify-between">
-                <Text
-                    className={`${
-                        colorScheme === "dark"
-                            ? "text-[#fff]"
-                            : "text-[#000000]"
-                    } mr-5 flex-1 text-justify text-sm`}
-                    style={globalStyles.font}
-                >
-                    {data.value}
-                </Text>
+                {longPressed ? (
+                    <View></View>
+                ) : (
+                    <Text
+                        className={`${
+                            colorScheme === "dark"
+                                ? "text-[#fff]"
+                                : "text-[#000000]"
+                        } mr-5 flex-1 text-justify text-sm`}
+                        style={globalStyles.font}
+                    >
+                        {data.value}
+                    </Text>
+                )}
                 <TouchableOpacity
                     onPress={() => {
                         messageAlertShower(
