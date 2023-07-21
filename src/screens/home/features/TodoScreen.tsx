@@ -38,6 +38,7 @@ import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
     const [user] = useAuthState(auth);
+    const [editable, setEditable] = useState(false);
 
     return (
         <View
@@ -57,7 +58,7 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
                     {data.value}
                 </Text>
                 <View className="flex flex-row items-center justify-center space-x-2">
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => setEditable(true)}>
                         <MaterialCommunityIcons
                             name="pencil"
                             size={24}
