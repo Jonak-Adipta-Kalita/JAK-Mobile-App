@@ -33,16 +33,18 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import Header from "@components/Header";
 import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
+import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 
 const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     const colorScheme = useColorScheme();
     const [user] = useAuthState(auth);
 
     return (
-        <View
+        <TouchableOpacity
             className={`mb-5 px-7 ${
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
             } mx-5 rounded-lg p-5 shadow-md`}
+            activeOpacity={0.5}
         >
             <View className="flex flex-row items-center justify-between">
                 <Text
@@ -56,9 +58,30 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
                     {data.value}
                 </Text>
                 <TouchableOpacity
-                    onPress={async () => {
-                        await deleteDoc(
-                            doc(db, "users", user?.uid!, "todos", id)
+                    onPress={() => {
+                        messageAlertShower(
+                            "Are you sure?",
+                            `Value: ${data.value}`,
+                            [
+                                {
+                                    text: "Cancel",
+                                    style: "cancel",
+                                },
+                                {
+                                    text: "Delete",
+                                    onPress: async () => {
+                                        await deleteDoc(
+                                            doc(
+                                                db,
+                                                "users",
+                                                user?.uid!,
+                                                "todos",
+                                                id
+                                            )
+                                        );
+                                    },
+                                },
+                            ]
                         );
                     }}
                 >
@@ -69,7 +92,7 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
                     />
                 </TouchableOpacity>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
