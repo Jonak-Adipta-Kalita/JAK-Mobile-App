@@ -45,6 +45,7 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
             } mx-5 rounded-lg p-5 shadow-md`}
             activeOpacity={0.5}
+            onLongPress={() => {}}
         >
             <View className="flex flex-row items-center justify-between">
                 <Text
