@@ -106,17 +106,17 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
 };
 
 const WriteTodo = ({
-    setCreatingNewTodo,
+    setWritingNewTodo,
 }: {
-    setCreatingNewTodo: React.Dispatch<React.SetStateAction<boolean>>;
+    setWritingNewTodo: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const [todoText, setTodoText] = useState("");
     const [user] = useAuthState(auth);
     const colorScheme = useColorScheme();
-    const [creatingTodo, setCreatingTodo] = useState<boolean>(false);
+    const [writingTodo, setWritingTodo] = useState<boolean>(false);
 
-    const createTodo = async () => {
-        setCreatingTodo(true);
+    const writeTodo = async () => {
+        setWritingTodo(true);
         await checkAncestoryDoc(user!);
         await setDoc(
             doc(
@@ -131,14 +131,14 @@ const WriteTodo = ({
                 timestamp: serverTimestamp(),
             }
         );
-        setCreatingNewTodo(false);
-        setCreatingTodo(false);
+        setWritingNewTodo(false);
+        setWritingTodo(false);
         setTodoText("");
     };
 
     return (
         <View
-            className={`${creatingTodo ? "hidden" : ""} mb-5 px-7 ${
+            className={`${writingTodo ? "hidden" : ""} mb-5 px-7 ${
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
             } mx-5 rounded-lg p-5 shadow-md`}
         >
@@ -156,7 +156,7 @@ const WriteTodo = ({
                     autoFocus
                 />
                 <TouchableOpacity
-                    onPress={createTodo}
+                    onPress={writeTodo}
                     disabled={todoText === ""}
                     className="mr-5"
                 >
@@ -166,7 +166,7 @@ const WriteTodo = ({
                         color={colorScheme === "dark" ? "#fff" : "#000000"}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setCreatingNewTodo(false)}>
+                <TouchableOpacity onPress={() => setWritingNewTodo(false)}>
                     <Entypo
                         name="cross"
                         size={24}
@@ -269,7 +269,7 @@ const TodoScreen = () => {
                             {creatingNewTodo && (
                                 <>
                                     <WriteTodo
-                                        setCreatingNewTodo={setCreatingNewTodo}
+                                        setWritingNewTodo={setCreatingNewTodo}
                                     />
                                     <View className="mb-2" />
                                 </>
