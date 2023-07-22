@@ -35,80 +35,12 @@ import Header from "@components/Header";
 import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
 import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 
-const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
-    const colorScheme = useColorScheme();
-    const [user] = useAuthState(auth);
-    const [editable, setEditable] = useState(false);
-
-    return (
-        <View
-            className={`mb-5 px-7 ${
-                colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
-            } mx-5 rounded-lg p-5 shadow-md`}
-        >
-            <View className="flex flex-row items-center justify-between">
-                <Text
-                    className={`${
-                        colorScheme === "dark"
-                            ? "text-[#fff]"
-                            : "text-[#000000]"
-                    } mr-5 flex-1 text-justify text-sm`}
-                    style={globalStyles.font}
-                >
-                    {data.value}
-                </Text>
-                <View className="flex flex-row items-center justify-center space-x-2">
-                    <TouchableOpacity onPress={() => setEditable(true)}>
-                        <MaterialCommunityIcons
-                            name="pencil"
-                            size={24}
-                            color={colorScheme === "dark" ? "#fff" : "#000000"}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-                            messageAlertShower(
-                                "Are you sure?",
-                                `Value: ${data.value}`,
-                                [
-                                    {
-                                        text: "Cancel",
-                                        style: "cancel",
-                                    },
-                                    {
-                                        text: "Delete",
-                                        onPress: async () => {
-                                            await deleteDoc(
-                                                doc(
-                                                    db,
-                                                    "users",
-                                                    user?.uid!,
-                                                    "todos",
-                                                    id
-                                                )
-                                            );
-                                        },
-                                    },
-                                ]
-                            );
-                        }}
-                    >
-                        <MaterialCommunityIcons
-                            name="delete"
-                            size={24}
-                            color={colorScheme === "dark" ? "#fff" : "#000000"}
-                        />
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
-    );
-};
-
 const WriteTodo = ({
+    type,
     setWritingNewTodo,
 }: {
     setWritingNewTodo: React.Dispatch<React.SetStateAction<boolean>>;
+    type: "create" | "edit";
 }) => {
     const [todoText, setTodoText] = useState("");
     const [user] = useAuthState(auth);
@@ -117,20 +49,24 @@ const WriteTodo = ({
 
     const writeTodo = async () => {
         setWritingTodo(true);
-        await checkAncestoryDoc(user!);
-        await setDoc(
-            doc(
-                db,
-                "users",
-                user?.uid!,
-                "todos",
-                todoText.replaceAll("\n", ";").replaceAll(" ", "_")
-            ),
-            {
-                value: todoText,
-                timestamp: serverTimestamp(),
-            }
-        );
+        if (type === "create") {
+            await checkAncestoryDoc(user!);
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    user?.uid!,
+                    "todos",
+                    todoText.replaceAll("\n", ";").replaceAll(" ", "_")
+                ),
+                {
+                    value: todoText,
+                    timestamp: serverTimestamp(),
+                }
+            );
+        } else if (type === "edit") {
+            // TODO: Handle Edit
+        }
         setWritingNewTodo(false);
         setWritingTodo(false);
         setTodoText("");
@@ -144,7 +80,7 @@ const WriteTodo = ({
         >
             <View className="flex flex-row items-center justify-between">
                 <TextInput
-                    placeholder="Enter Todo"
+                    placeholder={type === "create" ? "Enter Todo" : "Edit Todo"}
                     className={`${
                         colorScheme === "dark"
                             ? "text-[#fff]"
@@ -178,6 +114,102 @@ const WriteTodo = ({
     );
 };
 
+const Todo = ({
+    id,
+    data,
+    setEditingTodo,
+}: {
+    id: string;
+    data: DocumentData;
+    setEditingTodo: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+    const colorScheme = useColorScheme();
+    const [user] = useAuthState(auth);
+    const [editable, setEditable] = useState(false);
+
+    useEffect(() => {
+        setEditingTodo(editable);
+    }, [editable]);
+
+    return (
+        <>
+            {editable ? (
+                <WriteTodo setWritingNewTodo={setEditable} type="edit" />
+            ) : (
+                <View
+                    className={`mb-5 px-7 ${
+                        colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
+                    } mx-5 rounded-lg p-5 shadow-md`}
+                >
+                    <View className="flex flex-row items-center justify-between">
+                        <Text
+                            className={`${
+                                colorScheme === "dark"
+                                    ? "text-[#fff]"
+                                    : "text-[#000000]"
+                            } mr-5 flex-1 text-justify text-sm`}
+                            style={globalStyles.font}
+                        >
+                            {data.value}
+                        </Text>
+                        <View className="flex flex-row items-center justify-center space-x-2">
+                            <TouchableOpacity onPress={() => setEditable(true)}>
+                                <MaterialCommunityIcons
+                                    name="pencil"
+                                    size={24}
+                                    color={
+                                        colorScheme === "dark"
+                                            ? "#fff"
+                                            : "#000000"
+                                    }
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    messageAlertShower(
+                                        "Are you sure?",
+                                        `Value: ${data.value}`,
+                                        [
+                                            {
+                                                text: "Cancel",
+                                                style: "cancel",
+                                            },
+                                            {
+                                                text: "Delete",
+                                                onPress: async () => {
+                                                    await deleteDoc(
+                                                        doc(
+                                                            db,
+                                                            "users",
+                                                            user?.uid!,
+                                                            "todos",
+                                                            id
+                                                        )
+                                                    );
+                                                },
+                                            },
+                                        ]
+                                    );
+                                }}
+                            >
+                                <MaterialCommunityIcons
+                                    name="delete"
+                                    size={24}
+                                    color={
+                                        colorScheme === "dark"
+                                            ? "#fff"
+                                            : "#000000"
+                                    }
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            )}
+        </>
+    );
+};
+
 const TodoScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Todo">>();
     const [user, userLoading, userError] = useAuthState(auth);
@@ -191,6 +223,7 @@ const TodoScreen = () => {
         []
     );
     const [creatingNewTodo, setCreatingNewTodo] = useState<boolean>(false);
+    const [editingTodo, setEditingTodo] = useState<boolean>(false);
     const colorScheme = useColorScheme();
     const scrollRef = useRef<ScrollView | null>(null);
 
@@ -264,12 +297,18 @@ const TodoScreen = () => {
                         </View>
                         <ScrollView className="mt-5" ref={scrollRef}>
                             {todos?.map(({ id, data }) => (
-                                <Todo id={id} key={id} data={data} />
+                                <Todo
+                                    id={id}
+                                    key={id}
+                                    data={data}
+                                    setEditingTodo={setEditingTodo}
+                                />
                             ))}
                             {creatingNewTodo && (
                                 <>
                                     <WriteTodo
                                         setWritingNewTodo={setCreatingNewTodo}
+                                        type="create"
                                     />
                                     <View className="mb-2" />
                                 </>
@@ -277,24 +316,28 @@ const TodoScreen = () => {
                         </ScrollView>
                     </>
                 )}
-                {todosFetched?.docs.length! < 10 && !creatingNewTodo && (
-                    <View className="absolute bottom-10 right-10">
-                        <TouchableOpacity
-                            className={`${
-                                colorScheme === "dark"
-                                    ? "bg-[#272934]"
-                                    : "bg-white"
-                            } rounded-full p-2`}
-                            onPress={() => setCreatingNewTodo(true)}
-                        >
-                            <AntDesign
-                                name="plus"
-                                size={50}
-                                color={colorScheme === "dark" ? "#fff" : "#000"}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                )}
+                {todosFetched?.docs.length! < 10 &&
+                    !creatingNewTodo &&
+                    !editingTodo && (
+                        <View className="absolute bottom-10 right-10">
+                            <TouchableOpacity
+                                className={`${
+                                    colorScheme === "dark"
+                                        ? "bg-[#272934]"
+                                        : "bg-white"
+                                } rounded-full p-2`}
+                                onPress={() => setCreatingNewTodo(true)}
+                            >
+                                <AntDesign
+                                    name="plus"
+                                    size={50}
+                                    color={
+                                        colorScheme === "dark" ? "#fff" : "#000"
+                                    }
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    )}
             </View>
         </SafeAreaView>
     );
