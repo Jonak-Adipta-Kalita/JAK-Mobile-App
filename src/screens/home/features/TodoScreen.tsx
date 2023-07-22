@@ -105,7 +105,7 @@ const Todo = ({ id, data }: { id: string; data: DocumentData }) => {
     );
 };
 
-const CreateNewTodo = ({
+const WriteTodo = ({
     setCreatingNewTodo,
 }: {
     setCreatingNewTodo: React.Dispatch<React.SetStateAction<boolean>>;
@@ -268,7 +268,7 @@ const TodoScreen = () => {
                             ))}
                             {creatingNewTodo && (
                                 <>
-                                    <CreateNewTodo
+                                    <WriteTodo
                                         setCreatingNewTodo={setCreatingNewTodo}
                                     />
                                     <View className="mb-2" />
