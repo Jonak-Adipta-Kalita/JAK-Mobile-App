@@ -294,7 +294,25 @@ const TodoScreen = () => {
         <SafeAreaView className="flex-1">
             <StatusBar />
             <View className="flex-1">
-                <Header title="Todo" />
+                <Header
+                    title="Todo"
+                    showRightButton={
+                        todosFetched?.docs.length! < 10 &&
+                        !creatingNewTodo &&
+                        !editingTodo
+                    }
+                    rightButton={
+                        <TouchableOpacity
+                            onPress={() => setCreatingNewTodo(true)}
+                        >
+                            <AntDesign
+                                name="pluscircleo"
+                                size={24}
+                                color={colorScheme === "dark" ? "#fff" : "#000"}
+                            />
+                        </TouchableOpacity>
+                    }
+                />
                 {todosFetched?.docs.length === 0 && !creatingNewTodo ? (
                     <View className="mt-[50%] flex-1 items-center">
                         <Text
@@ -343,28 +361,6 @@ const TodoScreen = () => {
                         </ScrollView>
                     </>
                 )}
-                {todosFetched?.docs.length! < 10 &&
-                    !creatingNewTodo &&
-                    !editingTodo && (
-                        <View className="absolute bottom-10 right-10">
-                            <TouchableOpacity
-                                className={`${
-                                    colorScheme === "dark"
-                                        ? "bg-[#272934]"
-                                        : "bg-white"
-                                } rounded-full p-2`}
-                                onPress={() => setCreatingNewTodo(true)}
-                            >
-                                <AntDesign
-                                    name="plus"
-                                    size={50}
-                                    color={
-                                        colorScheme === "dark" ? "#fff" : "#000"
-                                    }
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    )}
             </View>
         </SafeAreaView>
     );

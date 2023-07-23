@@ -48,7 +48,9 @@ const Header = ({
             >
                 {title}
             </Text>
-            {showRightButton && rightButton}
+            {showRightButton && (
+                <View className="-mt-[0.5px] mr-10">{rightButton}</View>
+            )}
         </View>
     );
 };
