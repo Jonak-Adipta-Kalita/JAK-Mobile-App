@@ -327,39 +327,25 @@ const TodoScreen = () => {
                         </Text>
                     </View>
                 ) : (
-                    <>
-                        <View className="w-full">
-                            <Text
-                                style={globalStyles.font}
-                                className={`mr-10 text-right text-lg ${
-                                    colorScheme == "dark"
-                                        ? "text-gray-200"
-                                        : "text-gray-900"
-                                }`}
-                            >
-                                {todosFetched?.docs?.length}/10
-                            </Text>
-                        </View>
-                        <ScrollView className="mt-5" ref={scrollRef}>
-                            {todos?.map(({ id, data }) => (
-                                <Todo
-                                    id={id}
-                                    key={id}
-                                    data={data}
-                                    setEditingTodo={setEditingTodo}
+                    <ScrollView className="mt-5" ref={scrollRef}>
+                        {todos?.map(({ id, data }) => (
+                            <Todo
+                                id={id}
+                                key={id}
+                                data={data}
+                                setEditingTodo={setEditingTodo}
+                            />
+                        ))}
+                        {creatingNewTodo && (
+                            <>
+                                <WriteTodo
+                                    setWritingNewTodo={setCreatingNewTodo}
+                                    type="create"
                                 />
-                            ))}
-                            {creatingNewTodo && (
-                                <>
-                                    <WriteTodo
-                                        setWritingNewTodo={setCreatingNewTodo}
-                                        type="create"
-                                    />
-                                    <View className="mb-2" />
-                                </>
-                            )}
-                        </ScrollView>
-                    </>
+                                <View className="mb-2" />
+                            </>
+                        )}
+                    </ScrollView>
                 )}
             </View>
         </SafeAreaView>
