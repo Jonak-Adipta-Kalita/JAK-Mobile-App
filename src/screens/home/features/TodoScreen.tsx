@@ -37,12 +37,19 @@ import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 
 const WriteTodo = ({
     type,
+    editingTodo,
     setWritingNewTodo,
 }: {
     setWritingNewTodo: React.Dispatch<React.SetStateAction<boolean>>;
     type: "create" | "edit";
+    editingTodo?: {
+        id: string;
+        data: DocumentData;
+    };
 }) => {
-    const [todoText, setTodoText] = useState("");
+    const [todoText, setTodoText] = useState(
+        type === "create" ? "" : editingTodo?.data.value
+    );
     const [user] = useAuthState(auth);
     const colorScheme = useColorScheme();
     const [writingTodo, setWritingTodo] = useState<boolean>(false);
@@ -65,7 +72,22 @@ const WriteTodo = ({
                 }
             );
         } else if (type === "edit") {
-            // TODO: Handle Edit
+            await deleteDoc(
+                doc(db, "users", user?.uid!, "todos", editingTodo?.id!)
+            );
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    user?.uid!,
+                    "todos",
+                    todoText.replaceAll("\n", ";").replaceAll(" ", "_")
+                ),
+                {
+                    value: todoText,
+                    timestamp: editingTodo?.data.timestamp,
+                }
+            );
         }
         setWritingNewTodo(false);
         setWritingTodo(false);
@@ -90,6 +112,7 @@ const WriteTodo = ({
                     style={globalStyles.font}
                     onChangeText={(e) => setTodoText(e)}
                     autoFocus
+                    value={todoText}
                 />
                 <TouchableOpacity
                     onPress={writeTodo}
@@ -134,7 +157,11 @@ const Todo = ({
     return (
         <>
             {editable ? (
-                <WriteTodo setWritingNewTodo={setEditable} type="edit" />
+                <WriteTodo
+                    setWritingNewTodo={setEditable}
+                    type="edit"
+                    editingTodo={{ id, data }}
+                />
             ) : (
                 <View
                     className={`mb-5 px-7 ${
