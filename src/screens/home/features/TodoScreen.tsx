@@ -194,8 +194,8 @@ const Todo = ({
                             <TouchableOpacity
                                 onPress={() => {
                                     messageAlertShower(
-                                        "Are you sure? Only do it, If you have completed this Task",
-                                        `Value: ${data.value}`,
+                                        "Are you sure?",
+                                        data.value,
                                         [
                                             {
                                                 text: "Cancel",
