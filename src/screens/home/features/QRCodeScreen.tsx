@@ -248,10 +248,23 @@ const Create = () => {
                                             ? "bg-[#272934]"
                                             : "bg-white"
                                     } mb-10 p-5 shadow-md`}
-                                    onPress={
+                                    onPress={() =>
                                         qrCodeAlreadyExists()
-                                            ? deleteQRCode
-                                            : uploadQRCode
+                                            ? messageAlertShower(
+                                                  "Are you sure?",
+                                                  qrCodeData,
+                                                  [
+                                                      {
+                                                          text: "Cancel",
+                                                          onPress: () => {},
+                                                      },
+                                                      {
+                                                          text: "Delete",
+                                                          onPress: deleteQRCode,
+                                                      },
+                                                  ]
+                                              )
+                                            : uploadQRCode()
                                     }
                                 >
                                     <FontAwesome
