@@ -267,6 +267,7 @@ const TodoScreen = () => {
 
     useEffect(() => {
         const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+            // TODO: Scroll to the Current selected TodoID
             scrollRef.current?.scrollToEnd();
         });
 
