@@ -107,31 +107,32 @@ const WriteTodo = ({
                         colorScheme === "dark"
                             ? "text-[#fff]"
                             : "text-[#000000]"
-                    } flex-1 text-sm`}
+                    } mr-5 flex-1 text-sm`}
                     placeholderTextColor={"#9CA3AF"}
                     style={globalStyles.font}
                     onChangeText={(e) => setTodoText(e)}
                     autoFocus
                     value={todoText}
                 />
-                <TouchableOpacity
-                    onPress={writeTodo}
-                    disabled={todoText === ""}
-                    className="mr-5"
-                >
-                    <Entypo
-                        name="check"
-                        size={24}
-                        color={colorScheme === "dark" ? "#fff" : "#000000"}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setWritingNewTodo(false)}>
-                    <Entypo
-                        name="cross"
-                        size={24}
-                        color={colorScheme === "dark" ? "#fff" : "#000000"}
-                    />
-                </TouchableOpacity>
+                <View className="flex flex-row items-center justify-center space-x-2">
+                    <TouchableOpacity
+                        onPress={writeTodo}
+                        disabled={todoText === ""}
+                    >
+                        <Entypo
+                            name="check"
+                            size={24}
+                            color={colorScheme === "dark" ? "#fff" : "#000000"}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setWritingNewTodo(false)}>
+                        <Entypo
+                            name="cross"
+                            size={24}
+                            color={colorScheme === "dark" ? "#fff" : "#000000"}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
