@@ -99,7 +99,7 @@ const WriteTodo = ({
         <View
             className={`${writingTodo ? "hidden" : ""} mb-5 px-7 ${
                 colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
-            } mx-5 rounded-lg p-5 shadow-md`}
+            } mx-4 rounded-lg p-5 shadow-md`}
         >
             <View className="flex flex-row items-center justify-between">
                 <TextInput
@@ -142,10 +142,12 @@ const WriteTodo = ({
 const Todo = ({
     id,
     data,
+    alreadyEditingTodo,
     setEditingTodo,
 }: {
     id: string;
     data: DocumentData;
+    alreadyEditingTodo: boolean;
     setEditingTodo: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const colorScheme = useColorScheme();
@@ -182,7 +184,10 @@ const Todo = ({
                             {data.value}
                         </Text>
                         <View className="flex flex-row items-center justify-center space-x-2">
-                            <TouchableOpacity onPress={() => setEditable(true)}>
+                            <TouchableOpacity
+                                onPress={() => setEditable(true)}
+                                disabled={alreadyEditingTodo}
+                            >
                                 <MaterialCommunityIcons
                                     name="pencil"
                                     size={24}
@@ -337,6 +342,7 @@ const TodoScreen = () => {
                                 key={id}
                                 data={data}
                                 setEditingTodo={setEditingTodo}
+                                alreadyEditingTodo={editingTodo}
                             />
                         ))}
                         {creatingNewTodo && (
