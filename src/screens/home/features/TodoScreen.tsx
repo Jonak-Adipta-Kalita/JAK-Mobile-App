@@ -346,7 +346,9 @@ const TodoScreen = () => {
                                 key={id}
                                 data={data}
                                 setEditingTodo={setEditingTodo}
-                                alreadyEditingTodo={editingTodo}
+                                alreadyEditingTodo={
+                                    editingTodo || creatingNewTodo
+                                }
                             />
                         ))}
                         {creatingNewTodo && (
