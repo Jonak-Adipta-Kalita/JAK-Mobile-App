@@ -270,9 +270,7 @@ const TodoScreen = () => {
     useEffect(() => {
         const showSubscription = Keyboard.addListener(
             Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow",
-            () => {
-                // TODO: Scroll to the Focused Todo
-            }
+            () => {}
         );
 
         return () => {
