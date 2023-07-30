@@ -34,6 +34,7 @@ import { useHideBottomTab } from "@hooks/useBottomTab";
 import Header from "@components/Header";
 import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
 import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
+import { Platform } from "react-native";
 
 const WriteTodo = ({
     type,
@@ -267,9 +268,12 @@ const TodoScreen = () => {
     }, [user, navigation, todosFetched]);
 
     useEffect(() => {
-        const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-            // TODO: Scroll to the Focused Todo
-        });
+        const showSubscription = Keyboard.addListener(
+            Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow",
+            () => {
+                // TODO: Scroll to the Focused Todo
+            }
+        );
 
         return () => {
             showSubscription.remove();
