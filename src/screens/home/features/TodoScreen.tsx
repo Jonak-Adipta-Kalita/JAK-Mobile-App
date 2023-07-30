@@ -192,7 +192,11 @@ const Todo = ({
                                     name="pencil"
                                     size={24}
                                     color={
-                                        colorScheme === "dark"
+                                        alreadyEditingTodo
+                                            ? colorScheme === "dark"
+                                                ? "#808080"
+                                                : "#A3A3A3"
+                                            : colorScheme === "dark"
                                             ? "#fff"
                                             : "#000000"
                                     }
