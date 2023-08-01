@@ -123,7 +123,15 @@ const WriteTodo = ({
                         <Entypo
                             name="check"
                             size={24}
-                            color={colorScheme === "dark" ? "#fff" : "#000000"}
+                            color={
+                                todoText === ""
+                                    ? colorScheme === "dark"
+                                        ? "#808080"
+                                        : "#A3A3A3"
+                                    : colorScheme === "dark"
+                                    ? "#fff"
+                                    : "#000000"
+                            }
                         />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setWritingNewTodo(false)}>
