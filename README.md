@@ -31,7 +31,7 @@
 
 </div>
 
-# For [Desktop](https://github.com/Jonak-Adipta-Kalita/JAK-Desktop-App)
+-   For [Desktop](https://github.com/Jonak-Adipta-Kalita/JAK-Desktop-App)
 
 ## All Features
 
