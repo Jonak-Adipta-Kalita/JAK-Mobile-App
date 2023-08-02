@@ -31,6 +31,8 @@
 
 </div>
 
+# For [Desktop](https://github.com/Jonak-Adipta-Kalita/JAK-Desktop-App)
+
 ## All Features
 
 -   **Todo**: Create a Todo List
