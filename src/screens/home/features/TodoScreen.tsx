@@ -18,6 +18,7 @@ import {
     Text,
     useColorScheme,
     Keyboard,
+    LayoutRectangle,
 } from "react-native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import LoadingIndicator from "@components/Loading";
@@ -152,11 +153,17 @@ const Todo = ({
     data,
     alreadyEditingTodo,
     setEditingTodo,
+    index,
+    itemsCoords,
+    setItemsCoords,
 }: {
     id: string;
     data: DocumentData;
     alreadyEditingTodo: boolean;
     setEditingTodo: React.Dispatch<React.SetStateAction<boolean>>;
+    index: number;
+    itemsCoords: LayoutRectangle[];
+    setItemsCoords: React.Dispatch<React.SetStateAction<LayoutRectangle[]>>;
 }) => {
     const colorScheme = useColorScheme();
     const [user] = useAuthState(auth);
@@ -167,7 +174,13 @@ const Todo = ({
     }, [editable]);
 
     return (
-        <>
+        <View
+            onLayout={(event) => {
+                const layout = event.nativeEvent.layout;
+                itemsCoords[index] = layout;
+                setItemsCoords(itemsCoords);
+            }}
+        >
             {editable ? (
                 <WriteTodo
                     setWritingNewTodo={setEditable}
@@ -252,7 +265,7 @@ const Todo = ({
                     </View>
                 </View>
             )}
-        </>
+        </View>
     );
 };
 
@@ -273,6 +286,9 @@ const TodoScreen = () => {
     const colorScheme = useColorScheme();
     const scrollRef = useRef<ScrollView | null>(null);
 
+    const [itemsCoords, setItemCoords] = useState<LayoutRectangle[]>([]);
+    const [scrollToIndex, setScrollToIndex] = useState(0);
+
     useEffect(() => {
         setTodos(
             todosFetched
@@ -287,7 +303,17 @@ const TodoScreen = () => {
     useEffect(() => {
         const showSubscription = Keyboard.addListener(
             Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow",
-            () => {}
+            () => {
+                if (creatingNewTodo) {
+                    scrollRef.current?.scrollToEnd();
+                } else {
+                    scrollRef.current?.scrollTo({
+                        x: 0,
+                        y: itemsCoords[scrollToIndex - 1].y,
+                        animated: true,
+                    });
+                }
+            }
         );
 
         return () => {
@@ -348,7 +374,7 @@ const TodoScreen = () => {
                     </View>
                 ) : (
                     <ScrollView className="mt-5" ref={scrollRef}>
-                        {todos?.map(({ id, data }) => (
+                        {todos?.map(({ id, data }, i) => (
                             <Todo
                                 id={id}
                                 key={id}
@@ -357,6 +383,9 @@ const TodoScreen = () => {
                                 alreadyEditingTodo={
                                     editingTodo || creatingNewTodo
                                 }
+                                index={i}
+                                itemsCoords={itemsCoords}
+                                setItemsCoords={setItemCoords}
                             />
                         ))}
                         {creatingNewTodo && (
