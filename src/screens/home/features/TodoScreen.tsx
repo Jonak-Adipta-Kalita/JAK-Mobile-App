@@ -156,6 +156,7 @@ const Todo = ({
     index,
     itemsCoords,
     setItemsCoords,
+    setScrollToIndex,
 }: {
     id: string;
     data: DocumentData;
@@ -164,6 +165,7 @@ const Todo = ({
     index: number;
     itemsCoords: LayoutRectangle[];
     setItemsCoords: React.Dispatch<React.SetStateAction<LayoutRectangle[]>>;
+    setScrollToIndex: React.Dispatch<React.SetStateAction<number>>;
 }) => {
     const colorScheme = useColorScheme();
     const [user] = useAuthState(auth);
@@ -206,7 +208,10 @@ const Todo = ({
                         </Text>
                         <View className="flex flex-row items-center justify-center space-x-2">
                             <TouchableOpacity
-                                onPress={() => setEditable(true)}
+                                onPress={() => {
+                                    setEditable(true);
+                                    setScrollToIndex(index);
+                                }}
                                 disabled={alreadyEditingTodo}
                             >
                                 <MaterialCommunityIcons
@@ -287,7 +292,7 @@ const TodoScreen = () => {
     const scrollRef = useRef<ScrollView | null>(null);
 
     const [itemsCoords, setItemCoords] = useState<LayoutRectangle[]>([]);
-    const [scrollToIndex, setScrollToIndex] = useState(0);
+    const [scrollToIndex, setScrollToIndex] = useState(1);
 
     useEffect(() => {
         setTodos(
@@ -386,6 +391,7 @@ const TodoScreen = () => {
                                 index={i}
                                 itemsCoords={itemsCoords}
                                 setItemsCoords={setItemCoords}
+                                setScrollToIndex={setScrollToIndex}
                             />
                         ))}
                         {creatingNewTodo && (
