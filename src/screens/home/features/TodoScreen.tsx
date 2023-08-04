@@ -314,7 +314,7 @@ const TodoScreen = () => {
                 } else {
                     scrollRef.current?.scrollTo({
                         x: 0,
-                        y: itemsCoords[scrollToIndex - 1].y,
+                        y: itemsCoords[scrollToIndex].y,
                         animated: true,
                     });
                 }
@@ -324,7 +324,7 @@ const TodoScreen = () => {
         return () => {
             showSubscription.remove();
         };
-    }, []);
+    }, [scrollToIndex]);
 
     useHideBottomTab();
 
