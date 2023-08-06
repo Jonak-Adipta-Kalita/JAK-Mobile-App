@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import globalStyles from "@utils/globalStyles";
-import { Text, TouchableOpacity, View, useColorScheme } from "react-native";
+import {
+    Text,
+    TouchableOpacity,
+    View,
+    useColorScheme,
+    Linking,
+} from "react-native";
 import StatusBar from "@components/StatusBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -383,6 +389,9 @@ const QRCodeScreen = () => {
 
     const handleBarCodeScanned = ({ data }: BarCodeEvent) => {
         setScanned(true);
+        if (data.startsWith("https://")) {
+            Linking.openURL(data);
+        }
         setScannedData(data);
     };
 
@@ -510,8 +519,21 @@ const QRCodeScreen = () => {
                                                 colorScheme === "dark"
                                                     ? "text-[#fff]"
                                                     : "text-[#000000]"
-                                            } text-center text-sm`}
+                                            } mx-2 text-center text-sm ${
+                                                scannedData.startsWith(
+                                                    "https://"
+                                                )
+                                                    ? "underline-blue-500 text-blue-500 underline"
+                                                    : ""
+                                            }`}
                                             style={globalStyles.font}
+                                            onPress={() => {
+                                                if (
+                                                    scannedData.startsWith("https://")
+                                                ) {
+                                                    Linking.openURL(scannedData);
+                                                }
+                                            }}
                                         >
                                             {scannedData}
                                         </Text>
