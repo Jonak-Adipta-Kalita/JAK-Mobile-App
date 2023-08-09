@@ -529,9 +529,13 @@ const QRCodeScreen = () => {
                                             style={globalStyles.font}
                                             onPress={() => {
                                                 if (
-                                                    scannedData.startsWith("https://")
+                                                    scannedData.startsWith(
+                                                        "https://"
+                                                    )
                                                 ) {
-                                                    Linking.openURL(scannedData);
+                                                    Linking.openURL(
+                                                        scannedData
+                                                    );
                                                 }
                                             }}
                                         >
