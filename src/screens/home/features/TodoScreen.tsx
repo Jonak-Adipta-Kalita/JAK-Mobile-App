@@ -36,7 +36,6 @@ import Header from "@components/Header";
 import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
 import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 import { Platform } from "react-native";
-import SkeletonContent from "react-native-skeleton-content";
 
 const WriteTodo = ({
     type,
