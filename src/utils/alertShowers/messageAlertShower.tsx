@@ -5,11 +5,9 @@ const messageAlertShower = (
     message: string,
     buttons: AlertButton[]
 ) => {
-    if (Platform.OS === "android" || Platform.OS === "ios") {
-        return Alert.alert(title, message, buttons);
-    } else {
-        return;
-    }
+    return Platform.OS === "android" || Platform.OS === "ios"
+        ? Alert.alert(title, message, buttons)
+        : undefined;
 };
 
 export default messageAlertShower;
