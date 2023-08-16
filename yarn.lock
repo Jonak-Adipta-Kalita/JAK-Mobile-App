@@ -12421,6 +12421,11 @@ recast@^0.20.4:
     source-map "~0.6.1"
     tslib "^2.0.1"
 
+recoil-nexus@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/recoil-nexus/-/recoil-nexus-0.5.0.tgz#965835c6ba54774283e463bbb314859b1969c079"
+  integrity sha512-I2qerncPPmTPhFi0V/q2ebwKrRq9UXqZf30xoNUYLCZnjwxsusbfZKHICULVxjOhIJ3nkU2xrnVjdfVjKaYLEQ==
+
 recoil@^0.7.7:
   version "0.7.7"
   resolved "https://registry.npmjs.org/recoil/-/recoil-0.7.7.tgz"
