@@ -53,7 +53,7 @@ const AppChildren = () => {
                 onDismiss={() => setAlertData({ data: null, show: false })}
                 customView={<Alert />}
                 contentContainerStyle={{
-                    backgroundColor: scheme === "dark" ? "#413F44" : "#ffffff",
+                    backgroundColor: scheme === "dark" ? "#2a2a2a" : "#ffffff",
                 }}
             />
             <NavigationContainer
