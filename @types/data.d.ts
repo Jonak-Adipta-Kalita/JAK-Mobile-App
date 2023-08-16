@@ -1,3 +1,5 @@
+import { AlertButton } from "react-native";
+
 export type User = {
     photoURL?: string;
     todos: Todo[];
@@ -19,4 +21,13 @@ export type OnboardingData = {
     id: number;
     title: string;
     description: string;
+};
+
+export type AlertData = {
+    show: boolean;
+    data: {
+        title: string;
+        message: string;
+        buttons: AlertButton[];
+    } | null;
 };

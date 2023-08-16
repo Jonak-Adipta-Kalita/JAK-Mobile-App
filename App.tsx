@@ -13,9 +13,11 @@ import BottomTabNavigator from "@navigation/BottomTabNavigator";
 import { NetworkState, getNetworkStateAsync } from "expo-network";
 import { NoNetworkStack } from "@navigation/StackNavigator";
 import { decode } from "base-64";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilValue } from "recoil";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AwesomeAlert from "react-native-awesome-alerts";
+import { alertAtomState } from "./src/atoms/alertAtom";
+import RecoilNexus from "recoil-nexus";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -29,6 +31,7 @@ global.atob = global.atob || decode;
 const AppChildren = () => {
     const scheme = useColorScheme();
     const [networkState, setNetworkState] = useState<NetworkState | null>(null);
+    const alertData = useRecoilValue(alertAtomState);
 
     useEffect(() => {
         getNetworkStateAsync().then((state) => setNetworkState(state));
@@ -43,13 +46,19 @@ const AppChildren = () => {
         );
 
     return (
-        <NavigationContainer theme={scheme === "dark" ? DarkTheme : LightTheme}>
-            {networkState.isConnected && networkState.isInternetReachable ? (
-                <BottomTabNavigator />
-            ) : (
-                <NoNetworkStack />
-            )}
-        </NavigationContainer>
+        <>
+            <AwesomeAlert show={alertData.show} />
+            <NavigationContainer
+                theme={scheme === "dark" ? DarkTheme : LightTheme}
+            >
+                {networkState.isConnected &&
+                networkState.isInternetReachable ? (
+                    <BottomTabNavigator />
+                ) : (
+                    <NoNetworkStack />
+                )}
+            </NavigationContainer>
+        </>
     );
 };
 
@@ -65,7 +74,6 @@ const App = () => {
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-            <AwesomeAlert />
             {!fontsLoaded || userLoading ? (
                 <LoadingIndicator
                     dimensions={{ width: 70, height: 70 }}
@@ -73,6 +81,7 @@ const App = () => {
                 />
             ) : (
                 <RecoilRoot>
+                    <RecoilNexus />
                     <AppChildren />
                 </RecoilRoot>
             )}

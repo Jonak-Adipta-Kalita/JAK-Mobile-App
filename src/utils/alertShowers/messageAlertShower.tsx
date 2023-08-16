@@ -1,4 +1,6 @@
-import { Alert, AlertButton, Platform } from "react-native";
+import { alertAtomState } from "@/src/atoms/alertAtom";
+import { AlertButton, Platform } from "react-native";
+import { setRecoil } from "recoil-nexus";
 
 const messageAlertShower = (
     title: string,
@@ -6,7 +8,14 @@ const messageAlertShower = (
     buttons: AlertButton[]
 ) => {
     return Platform.OS === "android" || Platform.OS === "ios"
-        ? Alert.alert(title, message, buttons)
+        ? setRecoil(alertAtomState, {
+              show: true,
+              data: {
+                  title,
+                  message,
+                  buttons,
+              },
+          })
         : undefined;
 };
 
