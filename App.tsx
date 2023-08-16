@@ -13,7 +13,7 @@ import BottomTabNavigator from "@navigation/BottomTabNavigator";
 import { NetworkState, getNetworkStateAsync } from "expo-network";
 import { NoNetworkStack } from "@navigation/StackNavigator";
 import { decode } from "base-64";
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { alertAtomState } from "./src/atoms/alertAtom";
@@ -31,7 +31,7 @@ global.atob = global.atob || decode;
 const AppChildren = () => {
     const scheme = useColorScheme();
     const [networkState, setNetworkState] = useState<NetworkState | null>(null);
-    const alertData = useRecoilValue(alertAtomState);
+    const [alertData, setAlertData] = useRecoilState(alertAtomState);
 
     useEffect(() => {
         getNetworkStateAsync().then((state) => setNetworkState(state));
@@ -47,7 +47,10 @@ const AppChildren = () => {
 
     return (
         <>
-            <AwesomeAlert show={alertData.show} />
+            <AwesomeAlert
+                show={alertData.show}
+                onDismiss={() => setAlertData({ data: null, show: false })}
+            />
             <NavigationContainer
                 theme={scheme === "dark" ? DarkTheme : LightTheme}
             >
