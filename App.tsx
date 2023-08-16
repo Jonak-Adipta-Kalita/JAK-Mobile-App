@@ -18,6 +18,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { alertAtomState } from "./src/atoms/alertAtom";
 import RecoilNexus from "recoil-nexus";
+import Alert from "./src/components/Alert";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -50,6 +51,7 @@ const AppChildren = () => {
             <AwesomeAlert
                 show={alertData.show}
                 onDismiss={() => setAlertData({ data: null, show: false })}
+                customView={<Alert />}
             />
             <NavigationContainer
                 theme={scheme === "dark" ? DarkTheme : LightTheme}
