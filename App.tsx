@@ -16,7 +16,7 @@ import { decode } from "base-64";
 import { RecoilRoot, useRecoilState } from "recoil";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AwesomeAlert from "react-native-awesome-alerts";
-import { alertAtomState } from "./src/atoms/alertAtom";
+import { alertDataState } from "./src/atoms/alertAtom";
 import RecoilNexus from "recoil-nexus";
 import Alert from "./src/components/Alert";
 
@@ -32,7 +32,7 @@ global.atob = global.atob || decode;
 const AppChildren = () => {
     const scheme = useColorScheme();
     const [networkState, setNetworkState] = useState<NetworkState | null>(null);
-    const [alertData, setAlertData] = useRecoilState(alertAtomState);
+    const [alertData, setAlertData] = useRecoilState(alertDataState);
 
     useEffect(() => {
         getNetworkStateAsync().then((state) => setNetworkState(state));
@@ -54,6 +54,8 @@ const AppChildren = () => {
                 customView={<Alert />}
                 contentContainerStyle={{
                     backgroundColor: scheme === "dark" ? "#2a2a2a" : "#ffffff",
+                    maxWidth: 280,
+                    borderRadius: 2,
                 }}
             />
             <NavigationContainer
