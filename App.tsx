@@ -57,6 +57,8 @@ const AppChildren = () => {
                     maxWidth: 280,
                     borderRadius: 2,
                 }}
+                closeOnTouchOutside={false}
+                closeOnHardwareBackPress={false}
             />
             <NavigationContainer
                 theme={scheme === "dark" ? DarkTheme : LightTheme}
