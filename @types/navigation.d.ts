@@ -22,7 +22,7 @@ export type BottomTabScreensParamList = {
 };
 
 export type BottomTabStackNavigationProps<
-    StackRouteName extends keyof StackScreenParamList
+    StackRouteName extends keyof StackScreenParamList,
 > = CompositeNavigationProp<
     BottomTabNavigationProp<BottomTabScreensParamList>,
     StackNavigationProp<StackScreenParamList, StackRouteName>
