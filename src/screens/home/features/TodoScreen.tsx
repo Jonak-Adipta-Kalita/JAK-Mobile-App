@@ -324,7 +324,7 @@ const TodoScreen = () => {
         return () => {
             showSubscription.remove();
         };
-    }, [scrollToIndex]);
+    }, [scrollToIndex, creatingNewTodo]);
 
     useHideBottomTab();
 
