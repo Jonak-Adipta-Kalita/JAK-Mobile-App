@@ -56,7 +56,7 @@
         "expo-network": "~5.4.0",
         "expo-status-bar": "~1.6.0",
         "expo-updates": "~0.18.12",
-        "firebase": "9.21.0",
+        "firebase": "^9.21.0",
         "nativewind": "^2.0.11",
         "react": "18.2.0",
         "react-firebase-hooks": "^5.1.1",
