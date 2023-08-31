@@ -54,8 +54,8 @@ const AppChildren = () => {
                 customView={<Alert />}
                 contentContainerStyle={{
                     backgroundColor: scheme === "dark" ? "#2a2a2a" : "#ffffff",
-                    maxWidth: 280,
                     borderRadius: 2,
+                    width: "90%",
                 }}
                 closeOnTouchOutside={false}
                 closeOnHardwareBackPress={false}
