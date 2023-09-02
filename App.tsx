@@ -18,7 +18,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { alertDataState } from "./src/atoms/alertAtom";
 import RecoilNexus from "recoil-nexus";
-import Alert from "./src/components/Alert";
+import globalStyles from "./src/utils/globalStyles";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -51,11 +51,22 @@ const AppChildren = () => {
             <AwesomeAlert
                 show={alertData.show}
                 onDismiss={() => setAlertData({ data: null, show: false })}
-                customView={<Alert />}
                 contentContainerStyle={{
                     backgroundColor: scheme === "dark" ? "#2a2a2a" : "#ffffff",
                     borderRadius: 2,
                     width: "90%",
+                }}
+                title={alertData.data?.title}
+                message={alertData.data?.message}
+                titleStyle={{
+                    fontFamily: "Medium",
+                    fontSize: 16,
+                    color: scheme === "dark" ? "#ffffff" : "#000000",
+                }}
+                messageStyle={{
+                    ...globalStyles.font,
+                    fontSize: 14,
+                    color: scheme === "dark" ? "#ffffff" : "#000000",
                 }}
                 closeOnTouchOutside={false}
                 closeOnHardwareBackPress={false}
