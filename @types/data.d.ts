@@ -28,6 +28,6 @@ export type AlertData = {
     data: {
         title: string;
         message: string;
-        buttons: AlertButton[];
+        buttons: [AlertButton, AlertButton];
     } | null;
 };
