@@ -13,12 +13,10 @@ import BottomTabNavigator from "@navigation/BottomTabNavigator";
 import { NetworkState, getNetworkStateAsync } from "expo-network";
 import { NoNetworkStack } from "@navigation/StackNavigator";
 import { decode } from "base-64";
-import { RecoilRoot, useRecoilState } from "recoil";
+import { RecoilRoot } from "recoil";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import AwesomeAlert from "react-native-awesome-alerts";
-import { alertDataState } from "@atoms/alertAtom";
 import RecoilNexus from "recoil-nexus";
-import globalStyles from "@utils/globalStyles";
+import Alert from "@components/Alert";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -32,7 +30,6 @@ global.atob = global.atob || decode;
 const AppChildren = () => {
     const scheme = useColorScheme();
     const [networkState, setNetworkState] = useState<NetworkState | null>(null);
-    const [alertData, setAlertData] = useRecoilState(alertDataState);
 
     useEffect(() => {
         getNetworkStateAsync().then((state) => setNetworkState(state));
@@ -48,41 +45,7 @@ const AppChildren = () => {
 
     return (
         <>
-            <AwesomeAlert
-                show={alertData.show}
-                onDismiss={() => setAlertData({ data: null, show: false })}
-                contentContainerStyle={{
-                    backgroundColor: scheme === "dark" ? "#2a2a2a" : "#ffffff",
-                    borderRadius: 2,
-                    width: "90%",
-                }}
-                title={alertData.data?.title}
-                message={alertData.data?.message}
-                titleStyle={{
-                    fontFamily: "Medium",
-                    fontSize: 16,
-                    color: scheme === "dark" ? "#ffffff" : "#000000",
-                }}
-                messageStyle={{
-                    ...globalStyles.font,
-                    fontSize: 14,
-                    color: scheme === "dark" ? "#ffffff" : "#000000",
-                }}
-                showConfirmButton
-                showCancelButton
-                confirmText={alertData.data?.buttons[0].text}
-                cancelText={alertData.data?.buttons[1].text}
-                onConfirmPressed={() => {
-                    alertData.data?.buttons[0].onPress?.();
-                    setAlertData({ data: null, show: false });
-                }}
-                onCancelPressed={() => {
-                    alertData.data?.buttons[1].onPress?.();
-                    setAlertData({ data: null, show: false });
-                }}
-                closeOnTouchOutside={false}
-                closeOnHardwareBackPress={false}
-            />
+            <Alert />
             <NavigationContainer
                 theme={scheme === "dark" ? DarkTheme : LightTheme}
             >
