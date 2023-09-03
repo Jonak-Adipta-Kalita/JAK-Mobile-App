@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import globalStyles from "@utils/globalStyles";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { alertDataState } from "@atoms/alertAtom";
 import { useRecoilState } from "recoil";
-import { useColorScheme } from "react-native";
+import { useColorScheme, View, ActivityIndicator } from "react-native";
 
 const Alert = () => {
     const [alertData, setAlertData] = useRecoilState(alertDataState);
     const scheme = useColorScheme();
 
-    const [title, setTitle] = useState("");
-    const [message, setMessage] = useState("");
-
-    useEffect(() => {
-        alertData.data && setTitle(alertData.data.title);
-        alertData.data && setMessage(alertData.data.message);
-    }, [alertData]);
-
     return (
         <AwesomeAlert
             show={alertData.show}
+            customView={
+                !alertData.data && (
+                    <View className="flex items-center justify-center flex-1 w-full h-full py-10">
+                        <ActivityIndicator size="large" />
+                    </View>
+                )
+            }
             onDismiss={() => setAlertData({ data: null, show: false })}
             contentContainerStyle={{
                 backgroundColor: scheme === "dark" ? "#2a2a2a" : "#ffffff",
@@ -34,8 +33,8 @@ const Alert = () => {
                 marginTop: 15,
                 justifyContent: "space-evenly",
             }}
-            title={title}
-            message={message}
+            title={alertData.data?.title}
+            message={alertData.data?.message}
             titleStyle={{
                 fontFamily: "Medium",
                 fontSize: 16,
@@ -47,7 +46,7 @@ const Alert = () => {
                 fontSize: 14.5,
                 color: scheme === "dark" ? "#ffffff" : "#000000",
             }}
-            showConfirmButton
+            showConfirmButton={alertData.data?.buttons[0] ? true : false}
             showCancelButton={alertData.data?.buttons[1] ? true : false}
             confirmText={alertData.data?.buttons[0].text}
             cancelText={
