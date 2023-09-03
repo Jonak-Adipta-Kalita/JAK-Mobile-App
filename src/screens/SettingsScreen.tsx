@@ -69,61 +69,53 @@ const SettingsScreen = () => {
     }).toString();
 
     const signOut = () => {
-        messageAlertShower(
-            "Are you sure you want to sign out?",
-            "You can always sign back in",
-            [
-                {
-                    text: "Cancel",
-                    onPress: () => {},
+        messageAlertShower("Are you sure?", "You can always sign back in", [
+            {
+                text: "Cancel",
+                onPress: () => {},
+            },
+            {
+                text: "Sign Out",
+                onPress: () => {
+                    auth.signOut().catch((error) => {
+                        errorAlertShower(error);
+                    });
                 },
-                {
-                    text: "Sign Out",
-                    onPress: () => {
-                        auth.signOut().catch((error) => {
-                            errorAlertShower(error);
-                        });
-                    },
-                },
-            ]
-        );
+            },
+        ]);
     };
 
     const deleteAccount = () => {
-        messageAlertShower(
-            "Are you sure you want to delete your account?",
-            "This action is irreversible!!",
-            [
-                {
-                    text: "Cancel",
-                    onPress: () => {},
-                },
-                {
-                    text: "Delete",
-                    onPress: async () => {
-                        try {
-                            const userUID = user?.uid!;
-                            const dbDoc = doc(db, "users", userUID);
-                            const storageRef = ref(storage, `users/${userUID}`);
+        messageAlertShower("Are you sure?", "This action is irreversible!!", [
+            {
+                text: "Cancel",
+                onPress: () => {},
+            },
+            {
+                text: "Delete",
+                onPress: async () => {
+                    try {
+                        const userUID = user?.uid!;
+                        const dbDoc = doc(db, "users", userUID);
+                        const storageRef = ref(storage, `users/${userUID}`);
 
-                            await user?.delete();
+                        await user?.delete();
 
-                            if ((await getDoc(dbDoc)).exists()) {
-                                await deleteDoc(dbDoc);
-                            }
-
-                            getMetadata(storageRef)
-                                .then(() => {
-                                    deleteObject(storageRef);
-                                })
-                                .catch(() => {});
-                        } catch (error) {
-                            errorAlertShower(error);
+                        if ((await getDoc(dbDoc)).exists()) {
+                            await deleteDoc(dbDoc);
                         }
-                    },
+
+                        getMetadata(storageRef)
+                            .then(() => {
+                                deleteObject(storageRef);
+                            })
+                            .catch(() => {});
+                    } catch (error) {
+                        errorAlertShower(error);
+                    }
                 },
-            ]
-        );
+            },
+        ]);
     };
 
     if (userError) errorAlertShower(userError);

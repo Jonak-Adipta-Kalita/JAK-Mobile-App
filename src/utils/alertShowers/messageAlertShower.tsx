@@ -5,7 +5,7 @@ import { setRecoil } from "recoil-nexus";
 const messageAlertShower = (
     title: string,
     message: string,
-    buttons: AlertButton[]
+    buttons: [AlertButton, AlertButton] | [AlertButton]
 ) => {
     return Platform.OS === "android" || Platform.OS === "ios"
         ? setRecoil(alertDataState, {

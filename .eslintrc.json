@@ -6,7 +6,7 @@
     },
     "settings": {
         "react": {
-            "version": "16.13.1"
+            "version": "18.2.0"
         }
     },
     "extends": [
