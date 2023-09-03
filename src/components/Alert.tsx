@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import globalStyles from "@utils/globalStyles";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { alertDataState } from "@atoms/alertAtom";
@@ -9,6 +9,14 @@ const Alert = () => {
     const [alertData, setAlertData] = useRecoilState(alertDataState);
     const scheme = useColorScheme();
 
+    const [title, setTitle] = useState("");
+    const [message, setMessage] = useState("");
+
+    useEffect(() => {
+        alertData.data && setTitle(alertData.data.title);
+        alertData.data && setMessage(alertData.data.message);
+    }, [alertData]);
+
     return (
         <AwesomeAlert
             show={alertData.show}
@@ -18,8 +26,8 @@ const Alert = () => {
                 borderRadius: 2,
                 width: "90%",
             }}
-            title={alertData.data?.title}
-            message={alertData.data?.message}
+            title={title}
+            message={message}
             titleStyle={{
                 fontFamily: "Medium",
                 fontSize: 16,
