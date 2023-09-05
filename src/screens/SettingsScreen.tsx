@@ -24,11 +24,11 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
     const colorScheme = useColorScheme();
 
     return (
-        <View className="mb-5">
+        <View style={{ width: "100%" }}>
             <TouchableOpacity
                 className={`${
                     colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
-                } flex flex-row items-center rounded-lg p-4 shadow-md`}
+                } flex flex-row items-center rounded-lg p-4 shadow-md mb-5`}
             >
                 <Text
                     className={`${
@@ -41,7 +41,7 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
                     {title}
                 </Text>
                 <Text
-                    className="ml-5 text-sm text-gray-400 truncate"
+                    className="ml-5 text-sm text-gray-400"
                     style={globalStyles.font}
                 >
                     {value}
@@ -173,7 +173,7 @@ const SettingsScreen = () => {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View className="p-10 pt-16">
+                <View className="p-5 pt-16 flex flex-col items-center justify-center">
                     <ProfileDetail title="Name" value={user?.displayName!} />
                     <ProfileDetail title="Email" value={user?.email!} />
                 </View>
