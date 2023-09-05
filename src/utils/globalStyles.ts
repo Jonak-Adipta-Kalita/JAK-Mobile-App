@@ -45,7 +45,6 @@ export default StyleSheet.create<{
     },
     headerIcon: {
         alignItems: "flex-end",
-        margin: 20,
         marginBottom: 5,
     },
 });

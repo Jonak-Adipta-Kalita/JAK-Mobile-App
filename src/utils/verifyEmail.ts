@@ -6,8 +6,8 @@ export const verifyEmail = async (navigation: any, user: User) => {
     try {
         await sendEmailVerification(user);
         messageAlertShower(
-            "Verification Email Successfully Sent!!",
-            "Please check your Email for the Verification Link!!",
+            "Verification Email Sent",
+            "Please check your Email!",
             [
                 {
                     text: "OK",

@@ -140,7 +140,6 @@ const SettingsScreen = () => {
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
                             onPress={() => verifyEmail(navigation, user!)}
-                            className="-mt-[0.5px] mr-10"
                         >
                             <MaterialCommunityIcons
                                 name="account-cancel-outline"

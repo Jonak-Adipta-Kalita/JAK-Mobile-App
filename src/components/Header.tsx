@@ -25,7 +25,7 @@ const Header = ({
         <View className="flex flex-row items-center justify-between">
             {goBackButton && (
                 <TouchableOpacity
-                    style={globalStyles.headerIcon}
+                    style={{ ...globalStyles.headerIcon, margin: 20 }}
                     onPress={navigation.goBack}
                     className="-mt-[0.5px] ml-10"
                 >

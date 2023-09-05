@@ -23,7 +23,7 @@ const Alert = () => {
             contentContainerStyle={{
                 backgroundColor: scheme === "dark" ? "#2a2a2a" : "#ffffff",
                 borderRadius: 2,
-                width: "90%",
+                width: "95%",
             }}
             contentStyle={{
                 justifyContent: "flex-start",
@@ -40,13 +40,11 @@ const Alert = () => {
                 fontSize: 16,
                 color: scheme === "dark" ? "#ffffff" : "#000000",
                 paddingHorizontal: 0,
-                textAlign: "justify",
             }}
             messageStyle={{
                 ...globalStyles.font,
                 fontSize: 14.5,
                 color: scheme === "dark" ? "#ffffff" : "#000000",
-                textAlign: "justify",
             }}
             showConfirmButton={alertData.data?.buttons[0] ? true : false}
             showCancelButton={alertData.data?.buttons[1] ? true : false}
