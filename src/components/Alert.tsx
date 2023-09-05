@@ -40,11 +40,13 @@ const Alert = () => {
                 fontSize: 16,
                 color: scheme === "dark" ? "#ffffff" : "#000000",
                 paddingHorizontal: 0,
+                textAlign: "justify",
             }}
             messageStyle={{
                 ...globalStyles.font,
                 fontSize: 14.5,
                 color: scheme === "dark" ? "#ffffff" : "#000000",
+                textAlign: "justify",
             }}
             showConfirmButton={alertData.data?.buttons[0] ? true : false}
             showCancelButton={alertData.data?.buttons[1] ? true : false}

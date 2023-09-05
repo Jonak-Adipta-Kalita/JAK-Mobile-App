@@ -41,7 +41,7 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
                     {title}
                 </Text>
                 <Text
-                    className="ml-5 text-sm text-gray-400"
+                    className="ml-5 text-sm text-gray-400 truncate"
                     style={globalStyles.font}
                 >
                     {value}
