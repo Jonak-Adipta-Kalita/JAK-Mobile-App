@@ -28,7 +28,7 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
             <TouchableOpacity
                 className={`${
                     colorScheme == "dark" ? "bg-[#272934]" : "bg-[#fff]"
-                } flex flex-row items-center rounded-lg p-4 shadow-md mb-5`}
+                } flex flex-row items-center rounded-lg py-4 shadow-md mb-5`}
             >
                 <Text
                     className={`${
@@ -43,6 +43,7 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
                 <Text
                     className="ml-5 text-sm text-gray-400"
                     style={globalStyles.font}
+                    numberOfLines={1}
                 >
                     {value}
                 </Text>
