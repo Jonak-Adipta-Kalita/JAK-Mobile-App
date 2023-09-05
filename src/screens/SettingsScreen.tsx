@@ -66,7 +66,12 @@ const SettingsScreen = () => {
         hair: ["long04", "short06"],
         hairColor: ["85c2c6"],
         hairProbability: 100,
-    }).toString();
+    });
+
+    const avatarStyle =
+        avatar.toJson().extra.hair === "long04"
+            ? { marginTop: -10, marginLeft: 2 }
+            : { marginTop: 7 };
 
     const signOut = () => {
         messageAlertShower("Are you sure?", "You can always sign back in", [
@@ -161,7 +166,10 @@ const SettingsScreen = () => {
                                     : "bg-white"
                             } h-[120px] w-[120px]`}
                         >
-                            <SvgXml xml={avatar} style={{ marginTop: 7 }} />
+                            <SvgXml
+                                xml={avatar.toString()}
+                                style={avatarStyle}
+                            />
                         </View>
                     </TouchableOpacity>
                 </View>
