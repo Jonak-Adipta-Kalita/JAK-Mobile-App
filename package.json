@@ -1,6 +1,6 @@
 {
     "name": "jak-mobile-app",
-    "description": "A Mobile App made by JAK",
+    "description": "Simplifying your digital life with multiple features in one app, reducing the need for switching and saving storage space.",
     "author": "Jonak Adipta Kalita",
     "license": "MIT",
     "main": "node_modules/expo/AppEntry.js",

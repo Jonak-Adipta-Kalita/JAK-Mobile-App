@@ -32,6 +32,7 @@
 </div>
 
 -   For [Desktop](https://github.com/Jonak-Adipta-Kalita/JAK-Desktop-App)
+-   For [Chrome Extension](https://github.com/Jonak-Adipta-Kalita/JAK-Chrome-Extension)
 
 ## All Features
 
