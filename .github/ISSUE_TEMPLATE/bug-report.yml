@@ -24,7 +24,7 @@ body:
           description: |
               You must provide a way to reproduce the problem. If you don't provide a repro, the issue will be closed automatically after a specific period.
           value: ~
-          placeholder: Link to repro
+          placeholder: Steps to Reproduce your Bug!
       validations:
           required: true
     - type: checkboxes
