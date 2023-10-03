@@ -61,7 +61,7 @@ Kindly read our [Contributing Guide](CONTRIBUTING.md) to learn and understand ab
 ## Technology(s) Used
 
 -   Language: [TypeScript](https://www.typescriptlang.org/)
--   Language Framework: [React Native](https://reactnative.dev/)
+-   Frontend: [React Native](https://reactnative.dev/)
 -   Backend: [Node JS](https://nodejs.org/), [Firebase](https://firebase.google.com/)
 -   CLI: [Expo](https://expo.io/)
 
