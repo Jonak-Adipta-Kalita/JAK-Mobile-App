@@ -15,7 +15,7 @@ body:
           label: Feature Description
           description: Please provide a detailed description of the feature you would like to see implemented.
           placeholder: Describe the feature request here.
-          value: ""
+          value: ~
       validations:
           required: true
     - type: textarea
@@ -23,7 +23,7 @@ body:
       attributes:
           label: Use Case
           description: Please explain the specific use case or scenario where this feature would be beneficial.
-          value: ""
+          value: ~
       validations:
           required: true
     - type: dropdown
@@ -31,7 +31,6 @@ body:
       attributes:
           label: Priority
           description: Please specify the priority level for this feature request (e.g., High, Medium, Low).
-          placeholder: Enter the priority level.
           options:
               - High
               - Medium
