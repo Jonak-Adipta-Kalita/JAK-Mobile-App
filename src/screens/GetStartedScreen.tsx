@@ -14,7 +14,7 @@ import { BottomTabStackNavigationProps } from "@/@types/navigation";
 const data: OnboardingData[] = [
     {
         id: 1,
-        title: "Welcome to JAK Mobile App",
+        title: "Welcome to StreamlineX",
         description:
             "Simplifying your digital life with multiple features in one app, reducing the need for switching and saving storage space.",
     },
