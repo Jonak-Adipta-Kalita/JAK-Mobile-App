@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const PACKAGE_NAME = process.env.PACKAGE_NAME;
 const PROJECT_ID = process.env.PROJECT_ID;
-const VERSION = "0.0.1";
+const VERSION = "v2.0.0";
 const THEME = "dark";
 
 export default {
