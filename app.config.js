@@ -8,8 +8,8 @@ const VERSION = "0.0.1";
 const THEME = "dark";
 
 export default {
-    name: "JAK Mobile App",
-    slug: "JAK-Mobile-App",
+    name: "StreamlineX",
+    slug: "StreamlineX",
     owner: "xxjonakadiptaxx",
     version: VERSION,
     orientation: "portrait",
