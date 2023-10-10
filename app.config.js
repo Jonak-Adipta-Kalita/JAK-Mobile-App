@@ -9,7 +9,7 @@ const THEME = "dark";
 
 export default {
     name: "StreamlineX",
-    slug: "StreamlineX",
+    slug: "JAK-Mobile-App",
     owner: "xxjonakadiptaxx",
     version: VERSION,
     orientation: "portrait",
