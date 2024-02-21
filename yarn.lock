@@ -3255,10 +3255,10 @@
     prompts "^2.4.0"
     semver "^7.5.2"
 
-"@react-native-masked-view/masked-view@0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.2.9.tgz#723a7a076d56b8f5f3fda076eaa5b6b82988e854"
-  integrity sha512-Hs4vKBKj+15VxHZHFtMaFWSBxXoOE5Ea8saoigWhahp8Mepssm0ezU+2pTl7DK9z8Y9s5uOl/aPb4QmBZ3R3Zw==
+"@react-native-masked-view/masked-view@0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.3.1.tgz#5bd76f17004a6ccbcec03856893777ee91f23d29"
+  integrity sha512-uVm8U6nwFIlUd1iDIB5cS+lDadApKR+l8k4k84d9hn+GN4lzAIJhUZ9syYX7c022MxNgAlbxoFLt0pqKoyaAGg==
 
 "@react-native/assets-registry@^0.72.0":
   version "0.72.0"
