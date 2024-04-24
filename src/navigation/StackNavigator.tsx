@@ -11,7 +11,6 @@ import RegisterScreen from "@screens/auth/RegisterScreen";
 import NoNetworkScreen from "@screens/NoNetworkScreen";
 import TodoScreen from "@screens/home/features/TodoScreen";
 import QRCodeScreen from "@screens/home/features/QRCodeScreen";
-import UnitConvertorScreen from "@screens/home/features/UnitConvertorScreen";
 
 const Stack = createStackNavigator<StackScreenParamList>();
 
@@ -56,10 +55,6 @@ const HomeStack = () => {
             <Stack.Group>
                 <Stack.Screen name="Todo" component={TodoScreen} />
                 <Stack.Screen name="QRCode" component={QRCodeScreen} />
-                <Stack.Screen
-                    name="UnitConvertor"
-                    component={UnitConvertorScreen}
-                />
             </Stack.Group>
         </Stack.Navigator>
     );

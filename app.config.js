@@ -47,6 +47,7 @@ export default {
                 cameraPermission: "Allow $(PRODUCT_NAME) to access camera.",
             },
         ],
+        "expo-font",
     ],
     extra: {
         eas: {

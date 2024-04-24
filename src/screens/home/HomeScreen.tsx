@@ -114,14 +114,6 @@ const HomeScreen = () => {
                                         navigation.navigate("QRCode")
                                     }
                                 />
-                                <Feature
-                                    title="Unit Convertor"
-                                    description="Convert Units"
-                                    icon="thermometer"
-                                    buttonOnPress={() =>
-                                        navigation.navigate("UnitConvertor")
-                                    }
-                                />
                             </ScrollView>
                         </View>
                     ) : (
