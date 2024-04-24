@@ -2,7 +2,6 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatusBar from "@components/StatusBar";
 import { Text, View, useColorScheme } from "react-native";
-import globalStyles from "@utils/globalStyles";
 import Feather from "@expo/vector-icons/Feather";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 
@@ -28,7 +27,6 @@ const NoNetworkScreen = () => {
                             ? "bg-[#272934] text-gray-200"
                             : "bg-white text-gray-900"
                     } mx-5 mt-10 p-5 text-center text-lg`}
-                    style={globalStyles.font}
                 >
                     No Network Connection. Try turning on your Mobile Data or
                     Wi-Fi. And re-open the app.
