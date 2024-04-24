@@ -154,20 +154,13 @@ const SettingsScreen = () => {
                     showRightButton={!user?.emailVerified}
                 />
                 <View className="mt-8 flex flex-col items-center justify-center">
-                    <TouchableOpacity className="flex flex-col items-center justify-center">
-                        <View
-                            className={`rounded-full ${
-                                colorScheme == "dark"
-                                    ? "bg-[#272934]"
-                                    : "bg-white"
-                            } h-[120px] w-[120px]`}
-                        >
-                            <SvgXml
-                                xml={avatar.toString()}
-                                style={avatarStyle}
-                            />
-                        </View>
-                    </TouchableOpacity>
+                    <View
+                        className={`flex flex-col items-center justify-center rounded-full ${
+                            colorScheme == "dark" ? "bg-[#272934]" : "bg-white"
+                        } h-[120px] w-[120px]`}
+                    >
+                        <SvgXml xml={avatar.toString()} style={avatarStyle} />
+                    </View>
                 </View>
                 <View className="p-5 pt-16 flex flex-col items-center justify-center">
                     <ProfileDetail title="Name" value={user?.displayName!} />
