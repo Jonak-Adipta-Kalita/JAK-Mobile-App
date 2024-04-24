@@ -4,7 +4,6 @@ import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
 import { WithLocalSvg } from "react-native-svg/css";
-import globalStyles from "../utils/globalStyles";
 import { OnboardingData } from "@/@types/data";
 import PagerView from "react-native-pager-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -74,7 +73,7 @@ const GetStartedScreen = () => {
                                             ? "text-[#DADADA]"
                                             : "text-[#787878]"
                                     }`}
-                                    style={{ fontFamily: "Medium" }}
+                                    style={{ fontWeight: "500" }}
                                 >
                                     {screen.title}
                                 </Text>
@@ -86,7 +85,6 @@ const GetStartedScreen = () => {
                                             ? "text-[#C1C1C1]"
                                             : "text-[#545454]"
                                     }`}
-                                    style={globalStyles.font}
                                 >
                                     {screen.description}
                                 </Text>
@@ -112,7 +110,7 @@ const GetStartedScreen = () => {
                                     ? "text-white"
                                     : "text-zinc-600"
                             } opacity-90`}
-                            style={{ fontFamily: "Medium" }}
+                            style={{ fontWeight: "500" }}
                         >
                             Get Started
                         </Text>

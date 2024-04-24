@@ -27,7 +27,6 @@ import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import globalStyles from "@utils/globalStyles";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
@@ -111,7 +110,6 @@ const WriteTodo = ({
                             : "text-[#000000]"
                     } mr-5 flex-1 text-sm`}
                     placeholderTextColor={"#9CA3AF"}
-                    style={globalStyles.font}
                     onChangeText={(e) => setTodoText(e)}
                     autoFocus
                     value={todoText}
@@ -202,7 +200,6 @@ const Todo = ({
                                     ? "text-[#fff]"
                                     : "text-[#000000]"
                             } mr-5 flex-1 text-sm`}
-                            style={globalStyles.font}
                         >
                             {data.value}
                         </Text>
@@ -372,7 +369,6 @@ const TodoScreen = () => {
                                     ? "bg-[#272934] text-gray-200"
                                     : "bg-white text-gray-900"
                             } mx-10 p-5 text-center text-lg`}
-                            style={globalStyles.font}
                         >
                             No Todo!! Press the Plus to create.
                         </Text>

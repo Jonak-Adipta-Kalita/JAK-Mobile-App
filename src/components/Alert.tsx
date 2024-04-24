@@ -1,5 +1,4 @@
 import React from "react";
-import globalStyles from "@utils/globalStyles";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { alertDataState } from "@atoms/alertAtom";
 import { useRecoilState } from "recoil";
@@ -36,13 +35,12 @@ const Alert = () => {
             title={alertData.data?.title}
             message={alertData.data?.message}
             titleStyle={{
-                fontFamily: "Medium",
+                fontWeight: "500",
                 fontSize: 16,
                 color: scheme === "dark" ? "#ffffff" : "#000000",
                 paddingHorizontal: 0,
             }}
             messageStyle={{
-                ...globalStyles.font,
                 fontSize: 14.5,
                 color: scheme === "dark" ? "#ffffff" : "#000000",
             }}
@@ -65,12 +63,12 @@ const Alert = () => {
             confirmButtonColor={scheme === "dark" ? "#2a2a2a" : "#ffffff"}
             cancelButtonColor={scheme === "dark" ? "#2a2a2a" : "#ffffff"}
             confirmButtonTextStyle={{
-                fontFamily: "Bold",
+                fontWeight: "bold",
                 fontSize: 14,
                 color: scheme === "dark" ? "#ffffff" : "#2a2a2a",
             }}
             cancelButtonTextStyle={{
-                fontFamily: "Bold",
+                fontWeight: "bold",
                 fontSize: 14,
                 color: scheme === "dark" ? "#ffffff" : "#2a2a2a",
             }}

@@ -30,7 +30,6 @@
         "expo-barcode-scanner": "~12.9.3",
         "expo-dev-client": "~3.3.11",
         "expo-file-system": "~16.0.9",
-        "expo-font": "~11.10.3",
         "expo-image": "~1.10.6",
         "expo-media-library": "~15.9.2",
         "expo-network": "~5.8.0",

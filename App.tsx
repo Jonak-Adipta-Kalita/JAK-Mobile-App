@@ -2,7 +2,6 @@ import "expo-dev-client";
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme, LogBox } from "react-native";
-import { useFonts } from "expo-font";
 import LightTheme from "@themes/LightTheme";
 import DarkTheme from "@themes/DarkTheme";
 import LoadingIndicator from "@components/Loading";
@@ -62,17 +61,12 @@ const AppChildren = () => {
 
 const App = () => {
     const [, userLoading, userError] = useAuthState(auth);
-    const [fontsLoaded, fontsError] = useFonts({
-        Regular: require("./assets/fonts/Regular.ttf"),
-        Medium: require("./assets/fonts/Medium.ttf"),
-        Bold: require("./assets/fonts/Bold.ttf"),
-    });
 
-    if (fontsError || userError) errorAlertShower(fontsError || userError);
+    if (userError) errorAlertShower(userError);
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-            {!fontsLoaded || userLoading ? (
+            {userLoading ? (
                 <LoadingIndicator
                     dimensions={{ width: 70, height: 70 }}
                     containerStyle={{ flex: 1 }}

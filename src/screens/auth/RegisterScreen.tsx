@@ -102,7 +102,6 @@ const RegisterScreen = () => {
                             ? "text-gray-100"
                             : "text-gray-900"
                     } my-[20px] ml-10 text-center text-2xl font-bold`}
-                    style={globalStyles.font}
                 >
                     Create an Account
                 </Text>
@@ -233,10 +232,7 @@ const RegisterScreen = () => {
                         }}
                         onPress={registerEmail}
                     >
-                        <Text
-                            className="text-center text-[15px] text-white"
-                            style={globalStyles.font}
-                        >
+                        <Text className="text-center text-[15px] text-white">
                             Register
                         </Text>
                     </TouchableOpacity>

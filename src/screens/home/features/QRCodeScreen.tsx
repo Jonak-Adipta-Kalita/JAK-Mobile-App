@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalStyles from "@utils/globalStyles";
 import {
     Text,
     TouchableOpacity,
@@ -185,7 +184,6 @@ const Create = () => {
                             />
                         </TouchableOpacity>
                         <Text
-                            style={globalStyles.font}
                             className={`text-xl ${
                                 colorScheme === "dark"
                                     ? "text-[#fff]"
@@ -215,7 +213,6 @@ const Create = () => {
                                             ? "text-[#fff]"
                                             : "text-[#000000]"
                                     } text-sm`}
-                                    style={globalStyles.font}
                                 >
                                     {qrCode.data().value}
                                 </Text>
@@ -238,7 +235,6 @@ const Create = () => {
                                     ? "text-[#fff]"
                                     : "text-[#000000]"
                             } text-sm`}
-                            style={globalStyles.font}
                             onChangeText={(text) => setQRCodeData(text)}
                             value={qrCodeData}
                             multiline
@@ -345,7 +341,6 @@ const Create = () => {
                                                     ? "text-[#fff]"
                                                     : "text-[#000000]"
                                             } text-center text-xs`}
-                                            style={globalStyles.font}
                                         >
                                             Stored QRCodes
                                         </Text>
@@ -469,7 +464,6 @@ const QRCodeScreen = () => {
                                         ? "text-[#fff]"
                                         : "text-[#000000]"
                                 } text-center text-sm`}
-                                style={globalStyles.font}
                             >
                                 Scan
                             </Text>
@@ -488,7 +482,6 @@ const QRCodeScreen = () => {
                                         ? "text-[#fff]"
                                         : "text-[#000000]"
                                 } text-center text-sm`}
-                                style={globalStyles.font}
                             >
                                 Create
                             </Text>
@@ -504,7 +497,6 @@ const QRCodeScreen = () => {
                                             ? "bg-[#272934] text-gray-200"
                                             : "bg-white text-gray-900"
                                     } mx-5 p-5 text-center text-lg`}
-                                    style={globalStyles.font}
                                 >
                                     Select a Mode to continue.
                                 </Text>
@@ -526,7 +518,6 @@ const QRCodeScreen = () => {
                                                     ? "underline-blue-500 text-blue-500 underline"
                                                     : ""
                                             }`}
-                                            style={globalStyles.font}
                                             onPress={() => {
                                                 if (
                                                     scannedData.startsWith(
@@ -558,7 +549,6 @@ const QRCodeScreen = () => {
                                                         ? "text-[#fff]"
                                                         : "text-[#000000]"
                                                 } text-center text-sm`}
-                                                style={globalStyles.font}
                                             >
                                                 Scan Again
                                             </Text>

@@ -36,15 +36,10 @@ const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
                             ? "text-[#fff]"
                             : "text-[#000000]"
                     } ml-5 text-lg`}
-                    style={globalStyles.font}
                 >
                     {title}
                 </Text>
-                <Text
-                    className="ml-5 text-sm text-gray-400"
-                    style={globalStyles.font}
-                    numberOfLines={1}
-                >
+                <Text className="ml-5 text-sm text-gray-400" numberOfLines={1}>
                     {value}
                 </Text>
             </TouchableOpacity>
@@ -194,7 +189,6 @@ const SettingsScreen = () => {
                                         ? "text-[#fff]"
                                         : "text-[#000000]"
                                 } text-sm`}
-                                style={globalStyles.font}
                             >
                                 Sign Out
                             </Text>
@@ -213,7 +207,6 @@ const SettingsScreen = () => {
                                         ? "text-[#fff]"
                                         : "text-[#000000]"
                                 } text-sm`}
-                                style={globalStyles.font}
                             >
                                 Delete Account
                             </Text>

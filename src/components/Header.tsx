@@ -44,7 +44,6 @@ const Header = ({
                         ? "bg-[#272934] text-gray-200"
                         : "bg-white text-gray-900"
                 } p-2 px-0 text-center text-lg`}
-                style={globalStyles.font}
             >
                 {title}
             </Text>
