@@ -130,8 +130,8 @@ const WriteTodo = ({
                                         ? "#808080"
                                         : "#A3A3A3"
                                     : colorScheme === "dark"
-                                    ? "#fff"
-                                    : "#000000"
+                                      ? "#fff"
+                                      : "#000000"
                             }
                         />
                     </TouchableOpacity>
@@ -223,8 +223,8 @@ const Todo = ({
                                                 ? "#808080"
                                                 : "#A3A3A3"
                                             : colorScheme === "dark"
-                                            ? "#fff"
-                                            : "#000000"
+                                              ? "#fff"
+                                              : "#000000"
                                     }
                                 />
                             </TouchableOpacity>
