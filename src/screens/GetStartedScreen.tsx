@@ -3,7 +3,7 @@ import { Text, View, useColorScheme } from "react-native";
 import StatusBar from "@components/StatusBar";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import { useExitAppBackHandler } from "@hooks/useExitAppBackHandler";
-import { WithLocalSvg } from "react-native-svg";
+import { WithLocalSvg } from "react-native-svg/css";
 import globalStyles from "../utils/globalStyles";
 import { OnboardingData } from "@/@types/data";
 import PagerView from "react-native-pager-view";
