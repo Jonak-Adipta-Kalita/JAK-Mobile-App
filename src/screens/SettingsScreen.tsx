@@ -1,13 +1,13 @@
 import React from "react";
 import { View, TouchableOpacity, Text, useColorScheme } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { auth, db, storage } from "@utils/firebase";
+import { auth, storage } from "@utils/firebase";
 import globalStyles from "@utils/globalStyles";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingIndicator from "@components/Loading";
 import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import messageAlertShower from "@utils/alertShowers/messageAlertShower";
-import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import { deleteDoc, getDoc } from "firebase/firestore";
 import { deleteObject, getMetadata, ref } from "firebase/storage";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -19,6 +19,7 @@ import { adventurer } from "@dicebear/collection";
 import { SvgXml } from "react-native-svg";
 import { useShowBottomTab } from "../hooks/useBottomTab";
 import Header from "../components/Header";
+import { userRef } from "../utils/firebase/refs";
 
 const ProfileDetail = ({ title, value }: { title: string; value: string }) => {
     const colorScheme = useColorScheme();
@@ -96,9 +97,8 @@ const SettingsScreen = () => {
                 text: "Delete",
                 onPress: async () => {
                     try {
-                        const userUID = user?.uid!;
-                        const dbDoc = doc(db, "users", userUID);
-                        const storageRef = ref(storage, `users/${userUID}`);
+                        const dbDoc = userRef(user?.uid!);
+                        const storageRef = ref(storage, `users/${user?.uid!}`);
 
                         await user?.delete();
 

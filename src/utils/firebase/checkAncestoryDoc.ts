@@ -1,9 +1,10 @@
 import { User } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from ".";
+import { getDoc, setDoc } from "firebase/firestore";
+import { userRef } from "./refs";
 
 export const checkAncestoryDoc = async (user: User) => {
-    const documentDoc = doc(db, "users", user?.uid!);
+    const documentDoc = userRef(user.uid!);
+
     if (!(await getDoc(documentDoc)).exists()) {
         await setDoc(documentDoc, {});
     }

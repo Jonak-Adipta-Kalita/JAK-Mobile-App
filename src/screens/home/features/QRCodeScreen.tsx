@@ -20,14 +20,12 @@ import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, storage } from "@utils/firebase";
+import { auth, storage } from "@utils/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
-    collection,
     orderBy,
     query,
     setDoc,
-    doc,
     serverTimestamp,
     deleteDoc,
 } from "firebase/firestore";
@@ -41,15 +39,13 @@ import { uploadImageAsync } from "@utils/functions/uploadImageAsync";
 import { ScrollView } from "react-native-gesture-handler";
 import Header from "@components/Header";
 import { checkAncestoryDoc } from "@utils/firebase/checkAncestoryDoc";
+import { qrCodeRef, qrCodesRef } from "@/src/utils/firebase/refs";
 
 const Create = () => {
     const colorScheme = useColorScheme();
     const [user, userLoading, userError] = useAuthState(auth);
     const [qrCodesFetched, firestoreLoading, firestoreError] = useCollection(
-        query(
-            collection(db, "users", user?.uid!, "qrcodes"),
-            orderBy("timestamp", "desc")
-        )
+        query(qrCodesRef(user?.uid!), orderBy("timestamp", "desc"))
     );
 
     const [qrCodeData, setQRCodeData] = useState("");
@@ -94,7 +90,7 @@ const Create = () => {
         );
 
         await checkAncestoryDoc(user!);
-        await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID), {
+        await setDoc(qrCodeRef(user!.uid!, qrCodeID), {
             value: qrCodeData,
             timestamp: serverTimestamp(),
             image: downloadURL,
@@ -106,7 +102,7 @@ const Create = () => {
     const deleteQRCode = async () => {
         const qrCodeID = qrCodeData.replaceAll("\n", ";").replaceAll(" ", "_");
 
-        await deleteDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID));
+        await deleteDoc(qrCodeRef(user!.uid!, qrCodeID));
         await deleteObject(
             ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`)
         );

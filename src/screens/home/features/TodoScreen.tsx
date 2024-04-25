@@ -1,8 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import {
-    collection,
     deleteDoc,
-    doc,
     DocumentData,
     orderBy,
     query,
@@ -22,7 +20,7 @@ import {
 } from "react-native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import LoadingIndicator from "@components/Loading";
-import { auth, db } from "@utils/firebase";
+import { auth } from "@utils/firebase";
 import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -35,6 +33,7 @@ import Header from "@components/Header";
 import { checkAncestoryDoc } from "@utils/firebase/checkAncestoryDoc";
 import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 import { Platform } from "react-native";
+import { todoRef, todosRef } from "@/src/utils/firebase/refs";
 
 const WriteTodo = ({
     type,
@@ -60,11 +59,8 @@ const WriteTodo = ({
         if (type === "create") {
             await checkAncestoryDoc(user!);
             await setDoc(
-                doc(
-                    db,
-                    "users",
-                    user?.uid!,
-                    "todos",
+                todoRef(
+                    user!.uid!,
                     todoText.replaceAll("\n", ";").replaceAll(" ", "_")
                 ),
                 {
@@ -73,15 +69,10 @@ const WriteTodo = ({
                 }
             );
         } else if (type === "edit") {
-            await deleteDoc(
-                doc(db, "users", user?.uid!, "todos", editingTodo?.id!)
-            );
+            await deleteDoc(todoRef(user!.uid!, editingTodo?.id!));
             await setDoc(
-                doc(
-                    db,
-                    "users",
-                    user?.uid!,
-                    "todos",
+                todoRef(
+                    user!.uid!,
                     todoText.replaceAll("\n", ";").replaceAll(" ", "_")
                 ),
                 {
@@ -239,13 +230,7 @@ const Todo = ({
                                                 text: "Delete",
                                                 onPress: async () => {
                                                     await deleteDoc(
-                                                        doc(
-                                                            db,
-                                                            "users",
-                                                            user?.uid!,
-                                                            "todos",
-                                                            id
-                                                        )
+                                                        todoRef(user!.uid!, id)
                                                     );
                                                 },
                                             },
@@ -275,10 +260,7 @@ const TodoScreen = () => {
     const navigation = useNavigation<BottomTabStackNavigationProps<"Todo">>();
     const [user, userLoading, userError] = useAuthState(auth);
     const [todosFetched, firestoreLoading, firestoreError] = useCollection(
-        query(
-            collection(db, "users", user?.uid!, "todos"),
-            orderBy("timestamp", "asc")
-        )
+        query(todosRef(user?.uid!), orderBy("timestamp", "asc"))
     );
     const [todos, setTodos] = useState<{ id: string; data: DocumentData }[]>(
         []
