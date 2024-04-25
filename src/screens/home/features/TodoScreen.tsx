@@ -221,20 +221,15 @@ const Todo = ({
                                     messageAlertShower(
                                         "Are you sure?",
                                         data.value,
-                                        [
-                                            {
-                                                text: "Cancel",
-                                                style: "cancel",
+                                        "Cancel",
+                                        {
+                                            text: "Delete",
+                                            onPress: async () => {
+                                                await deleteDoc(
+                                                    todoRef(user!.uid!, id)
+                                                );
                                             },
-                                            {
-                                                text: "Delete",
-                                                onPress: async () => {
-                                                    await deleteDoc(
-                                                        todoRef(user!.uid!, id)
-                                                    );
-                                                },
-                                            },
-                                        ]
+                                        }
                                     );
                                 }}
                             >

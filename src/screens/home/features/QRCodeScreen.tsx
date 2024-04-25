@@ -72,13 +72,7 @@ const Create = () => {
         if (qrCodesFetched?.docs?.length! >= 5) {
             messageAlertShower(
                 "Max QRCodes Reached!",
-                "Total amount of QRCodes stored cannot be more than 5. Delete some from the Stored QRCode",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
+                "Total amount of QRCodes stored cannot be more than 5. Delete some from the Stored QRCode"
             );
             return null;
         }
@@ -135,13 +129,7 @@ const Create = () => {
 
         messageAlertShower(
             "QRCode Downloaded!",
-            "The QRCode has been downloaded to your device!!",
-            [
-                {
-                    text: "OK",
-                    onPress: () => {},
-                },
-            ]
+            "The QRCode has been downloaded to your device!!"
         );
     };
 
@@ -251,16 +239,12 @@ const Create = () => {
                                             ? messageAlertShower(
                                                   "Are you sure?",
                                                   qrCodeData,
-                                                  [
-                                                      {
-                                                          text: "Cancel",
-                                                          onPress: () => {},
-                                                      },
-                                                      {
-                                                          text: "Delete",
-                                                          onPress: deleteQRCode,
-                                                      },
-                                                  ]
+                                                  "Cancel",
+
+                                                  {
+                                                      text: "Delete",
+                                                      onPress: deleteQRCode,
+                                                  }
                                               )
                                             : uploadQRCode()
                                     }

@@ -7,13 +7,7 @@ export const verifyEmail = async (navigation: any, user: User) => {
         await sendEmailVerification(user);
         messageAlertShower(
             "Verification Email Sent",
-            "Please check your Email!",
-            [
-                {
-                    text: "OK",
-                    onPress: () => {},
-                },
-            ]
+            "Please check your Email!"
         );
         navigation.navigate("Home");
     } catch (error) {

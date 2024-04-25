@@ -71,11 +71,10 @@ const SettingsScreen = () => {
             : { marginTop: 7 };
 
     const signOut = () => {
-        messageAlertShower("Are you sure?", "You can always sign back in", [
-            {
-                text: "Cancel",
-                onPress: () => {},
-            },
+        messageAlertShower(
+            "Are you sure?",
+            "You can always sign back in",
+            "Cancel",
             {
                 text: "Sign Out",
                 onPress: () => {
@@ -83,16 +82,15 @@ const SettingsScreen = () => {
                         errorAlertShower(error);
                     });
                 },
-            },
-        ]);
+            }
+        );
     };
 
     const deleteAccount = () => {
-        messageAlertShower("Are you sure?", "This action is irreversible!!", [
-            {
-                text: "Cancel",
-                onPress: () => {},
-            },
+        messageAlertShower(
+            "Are you sure?",
+            "This action is irreversible!!",
+            "Cancel",
             {
                 text: "Delete",
                 onPress: async () => {
@@ -115,8 +113,8 @@ const SettingsScreen = () => {
                         errorAlertShower(error);
                     }
                 },
-            },
-        ]);
+            }
+        );
     };
 
     if (userError) errorAlertShower(userError);

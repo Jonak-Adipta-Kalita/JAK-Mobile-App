@@ -45,24 +45,12 @@ const RegisterScreen = () => {
         ) {
             messageAlertShower(
                 "Value not Filled!!",
-                "Please Enter all the Values in the Form!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
+                "Please Enter all the Values in the Form!!"
             );
         } else if (password !== confirmPassword) {
             messageAlertShower(
                 "Passwords doesn't Matches!!!!",
-                "Please make sure your Password and Confirm Password is same!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
+                "Please make sure your Password and Confirm Password is same!!"
             );
         } else {
             try {

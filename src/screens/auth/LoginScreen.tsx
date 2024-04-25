@@ -34,13 +34,7 @@ const LoginScreen = () => {
         if (email === "" || password === "") {
             messageAlertShower(
                 "Value not Filled!!",
-                "Please Enter all the Values in the Form!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
+                "Please Enter all the Values in the Form!!"
             );
         } else {
             try {
