@@ -19,7 +19,7 @@ import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
-import { verifyEmail } from "@utils/verifyEmail";
+import { verifyEmail } from "@utils/functions/verifyEmail";
 import { useShowBottomTab } from "@hooks/useBottomTab";
 import { TextInput } from "react-native-gesture-handler";
 

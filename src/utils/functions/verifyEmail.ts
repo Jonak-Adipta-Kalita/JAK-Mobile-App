@@ -1,6 +1,6 @@
 import { User, sendEmailVerification } from "firebase/auth";
-import messageAlertShower from "./alertShowers/messageAlertShower";
-import errorAlertShower from "./alertShowers/errorAlertShower";
+import messageAlertShower from "../alertShowers/messageAlertShower";
+import errorAlertShower from "../alertShowers/errorAlertShower";
 
 export const verifyEmail = async (navigation: any, user: User) => {
     try {

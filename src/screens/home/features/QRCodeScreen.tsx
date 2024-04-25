@@ -37,10 +37,10 @@ import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { deleteObject, getDownloadURL, ref } from "firebase/storage";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
-import { uploadImageAsync } from "@utils/uploadImageAsync";
+import { uploadImageAsync } from "@utils/functions/uploadImageAsync";
 import { ScrollView } from "react-native-gesture-handler";
 import Header from "@components/Header";
-import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
+import { checkAncestoryDoc } from "@utils/firebase/checkAncestoryDoc";
 
 const Create = () => {
     const colorScheme = useColorScheme();

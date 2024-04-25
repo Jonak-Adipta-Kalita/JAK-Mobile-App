@@ -32,7 +32,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import Header from "@components/Header";
-import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
+import { checkAncestoryDoc } from "@utils/firebase/checkAncestoryDoc";
 import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
 import { Platform } from "react-native";
 

@@ -11,7 +11,7 @@ import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import { deleteObject, getMetadata, ref } from "firebase/storage";
 import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { verifyEmail } from "@utils/verifyEmail";
+import { verifyEmail } from "@utils/functions/verifyEmail";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import { createAvatar } from "@dicebear/core";
