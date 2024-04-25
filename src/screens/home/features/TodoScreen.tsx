@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import {
+    collection,
     deleteDoc,
+    doc,
     DocumentData,
     orderBy,
     query,
@@ -20,7 +22,7 @@ import {
 } from "react-native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import LoadingIndicator from "@components/Loading";
-import { auth } from "@utils/firebase";
+import { auth, db } from "@utils/firebase";
 import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -31,9 +33,9 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { useHideBottomTab } from "@hooks/useBottomTab";
 import Header from "@components/Header";
 import { checkAncestoryDoc } from "@utils/firebase/checkAncestoryDoc";
-import messageAlertShower from "@/src/utils/alertShowers/messageAlertShower";
+import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { Platform } from "react-native";
-import { todoRef, todosRef } from "@/src/utils/firebase/refs";
+import { todoRef, todosRef } from "@utils/firebase/refs";
 
 const WriteTodo = ({
     type,
@@ -56,30 +58,22 @@ const WriteTodo = ({
 
     const writeTodo = async () => {
         setWritingTodo(true);
+        const replacedTodoText = todoText
+            .replaceAll("\n", ";")
+            .replaceAll(" ", "_");
+
         if (type === "create") {
             await checkAncestoryDoc(user!);
-            await setDoc(
-                todoRef(
-                    user!.uid!,
-                    todoText.replaceAll("\n", ";").replaceAll(" ", "_")
-                ),
-                {
-                    value: todoText,
-                    timestamp: serverTimestamp(),
-                }
-            );
+            await setDoc(todoRef(user!.uid!, replacedTodoText), {
+                value: todoText,
+                timestamp: serverTimestamp(),
+            });
         } else if (type === "edit") {
             await deleteDoc(todoRef(user!.uid!, editingTodo?.id!));
-            await setDoc(
-                todoRef(
-                    user!.uid!,
-                    todoText.replaceAll("\n", ";").replaceAll(" ", "_")
-                ),
-                {
-                    value: todoText,
-                    timestamp: editingTodo?.data.timestamp,
-                }
-            );
+            await setDoc(todoRef(user!.uid!, replacedTodoText), {
+                value: todoText,
+                timestamp: editingTodo?.data.timestamp,
+            });
         }
         setWritingNewTodo(false);
         setWritingTodo(false);
@@ -137,7 +131,7 @@ const WriteTodo = ({
     );
 };
 
-const Todo = ({
+const TodoComponent = ({
     id,
     data,
     alreadyEditingTodo,
@@ -353,7 +347,7 @@ const TodoScreen = () => {
                 ) : (
                     <ScrollView className="mt-5" ref={scrollRef}>
                         {todos?.map(({ id, data }, i) => (
-                            <Todo
+                            <TodoComponent
                                 id={id}
                                 key={id}
                                 data={data}

@@ -39,7 +39,7 @@ import { uploadImageAsync } from "@utils/functions/uploadImageAsync";
 import { ScrollView } from "react-native-gesture-handler";
 import Header from "@components/Header";
 import { checkAncestoryDoc } from "@utils/firebase/checkAncestoryDoc";
-import { qrCodeRef, qrCodesRef } from "@/src/utils/firebase/refs";
+import { qrCodeRef, qrCodesRef } from "@utils/firebase/refs";
 
 const Create = () => {
     const colorScheme = useColorScheme();

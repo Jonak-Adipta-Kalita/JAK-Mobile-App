@@ -1,4 +1,4 @@
-import { alertDataState } from "@/src/atoms/alertAtom";
+import { alertDataState } from "@atoms/alertAtom";
 import { AlertButton, Platform } from "react-native";
 import { setRecoil } from "recoil-nexus";
 
