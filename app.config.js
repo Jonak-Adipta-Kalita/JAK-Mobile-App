@@ -42,7 +42,7 @@ export default {
     },
     plugins: [
         [
-            "expo-barcode-scanner",
+            "expo-camera",
             {
                 cameraPermission: "Allow $(PRODUCT_NAME) to access camera.",
             },

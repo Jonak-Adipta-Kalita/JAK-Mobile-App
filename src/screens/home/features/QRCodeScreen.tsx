@@ -14,7 +14,6 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "@hooks/useBottomTab";
-import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
@@ -35,6 +34,7 @@ import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { deleteObject, getDownloadURL, ref } from "firebase/storage";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
+import { CameraView, Camera, BarcodeScanningResult } from "expo-camera/next";
 import { uploadImageAsync } from "@utils/functions/uploadImageAsync";
 import { ScrollView } from "react-native-gesture-handler";
 import Header from "@components/Header";
@@ -362,7 +362,7 @@ const QRCodeScreen = () => {
     const [scanned, setScanned] = useState(false);
     const [scannedData, setScannedData] = useState<any | null>(null);
 
-    const handleBarCodeScanned = ({ data }: BarCodeEvent) => {
+    const handleBarcodeScanned = ({ data }: BarcodeScanningResult) => {
         setScanned(true);
         if (data.startsWith("https://")) {
             Linking.openURL(data);
@@ -372,13 +372,13 @@ const QRCodeScreen = () => {
 
     useEffect(() => {
         const requestPermissions = async () => {
-            const { status: barcodeStatus } =
-                await BarCodeScanner.requestPermissionsAsync();
+            const { status: cameraStatus } =
+                await Camera.requestCameraPermissionsAsync();
             const { status: mediaLibraryStatus } =
                 await MediaLibrary.requestPermissionsAsync();
 
             if (
-                barcodeStatus !== "granted" &&
+                cameraStatus !== "granted" &&
                 mediaLibraryStatus !== "granted"
             ) {
                 navigation.replace("Home");
@@ -403,9 +403,10 @@ const QRCodeScreen = () => {
                         />
                     </TouchableOpacity>
                 </View>
-                <BarCodeScanner
-                    onBarCodeScanned={handleBarCodeScanned}
-                    barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                <CameraView
+                    onBarcodeScanned={
+                        scanned ? undefined : handleBarcodeScanned
+                    }
                     style={{
                         height: "100%",
                         width: "100%",
@@ -418,7 +419,7 @@ const QRCodeScreen = () => {
                         width={300}
                         showAnimatedLine
                     />
-                </BarCodeScanner>
+                </CameraView>
             </View>
         );
     }
