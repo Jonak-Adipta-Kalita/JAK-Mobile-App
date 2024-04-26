@@ -5,7 +5,7 @@ import { setRecoil } from "recoil-nexus";
 const messageAlertShower = (
     title: string,
     message: string,
-    noActionButtonText: "Ok" | "Cancel" = "Ok",
+    noActionButtonText: "Ok" | "Cancel" | "No" = "Ok",
     actionButton?: { text: string; onPress: () => void }
 ) => {
     const buttons: [AlertButton, AlertButton] | [AlertButton] = [

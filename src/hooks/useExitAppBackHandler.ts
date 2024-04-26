@@ -12,16 +12,13 @@ const useExitAppBackHandler = () => {
                 }
 
                 messageAlertShower(
-                    "Exit App!!",
+                    "Exit App",
                     "Hold on. Are you sure you want to Exit?",
-                    [
-                        {
-                            text: "Cancel",
-                            onPress: () => {},
-                            style: "cancel",
-                        },
-                        { text: "Yes", onPress: () => BackHandler.exitApp() },
-                    ]
+                    "No",
+                    {
+                        text: "Yes",
+                        onPress: () => BackHandler.exitApp(),
+                    }
                 );
                 return true;
             };
