@@ -486,6 +486,7 @@ const QRCodeScreen = () => {
                         {mode === "scan" && (
                             <View className="flex items-center">
                                 {scanned && (
+                                    // TODO: Make UI look better
                                     <View className="flex flex-col items-center justify-center space-y-10">
                                         <Text
                                             className={`${
