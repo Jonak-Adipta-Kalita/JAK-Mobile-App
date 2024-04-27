@@ -300,15 +300,6 @@ const TodoScreen = () => {
         errorAlertShower(firestoreError || userError);
     }
 
-    if (firestoreLoading || userLoading) {
-        return (
-            <LoadingIndicator
-                containerStyle={{ flex: 1 }}
-                dimensions={{ width: 70, height: 70 }}
-            />
-        );
-    }
-
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
@@ -316,21 +307,31 @@ const TodoScreen = () => {
                 <Header
                     title="Todo"
                     showRightButton={
+                        !(firestoreLoading || userLoading) &&
                         todosFetched?.docs.length! < 10 &&
                         !creatingNewTodo &&
                         !editingTodo
                     }
-                    rightButton={
-                        <TouchableOpacity
-                            onPress={() => setCreatingNewTodo(true)}
-                        >
-                            <AntDesign
-                                name="pluscircleo"
-                                size={24}
-                                color={colorScheme === "dark" ? "#fff" : "#000"}
-                            />
-                        </TouchableOpacity>
-                    }
+                    rightButton={({ disabled }) => {
+                        console.log(disabled);
+                        return (
+                            <TouchableOpacity
+                                onPress={() => setCreatingNewTodo(true)}
+                            >
+                                <AntDesign
+                                    name="pluscircleo"
+                                    size={24}
+                                    color={
+                                        disabled
+                                            ? "gray"
+                                            : colorScheme === "dark"
+                                              ? "#fff"
+                                              : "#000"
+                                    }
+                                />
+                            </TouchableOpacity>
+                        );
+                    }}
                 />
                 {todosFetched?.docs.length === 0 && !creatingNewTodo ? (
                     <View className="mt-[50%] flex-1 items-center">

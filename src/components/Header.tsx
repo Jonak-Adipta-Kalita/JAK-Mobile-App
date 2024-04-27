@@ -9,7 +9,7 @@ interface Props {
     title: string;
     goBackButton?: boolean;
     showRightButton?: boolean;
-    rightButton?: JSX.Element;
+    rightButton?: (props: { disabled: boolean }) => JSX.Element;
 }
 
 const Header = ({
@@ -47,8 +47,10 @@ const Header = ({
             >
                 {title}
             </Text>
-            {showRightButton && (
-                <View className="-mt-[0.5px] mr-10">{rightButton}</View>
+            {rightButton && (
+                <View className="-mt-[0.5px] mr-10">
+                    {rightButton({ disabled: !showRightButton })}
+                </View>
             )}
         </View>
     );

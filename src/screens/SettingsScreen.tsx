@@ -135,7 +135,7 @@ const SettingsScreen = () => {
                 <Header
                     title="User Settings"
                     goBackButton={false}
-                    rightButton={
+                    rightButton={({ disabled }) => (
                         <TouchableOpacity
                             style={globalStyles.headerIcon}
                             onPress={() => verifyEmail(navigation, user!)}
@@ -144,11 +144,15 @@ const SettingsScreen = () => {
                                 name="account-cancel-outline"
                                 size={30}
                                 color={
-                                    colorScheme === "dark" ? "#fff" : "#000000"
+                                    disabled
+                                        ? "gray"
+                                        : colorScheme === "dark"
+                                          ? "#fff"
+                                          : "#000000"
                                 }
                             />
                         </TouchableOpacity>
-                    }
+                    )}
                     showRightButton={!user?.emailVerified}
                 />
                 <View className="mt-8 flex flex-col items-center justify-center">
