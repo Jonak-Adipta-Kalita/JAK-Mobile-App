@@ -1,11 +1,11 @@
 import React from "react";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { alertDataState } from "@atoms/alertAtom";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import { useColorScheme, View, ActivityIndicator } from "react-native";
 
 const Alert = () => {
-    const [alertData, setAlertData] = useRecoilState(alertDataState);
+    const [alertData, setAlertData] = useAtom(alertDataState);
     const scheme = useColorScheme();
 
     return (

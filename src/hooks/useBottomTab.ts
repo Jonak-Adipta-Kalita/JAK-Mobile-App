@@ -1,10 +1,10 @@
-import { useSetRecoilState } from "recoil";
+import { useSetAtom } from "jotai";
 import { tabBarHideState } from "@atoms/tabBarAtom";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
 
 const useHideBottomTab = () => {
-    const setTabBarHide = useSetRecoilState(tabBarHideState);
+    const setTabBarHide = useSetAtom(tabBarHideState);
 
     useFocusEffect(
         useCallback(() => {
@@ -14,7 +14,7 @@ const useHideBottomTab = () => {
 };
 
 const useShowBottomTab = () => {
-    const setTabBarHide = useSetRecoilState(tabBarHideState);
+    const setTabBarHide = useSetAtom(tabBarHideState);
 
     useFocusEffect(
         useCallback(() => {
