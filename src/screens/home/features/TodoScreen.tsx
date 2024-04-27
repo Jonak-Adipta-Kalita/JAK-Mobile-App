@@ -334,6 +334,7 @@ const TodoScreen = () => {
                     }}
                 />
                 {todosFetched?.docs.length === 0 && !creatingNewTodo ? (
+                    // TODO: Add a better UI for this
                     <View className="mt-[50%] flex-1 items-center">
                         <Text
                             className={`self-center rounded-2xl ${
@@ -342,7 +343,8 @@ const TodoScreen = () => {
                                     : "bg-white text-gray-900"
                             } mx-10 p-5 text-center text-lg`}
                         >
-                            No Todo!! Press the Plus to create.
+                            No Todo at the moment! Please press the Plus to
+                            create one.
                         </Text>
                     </View>
                 ) : (
