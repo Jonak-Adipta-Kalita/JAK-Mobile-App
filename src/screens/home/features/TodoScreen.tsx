@@ -312,26 +312,24 @@ const TodoScreen = () => {
                         !creatingNewTodo &&
                         !editingTodo
                     }
-                    rightButton={({ disabled }) => {
-                        console.log(disabled);
-                        return (
-                            <TouchableOpacity
-                                onPress={() => setCreatingNewTodo(true)}
-                            >
-                                <AntDesign
-                                    name="pluscircleo"
-                                    size={24}
-                                    color={
-                                        disabled
-                                            ? "gray"
-                                            : colorScheme === "dark"
-                                              ? "#fff"
-                                              : "#000"
-                                    }
-                                />
-                            </TouchableOpacity>
-                        );
-                    }}
+                    rightButton={({ disabled }) => (
+                        <TouchableOpacity
+                            onPress={() => setCreatingNewTodo(true)}
+                            disabled={disabled}
+                        >
+                            <AntDesign
+                                name="pluscircleo"
+                                size={24}
+                                color={
+                                    disabled
+                                        ? "gray"
+                                        : colorScheme === "dark"
+                                          ? "#fff"
+                                          : "#000"
+                                }
+                            />
+                        </TouchableOpacity>
+                    )}
                 />
                 {todosFetched?.docs.length === 0 && !creatingNewTodo ? (
                     // TODO: Add a better UI for this
