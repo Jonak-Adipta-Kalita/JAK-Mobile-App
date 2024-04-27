@@ -1,5 +1,5 @@
 import "expo-dev-client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme, LogBox } from "react-native";
 import LightTheme from "@themes/LightTheme";
@@ -17,6 +17,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import RecoilNexus from "recoil-nexus";
 import Alert from "@components/Alert";
 import { User } from "firebase/auth";
+import * as SplashScreen from "expo-splash-screen";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -24,6 +25,8 @@ LogBox.ignoreLogs([
     "AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-async-storage/async-storage' instead of 'react-native'. See https://github.com/react-native-async-storage/async-storage",
     '[Expectation Violation: Duplicate atom key "tabBarHideState". This is a FATAL ERROR in production. But it is safe to ignore this warning if occurred because of hot module replacement.]',
 ]);
+
+SplashScreen.preventAutoHideAsync();
 
 global.atob = global.atob || decode;
 
@@ -59,18 +62,22 @@ const AppChildren = ({ user }: { user: User | null | undefined }) => {
 const App = () => {
     const [user, userLoading, userError] = useAuthState(auth);
 
+    const onLayoutRootView = useCallback(async () => {
+        if (!userLoading) await SplashScreen.hideAsync();
+    }, [userLoading]);
+
     if (userError) errorAlertShower(userError);
 
+    if (userLoading) {
+        return null;
+    }
+
     return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
-            {userLoading ? (
-                <LoadingIndicator />
-            ) : (
-                <RecoilRoot>
-                    <RecoilNexus />
-                    <AppChildren user={user} />
-                </RecoilRoot>
-            )}
+        <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
+            <RecoilRoot>
+                <RecoilNexus />
+                <AppChildren user={user} />
+            </RecoilRoot>
         </GestureHandlerRootView>
     );
 };

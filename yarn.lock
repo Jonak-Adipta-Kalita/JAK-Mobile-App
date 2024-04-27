@@ -4946,6 +4946,13 @@ expo-network@~5.8.0:
   resolved "https://registry.yarnpkg.com/expo-network/-/expo-network-5.8.0.tgz#1481471467fc5cc55df750eaf74927ea8c664fbc"
   integrity sha512-mTtyqRgLKvXWB+xCoY5WMtRrpVqYmcXWz3YbyN+X0HRGqXg7a+UYOXeKlxrkwBiadsElhmfMeaj1UpmW79Zw/w==
 
+expo-splash-screen@~0.26.5:
+  version "0.26.5"
+  resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.26.5.tgz#9813a5e099180188204e4e7f925f90a0a1939cd2"
+  integrity sha512-FyvA2EWDeQdC3zuoQdXV2VmSANiJzF0hmbtoEEyR6MXoHaYFvxxKyhBeAm61N8C9TtUijIcEgFM6XBCh0wTBVw==
+  dependencies:
+    "@expo/prebuild-config" "6.8.1"
+
 expo-status-bar@~1.11.1:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.11.1.tgz#a11318741d361048c11db2b16c4364a79a74af30"
@@ -4955,6 +4962,14 @@ expo-structured-headers@~3.7.0:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/expo-structured-headers/-/expo-structured-headers-3.7.2.tgz#2bccba6af090ba2cc82295f7ec695058530b399f"
   integrity sha512-/nGOyeWUXSUy4aIYKJTwQOznRNs0yKqKPAyEE6jtwvOl9qvfDWx9xskNtShioggBhFAssFkV6RBbPn+xZMQtvw==
+
+expo-system-ui@~2.9.4:
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/expo-system-ui/-/expo-system-ui-2.9.4.tgz#f5f210805527e728f47edcd6a5aba3c1e83c9465"
+  integrity sha512-ExJ8AzEZjb/zbg6nRLrN/mqxWr6e4fAcT0LBN/YvPZljbMo23HU+/lPy0/YctF1tRRvQ3Z95ABSNjnx9ajQBjg==
+  dependencies:
+    "@react-native/normalize-color" "^2.0.0"
+    debug "^4.3.2"
 
 expo-updates-interface@~0.15.1:
   version "0.15.3"
