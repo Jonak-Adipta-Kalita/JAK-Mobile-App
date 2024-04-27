@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 interface Props {
     title: string;
     goBackButton?: boolean;
+    disableRightButton?: boolean;
     showRightButton?: boolean;
     rightButton?: (props: { disabled: boolean }) => JSX.Element;
 }
@@ -15,6 +16,7 @@ interface Props {
 const Header = ({
     title,
     goBackButton = true,
+    disableRightButton,
     showRightButton,
     rightButton,
 }: Props) => {
@@ -47,7 +49,7 @@ const Header = ({
             >
                 {title}
             </Text>
-            {rightButton && (
+            {rightButton && disableRightButton && (
                 <View className="-mt-[0.5px] mr-10">
                     {rightButton({ disabled: !showRightButton })}
                 </View>

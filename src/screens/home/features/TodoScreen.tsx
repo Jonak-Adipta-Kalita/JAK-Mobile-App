@@ -306,6 +306,7 @@ const TodoScreen = () => {
             <View className="flex-1">
                 <Header
                     title="Todo"
+                    disableRightButton={true}
                     showRightButton={
                         !(firestoreLoading || userLoading) &&
                         todosFetched?.docs.length! < 10 &&
