@@ -4,19 +4,20 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 
 export type StackScreenParamList = {
     GetStarted: undefined;
-    NoNetwork: undefined;
-    Home: undefined;
-    Settings: undefined;
     Login: undefined;
     Register: undefined;
 
+    Home: undefined;
     Todo: undefined;
     QRCode: undefined;
+
+    NoNetwork: undefined;
+
+    Settings: undefined;
 };
 
 export type BottomTabScreensParamList = {
     HomeTab: undefined;
-    AuthTab: undefined;
     ProfileTab: undefined;
 };
 

@@ -87,57 +87,43 @@ const HomeScreen = () => {
     return (
         <SafeAreaView className="flex-1">
             <StatusBar />
-            {user ? (
-                <View className="flex-1">
-                    {user.emailVerified ? (
-                        <View>
-                            <Header title="Tools" goBackButton={false} />
-                            <ScrollView className="mb-64 mt-10">
-                                <Feature
-                                    title="Todo"
-                                    description="Create a Todo List"
-                                    icon="th-list"
-                                    buttonOnPress={() =>
-                                        navigation.navigate("Todo")
-                                    }
-                                />
-                                <Feature
-                                    title="QRCode"
-                                    description="Create/Scan QRCode"
-                                    icon="qrcode"
-                                    buttonOnPress={() =>
-                                        navigation.navigate("QRCode")
-                                    }
-                                />
-                            </ScrollView>
-                        </View>
-                    ) : (
-                        <View className="flex-1 items-center justify-center">
-                            <Text
-                                className={`self-center rounded-2xl ${
-                                    colorScheme == "dark"
-                                        ? "bg-[#272934] text-gray-200"
-                                        : "bg-white text-gray-900"
-                                } mx-5 p-5 text-center text-lg`}
-                            >
-                                Check your Email to Verify to use the Features
-                            </Text>
-                        </View>
-                    )}
-                </View>
-            ) : (
-                <View className="flex-1 items-center justify-center">
-                    <Text
-                        className={`self-center rounded-2xl ${
-                            colorScheme == "dark"
-                                ? "bg-[#272934] text-gray-200"
-                                : "bg-white text-gray-900"
-                        } mx-5 p-5 text-center text-lg`}
-                    >
-                        Become a Member to use the Features.
-                    </Text>
-                </View>
-            )}
+            <View className="flex-1">
+                {user!.emailVerified ? (
+                    <View>
+                        <Header title="Tools" goBackButton={false} />
+                        <ScrollView className="mb-64 mt-10">
+                            <Feature
+                                title="Todo"
+                                description="Create a Todo List"
+                                icon="th-list"
+                                buttonOnPress={() =>
+                                    navigation.navigate("Todo")
+                                }
+                            />
+                            <Feature
+                                title="QRCode"
+                                description="Create/Scan QRCode"
+                                icon="qrcode"
+                                buttonOnPress={() =>
+                                    navigation.navigate("QRCode")
+                                }
+                            />
+                        </ScrollView>
+                    </View>
+                ) : (
+                    <View className="flex-1 items-center justify-center">
+                        <Text
+                            className={`self-center rounded-2xl ${
+                                colorScheme == "dark"
+                                    ? "bg-[#272934] text-gray-200"
+                                    : "bg-white text-gray-900"
+                            } mx-5 p-5 text-center text-lg`}
+                        >
+                            Check your Email to Verify to use the Features
+                        </Text>
+                    </View>
+                )}
+            </View>
         </SafeAreaView>
     );
 };

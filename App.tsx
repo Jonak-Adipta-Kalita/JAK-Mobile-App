@@ -10,12 +10,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import BottomTabNavigator from "@navigation/BottomTabNavigator";
 import { NetworkState, getNetworkStateAsync } from "expo-network";
-import { NoNetworkStack } from "@navigation/StackNavigator";
+import { FirstLaunchStack, NoNetworkStack } from "@navigation/StackNavigator";
 import { decode } from "base-64";
 import { RecoilRoot } from "recoil";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import RecoilNexus from "recoil-nexus";
 import Alert from "@components/Alert";
+import { User } from "firebase/auth";
 
 LogBox.ignoreLogs([
     'Debugger and device times have drifted by more than 60s. Please correct this by running adb shell "date `date +%m%d%H%M%Y.%S`" on your debugger machine.',
@@ -26,7 +27,7 @@ LogBox.ignoreLogs([
 
 global.atob = global.atob || decode;
 
-const AppChildren = () => {
+const AppChildren = ({ user }: { user: User | null | undefined }) => {
     const scheme = useColorScheme();
     const [networkState, setNetworkState] = useState<NetworkState | null>(null);
 
@@ -48,8 +49,10 @@ const AppChildren = () => {
             <NavigationContainer
                 theme={scheme === "dark" ? DarkTheme : LightTheme}
             >
-                {networkState.isConnected &&
-                networkState.isInternetReachable ? (
+                {!user ? (
+                    <FirstLaunchStack />
+                ) : networkState.isConnected &&
+                  networkState.isInternetReachable ? (
                     <BottomTabNavigator />
                 ) : (
                     <NoNetworkStack />
@@ -60,7 +63,7 @@ const AppChildren = () => {
 };
 
 const App = () => {
-    const [, userLoading, userError] = useAuthState(auth);
+    const [user, userLoading, userError] = useAuthState(auth);
 
     if (userError) errorAlertShower(userError);
 
@@ -74,7 +77,7 @@ const App = () => {
             ) : (
                 <RecoilRoot>
                     <RecoilNexus />
-                    <AppChildren />
+                    <AppChildren user={user} />
                 </RecoilRoot>
             )}
         </GestureHandlerRootView>

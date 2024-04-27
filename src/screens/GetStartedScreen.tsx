@@ -1,3 +1,5 @@
+// TODO: Better UI/UX for onboarding screen
+
 import React, { useEffect, useState } from "react";
 import { Text, View, useColorScheme } from "react-native";
 import StatusBar from "@components/StatusBar";
@@ -102,7 +104,7 @@ const GetStartedScreen = () => {
                         style={{
                             elevation: 2,
                         }}
-                        onPress={() => navigation.replace("Home")}
+                        onPress={() => navigation.replace("Login")}
                     >
                         <Text
                             className={`py-[8px] text-center text-[18px] ${
