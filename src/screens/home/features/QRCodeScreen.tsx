@@ -138,12 +138,7 @@ const Create = () => {
     }
 
     if (firestoreLoading || userLoading) {
-        return (
-            <LoadingIndicator
-                containerStyle={{ flex: 1 }}
-                dimensions={{ width: 70, height: 70 }}
-            />
-        );
+        return <LoadingIndicator />;
     }
 
     return (

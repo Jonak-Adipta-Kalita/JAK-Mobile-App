@@ -8,28 +8,27 @@ import {
 } from "react-native";
 
 interface Props {
-    containerStyle?: StyleProp<ViewStyle>;
-    dimensions: StyleProp<ViewStyle>;
+    notInCenter?: boolean;
 }
 
-const LoadingIndicator = ({ containerStyle, dimensions }: Props) => {
+const LoadingIndicator = ({ notInCenter }: Props) => {
     const colorScheme = useColorScheme();
 
     return (
         <View
             style={[
-                containerStyle,
                 {
                     backgroundColor:
                         colorScheme === "dark" ? "#413f44" : "#fff",
                     justifyContent: "center",
                     alignItems: "center",
                 },
+                !notInCenter && { flex: 1 },
             ]}
         >
             <ActivityIndicator
                 size="large"
-                style={dimensions}
+                style={{ width: 70, height: 70 }}
                 color="#0cccbf"
             />
         </View>

@@ -35,13 +35,7 @@ const AppChildren = ({ user }: { user: User | null | undefined }) => {
         getNetworkStateAsync().then((state) => setNetworkState(state));
     }, []);
 
-    if (networkState === null)
-        return (
-            <LoadingIndicator
-                dimensions={{ width: 70, height: 70 }}
-                containerStyle={{ flex: 1 }}
-            />
-        );
+    if (networkState === null) return <LoadingIndicator />;
 
     return (
         <>
@@ -70,10 +64,7 @@ const App = () => {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
             {userLoading ? (
-                <LoadingIndicator
-                    dimensions={{ width: 70, height: 70 }}
-                    containerStyle={{ flex: 1 }}
-                />
+                <LoadingIndicator />
             ) : (
                 <RecoilRoot>
                     <RecoilNexus />

@@ -120,12 +120,7 @@ const SettingsScreen = () => {
     if (userError) errorAlertShower(userError);
 
     if (userLoading) {
-        return (
-            <LoadingIndicator
-                dimensions={{ width: 70, height: 70 }}
-                containerStyle={{ flex: 1 }}
-            />
-        );
+        return <LoadingIndicator />;
     }
 
     return (

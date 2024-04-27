@@ -332,7 +332,11 @@ const TodoScreen = () => {
                         </TouchableOpacity>
                     )}
                 />
-                {todosFetched?.docs.length === 0 && !creatingNewTodo ? (
+                {firestoreLoading || userLoading ? (
+                    <View className="mt-5">
+                        <LoadingIndicator notInCenter={true} />
+                    </View>
+                ) : todosFetched?.docs.length === 0 && !creatingNewTodo ? (
                     // TODO: Add a better UI for this
                     <View className="mt-[50%] flex-1 items-center">
                         <Text
