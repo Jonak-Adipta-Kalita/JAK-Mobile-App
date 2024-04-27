@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackScreenParamList } from "@/@types/navigation";
 
 import GetStartedScreen from "@screens/GetStartedScreen";

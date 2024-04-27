@@ -1,8 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import {
-    collection,
     deleteDoc,
-    doc,
     DocumentData,
     orderBy,
     query,
@@ -22,7 +20,7 @@ import {
 } from "react-native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import LoadingIndicator from "@components/Loading";
-import { auth, db } from "@utils/firebase";
+import { auth } from "@utils/firebase";
 import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";

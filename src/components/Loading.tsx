@@ -1,11 +1,5 @@
 import React from "react";
-import {
-    View,
-    ActivityIndicator,
-    useColorScheme,
-    ViewStyle,
-    StyleProp,
-} from "react-native";
+import { View, ActivityIndicator, useColorScheme } from "react-native";
 
 interface Props {
     notInCenter?: boolean;

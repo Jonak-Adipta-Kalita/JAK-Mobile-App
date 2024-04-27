@@ -4,7 +4,9 @@ require("dotenv").config();
 
 const PACKAGE_NAME = process.env.PACKAGE_NAME;
 const PROJECT_ID = process.env.PROJECT_ID;
-const VERSION = "v2.0.0";
+const PROJECT_SLUG = process.env.PROJECT_SLUG;
+const PROJECT_OWNER = process.env.PROJECT_OWNER;
+const PROJECT_VERSION = process.env.PROJECT_VERSION;
 
 const splash = {
     image: "./assets/images/splash.png",
@@ -19,9 +21,9 @@ const splash = {
 
 export default {
     name: "StreamlineX",
-    slug: "JAK-Mobile-App",
-    owner: "xxjonakadiptaxx",
-    version: VERSION,
+    slug: PROJECT_SLUG,
+    owner: PROJECT_OWNER,
+    version: PROJECT_VERSION,
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     scheme: PACKAGE_NAME,
@@ -34,7 +36,7 @@ export default {
         usesAppleSignIn: true,
         supportsTablet: true,
         bundleIdentifier: PACKAGE_NAME,
-        buildNumber: VERSION,
+        buildNumber: PROJECT_VERSION,
         googleServicesFile: "./google_services_ios.plist",
     },
     android: {
