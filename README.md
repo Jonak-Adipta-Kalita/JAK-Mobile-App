@@ -38,7 +38,6 @@
 
 -   **Todo**: Create a Todo List
 -   **QRCode**: Create/Scan QRCode
--   **Unit Convertor**: Convert Units
 
 ## Community support
 
