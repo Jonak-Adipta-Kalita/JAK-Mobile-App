@@ -1,18 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@utils/firebase";
-import errorAlertShower from "@utils/alertShowers/errorAlertShower";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { BottomTabScreensParamList } from "@/@types/navigation";
 import { Platform, View, useColorScheme, ColorSchemeName } from "react-native";
 import { bottomTabScreenOptions } from "@utils/bottomTabScreenOptions";
 
-import {
-    HomeStack,
-    SettingsStack,
-    AuthenticationStack,
-} from "./StackNavigator";
+import { HomeStack, SettingsStack } from "./StackNavigator";
 import TabBar from "@components/TabBar";
 
 const Tab = createBottomTabNavigator<BottomTabScreensParamList>();
@@ -45,10 +38,7 @@ const TabBarIcon = ({
 };
 
 const BottomTabNavigator = () => {
-    const [user, , userError] = useAuthState(auth);
     const colorScheme = useColorScheme();
-
-    if (userError) errorAlertShower(userError);
 
     return (
         <Tab.Navigator
@@ -75,50 +65,25 @@ const BottomTabNavigator = () => {
                     ),
                 }}
             />
-            {!user ? (
-                <Tab.Screen
-                    name="AuthTab"
-                    component={AuthenticationStack}
-                    options={{
-                        tabBarLabel: "Login",
-                        tabBarIcon: ({ color, size, focused }) => (
-                            <TabBarIcon
-                                isActive={focused}
-                                colorScheme={colorScheme}
-                            >
-                                <AntDesign
-                                    name="login"
-                                    size={24}
-                                    style={{
-                                        color: color,
-                                        fontSize: size,
-                                    }}
-                                />
-                            </TabBarIcon>
-                        ),
-                    }}
-                />
-            ) : (
-                <Tab.Screen
-                    name="ProfileTab"
-                    component={SettingsStack}
-                    options={{
-                        tabBarLabel: "Profile",
-                        tabBarIcon: ({ color, size, focused }) => (
-                            <TabBarIcon
-                                isActive={focused}
-                                colorScheme={colorScheme}
-                            >
-                                <AntDesign
-                                    name="setting"
-                                    size={24}
-                                    style={{ color: color, fontSize: size }}
-                                />
-                            </TabBarIcon>
-                        ),
-                    }}
-                />
-            )}
+            <Tab.Screen
+                name="ProfileTab"
+                component={SettingsStack}
+                options={{
+                    tabBarLabel: "Profile",
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <TabBarIcon
+                            isActive={focused}
+                            colorScheme={colorScheme}
+                        >
+                            <AntDesign
+                                name="setting"
+                                size={24}
+                                style={{ color: color, fontSize: size }}
+                            />
+                        </TabBarIcon>
+                    ),
+                }}
+            />
         </Tab.Navigator>
     );
 };

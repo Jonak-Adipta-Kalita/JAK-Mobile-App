@@ -6,4 +6,4 @@ export default {
         ...DarkTheme.colors,
         background: "#413f44",
     },
-};
+} as typeof DarkTheme;

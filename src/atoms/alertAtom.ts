@@ -1,10 +1,7 @@
 import { AlertData } from "@/@types/data";
-import { atom } from "recoil";
+import { atom } from "jotai";
 
 export const alertDataState = atom<AlertData>({
-    key: "alertDataState",
-    default: {
-        show: false,
-        data: null,
-    },
+    show: false,
+    data: null,
 });

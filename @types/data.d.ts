@@ -1,7 +1,7 @@
+import { FieldValue } from "firebase/firestore";
 import { AlertButton } from "react-native";
 
 export type User = {
-    photoURL?: string;
     todos: Todo[];
     qrcodes: QRCode[];
 };

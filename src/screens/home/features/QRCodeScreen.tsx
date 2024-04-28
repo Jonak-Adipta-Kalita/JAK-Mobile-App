@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import globalStyles from "@utils/globalStyles";
 import {
     Text,
     TouchableOpacity,
@@ -15,20 +14,17 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { useHideBottomTab } from "@hooks/useBottomTab";
-import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
 import BarcodeMask from "react-native-barcode-mask";
 import { TextInput } from "react-native-gesture-handler";
 import QRCode from "react-native-qrcode-svg";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, storage } from "@utils/firebase";
+import { auth, storage } from "@utils/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {
-    collection,
     orderBy,
     query,
     setDoc,
-    doc,
     serverTimestamp,
     deleteDoc,
 } from "firebase/firestore";
@@ -38,19 +34,18 @@ import messageAlertShower from "@utils/alertShowers/messageAlertShower";
 import { deleteObject, getDownloadURL, ref } from "firebase/storage";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
-import { uploadImageAsync } from "@utils/uploadImageAsync";
+import { CameraView, Camera, BarcodeScanningResult } from "expo-camera/next";
+import { uploadImageAsync } from "@utils/functions/uploadImageAsync";
 import { ScrollView } from "react-native-gesture-handler";
 import Header from "@components/Header";
-import { checkAncestoryDoc } from "@utils/checkAncestoryDoc";
+import { checkAncestoryDoc } from "@utils/firebase/checkAncestoryDoc";
+import { qrCodeRef, qrCodesRef } from "@utils/firebase/refs";
 
 const Create = () => {
     const colorScheme = useColorScheme();
     const [user, userLoading, userError] = useAuthState(auth);
     const [qrCodesFetched, firestoreLoading, firestoreError] = useCollection(
-        query(
-            collection(db, "users", user?.uid!, "qrcodes"),
-            orderBy("timestamp", "desc")
-        )
+        query(qrCodesRef(user?.uid!), orderBy("timestamp", "desc"))
     );
 
     const [qrCodeData, setQRCodeData] = useState("");
@@ -77,13 +72,7 @@ const Create = () => {
         if (qrCodesFetched?.docs?.length! >= 5) {
             messageAlertShower(
                 "Max QRCodes Reached!",
-                "Total amount of QRCodes stored cannot be more than 5. Delete some from the Stored QRCode",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
+                "Total amount of QRCodes stored cannot be more than 5. Delete some from the Stored QRCode"
             );
             return null;
         }
@@ -95,7 +84,7 @@ const Create = () => {
         );
 
         await checkAncestoryDoc(user!);
-        await setDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID), {
+        await setDoc(qrCodeRef(user!.uid!, qrCodeID), {
             value: qrCodeData,
             timestamp: serverTimestamp(),
             image: downloadURL,
@@ -107,7 +96,7 @@ const Create = () => {
     const deleteQRCode = async () => {
         const qrCodeID = qrCodeData.replaceAll("\n", ";").replaceAll(" ", "_");
 
-        await deleteDoc(doc(db, "users", user?.uid!, "qrcodes", qrCodeID));
+        await deleteDoc(qrCodeRef(user!.uid!, qrCodeID));
         await deleteObject(
             ref(storage, `users/${user?.uid}/qrcodes/${qrCodeID}`)
         );
@@ -140,13 +129,7 @@ const Create = () => {
 
         messageAlertShower(
             "QRCode Downloaded!",
-            "The QRCode has been downloaded to your device!!",
-            [
-                {
-                    text: "OK",
-                    onPress: () => {},
-                },
-            ]
+            "The QRCode has been downloaded to your device!!"
         );
     };
 
@@ -155,12 +138,7 @@ const Create = () => {
     }
 
     if (firestoreLoading || userLoading) {
-        return (
-            <LoadingIndicator
-                containerStyle={{ flex: 1 }}
-                dimensions={{ width: 70, height: 70 }}
-            />
-        );
+        return <LoadingIndicator />;
     }
 
     return (
@@ -185,7 +163,6 @@ const Create = () => {
                             />
                         </TouchableOpacity>
                         <Text
-                            style={globalStyles.font}
                             className={`text-xl ${
                                 colorScheme === "dark"
                                     ? "text-[#fff]"
@@ -215,7 +192,6 @@ const Create = () => {
                                             ? "text-[#fff]"
                                             : "text-[#000000]"
                                     } text-sm`}
-                                    style={globalStyles.font}
                                 >
                                     {qrCode.data().value}
                                 </Text>
@@ -238,7 +214,6 @@ const Create = () => {
                                     ? "text-[#fff]"
                                     : "text-[#000000]"
                             } text-sm`}
-                            style={globalStyles.font}
                             onChangeText={(text) => setQRCodeData(text)}
                             value={qrCodeData}
                             multiline
@@ -259,16 +234,12 @@ const Create = () => {
                                             ? messageAlertShower(
                                                   "Are you sure?",
                                                   qrCodeData,
-                                                  [
-                                                      {
-                                                          text: "Cancel",
-                                                          onPress: () => {},
-                                                      },
-                                                      {
-                                                          text: "Delete",
-                                                          onPress: deleteQRCode,
-                                                      },
-                                                  ]
+                                                  "Cancel",
+
+                                                  {
+                                                      text: "Delete",
+                                                      onPress: deleteQRCode,
+                                                  }
                                               )
                                             : uploadQRCode()
                                     }
@@ -345,7 +316,6 @@ const Create = () => {
                                                     ? "text-[#fff]"
                                                     : "text-[#000000]"
                                             } text-center text-xs`}
-                                            style={globalStyles.font}
                                         >
                                             Stored QRCodes
                                         </Text>
@@ -387,7 +357,7 @@ const QRCodeScreen = () => {
     const [scanned, setScanned] = useState(false);
     const [scannedData, setScannedData] = useState<any | null>(null);
 
-    const handleBarCodeScanned = ({ data }: BarCodeEvent) => {
+    const handleBarcodeScanned = ({ data }: BarcodeScanningResult) => {
         setScanned(true);
         if (data.startsWith("https://")) {
             Linking.openURL(data);
@@ -397,13 +367,13 @@ const QRCodeScreen = () => {
 
     useEffect(() => {
         const requestPermissions = async () => {
-            const { status: barcodeStatus } =
-                await BarCodeScanner.requestPermissionsAsync();
+            const { status: cameraStatus } =
+                await Camera.requestCameraPermissionsAsync();
             const { status: mediaLibraryStatus } =
                 await MediaLibrary.requestPermissionsAsync();
 
             if (
-                barcodeStatus !== "granted" &&
+                cameraStatus !== "granted" &&
                 mediaLibraryStatus !== "granted"
             ) {
                 navigation.replace("Home");
@@ -428,9 +398,10 @@ const QRCodeScreen = () => {
                         />
                     </TouchableOpacity>
                 </View>
-                <BarCodeScanner
-                    onBarCodeScanned={handleBarCodeScanned}
-                    barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                <CameraView
+                    onBarcodeScanned={
+                        scanned ? undefined : handleBarcodeScanned
+                    }
                     style={{
                         height: "100%",
                         width: "100%",
@@ -443,7 +414,7 @@ const QRCodeScreen = () => {
                         width={300}
                         showAnimatedLine
                     />
-                </BarCodeScanner>
+                </CameraView>
             </View>
         );
     }
@@ -469,7 +440,6 @@ const QRCodeScreen = () => {
                                         ? "text-[#fff]"
                                         : "text-[#000000]"
                                 } text-center text-sm`}
-                                style={globalStyles.font}
                             >
                                 Scan
                             </Text>
@@ -488,7 +458,6 @@ const QRCodeScreen = () => {
                                         ? "text-[#fff]"
                                         : "text-[#000000]"
                                 } text-center text-sm`}
-                                style={globalStyles.font}
                             >
                                 Create
                             </Text>
@@ -504,7 +473,6 @@ const QRCodeScreen = () => {
                                             ? "bg-[#272934] text-gray-200"
                                             : "bg-white text-gray-900"
                                     } mx-5 p-5 text-center text-lg`}
-                                    style={globalStyles.font}
                                 >
                                     Select a Mode to continue.
                                 </Text>
@@ -513,6 +481,7 @@ const QRCodeScreen = () => {
                         {mode === "scan" && (
                             <View className="flex items-center">
                                 {scanned && (
+                                    // TODO: Make UI look better
                                     <View className="flex flex-col items-center justify-center space-y-10">
                                         <Text
                                             className={`${
@@ -526,7 +495,6 @@ const QRCodeScreen = () => {
                                                     ? "underline-blue-500 text-blue-500 underline"
                                                     : ""
                                             }`}
-                                            style={globalStyles.font}
                                             onPress={() => {
                                                 if (
                                                     scannedData.startsWith(
@@ -558,7 +526,6 @@ const QRCodeScreen = () => {
                                                         ? "text-[#fff]"
                                                         : "text-[#000000]"
                                                 } text-center text-sm`}
-                                                style={globalStyles.font}
                                             >
                                                 Scan Again
                                             </Text>

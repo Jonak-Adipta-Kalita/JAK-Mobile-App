@@ -19,7 +19,7 @@ import StatusBar from "@components/StatusBar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabStackNavigationProps } from "@/@types/navigation";
-import { verifyEmail } from "@utils/verifyEmail";
+import { verifyEmail } from "@utils/functions/verifyEmail";
 import { useShowBottomTab } from "@hooks/useBottomTab";
 import { TextInput } from "react-native-gesture-handler";
 
@@ -45,24 +45,12 @@ const RegisterScreen = () => {
         ) {
             messageAlertShower(
                 "Value not Filled!!",
-                "Please Enter all the Values in the Form!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
+                "Please Enter all the Values in the Form!!"
             );
         } else if (password !== confirmPassword) {
             messageAlertShower(
                 "Passwords doesn't Matches!!!!",
-                "Please make sure your Password and Confirm Password is same!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
+                "Please make sure your Password and Confirm Password is same!!"
             );
         } else {
             try {
@@ -102,7 +90,6 @@ const RegisterScreen = () => {
                             ? "text-gray-100"
                             : "text-gray-900"
                     } my-[20px] ml-10 text-center text-2xl font-bold`}
-                    style={globalStyles.font}
                 >
                     Create an Account
                 </Text>
@@ -233,10 +220,7 @@ const RegisterScreen = () => {
                         }}
                         onPress={registerEmail}
                     >
-                        <Text
-                            className="text-center text-[15px] text-white"
-                            style={globalStyles.font}
-                        >
+                        <Text className="text-center text-[15px] text-white">
                             Register
                         </Text>
                     </TouchableOpacity>

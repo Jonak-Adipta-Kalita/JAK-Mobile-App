@@ -18,7 +18,10 @@
             "@themes/*": ["./src/themes/*"],
             "@utils/*": ["./src/utils/*"],
             "@atoms/*": ["./src/atoms/*"],
-            "@assets/*": ["./assets/*"]
+            "@assets/*": ["./assets/*"],
+            "@firebase/auth": [
+                "./node_modules/@firebase/auth/dist/index.rn.d.ts"
+            ]
         }
     },
     "include": ["**/*.ts", "**/*.tsx"],

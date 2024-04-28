@@ -9,13 +9,7 @@ const errorAlertShower = (error: any) => {
                 ? `${error.code} - ${error.title}`
                 : "Error"
         }`,
-        error.message,
-        [
-            {
-                text: "OK",
-                onPress: () => null,
-            },
-        ]
+        error.message
     );
 };
 

@@ -1,14 +1,23 @@
-import { alertDataState } from "@/src/atoms/alertAtom";
+import { alertDataState } from "@atoms/alertAtom";
 import { AlertButton, Platform } from "react-native";
-import { setRecoil } from "recoil-nexus";
+import { writeAtom } from "jotai-nexus";
 
 const messageAlertShower = (
     title: string,
     message: string,
-    buttons: [AlertButton, AlertButton] | [AlertButton]
+    noActionButtonText: "Ok" | "Cancel" | "No" = "Ok",
+    actionButton?: { text: string; onPress: () => void }
 ) => {
+    const buttons: [AlertButton, AlertButton] | [AlertButton] = [
+        {
+            text: noActionButtonText,
+        },
+    ];
+
+    if (actionButton) buttons.push(actionButton);
+
     return Platform.OS === "android" || Platform.OS === "ios"
-        ? setRecoil(alertDataState, {
+        ? writeAtom(alertDataState, {
               show: true,
               data: {
                   title,

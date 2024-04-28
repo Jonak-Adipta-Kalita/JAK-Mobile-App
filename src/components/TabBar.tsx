@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { BottomTabBar, BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { Animated, Easing } from "react-native";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { tabBarHideState } from "@atoms/tabBarAtom";
 
 const TabBar = (props: BottomTabBarProps) => {
-    const hide = useRecoilValue(tabBarHideState);
+    const hide = useAtomValue(tabBarHideState);
     const translateY = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {

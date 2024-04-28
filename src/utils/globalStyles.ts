@@ -4,7 +4,6 @@ const colorScheme = Appearance.getColorScheme();
 
 export default StyleSheet.create<{
     button: ViewStyle;
-    font: TextStyle;
     inputIconContainer: ViewStyle;
     inputBarContainer: ViewStyle;
     inputBar: TextStyle;
@@ -14,9 +13,6 @@ export default StyleSheet.create<{
     button: {
         width: 150,
         borderRadius: 20,
-    },
-    font: {
-        fontFamily: "Regular",
     },
     inputIconContainer: {
         height: 40,

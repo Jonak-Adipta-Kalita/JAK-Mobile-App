@@ -8,13 +8,15 @@ import { useNavigation } from "@react-navigation/native";
 interface Props {
     title: string;
     goBackButton?: boolean;
+    disableRightButton?: boolean;
     showRightButton?: boolean;
-    rightButton?: JSX.Element;
+    rightButton?: (props: { disabled: boolean }) => JSX.Element;
 }
 
 const Header = ({
     title,
     goBackButton = true,
+    disableRightButton,
     showRightButton,
     rightButton,
 }: Props) => {
@@ -44,12 +46,13 @@ const Header = ({
                         ? "bg-[#272934] text-gray-200"
                         : "bg-white text-gray-900"
                 } p-2 px-0 text-center text-lg`}
-                style={globalStyles.font}
             >
                 {title}
             </Text>
-            {showRightButton && (
-                <View className="-mt-[0.5px] mr-10">{rightButton}</View>
+            {rightButton && disableRightButton && (
+                <View className="-mt-[0.5px] mr-10">
+                    {rightButton({ disabled: !showRightButton })}
+                </View>
             )}
         </View>
     );

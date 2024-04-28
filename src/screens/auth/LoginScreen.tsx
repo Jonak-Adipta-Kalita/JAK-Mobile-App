@@ -34,13 +34,7 @@ const LoginScreen = () => {
         if (email === "" || password === "") {
             messageAlertShower(
                 "Value not Filled!!",
-                "Please Enter all the Values in the Form!!",
-                [
-                    {
-                        text: "OK",
-                        onPress: () => {},
-                    },
-                ]
+                "Please Enter all the Values in the Form!!"
             );
         } else {
             try {
@@ -114,10 +108,7 @@ const LoginScreen = () => {
                         className="rounded-md bg-[#609fe6] p-[20px] py-6"
                         onPress={loginEmail}
                     >
-                        <Text
-                            className="text-center text-[15px] text-white"
-                            style={globalStyles.font}
-                        >
+                        <Text className="text-center text-[15px] text-white">
                             Login
                         </Text>
                     </TouchableOpacity>
@@ -125,10 +116,7 @@ const LoginScreen = () => {
                         className="mt-[40px] rounded-md bg-[#e3ad3e] p-[20px] py-6"
                         onPress={() => navigation.navigate("Register")}
                     >
-                        <Text
-                            className="text-center text-[15px] text-white"
-                            style={globalStyles.font}
-                        >
+                        <Text className="text-center text-[15px] text-white">
                             Register
                         </Text>
                     </TouchableOpacity>

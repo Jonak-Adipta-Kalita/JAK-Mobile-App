@@ -1,6 +1,3 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 
-export const tabBarHideState = atom({
-    key: "tabBarHideState",
-    default: false,
-});
+export const tabBarHideState = atom(false);
