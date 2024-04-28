@@ -92,7 +92,7 @@ If you are in Windows: Download [Android Studio](https://developer.android.com/s
 ```bash
 npm run start:android
 # or
-yarn start:android
+yarn start
 ```
 
 #### IOS
@@ -102,7 +102,7 @@ If you are in MAC: Download [XCode](https://developer.apple.com/xcode/)
 ```bash
 npm run start:ios
 # or
-yarn start:ios
+yarn start
 ```
 
 ### Deploying edited Firebase Rules or Indexes
