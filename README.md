@@ -61,7 +61,8 @@ Kindly read our [Contributing Guide](CONTRIBUTING.md) to learn and understand ab
 
 -   Language: [TypeScript](https://www.typescriptlang.org/)
 -   Frontend: [React Native](https://reactnative.dev/)
--   Backend: [Node JS](https://nodejs.org/), [Firebase](https://firebase.google.com/)
+-   Backend: [Firebase](https://firebase.google.com/)
+-   Runtime: [Node.js](https://nodejs.org/)
 -   CLI: [Expo](https://expo.io/)
 
 ## Contributors
