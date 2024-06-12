@@ -18,6 +18,7 @@ google_services*
 *.log
 
 mass_db_update/
+data.json
 
 # macOS
 .DS_Store

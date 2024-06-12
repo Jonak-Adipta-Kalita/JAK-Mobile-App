@@ -332,6 +332,8 @@ const TodoScreen = () => {
                 />
                 {firestoreLoading || userLoading ? (
                     <View className="mt-5">
+                        {/* // TODO: Remove White Background for Loading in Light Mode
+                         */}
                         <LoadingIndicator notInCenter={true} />
                     </View>
                 ) : todosFetched?.docs.length === 0 && !creatingNewTodo ? (

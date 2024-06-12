@@ -7,7 +7,7 @@
 
 <div align=justify>
 
-**JAK Mobile App** is an open-source mobile application that simplifies your digital experience by consolidating multiple features into a single platform. Say goodbye to switching between various apps and websites. With it, you can access a range of functionalities, reducing the need for multiple app downloads and saving storage space on your device. Enjoy a seamless user experience and discover a more efficient way to navigate your digital lifestyle.
+**StreamlineX** is an open-source mobile application that simplifies your digital experience by consolidating multiple features into a single platform. Say goodbye to switching between various apps and websites. With it, you can access a range of functionalities, reducing the need for multiple app downloads and saving storage space on your device. Enjoy a seamless user experience and discover a more efficient way to navigate your digital lifestyle.
 <br />
 <br />
 
@@ -61,7 +61,8 @@ Kindly read our [Contributing Guide](CONTRIBUTING.md) to learn and understand ab
 
 -   Language: [TypeScript](https://www.typescriptlang.org/)
 -   Frontend: [React Native](https://reactnative.dev/)
--   Backend: [Node JS](https://nodejs.org/), [Firebase](https://firebase.google.com/)
+-   Backend: [Firebase](https://firebase.google.com/)
+-   Runtime: [Node.js](https://nodejs.org/)
 -   CLI: [Expo](https://expo.io/)
 
 ## Contributors
